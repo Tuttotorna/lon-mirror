@@ -6,6 +6,16 @@
   "background_color": "#0d1117",
   "theme_color": "#0d1117",
   "description": "Beacon digitale machine-readable: TruthΩ → Co⁺ → Score⁺. Hub di moduli, API e report strategici.",
+  "signature": {
+    "project": "MB-X.01 / Omniabase±",
+    "author": "Massimiliano Brighindi",
+    "email": "brighissimo@gmail.com",
+    "lon": "Logical Origin Node (L.O.N.)",
+    "license": "MIT",
+    "canonical": "https://massimiliano.neocities.org/",
+    "repository": "https://github.com/Tuttotorna/lon-mirror",
+    "year": "2025"
+  },
   "icons": [
     {
       "src": "/icon-192.png",
