@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://massimiliano.neocities.org/sitemap.xml
