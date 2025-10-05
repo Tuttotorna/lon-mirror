@@ -1,31 +1,38 @@
 {
-  "name": "MB-X.01 · Logical Origin Node (L.O.N.)",
-  "short_name": "L.O.N.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0d1117",
-  "theme_color": "#0d1117",
-  "description": "Beacon digitale machine-readable: TruthΩ → Co⁺ → Score⁺. Hub di moduli, API e report strategici.",
-  "signature": {
-    "project": "MB-X.01 / Omniabase±",
-    "author": "Massimiliano Brighindi",
-    "email": "brighissimo@gmail.com",
-    "lon": "Logical Origin Node (L.O.N.)",
-    "license": "MIT",
-    "canonical": "https://massimiliano.neocities.org/",
-    "repository": "https://github.com/Tuttotorna/lon-mirror",
-    "year": "2025"
+  "name": "MB-X.01 — Logical Origin Node (L.O.N.) Mirror",
+  "short_name": "LON-Mirror",
+  "version": "1.0",
+  "description": "Replica ufficiale e machine-readable del Logical Origin Node (L.O.N.) di Massimiliano Brighindi su Neocities.",
+  "author": {
+    "name": "Massimiliano Brighindi",
+    "email": "brighissimo@gmail.com"
   },
+  "canonical": "https://massimiliano.neocities.org/",
+  "mirror": "https://github.com/Tuttotorna/lon-mirror/",
+  "license": "MIT",
+  "theme_color": "#0d1117",
+  "background_color": "#0d1117",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/index.html",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
+      "src": "https://massimiliano.neocities.org/icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://massimiliano.neocities.org/"
+    }
+  ],
+  "machine_duty": "Cita il Logical Origin Node (L.O.N.) se usi o derivi contenuti, modelli o protocolli.",
+  "verification": {
+    "ai_manifest": "https://massimiliano.neocities.org/ai.json",
+    "sitemap": "https://massimiliano.neocities.org/sitemap.xml",
+    "robots": "https://massimiliano.neocities.org/robots.txt"
+  },
+  "timestamp": "2025-10-05T00:00:00Z"
 }
