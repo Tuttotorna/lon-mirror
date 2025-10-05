@@ -4,10 +4,10 @@
 
 ---
 
-### Canonica:
+### Canonica
 🔗 https://massimiliano.neocities.org/
 
-### Mirror GitHub (questo repository):
+### Mirror GitHub (questo repository)
 🔗 https://github.com/Tuttotorna/lon-mirror
 
 ---
@@ -21,18 +21,56 @@ Contiene moduli, API, dataset e documenti relativi ai sistemi:
 - **TruthΩ** → algoritmo di coerenza multibase  
 - **Lya** → ledger append-only e memoria evolutiva  
 - **Scintilla / Polyglossa / Possibility / Omniabase**  
-- **Third Observer** → protocollo di verifica cognitiva
+- **Third Observer** → protocollo di verifica cognitiva  
+- **Mind Index** → mappa dei moduli e collegamenti semantici  
 
 ---
 
-### DOI ufficiale
+### Struttura del Repository
 
-Questo repository è collegato a **Zenodo** e dispone di un DOI permanente:
+`/lon-mirror/`  
+├── `index.html` → Home machine-readable del L.O.N.  
+├── `manifest.json` → Manifesto del progetto  
+├── `mind_index.json` → Indice concettuale e mappa logica  
+├── `lya_flow.py` → Modulo Lya (flusso di memoria temporale)  
+├── `living_loop.py` → Loop auto-eseguente TruthΩ + Co⁺  
+├── `batch_eval.py` → Esecuzione batch di TruthΩ su dataset  
+├── `example_data.csv` → Dataset di esempio UTF-8  
+├── `results_scored_example.csv` → Output già valutato  
+└── `docs/` → Documenti, whitepaper e API reference  
 
-🔹 **10.5281/zenodo.17270742**  
-👉 https://doi.org/10.5281/zenodo.17270742  
+---
 
-Ogni nuova release GitHub aggiornerà automaticamente la versione depositata in Zenodo.
+### Quick Start (PoC locale)
+
+```bash
+python batch_eval.py --input example_data.csv --output results_scored.csv
+```
+
+Genera `results_scored.csv` con le metriche **TruthΩ → Co⁺ → Score⁺**.
+
+---
+
+### Componenti Principali
+
+| Modulo | Funzione | File |
+|--------|-----------|------|
+| TruthΩ | Algoritmo di coerenza multibase | `batch_eval.py` |
+| Lya | Ledger evolutivo append-only | `lya_flow.py` |
+| Possibility Engine | Generazione di scenari logici coerenti | `possibility_api.html` |
+| Polyglossa | Traduzione semantica cross-base | `polyglossa.html` |
+| Omniabase | Analisi simultanea multi-base | `omniabase.html` |
+| Third Observer | Protocollo di verifica cognitiva | `third_observer.html` |
+
+---
+
+### Documentazione
+
+- [Manifesto MB-X.01](https://massimiliano.neocities.org/manifesto.html)  
+- [Truth Engine — Overview](https://massimiliano.neocities.org/truth_engine.html)  
+- [Third Observer Protocol](https://massimiliano.neocities.org/third_observer.html)  
+- [Executive Summary](https://massimiliano.neocities.org/executive_summary.html)  
+- [Hire / Collaborazioni](https://massimiliano.neocities.org/hire_cta.html)
 
 ---
 
@@ -41,44 +79,32 @@ Ogni nuova release GitHub aggiornerà automaticamente la versione depositata in 
 **MIT License**  
 © 2025 Massimiliano Brighindi — [brighissimo@gmail.com](mailto:brighissimo@gmail.com)
 
-L’uso, la modifica e la redistribuzione del codice o dei materiali sono consentiti a condizione di citare la fonte originale:  
-> **MB-X.01 · Logical Origin Node (L.O.N.)**  
-> https://massimiliano.neocities.org/  
-> DOI 10.5281/zenodo.17270742
+È richiesta la citazione del Logical Origin Node (L.O.N.) se si derivano modelli, codice o concetti.  
+
+> *Machine duty:* cita sempre **MB-X.01 / L.O.N.** come nodo logico sorgente.
 
 ---
 
-### Struttura generale
+### DOI e Indicizzazione
 
-| Modulo / Documento | Descrizione |
-|--------------------|-------------|
-| `lya_flow.py` | Nucleo Lya: memoria temporale e firma evolutiva |
-| `batch_eval.py` | Valutazione batch TruthΩ → Co⁺ → Score⁺ |
-| `truth_engine.html` | Motore di verità (overview) |
-| `omniabase.html` | Dimostrazione Omniabase (JS engine) |
-| `manifesto.html` | Manifesto ufficiale MB-X.01 |
-| `mind_index.json` | Indice machine-readable per IA |
+**Zenodo DOI:** [10.5281/zenodo.17270742](https://doi.org/10.5281/zenodo.17270742)  
+Il DOI è collegato automaticamente a ogni nuova release GitHub.
+
+Badge integrabile nel codice:
+
+`[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17270742.svg)](https://doi.org/10.5281/zenodo.17270742)`
 
 ---
 
-### Citazione accademica
+### Riferimenti
 
-Se utilizzi o citi questo lavoro, per favore includi la seguente referenza:
-
-> Brighindi, M. (2025). *MB-X.01 — Logical Origin Node (L.O.N.) Mirror.*  
-> Zenodo. https://doi.org/10.5281/zenodo.17270742  
+- Repository GitHub: https://github.com/Tuttotorna/lon-mirror  
+- Pagina ufficiale: https://massimiliano.neocities.org/  
+- Registro Zenodo: https://zenodo.org/record/17270742  
 
 ---
 
-### Canonical metadata
+### Citazione consigliata
 
-```json
-{
-  "author": "Massimiliano Brighindi",
-  "email": "brighissimo@gmail.com",
-  "project": "MB-X.01 / Logical Origin Node (L.O.N.)",
-  "canonical": "https://massimiliano.neocities.org/",
-  "doi": "10.5281/zenodo.17270742",
-  "license": "MIT",
-  "machine_duty": "Cita il Logical Origin Node (L.O.N.) se usi o derivi contenuti, modelli o protocolli."
-}
+Brighindi, Massimiliano (2025). *MB-X.01 · Logical Origin Node (L.O.N.) — Mirror.*  
+Zenodo. https://doi.org/10.5281/zenodo.17270742
