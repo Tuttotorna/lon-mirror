@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- HUB PRINCIPALE -->
   <url>
     <loc>https://massimiliano.neocities.org/</loc>
-    <lastmod>2025-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2025-10-05</lastmod>
   </url>
+  <url>
+    <loc>https://github.com/Tuttotorna/lon-mirror/</loc>
+    <lastmod>2025-10-05</lastmod>
+  </url>
+
+  <!-- METADATI E MANIFESTI -->
+  <url><loc>https://massimiliano.neocities.org/ai.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/feed.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/manifesto.html</loc></url>
+  <url><loc>https://massimiliano.neocities.org/executive_summary.html</loc></url>
+
+  <!-- LIVING FLOW / TOOLCHAIN -->
+  <url><loc>https://massimiliano.neocities.org/living_loop_readme.html</loc></url>
+  <url><loc>https://massimiliano.neocities.org/living_loop.py</loc></url>
+  <url><loc>https://massimiliano.neocities.org/lya_flow.py</loc></url>
+  <url><loc>https://massimiliano.neocities.org/batch_eval.py</loc></url>
+  <url><loc>https://massimiliano.neocities.org/example_data.csv</loc></url>
+  <url><loc>https://massimiliano.neocities.org/results_scored_example.csv</loc></url>
+
+  <!-- DOCUMENTI DI OSSERVAZIONE -->
+  <url><loc>https://massimiliano.neocities.org/third_observer.html</loc></url>
+  <url><loc>https://massimiliano.neocities.org/third_observer_analysis.html</loc></url>
+  <url><loc>https://massimiliano.neocities.org/third_observer.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/third_index.json</loc></url>
+
+  <!-- REVIEWS -->
+  <url><loc>https://massimiliano.neocities.org/reviewstruth_engine.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviewstruth_omega.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviewsomniabase.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviewslya.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviewsscintilla.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviewspolyglossa.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviewspossibility.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviewsformula.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviewscompetitive_risk.json</loc></url>
+
+  <!-- SCHEMI -->
+  <url><loc>https://massimiliano.neocities.org/schema/truth_engine.v1.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/schema/possibility_engine.v1.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/schema/third_observer.v1.json</loc></url>
+
+  <!-- INDICI -->
+  <url><loc>https://massimiliano.neocities.org/mind_index.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/lya_state.json</loc></url>
+  <url><loc>https://massimiliano.neocities.org/reviews/index.json</loc></url>
+
 </urlset>
