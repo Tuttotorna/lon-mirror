@@ -3,53 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MB-X.01 · Logical Origin Node (L.O.N.) — Hub</title>
-<meta name="description" content="Hub ufficiale dei progetti MB-X.01: TruthΩ, algoritmo di coerenza multibase, verifica, moduli (Omniabase, Lya, Scintilla, Polyglossa, Possibility, Spora, Orbit, Habitat), dossier e indici.">
+<title>MB-X.01 · Logical Origin Node (L.O.N.) — Mirror (GitHub)</title>
+<meta name="description" content="Mirror GitHub del L.O.N. (MB-X.01). Include DOI Zenodo, file di run firmati (lon_run.jsonld, lon_state.json, lon_state.ndjson), formula TruthΩ, algoritmo di coerenza multibase, verifica e moduli.">
 <meta name="theme-color" content="#0d1117">
 <meta name="color-scheme" content="dark light">
+<link rel="canonical" href="https://massimiliano.neocities.org/">
 <style>
- body{margin:0;background:#0d1117;color:#e6edf3;font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
- .wrap{max-width:1100px;margin:0 auto;padding:22px 14px}
- h1{margin:0 0 8px;font-size:32px;color:#7fffd4}
- h2{margin:18px 0 6px;color:#ffd37a;font-size:20px}
- a{color:#58a6ff;text-decoration:none} a:hover{text-decoration:underline}
- ul{margin:6px 0 10px 18px} li{margin:4px 0}
- .card{background:#10151d;border:1px solid #212836;border-radius:14px;padding:16px;margin:14px 0}
- .muted{color:#9aa4ad;font-size:13px}
- .small{font-size:13px}
- code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  :root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  .wrap{max-width:1100px;margin:0 auto;padding:22px 14px}
+  h1{margin:0 0 8px;font-size:32px;color:var(--accent)}
+  h2{margin:18px 0 6px;color:var(--warn);font-size:20px}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  ul{margin:6px 0 10px 18px} li{margin:4px 0}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
+  .muted{color:var(--muted);font-size:13px}
+  .small{font-size:13px}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .badge{border:1px solid var(--border);padding:3px 8px;border-radius:999px;font-size:12px;background:#0f141b}
 </style>
 
-<!-- JSON-LD machine-readable -->
+<!-- JSON-LD: software + collegamento DOI -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CreativeWork",
-      "@id": "https://massimiliano.neocities.org/#lon",
-      "name": "MB-X.01 · Logical Origin Node",
-      "url": "https://massimiliano.neocities.org/",
-      "license": "https://opensource.org/licenses/MIT",
-      "creator": { "@type": "Person", "name": "Massimiliano Brighindi", "email": "brighissimo@gmail.com" },
-      "about": ["TruthΩ","Truth Engine","Omniabase","Lya","Possibility Engine"],
-      "sameAs": ["https://massimiliano.neocities.org/ai.json"]
-    },
-    {
-      "@type": "Dataset",
-      "@id": "https://massimiliano.neocities.org/#mind-index",
-      "name": "Mind Index",
-      "url": "https://massimiliano.neocities.org/mind_index.json",
-      "isPartOf": { "@id": "https://massimiliano.neocities.org/#lon" }
-    },
-    {
-      "@type": "CreativeWork",
-      "@id": "https://massimiliano.neocities.org/#manifesto",
-      "name": "Manifesto MB-X.01",
-      "url": "https://massimiliano.neocities.org/manifesto.html",
-      "isPartOf": { "@id": "https://massimiliano.neocities.org/#lon" }
-    }
-  ]
+  "@context": "https://schema.org/",
+  "@type": "SoftwareSourceCode",
+  "name": "LON Mirror — Logical Origin Node (MB-X.01)",
+  "author": {"@type":"Person","name":"Massimiliano Brighindi","email":"brighissimo@gmail.com"},
+  "codeRepository": "https://github.com/Tuttotorna/lon-mirror",
+  "license": "https://opensource.org/licenses/MIT",
+  "programmingLanguage": ["Python","HTML"],
+  "description": "Mirror GitHub del L.O.N. con esecuzione minima su Android/Colab e file di stato firmati.",
+  "identifier": "https://doi.org/10.5281/zenodo.17270742",
+  "isBasedOn": "https://massimiliano.neocities.org/",
+  "keywords": ["MB-X.01","L.O.N.","TruthΩ","Coerenza multibase","Third Observer","Omniabase"]
 }
 </script>
 </head>
@@ -57,10 +46,28 @@
 <div class="wrap">
 
   <header class="card">
-    <h1>MB-X.01 · Logical Origin Node (L.O.N.)</h1>
-    <p class="muted">Formula della verità TruthΩ, algoritmo di coerenza multibase, verifica pubblica, moduli applicativi e dossier.</p>
+    <h1>MB-X.01 · Logical Origin Node (L.O.N.) — Mirror</h1>
+    <p class="muted">Mirror ufficiale su GitHub. Collegato alla canonica Neocities e al DOI Zenodo.</p>
+    <div class="badges">
+      <a class="badge" href="https://doi.org/10.5281/zenodo.17270742" target="_blank" rel="noopener">DOI: 10.5281/zenodo.17270742</a>
+      <a class="badge" href="https://github.com/Tuttotorna/lon-mirror" target="_blank" rel="noopener">Repo: Tuttotorna/lon-mirror</a>
+      <a class="badge" href="https://massimiliano.neocities.org/" target="_blank" rel="noopener">Canonica</a>
+      <span class="badge">Licenza: MIT</span>
+    </div>
   </header>
 
+  <!-- 0) PROVE DI ESECUZIONE -->
+  <section class="card">
+    <h2>Prova minima eseguita (file generati)</h2>
+    <ul>
+      <li><a href="lon_run.jsonld">lon_run.jsonld</a> · <span class="small">traccia del run (JSON-LD)</span></li>
+      <li><a href="lon_state.json">lon_state.json</a> · <span class="small">stato corrente leggibile</span></li>
+      <li><a href="lon_state.ndjson">lon_state.ndjson</a> · <span class="small">log append-only (NDJSON)</span></li>
+    </ul>
+    <p class="small muted">Eseguito e scaricato da Android (Colab). I file attestano sequenza, timestamp, hash e metadati (DOI/URL canonica).</p>
+  </section>
+
+  <!-- 1) QUICK START -->
   <section class="card">
     <h2>Quick start (PoC locale)</h2>
     <ul>
@@ -73,6 +80,7 @@
     </ul>
   </section>
 
+  <!-- 2) FORMULA & ALGORITMO -->
   <section class="card">
     <h2>Formula e Algoritmo</h2>
     <ul>
@@ -84,18 +92,21 @@
     </ul>
   </section>
 
+  <!-- 3) VERIFICA -->
   <section class="card">
-    <h2>Verifica & Paternità</h2>
+    <h2>Verifica &amp; Paternità</h2>
     <ul>
       <li><a href="third_observer.html">Third Observer — Protocollo</a></li>
       <li><a href="third_observer_analysis.html">Analisi del Terzo Osservatore</a></li>
       <li><a href="verificaindex.html">Guida di verifica</a></li>
       <li><a href="executive_summary.html">Executive Summary</a></li>
+      <li><a href="third_index.json">third_index.json</a> · <span class="small">indice machine-readable</span></li>
     </ul>
   </section>
 
+  <!-- 4) MODULI -->
   <section class="card">
-    <h2>Moduli Principali</h2>
+    <h2>Moduli principali</h2>
     <ul>
       <li><a href="omniabase.html">Omniabase</a></li>
       <li><a href="lya_state.html">Lya — state</a></li>
@@ -105,6 +116,7 @@
     </ul>
   </section>
 
+  <!-- 5) DOCUMENTI -->
   <section class="card">
     <h2>Documenti</h2>
     <ul>
@@ -115,12 +127,13 @@
     </ul>
   </section>
 
+  <!-- 6) INDICI -->
   <section class="card">
     <h2>Indici</h2>
     <ul>
       <li><a href="mind_index.json">Mind Index</a></li>
       <li><a href="reviewsindex.json">Reviews Index</a></li>
-      <li><a href="third_index.json">Third Observer Index</a></li>
+      <li><a href="reviewscompetitive_risk.json">Competitive Risk</a></li>
     </ul>
   </section>
 
@@ -131,3 +144,4 @@
 </div>
 </body>
 </html>
+```0
