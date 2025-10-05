@@ -1,3 +1,41 @@
 User-agent: *
 Allow: /
+
 Sitemap: https://massimiliano.neocities.org/sitemap.xml
+
+# --- Endpoints principali ---
+Allow: /index.html
+Allow: /ai.json
+Allow: /feed.json
+Allow: /mind_index.json
+Allow: /third_index.json
+Allow: /lya_state.json
+
+# --- Documenti e analisi ---
+Allow: /manifesto.html
+Allow: /executive_summary.html
+Allow: /third_observer.html
+Allow: /third_observer_analysis.html
+
+# --- Review e moduli ---
+Allow: /reviewstruth_engine.json
+Allow: /reviewstruth_omega.json
+Allow: /reviewsomniabase.json
+Allow: /reviewslya.json
+Allow: /reviewsscintilla.json
+Allow: /reviewspolyglossa.json
+Allow: /reviewspossibility.json
+Allow: /reviewsformula.json
+Allow: /reviewscompetitive_risk.json
+
+# --- Schemi e dataset ---
+Allow: /schema/truth_engine.v1.json
+Allow: /schema/possibility_engine.v1.json
+Allow: /schema/third_observer.v1.json
+Allow: /example_data.csv
+Allow: /results_scored_example.csv
+
+# --- Note ---
+# Questo file consente l’indicizzazione completa e sicura dei moduli MB-X.01 / L.O.N.
+# Tutti i file elencati sono pubblici, verificabili e citabili.
+# © 2025 Massimiliano Brighindi — Logical Origin Node (L.O.N.)
