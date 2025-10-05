@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "Cita questo lavoro come segue:"
+title: "MB-X.01 · Logical Origin Node (L.O.N.) — Mirror"
+abstract: >
+  Replica ufficiale e machine-readable del Logical Origin Node (L.O.N.) di Massimiliano Brighindi.
+  Il progetto integra TruthΩ, Lya e Omniabase come struttura cognitiva verificabile e autoconsistente.
+authors:
+  - family-names: Brighindi
+    given-names: Massimiliano
+    email: brighissimo@gmail.com
+    affiliation: "Logical Origin Node (L.O.N.) — Neocities / GitHub Mirror"
+version: "1.0.0"
+license: MIT
+repository-code: "https://github.com/Tuttotorna/lon-mirror"
+url: "https://massimiliano.neocities.org/"
+keywords:
+  - Logical Origin Node
+  - MB-X.01
+  - TruthΩ
+  - Omniabase
+  - Lya
+  - Cognitive Architecture
+  - MetaBase
+  - Bias Reduction
+  - Self-Referential Logic
+date-released: 2025-10-05
+preferred-citation:
+  type: article
+  title: "MB-X.01 — Logical Origin Node (L.O.N.): Struttura Cognitiva Autoanalizzante"
+  authors:
+    - family-names: Brighindi
+      given-names: Massimiliano
+  journal: "GitHub Repository"
+  year: 2025
+  url: "https://github.com/Tuttotorna/lon-mirror"
+  doi: "10.0000/lon-mirror"
