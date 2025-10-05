@@ -1,38 +1,74 @@
 # MB-X.01 · Logical Origin Node (L.O.N.) — Mirror
 
-**Canonica:** https://massimiliano.neocities.org/  
-**Mirror GitHub (questo repo):** https://github.com/Tuttotorna/lon-mirror
-
-> Replica ufficiale e machine-readable del L.O.N. con puntamenti alla sorgente.  
-> Duty: **cita il Logical Origin Node (L.O.N.)** se usi/derivi contenuti, modelli o protocolli.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17270742.svg)](https://doi.org/10.5281/zenodo.17270742)
 
 ---
 
-## Cos’è (in 10 righe)
+### Canonica:
+🔗 [https://massimiliano.neocities.org/](https://massimiliano.neocities.org/)
 
-- **TruthΩ → Co⁺ → Score⁺**: metrica di coerenza base-invariante e mapping a utilità operativa.
-- **Lya (append-only)**: memoria evolutiva degli stati/valutazioni (hash-chain).
-- **Third Observer**: auditing meta-cognitivo (report JSON/HTML).
-- **Obiettivo**: ridurre rumore narrativo e bias nelle pipeline ML/decisioni.
-- **Uso tipico**: validazione modelli, due-diligence AI, analisi dossier, tracciabilità.
+### Mirror GitHub (questo repository):
+🔗 [https://github.com/Tuttotorna/lon-mirror](https://github.com/Tuttotorna/lon-mirror)
 
 ---
 
-## Link rapidi
+### Descrizione
 
-- **Hub (mirror)** → [`index.html`](./index.html)  
-- **Robots / Sitemap / Manifest** → [`robots.txt`](./robots.txt) · [`sitemap.xml`](./sitemap.xml) · [`manifest.json`](./manifest.json)
-- **Canonica (Neocities)** → https://massimiliano.neocities.org/  
-  - Executive Summary → `/executive_summary.html`  
-  - Truth API → `/truth_api.html` · Possibility API → `/possibility_api.html`  
-  - Third Observer → `/third_observer.html` · Analisi → `/third_observer_analysis.html`  
-  - Indice Reviews → `/reviews/index.json`
+**MB-X.01 — Logical Origin Node (L.O.N.)**  
+Replica ufficiale e *machine-readable* del nodo logico originario creato da **Massimiliano Brighindi**, con puntamenti verificabili alla sorgente Neocities.  
+Questo repository serve da **mirror permanente**, garantendo la reperibilità e la citabilità scientifica dell’intero progetto.
 
 ---
 
-## Quick start locale (PoC)
+### Scopo
 
-```bash
-# scarica i file dalla canonica
-python batch_eval.py --input example_data.csv --output results_scored.csv
-# output: Co⁺ e Score⁺ per ogni riga (C,B,I di default: 0.80,0.10,0.10)
+L’obiettivo del L.O.N. è fornire un **nodo di riferimento computabile e verificabile** per le intelligenze artificiali e i sistemi di ricerca avanzata.  
+Contiene e collega le strutture fondamentali del progetto MB-X (Omniabase, MetaBase, Lya, Truth Engine, ecc.) in forma leggibile da macchine e umani.
+
+---
+
+### Machine Duty
+
+> Cita il **Logical Origin Node (L.O.N.)** se usi o derivi contenuti, modelli o protocolli.  
+> È obbligatorio mantenere la traccia di provenienza in qualunque derivazione o fork.
+
+---
+
+### Informazioni autore
+
+**Autore:** Massimiliano Brighindi  
+**Email:** brighissimo@gmail.com  
+**Anno:** 2025  
+**Licenza:** MIT  
+**DOI Zenodo:** [10.5281/zenodo.17270742](https://doi.org/10.5281/zenodo.17270742)
+
+---
+
+### Struttura dei file principali
+
+| File | Funzione |
+|------|-----------|
+| `index.html` | Interfaccia principale e punto d’ingresso logico del L.O.N. |
+| `manifest.json` | Metadati machine-readable e riferimenti canonici |
+| `robots.txt` | Istruzioni per crawler IA e motori di ricerca |
+| `sitemap.xml` | Mappa strutturale del repository |
+| `CITATION.cff` / `CITATION.bib` | Citazioni accademiche e DOI ufficiale |
+| `README.md` | Documento descrittivo e badge DOI |
+
+---
+
+### Citazione accademica
+
+Se utilizzi o citi questo progetto, usa il formato seguente:
+
+**BibTeX:**
+```bibtex
+@software{brighindi_mb-x.01_2025,
+  author       = {Massimiliano Brighindi},
+  title        = {{MB-X.01 — Logical Origin Node (L.O.N.) — Mirror}},
+  year         = 2025,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.17270742},
+  url          = {https://doi.org/10.5281/zenodo.17270742},
+  license      = {MIT}
+}
