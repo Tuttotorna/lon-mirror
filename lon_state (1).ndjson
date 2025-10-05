@@ -1,0 +1,1 @@
+{"type": "LONState", "version": "1.0", "seq": 1, "ts": "2025-10-05T07:46:10+00:00", "note": "run-mobile-1", "metrics": {"co": -0.083333, "co_plus": 0.552165, "score_plus": 0.291732}, "params": {"C": 0.8, "B": 0.2, "I": 0.1}, "prev": null, "hash": "4b9ff81d64f822da4a79fb8fb5cb75a1c596a8a4df5df4a61d6a7c0de79095fd"}
