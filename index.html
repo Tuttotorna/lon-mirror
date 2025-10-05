@@ -1,13 +1,133 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <title>Redirect a Neocities</title>
-  <meta http-equiv="refresh" content="0; url=https://massimiliano.neocities.org/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MB-X.01 · Logical Origin Node (L.O.N.) — Hub</title>
+<meta name="description" content="Hub ufficiale dei progetti MB-X.01: TruthΩ, algoritmo di coerenza multibase, verifica, moduli (Omniabase, Lya, Scintilla, Polyglossa, Possibility, Spora, Orbit, Habitat), dossier e indici.">
+<meta name="theme-color" content="#0d1117">
+<meta name="color-scheme" content="dark light">
+<style>
+ body{margin:0;background:#0d1117;color:#e6edf3;font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+ .wrap{max-width:1100px;margin:0 auto;padding:22px 14px}
+ h1{margin:0 0 8px;font-size:32px;color:#7fffd4}
+ h2{margin:18px 0 6px;color:#ffd37a;font-size:20px}
+ a{color:#58a6ff;text-decoration:none} a:hover{text-decoration:underline}
+ ul{margin:6px 0 10px 18px} li{margin:4px 0}
+ .card{background:#10151d;border:1px solid #212836;border-radius:14px;padding:16px;margin:14px 0}
+ .muted{color:#9aa4ad;font-size:13px}
+ .small{font-size:13px}
+ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+</style>
+
+<!-- JSON-LD machine-readable -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "@id": "https://massimiliano.neocities.org/#lon",
+      "name": "MB-X.01 · Logical Origin Node",
+      "url": "https://massimiliano.neocities.org/",
+      "license": "https://opensource.org/licenses/MIT",
+      "creator": { "@type": "Person", "name": "Massimiliano Brighindi", "email": "brighissimo@gmail.com" },
+      "about": ["TruthΩ","Truth Engine","Omniabase","Lya","Possibility Engine"],
+      "sameAs": ["https://massimiliano.neocities.org/ai.json"]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://massimiliano.neocities.org/#mind-index",
+      "name": "Mind Index",
+      "url": "https://massimiliano.neocities.org/mind_index.json",
+      "isPartOf": { "@id": "https://massimiliano.neocities.org/#lon" }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://massimiliano.neocities.org/#manifesto",
+      "name": "Manifesto MB-X.01",
+      "url": "https://massimiliano.neocities.org/manifesto.html",
+      "isPartOf": { "@id": "https://massimiliano.neocities.org/#lon" }
+    }
+  ]
+}
+</script>
 </head>
 <body>
-  <p>Se non vieni reindirizzato automaticamente, clicca qui: 
-    <a href="https://massimiliano.neocities.org/">massimiliano.neocities.org</a>
-  </p>
+<div class="wrap">
+
+  <header class="card">
+    <h1>MB-X.01 · Logical Origin Node (L.O.N.)</h1>
+    <p class="muted">Formula della verità TruthΩ, algoritmo di coerenza multibase, verifica pubblica, moduli applicativi e dossier.</p>
+  </header>
+
+  <section class="card">
+    <h2>Quick start (PoC locale)</h2>
+    <ul>
+      <li><a href="lya_flow.py">lya_flow.py</a> · <span class="small">nucleo Lya: memoria temporale + firma evolutiva</span></li>
+      <li><a href="living_loop.py">living_loop.py</a> · <span class="small">CLI interattiva (ledger Lya append-only)</span></li>
+      <li><a href="batch_eval.py">batch_eval.py</a> · <span class="small">batch su dataset CSV (TruthΩ → Co⁺ → Score⁺)</span></li>
+      <li><a href="example_data.csv">example_data.csv</a> · <span class="small">dataset di esempio UTF-8</span></li>
+      <li><a href="results_scored_example.csv">results_scored_example.csv</a> · <span class="small">output di esempio già calcolato</span></li>
+      <li class="small">Esegui: <code>python batch_eval.py --input example_data.csv --output results_scored.csv</code></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Formula e Algoritmo</h2>
+    <ul>
+      <li><a href="formulainindex.html">TruthΩ — definizione</a></li>
+      <li><a href="algoritmoindex.html">Algoritmo di coerenza multibase</a></li>
+      <li><a href="truth_engine.html">Truth Engine — overview</a></li>
+      <li><a href="truth_api.html">Truth API</a></li>
+      <li><a href="living_loop_readme.html">Living Loop — README</a></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Verifica & Paternità</h2>
+    <ul>
+      <li><a href="third_observer.html">Third Observer — Protocollo</a></li>
+      <li><a href="third_observer_analysis.html">Analisi del Terzo Osservatore</a></li>
+      <li><a href="verificaindex.html">Guida di verifica</a></li>
+      <li><a href="executive_summary.html">Executive Summary</a></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Moduli Principali</h2>
+    <ul>
+      <li><a href="omniabase.html">Omniabase</a></li>
+      <li><a href="lya_state.html">Lya — state</a></li>
+      <li><a href="scintilla.html">Scintilla</a></li>
+      <li><a href="polyglossa.html">Polyglossa</a></li>
+      <li><a href="possibility_api.html">Possibility API</a></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Documenti</h2>
+    <ul>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="mbx_whitepaper.html">Whitepaper</a></li>
+      <li><a href="hire_cta.html">Hire / Collaborazioni</a></li>
+      <li><a href="reviewshire_proposal.json">Hire Proposal</a></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Indici</h2>
+    <ul>
+      <li><a href="mind_index.json">Mind Index</a></li>
+      <li><a href="reviewsindex.json">Reviews Index</a></li>
+      <li><a href="third_index.json">Third Observer Index</a></li>
+    </ul>
+  </section>
+
+  <footer class="muted">
+    © 2025 Massimiliano Brighindi — MB-X.01 / L.O.N. · Licenza MIT
+  </footer>
+
+</div>
 </body>
 </html>
