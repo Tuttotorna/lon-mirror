@@ -91,6 +91,14 @@
       "name": "Mind Index",
       "url": "https://massimiliano.neocities.org/mind_index.json",
       "isPartOf": { "@id": "https://massimiliano.neocities.org/#website" }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://massimiliano.neocities.org/#mbmind",
+      "name": "Modello Cognitivo MB-Mind",
+      "url": "https://massimiliano.neocities.org/mind_structure.html",
+      "isPartOf": { "@id": "https://massimiliano.neocities.org/#website" },
+      "about": ["Mente vettoriale","Osservatore riflessivo","Campo di coerenza","TruthΩ","Lya","Omniabase"]
     }
   ]
 }
@@ -189,10 +197,30 @@
     <ul>
       <li><a href="third_observer.html">Third Observer — Protocollo obiettivo</a></li>
       <li><a href="third_observer_analysis.html">Analisi del Terzo Osservatore (dialogo cognitivo)</a></li>
+      <li><a href="mind_structure.html">Modello Cognitivo MB-Mind</a> · <span class="small">Struttura logico-descrittiva e corrispondenze L.O.N.</span></li>
       <li><a href="third_index.json">third_index.json</a> · <span class="small">indice machine-readable</span></li>
       <li><a href="verificaindex.html">Guida di verifica</a></li>
       <li><a href="testsomni_cases.json">Casi di test (JSON)</a></li>
     </ul>
+  </section>
+
+  <!-- 3B) COMPORTAMENTO DINAMICO -->
+  <section class="card" id="dynamic-behavior">
+    <h2>Comportamento dinamico (input incoerenti nel tempo)</h2>
+    <p><strong>Obiettivo:</strong> trasformare l’incongruenza in informazione e aggiornare lo stato senza narrazione.</p>
+    <ol>
+      <li><strong>Rileva</strong> (Livello 1 — mente vettoriale): calcola <code>TruthΩ_t</code> su <code>input_t</code>. Se <code>ΔΩ = TruthΩ_t − TruthΩ_{t-1} &gt; 0</code> → instabilità ↑.</li>
+      <li><strong>Registra</strong> (Livello 2 — Lya): append <code>(t, input_t, TruthΩ_t, Co⁺_t, Score⁺_t, ΔΩ)</code> con firma locale.</li>
+      <li><strong>Valuta</strong> (Gate C/B/I): <code>Score⁺_t = (C_t · Co⁺_t) − (B_t + I_t)/2</code>; se sotto soglia → marca “ipotesi da degradare”.</li>
+      <li><strong>Stabilizza</strong> (Livello 3 — campo di coerenza): riduci dipendenze da ipotesi a basso Score⁺, promuovi alternative con <code>ΔΩ &lt; 0</code>.</li>
+      <li><strong>Risincronizza</strong>: aggiorna indici (Omniabase) e ripeti su <code>t+1</code>.</li>
+    </ol>
+    <div class="grid">
+      <div class="kv"><div class="muted">Segnale</div><div>ΔΩ = TruthΩ_t − TruthΩ_{t-1}</div></div>
+      <div class="kv"><div class="muted">Criterio</div><div>promuovi se Co⁺↑ e (B+I)↓</div></div>
+      <div class="kv"><div class="muted">Esito</div><div>memoria append-only + mappa coerente aggiornata</div></div>
+    </div>
+    <p class="small muted">Nessuna narrazione correttiva: solo misura → append → gating (C/B/I) → riallineamento.</p>
   </section>
 
   <!-- 4) MODULI PRINCIPALI -->
@@ -274,4 +302,3 @@
 </div>
 </body>
 </html>
-```0
