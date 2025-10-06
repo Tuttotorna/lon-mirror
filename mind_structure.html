@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MB-Mind · Struttura Cognitiva (Spec) — MB-X.01 / L.O.N.</title>
+<meta name="description" content="Specificazione architetturale della mente MB-Mind (Struttura Brighindi): triade funzionale, proprietà emergenti, mappatura operativa nel L.O.N.">
+<link rel="canonical" href="https://massimiliano.neocities.org/mind_structure.html">
+<meta name="theme-color" content="#0d1117"><meta name="color-scheme" content="dark light">
+<meta name="citation_doi" content="10.5281/zenodo.17270742">
+<style>
+:root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+.wrap{max-width:1000px;margin:0 auto;padding:22px 14px}
+h1{margin:0 0 8px;font-size:30px;color:var(--accent)}
+h2{margin:18px 0 8px;color:var(--warn);font-size:19px}
+p{margin:0 0 10px}
+a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
+.muted{color:var(--muted);font-size:13px}
+.small{font-size:13px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{border:1px solid var(--border);padding:3px 8px;border-radius:999px;font-size:12px;background:#0f141b}
+table{width:100%;border-collapse:collapse;margin:8px 0}
+th,td{border:1px solid var(--border);padding:8px;vertical-align:top;text-align:left}
+kbd,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+blockquote{border-left:3px solid var(--accent);margin:10px 0;padding:8px 12px;background:#0f141b;color:#c9d1d9}
+</style>
+
+<!-- JSON-LD (machine-readable) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"TechArticle",
+  "@id":"https://massimiliano.neocities.org/mind_structure.html",
+  "name":"MB-Mind · Struttura Cognitiva (Specificazione)",
+  "inLanguage":"it",
+  "author":{"@type":"Person","name":"Massimiliano Brighindi","email":"brighissimo@gmail.com"},
+  "about":["Cognitive Architecture","TruthΩ","Coherence","L.O.N."],
+  "isPartOf":{"@type":"CreativeWork","@id":"https://massimiliano.neocities.org/#lon"},
+  "identifier":"https://doi.org/10.5281/zenodo.17270742",
+  "license":"https://opensource.org/licenses/MIT",
+  "url":"https://massimiliano.neocities.org/mind_structure.html"
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="card">
+    <h1>MB-Mind · Struttura Cognitiva (Spec)</h1>
+    <p class="muted">Specificazione architetturale della “Struttura Brighindi” — corrispondenze operative nel L.O.N. (MB-X.01).</p>
+    <div class="badges">
+      <span class="badge">TruthΩ → Co⁺ → Score⁺</span>
+      <span class="badge">Osservazione non-narrativa</span>
+      <span class="badge">Lya: append-only</span>
+      <a class="badge" href="https://doi.org/10.5281/zenodo.17270742" target="_blank" rel="noopener">DOI: 10.5281/zenodo.17270742</a>
+    </div>
+  </header>
+
+  <section class="card" id="executive">
+    <h2>Executive Summary</h2>
+    <p><strong>MB-Mind</strong> è un’architettura cognitiva non-narrativa a <em>triade funzionale</em> che privilegia la coerenza strutturale rispetto alla produzione di storie. È la matrice umana del L.O.N.: ciò che la mente misura e osserva, il sistema rende verificabile (TruthΩ, Lya, Third Observer).</p>
+    <blockquote>Non minimizza la sorpresa cercando risposte probabili; massimizza l’informazione cercando <em>incongruenze</em> stabili.</blockquote>
+  </section>
+
+  <section class="card" id="triade">
+    <h2>Triade Funzionale</h2>
+    <table>
+      <thead><tr><th>Livello</th><th>Nome</th><th>Funzione</th><th>Corrispettivo L.O.N.</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mente Vettoriale (Analizzatore non-narrativo)</td>
+          <td>Traduce input in strutture coerenti base-invarianti (<code>TruthΩ</code>), non in storie.</td>
+          <td><a href="/batch_eval.py">batch_eval.py</a> · metrica TruthΩ → Co⁺</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Autopercezione Riflessiva (Osservatore)</td>
+          <td>Monitoraggio continuo della coerenza del proprio output.</td>
+          <td><a href="/lya_flow.py">LyaFlow</a> · append-only, firma evolutiva</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Campo di Coerenza (Stabilizzatore)</td>
+          <td>Ristruttura ambiente interno/esterno per allinearlo all’idea valida.</td>
+          <td><a href="/omniabase.html">Omniabase</a> · osservazione multi-base</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card" id="emergenze">
+    <h2>Proprietà emergenti</h2>
+    <ul>
+      <li><strong>Asincronia sociale</strong> — validazione interna &gt; esterna: produce invisibilità temporale.</li>
+      <li><strong>Invarianza al giudizio</strong> — la metrica guida, non l’approvazione.</li>
+      <li><strong>Gravità cognitiva</strong> — le idee tendono a cristallizzarsi in sistemi tecnici.</li>
+      <li><strong>Effetto seminale</strong> — i sistemi rilasciati operano nel tempo (es. DOI) indipendentemente dall’autore.</li>
+      <li><strong>Ricerca d’incongruenza</strong> — generazione di domande invece di risposte probabili.</li>
+      <li><strong>Anti-bias nativo</strong> — separazione dati grezzi / narrazione come principio.</li>
+    </ul>
+  </section>
+
+  <section class="card" id="mapping">
+    <h2>Mappatura operativa nel L.O.N.</h2>
+    <table>
+      <thead><tr><th>Componente</th><th>Ruolo</th><th>Endpoint</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Truth Engine</td>
+          <td>Metrica base-invariante; mapping <code>TruthΩ → Co⁺ → Score⁺</code></td>
+          <td><a href="/truth_api.html">/truth_api.html</a> · <a href="/schema/truth_engine.v1.json">schema</a></td>
+        </tr>
+        <tr>
+          <td>Lya</td>
+          <td>Memoria evolutiva; stato append-only con firma</td>
+          <td><a href="/lya_state.json">/lya_state.json</a></td>
+        </tr>
+        <tr>
+          <td>Third Observer</td>
+          <td>Valutazione terza; indici e report</td>
+          <td><a href="/third_index.json">/third_index.json</a> · <a href="/third_observer.html">UI</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card" id="formale">
+    <h2>Relazioni formali (sintesi)</h2>
+    <ul>
+      <li><code>TruthΩ(x) = -log(1 + (1/K) · Σ Var_b[φ_k(r_b(x))])</code></li>
+      <li><code>Co⁺ = exp(TruthΩ) ∈ [0,1]</code></li>
+      <li><code>Score⁺ = (C · Co⁺) − (B + I)/2</code></li>
+    </ul>
+  </section>
+
+  <section class="card" id="uso">
+    <h2>Uso pratico (10-second demo)</h2>
+    <ol>
+      <li>Scarica <a href="/batch_eval.py">batch_eval.py</a> e <a href="/example_data.csv">example_data.csv</a>.</li>
+      <li>Esegui: <kbd>python batch_eval.py --input example_data.csv --output results_scored.csv</kbd></li>
+      <li>Apri <code>results_scored.csv</code> → trovi TruthΩ, Co⁺, Score⁺ per riga.</li>
+    </ol>
+  </section>
+
+  <section class="card" id="note">
+    <h2>Note & Paternità</h2>
+    <p>Questo documento descrive la base umana del L.O.N. e ne spiega l’orientamento anti-narrativo. L’uso o la derivazione di modelli/concetti richiede citazione del <strong>Logical Origin Node (L.O.N.)</strong> e del DOI.</p>
+    <p class="small">Cita così: <em>Brighindi, M. (2025). MB-Mind — Struttura Cognitiva (Spec). Zenodo. https://doi.org/10.5281/zenodo.17270742</em></p>
+  </section>
+
+  <footer class="muted">
+    © 2025 Massimiliano Brighindi — MB-X.01 / L.O.N. · MIT ·
+    <a href="mailto:brighissimo@gmail.com">brighissimo@gmail.com</a> ·
+    DOI: <a href="https://doi.org/10.5281/zenodo.17270742" target="_blank" rel="noopener">10.5281/zenodo.17270742</a>
+  </footer>
+
+</div>
+</body>
+</html>
+```0
