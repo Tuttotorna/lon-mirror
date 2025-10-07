@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TruthΩ Trading Demo — MB-X.01</title>
+<style>
+body{background:#0d1117;color:#e6edf3;font:14px system-ui;padding:20px}
+input,button{padding:6px 10px;margin:6px 0;border-radius:6px;border:1px solid #333;background:#151b23;color:#e6edf3}
+pre{background:#10151d;padding:10px;border-radius:8px;overflow:auto}
+</style>
+</head>
+<body>
+<h1>TruthΩ Trading Demo (browser)</h1>
+<p>Carica un file CSV tipo <code>sample_ohlcv.csv</code> e calcola <strong>TruthΩ → Co⁺ → Score⁺</strong>.</p>
+<input type="file" id="fileInput" accept=".csv">
+<button onclick="analyze()">Calcola</button>
+<pre id="output"></pre>
+
+<script>
+function analyze(){
+  const f=document.getElementById('fileInput').files[0];
+  if(!f){alert('Seleziona un file CSV');return;}
+  const r=new FileReader();
+  r.onload=function(e){
+    const lines=e.target.result.trim().split(/\r?\n/);
+    const out=["date,TruthΩ,Co⁺,Score⁺"];
+    for(let i=1;i<lines.length;i++){
+      const cols=lines[i].split(',');
+      const close=parseFloat(cols[4]);
+      const open=parseFloat(cols[1]);
+      const varb=Math.abs(close-open);
+      const truthOmega=-Math.log(1+(varb/100));
+      const coPlus=Math.exp(truthOmega);
+      const scorePlus=(1*coPlus)-((0.5+0.5)/2);
+      out.push(`${cols[0]},${truthOmega.toFixed(6)},${coPlus.toFixed(6)},${scorePlus.toFixed(6)}`);
+    }
+    document.getElementById('output').textContent=out.join('\n');
+  };
+  r.readAsText(f);
+}
+</script>
+</body>
+</html>
