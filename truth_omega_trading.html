@@ -41,3 +41,21 @@ document.getElementById('calcBtn').onclick = async () => {
   }
 
   // mostra output
+  document.getElementById("output").textContent = results.map(r=>r.join(",")).join("\n");
+
+  // genera CSV
+  const csvContent = results.map(r=>r.join(",")).join("\n");
+  const blob = new Blob([csvContent], {type: "text/csv"});
+  const url = URL.createObjectURL(blob);
+  const btn = document.getElementById("downloadBtn");
+  btn.style.display = "inline-block";
+  btn.onclick = ()=> {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "truthomega_results.csv";
+    a.click();
+  };
+};
+</script>
+</body>
+</html>
