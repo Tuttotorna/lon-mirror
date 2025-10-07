@@ -4,58 +4,191 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TruthΩ Trading Demo (browser)</title>
+<meta name="color-scheme" content="dark light">
 <style>
-body{font-family:system-ui;background:#0d1117;color:#e6edf3;text-align:center;padding:2em}
-input,button{margin:8px;padding:6px 10px;border-radius:6px;border:1px solid #30363d;background:#161b22;color:#e6edf3}
-button{cursor:pointer}
-button:hover{background:#21262d}
-pre{background:#10151d;padding:10px;border-radius:8px;white-space:pre-wrap;text-align:left;max-width:90%;margin:auto}
+  :root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--border:#30363d}
+  *{box-sizing:border-box}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto;background:var(--bg);color:var(--fg);padding:24px;margin:0}
+  h2{margin:0 0 6px}
+  p{color:var(--muted);margin:0 0 14px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  input,button{margin:0;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:#161b22;color:var(--fg)}
+  button{cursor:pointer} button:hover{background:#21262d}
+  pre{background:var(--card);padding:12px;border-radius:10px;white-space:pre-wrap;max-width:100%;overflow:auto}
+  .wrap{max-width:1000px;margin:0 auto}
+  .muted{color:var(--muted)}
+  #chartWrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:12px}
 </style>
 </head>
 <body>
-<h2>TruthΩ Trading Demo (browser)</h2>
-<p>Carica un file CSV tipo <b>sample_ohlcv.csv</b> e calcola <b>TruthΩ → Co⁺ → Score⁺</b>.</p>
+<div class="wrap">
+  <h2>TruthΩ Trading Demo (browser)</h2>
+  <p>Carica un CSV tipo <code>date,open,high,low,close,volume</code> e calcola <strong>TruthΩ → Co⁺ → Score⁺</strong>.</p>
 
-<input type="file" id="fileInput" accept=".csv">
-<button id="calcBtn">Calcola</button>
-<button id="downloadBtn" style="display:none;">Scarica risultati CSV</button>
+  <div class="row">
+    <input type="file" id="fileInput" accept=".csv">
+    <button id="calcBtn">Calcola</button>
+    <button id="downloadBtn" style="display:none;">Scarica risultati CSV</button>
+  </div>
 
-<pre id="output"></pre>
+  <div id="chartWrap" style="display:none">
+    <h3 style="margin:0 0 8px">Trend TruthΩ &amp; Score⁺</h3>
+    <canvas id="tosChart" height="120"></canvas>
+    <div class="row" style="margin-top:10px">
+      <label class="muted"><input type="checkbox" id="toggleTruth" checked> TruthΩ</label>
+      <label class="muted"><input type="checkbox" id="toggleScore" checked> Score⁺</label>
+      <span id="summary" class="muted" style="margin-left:auto"></span>
+    </div>
+  </div>
+
+  <pre id="output" class="muted">In attesa di file…</pre>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <script>
-document.getElementById('calcBtn').onclick = async () => {
-  const file = document.getElementById('fileInput').files[0];
-  if (!file) return alert("Seleziona un file CSV prima.");
-  const text = await file.text();
-  const rows = text.trim().split("\n").map(r=>r.split(","));
-  const header = rows.shift();
-  const results = [["date","TruthΩ","Co⁺","Score⁺"]];
+const fileEl = document.getElementById('fileInput');
+const outEl  = document.getElementById('output');
+const dlBtn  = document.getElementById('downloadBtn');
+const chartBox = document.getElementById('chartWrap');
+let chartRef = null; // istanza Chart.js corrente
+let resultsRows = []; // [{date,truth,co,score}]
 
-  for(const r of rows){
-    const [date,open,high,low,close,volume] = r;
-    const diff = close - open;
-    const truth = Math.log(Math.abs(diff)+1) * (diff>=0?1:-1);
-    const co = Math.exp(-Math.abs(truth));
-    const score = (co * 100 - Math.abs(truth*10)).toFixed(3);
-    results.push([date,truth.toFixed(4),co.toFixed(4),score]);
-  }
+function parseCSV(text){
+  // parser semplice (CSV senza virgole quotate): OK per i nostri file
+  return text.trim().split(/\r?\n/).map(r => r.split(',').map(c => c.trim()));
+}
 
-  // mostra output
-  document.getElementById("output").textContent = results.map(r=>r.join(",")).join("\n");
-
-  // genera CSV
-  const csvContent = results.map(r=>r.join(",")).join("\n");
-  const blob = new Blob([csvContent], {type: "text/csv"});
-  const url = URL.createObjectURL(blob);
-  const btn = document.getElementById("downloadBtn");
-  btn.style.display = "inline-block";
-  btn.onclick = ()=> {
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "truthomega_results.csv";
-    a.click();
+function computeMetrics(rows){
+  // rows: con header in testa
+  const header = rows.shift().map(h => h.toLowerCase());
+  const idx = {
+    date: header.indexOf('date'),
+    open: header.indexOf('open'),
+    close: header.indexOf('close')
   };
+  if (idx.date<0 || idx.open<0 || idx.close<0){
+    throw new Error("Header richiesto: date,open,close (+ opz. altri).");
+  }
+  const out = [];
+  for(const r of rows){
+    const date  = r[idx.date];
+    const open  = parseFloat(r[idx.open]);
+    const close = parseFloat(r[idx.close]);
+    if (!isFinite(open) || !isFinite(close) || !date) continue;
+
+    const diff  = close - open;
+    const truth = Math.log(Math.abs(diff) + 1) * (diff >= 0 ? 1 : -1); // segno direzione
+    const co    = Math.exp(-Math.abs(truth));                           // ∈ (0,1]
+    const score = (co * 100 - Math.abs(truth * 10));                    // semplice gate demo
+
+    out.push({
+      date,
+      truth: +truth.toFixed(4),
+      co:    +co.toFixed(4),
+      score: +score.toFixed(3)
+    });
+  }
+  return out;
+}
+
+function renderTextTable(arr){
+  const header = ['date','TruthΩ','Co⁺','Score⁺'];
+  const lines = [header.join(',')].concat(
+    arr.map(r => [r.date, r.truth, r.co, r.score].join(','))
+  );
+  outEl.textContent = lines.join('\n');
+}
+
+function renderChart(arr){
+  const labels = arr.map(r => r.date);
+  const truth  = arr.map(r => r.truth);
+  const score  = arr.map(r => r.score);
+
+  chartBox.style.display = 'block';
+
+  const ctx = document.getElementById('tosChart').getContext('2d');
+  if (chartRef) chartRef.destroy();
+  chartRef = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'TruthΩ', data: truth, borderWidth: 2, tension: .2 },
+        { label: 'Score⁺', data: score, borderWidth: 2, tension: .2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: { ticks: { autoSkip: true, maxTicksLimit: 10 } },
+        y: { beginAtZero: false }
+      },
+      plugins: {
+        legend: { labels: { boxWidth: 10 } },
+        tooltip: { callbacks: {
+          label: (ctx) => `${ctx.dataset.label}: ${(+ctx.parsed.y).toFixed(4)}`
+        }}
+      }
+    }
+  });
+
+  // Toggle visibilità
+  document.getElementById('toggleTruth').onchange = (e)=>{
+    chartRef.setDatasetVisibility(0, e.target.checked);
+    chartRef.update();
+  };
+  document.getElementById('toggleScore').onchange = (e)=>{
+    chartRef.setDatasetVisibility(1, e.target.checked);
+    chartRef.update();
+  };
+
+  // Summary rapido
+  const s = document.getElementById('summary');
+  const last = arr[arr.length-1];
+  if (last){
+    s.textContent = `Ultimo: TruthΩ ${last.truth} · Score⁺ ${last.score}`;
+  } else {
+    s.textContent = '';
+  }
+}
+
+function enableDownload(arr){
+  const header = 'date,TruthΩ,Co⁺,Score⁺';
+  const lines = arr.map(r => [r.date, r.truth, r.co, r.score].join(','));
+  const csv = [header, ...lines].join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  dlBtn.style.display = 'inline-block';
+  dlBtn.onclick = ()=>{
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'truthomega_results.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+}
+
+document.getElementById('calcBtn').onclick = async () => {
+  const file = fileEl.files[0];
+  if (!file){ alert('Seleziona un file CSV prima.'); return; }
+
+  try{
+    const text = await file.text();
+    const rows = parseCSV(text);
+    resultsRows = computeMetrics(rows);
+    renderTextTable(resultsRows);
+    renderChart(resultsRows);
+    enableDownload(resultsRows);
+  }catch(err){
+    outEl.textContent = 'Errore: ' + (err.message || err);
+    chartBox.style.display = 'none';
+    dlBtn.style.display = 'none';
+  }
 };
 </script>
 </body>
 </html>
+```0
