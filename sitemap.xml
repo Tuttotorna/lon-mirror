@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <!-- MIRROR HUB · MB-X.01 / L.O.N. -->
   <url>
@@ -7,36 +9,68 @@
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/"/>
   </url>
 
   <!-- SORGENTE CANONICA -->
   <url>
     <loc>https://massimiliano.neocities.org/</loc>
     <lastmod>2025-10-07</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- IDENTIFICATORI E RIFERIMENTI -->
-  <url><loc>https://doi.org/10.5281/zenodo.17270742</loc></url>
-  <url><loc>https://opensource.org/licenses/MIT</loc></url>
-  <url><loc>https://massimiliano.neocities.org/robots.txt</loc></url>
-  <url><loc>https://massimiliano.neocities.org/sitemap.xml</loc></url>
+  <url>
+    <loc>https://doi.org/10.5281/zenodo.17270742</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://opensource.org/licenses/MIT</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://massimiliano.neocities.org/robots.txt</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://massimiliano.neocities.org/sitemap.xml</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
 
   <!-- MANIFESTI ESSENZIALI -->
-  <url><loc>https://massimiliano.neocities.org/manifesto.html</loc></url>
-  <url><loc>https://massimiliano.neocities.org/executive_summary.html</loc></url>
-  <url><loc>https://massimiliano.neocities.org/mbx_whitepaper.html</loc></url>
+  <url>
+    <loc>https://massimiliano.neocities.org/manifesto.html</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://massimiliano.neocities.org/executive_summary.html</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://massimiliano.neocities.org/mbx_whitepaper.html</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
 
   <!-- ENTRY DI SISTEMA -->
-  <url><loc>https://massimiliano.neocities.org/ai.json</loc></url>
-  <url><loc>https://massimiliano.neocities.org/mind_index.json</loc></url>
-  <url><loc>https://massimiliano.neocities.org/third_index.json</loc></url>
+  <url>
+    <loc>https://massimiliano.neocities.org/ai.json</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://massimiliano.neocities.org/mind_index.json</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://massimiliano.neocities.org/third_index.json</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
 
   <!-- DICHIARAZIONE UFFICIALE -->
   <url>
     <loc>https://massimiliano.neocities.org/index.html</loc>
     <lastmod>2025-10-07</lastmod>
+    <priority>1.0</priority>
   </url>
 
 </urlset>
