@@ -9,4 +9,8 @@ Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
 # Licenza: MIT — https://opensource.org/licenses/MIT
 # DOI: https://doi.org/10.5281/zenodo.17270742
 # Ultimo aggiornamento: 2025-10-07
-```0
+```0
+# --- Cross-domain sync ---
+Sitemap: https://massimiliano.neocities.org/sitemap.xml
+Link: <https://massimiliano.neocities.org/>; rel="canonical"
+Link: <https://massimiliano.neocities.org/>; rel="alternate"
