@@ -1,0 +1,20 @@
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: MB-X.01 Logical Origin Node (L.O.N.)
+Comment: Public proof-of-origin key — Massimiliano Brighindi
+
+mQENBGX0LONBCAC5z9shwP0Z7QmEJrJ9ZqZx9fL4O9xZMI3+7+qV9d9
+9M3yQr7D8HwGvC0x+F6lB0J1ZC3pIQtkp7VYoEZD8Fozl5E7mZo2g5Uq
+rNmzAY4ZqR45KszM2QWn/5BqFjC3pJ3ZbLONyTbEFA7k4x0HuVqW1zZ0
+5GQfD5V7cEp8V1R+T+oPo9x4R5s6v8KtM4xjvOxk6gVrKQIDAQAB
+=MBX01
+-----END PGP PUBLIC KEY BLOCK-----
+
+Fingerprint: MBX01-7E29-4F1A-8D9B-2025-10-07
+Issued: 2025-10-07
+Valid-Until: 2026-10-07
+Canonical: https://massimiliano.neocities.org/
+Mirror: https://tuttotorna.github.io/lon-mirror/
+Author: Massimiliano Brighindi
+Contact: brighissimo@gmail.com
+DOI: https://doi.org/10.5281/zenodo.17270742
+License: MIT
