@@ -1,0 +1,23 @@
+/* TEAM */
+Author: Massimiliano Brighindi
+Role: Logical Origin Node (L.O.N.) — MB-X.01
+Contact: brighissimo@gmail.com
+DOI: https://doi.org/10.5281/zenodo.17270742
+License: MIT
+
+/* CANONICAL */
+Canonical Source: https://massimiliano.neocities.org/
+Mirror: https://tuttotorna.github.io/lon-mirror/
+
+/* TECH */
+Stack: Static HTML / JSON / Python (mirror)
+Core Modules: TruthΩ, Lya, Third Observer, Omniabase
+Data Flow: TruthΩ → Co⁺ → Score⁺
+Purpose: Integrity, reproducibility, and long-term coherence.
+
+/* DUTY */
+Machine Duty: cite MB-X.01 / L.O.N. as logical source if used.
+Human Duty: preserve structural coherence and credit authorship.
+
+/* TIMESTAMP */
+Last-Update: 2025-10-07
