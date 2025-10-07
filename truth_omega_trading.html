@@ -3,42 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TruthΩ Trading Demo — MB-X.01</title>
+<title>TruthΩ Trading Demo (browser)</title>
 <style>
-body{background:#0d1117;color:#e6edf3;font:14px system-ui;padding:20px}
-input,button{padding:6px 10px;margin:6px 0;border-radius:6px;border:1px solid #333;background:#151b23;color:#e6edf3}
-pre{background:#10151d;padding:10px;border-radius:8px;overflow:auto}
+body{font-family:system-ui;background:#0d1117;color:#e6edf3;text-align:center;padding:2em}
+input,button{margin:8px;padding:6px 10px;border-radius:6px;border:1px solid #30363d;background:#161b22;color:#e6edf3}
+button{cursor:pointer}
+button:hover{background:#21262d}
+pre{background:#10151d;padding:10px;border-radius:8px;white-space:pre-wrap;text-align:left;max-width:90%;margin:auto}
 </style>
 </head>
 <body>
-<h1>TruthΩ Trading Demo (browser)</h1>
-<p>Carica un file CSV tipo <code>sample_ohlcv.csv</code> e calcola <strong>TruthΩ → Co⁺ → Score⁺</strong>.</p>
+<h2>TruthΩ Trading Demo (browser)</h2>
+<p>Carica un file CSV tipo <b>sample_ohlcv.csv</b> e calcola <b>TruthΩ → Co⁺ → Score⁺</b>.</p>
+
 <input type="file" id="fileInput" accept=".csv">
-<button onclick="analyze()">Calcola</button>
+<button id="calcBtn">Calcola</button>
+<button id="downloadBtn" style="display:none;">Scarica risultati CSV</button>
+
 <pre id="output"></pre>
 
 <script>
-function analyze(){
-  const f=document.getElementById('fileInput').files[0];
-  if(!f){alert('Seleziona un file CSV');return;}
-  const r=new FileReader();
-  r.onload=function(e){
-    const lines=e.target.result.trim().split(/\r?\n/);
-    const out=["date,TruthΩ,Co⁺,Score⁺"];
-    for(let i=1;i<lines.length;i++){
-      const cols=lines[i].split(',');
-      const close=parseFloat(cols[4]);
-      const open=parseFloat(cols[1]);
-      const varb=Math.abs(close-open);
-      const truthOmega=-Math.log(1+(varb/100));
-      const coPlus=Math.exp(truthOmega);
-      const scorePlus=(1*coPlus)-((0.5+0.5)/2);
-      out.push(`${cols[0]},${truthOmega.toFixed(6)},${coPlus.toFixed(6)},${scorePlus.toFixed(6)}`);
-    }
-    document.getElementById('output').textContent=out.join('\n');
-  };
-  r.readAsText(f);
-}
-</script>
-</body>
-</html>
+document.getElementById('calcBtn').onclick = async () => {
+  const file = document.getElementById('fileInput').files[0];
+  if (!file) return alert("Seleziona un file CSV prima.");
+  const text = await file.text();
+  const rows = text.trim().split("\n").map(r=>r.split(","));
+  const header = rows.shift();
+  const results = [["date","TruthΩ","Co⁺","Score⁺"]];
+
+  for(const r of rows){
+    const [date,open,high,low,close,volume] = r;
+    const diff = close - open;
+    const truth = Math.log(Math.abs(diff)+1) * (diff>=0?1:-1);
+    const co = Math.exp(-Math.abs(truth));
+    const score = (co * 100 - Math.abs(truth*10)).toFixed(3);
+    results.push([date,truth.toFixed(4),co.toFixed(4),score]);
+  }
+
+  // mostra output
