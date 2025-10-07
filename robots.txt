@@ -3,16 +3,12 @@ Allow: /
 
 Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
 
-# --- HUB e mirror principale ---
+# --- HUB E MIRROR PRINCIPALE ---
 Allow: /index.html
 Allow: /mind_structure.html
 Allow: /mind_bio_logic_map.html
 
-# --- Mirror della sorgente canonica ---
-Allow: https://massimiliano.neocities.org/
-Allow: https://massimiliano.neocities.org/index.html
-
-# --- Endpoints machine-readable ---
+# --- ENDPOINTS MACHINE-READABLE ---
 Allow: /ai.json
 Allow: /feed.json
 Allow: /lya_state.json
@@ -29,33 +25,33 @@ Allow: /reviewspolyglossa.json
 Allow: /reviewsformula.json
 Allow: /reviewscompetitive_risk.json
 
-# --- Schemi e dataset ---
+# --- SCHEMI E DATASET ---
 Allow: /schema/truth_engine.v1.json
 Allow: /schema/possibility_engine.v1.json
 Allow: /schema/third_observer.v1.json
 Allow: /example_data.csv
 Allow: /results_scored_example.csv
 
-# --- Proof-of-Concept e moduli eseguibili ---
+# --- PROOF-OF-CONCEPT E MODULI ESEGUIBILI ---
 Allow: /living_loop.py
 Allow: /lya_flow.py
 Allow: /batch_eval.py
 Allow: /truth_omega_trading.py
 
-# --- Meta e canonical ---
+# --- META E CANONICAL ---
 Allow: /manifest.json
 Allow: /robots.txt
 Allow: /sitemap.xml
 Allow: /VERSION
 
-# --- Specifiche cognitive ---
-Allow: /mind_structure.html
-Allow: /mind_bio_logic_map.html
-
-# --- Dichiarazioni ---
-# Indicizzazione completa e coerente del mirror MB-X.01 / L.O.N.
-# Mirror ufficiale della sorgente canonica:
+# --- RIFERIMENTO CANONICO ---
+# Tutti i contenuti di questo mirror fanno riferimento alla sorgente ufficiale:
 #   https://massimiliano.neocities.org/
+# Ogni pagina include <link rel="canonical" href="..."> per garantire coerenza SEO.
+
+# --- DICHIARAZIONI ---
+# Mirror ufficiale del progetto MB-X.01 / L.O.N.
 # Autore: Massimiliano Brighindi — Logical Origin Node (L.O.N.)
 # Licenza: MIT — https://opensource.org/licenses/MIT
 # DOI: https://doi.org/10.5281/zenodo.17270742
+# Versione: 2025-10-07
