@@ -1,130 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-  <!-- HUB MIRROR (GitHub Pages) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/index.html</loc>
     <lastmod>2025-10-07</lastmod>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/index.html"/>
   </url>
-
-  <!-- MANIFESTI / METADATI -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/ai.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/ai.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/feed.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/feed.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/manifest.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/manifest.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/manifesto.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/manifesto.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/VERSION</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/VERSION"/></url>
-
-  <!-- SCHEMI -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/schema/truth_engine.v1.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/schema/truth_engine.v1.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/schema/possibility_engine.v1.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/schema/possibility_engine.v1.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/schema/third_observer.v1.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/schema/third_observer.v1.json"/></url>
-
-  <!-- FORMULA / ALGORITMO / API -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/formulainindex.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/formulainindex.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/algoritmoindex.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/algoritmoindex.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/truth_engine.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/truth_engine.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/truth_engine_full.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/truth_engine_full.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/truth_engine_v3.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/truth_engine_v3.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/truth_api.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/truth_api.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/truth_poc.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/truth_poc.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/possibility_api.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/possibility_api.html"/></url>
-
-  <!-- VERIFICA / TERZO OSSERVATORE -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/third_observer.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/third_observer.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/third_observer_analysis.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/third_observer_analysis.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/third_index.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/third_index.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/testsomni_cases.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/testsomni_cases.json"/></url>
-
-  <!-- LIVING FLOW / PoC -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/living_loop_readme.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/living_loop_readme.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/living_loop.py</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/living_loop.py"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/lya_flow.py</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_flow.py"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/batch_eval.py</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/batch_eval.py"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/example_data.csv</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/example_data.csv"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/results_scored_example.csv</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/results_scored_example.csv"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/truth_omega_trading.py</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/truth_omega_trading.py"/></url>
-
-  <!-- INDICI / STATI -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/mind_index.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mind_index.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/lya_state.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_state.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviews/index.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviews/index.json"/></url>
-
-  <!-- REVIEWS -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewstruth_engine.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewstruth_engine.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewstruth_omega.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewstruth_omega.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewspossibility.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewspossibility.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewsomniabase.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewsomniabase.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewslya.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewslya.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewsscintilla.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewsscintilla.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewspolyglossa.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewspolyglossa.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewscompetitive_risk.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewscompetitive_risk.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewsformula.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewsformula.json"/></url>
-
-  <!-- MODULI PRINCIPALI / DEMO -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/omniabase.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/omniabase.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/omniabase_demo.js</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/omniabase_demo.js"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/lya_state.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_state.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/lya_readme.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_readme.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/lya_flow_v1.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_flow_v1.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/lya_identity_flow_v1.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_identity_flow_v1.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/scintilla.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/scintilla.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/scintilla_mirror.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/scintilla_mirror.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/scintillafilos.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/scintillafilos.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/scintilla_pm.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/scintilla_pm.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/polyglossa.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/polyglossa.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/polyglossa-plus.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/polyglossa-plus.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/polyglossa.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/polyglossa.json"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/possibility_api.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/possibility_api.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/spora-flow.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/spora-flow.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/spora-flow-light.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/spora-flow-light.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/spora-flow-exploratory.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/spora-flow-exploratory.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/spora-flow-auto.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/spora-flow-auto.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/spora_flow_live.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/spora_flow_live.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/orbital_resonance_classi.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/orbital_resonance_classi.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/z_orbit_unum.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/z_orbit_unum.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/origin_unit.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/origin_unit.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/habitat.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/habitat.html"/></url>
-
-  <!-- DOCUMENTI -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/executive_summary.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/executive_summary.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/mbx_whitepaper.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mbx_whitepaper.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/MBX_MAVE.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/MBX_MAVE.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/meta_mind.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/meta_mind.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/hire_cta.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/hire_cta.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/reviewshire_proposal.json</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reviewshire_proposal.json"/></url>
-
-  <!-- MODELLO COGNITIVO -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/mind_structure.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mind_structure.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/mind_bio_logic_map.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mind_bio_logic_map.html"/></url>
-
-  <!-- INDICI / DISCOVERY -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/catalog.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/catalog.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/governanceindex.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/governanceindex.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/identitaindex.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/identitaindex.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/discoveryindex.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/discoveryindex.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/demoindex.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/demoindex.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/for_researchers.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/for_researchers.html"/></url>
-
-  <!-- MB-X SERIE -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/mbx01.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mbx01.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/mbx02_living_flow_v2.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mbx02_living_flow_v2.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/mbx_triskelion.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mbx_triskelion.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/mbx_frequenziale.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mbx_frequenziale.html"/></url>
-
-  <!-- STRUMENTI -->
-  <url><loc>https://tuttotorna.github.io/lon-mirror/biasmeter.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/biasmeter.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/bias_primes.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/bias_primes.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/frequency_ratio.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/frequency_ratio.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/frequency_ratio_tool.html</loc><lastmod>2025-10-07</lastmod><xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/frequency_ratio_tool.html"/></url>
-  <url><loc>https://tuttotorna.github.io/lon-mirror/matrix.html</loc><lastmod>2025-10-07</lastmod><
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/ai.json</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/mind_structure.html</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/truth_omega_trading.py</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://massimiliano.neocities.org/</loc>
+    <lastmod>2025-10-07</lastmod>
+  </url>
+</urlset>
