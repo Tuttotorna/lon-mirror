@@ -1,0 +1,8 @@
+Contact: mailto:brighissimo@gmail.com
+Canonical: https://massimiliano.neocities.org/
+Mirror: https://tuttotorna.github.io/lon-mirror/
+Encryption: https://massimiliano.neocities.org/pgp.txt
+Preferred-Languages: it, en
+Policy: https://massimiliano.neocities.org/manifesto.html
+Acknowledgments: https://doi.org/10.5281/zenodo.17270742
+Expires: 2026-10-07T00:00:00Z
