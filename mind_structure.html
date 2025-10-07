@@ -4,10 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MB-Mind · Struttura Cognitiva (Spec) — MB-X.01 / L.O.N.</title>
-<meta name="description" content="Specificazione architetturale della mente MB-Mind (Struttura Brighindi): triade funzionale, proprietà emergenti, mappatura operativa nel L.O.N.">
+<meta name="description" content="Specificazione architetturale della mente MB-Mind (Struttura Brighindi): triade funzionale, proprietà emergenti, mappatura operativa nel L.O.N., formule e demo riproducibili.">
 <link rel="canonical" href="https://massimiliano.neocities.org/mind_structure.html">
-<meta name="theme-color" content="#0d1117"><meta name="color-scheme" content="dark light">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0d1117">
+<meta name="color-scheme" content="dark light">
 <meta name="citation_doi" content="10.5281/zenodo.17270742">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:title" content="MB-Mind · Struttura Cognitiva (Spec)">
+<meta property="og:description" content="Triade funzionale non-narrativa (TruthΩ, Lya, Omniabase), proprietà emergenti e mappatura nel L.O.N. con demo riproducibili.">
+<meta property="og:url" content="https://massimiliano.neocities.org/mind_structure.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+
 <style>
 :root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
 *{box-sizing:border-box}
@@ -26,22 +36,53 @@ table{width:100%;border-collapse:collapse;margin:8px 0}
 th,td{border:1px solid var(--border);padding:8px;vertical-align:top;text-align:left}
 kbd,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 blockquote{border-left:3px solid var(--accent);margin:10px 0;padding:8px 12px;background:#0f141b;color:#c9d1d9}
+.nav{display:flex;gap:10px;flex-wrap:wrap}
+.nav a{font-size:13px}
+hr{border:0;border-top:1px solid var(--border);margin:14px 0}
 </style>
 
-<!-- JSON-LD (machine-readable) -->
+<!-- JSON-LD -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"TechArticle",
-  "@id":"https://massimiliano.neocities.org/mind_structure.html",
-  "name":"MB-Mind · Struttura Cognitiva (Specificazione)",
-  "inLanguage":"it",
-  "author":{"@type":"Person","name":"Massimiliano Brighindi","email":"brighissimo@gmail.com"},
-  "about":["Cognitive Architecture","TruthΩ","Coherence","L.O.N."],
-  "isPartOf":{"@type":"CreativeWork","@id":"https://massimiliano.neocities.org/#lon"},
-  "identifier":"https://doi.org/10.5281/zenodo.17270742",
-  "license":"https://opensource.org/licenses/MIT",
-  "url":"https://massimiliano.neocities.org/mind_structure.html"
+  "@graph":[
+    {
+      "@type":"Person",
+      "@id":"https://massimiliano.neocities.org/#person",
+      "name":"Massimiliano Brighindi",
+      "email":"brighissimo@gmail.com"
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://massimiliano.neocities.org/#website",
+      "url":"https://massimiliano.neocities.org/",
+      "name":"MB-X.01 · Logical Origin Node (L.O.N.)",
+      "inLanguage":"it",
+      "publisher":{"@id":"https://massimiliano.neocities.org/#person"}
+    },
+    {
+      "@type":"TechArticle",
+      "@id":"https://massimiliano.neocities.org/mind_structure.html",
+      "headline":"MB-Mind · Struttura Cognitiva (Specificazione)",
+      "inLanguage":"it",
+      "author":{"@id":"https://massimiliano.neocities.org/#person"},
+      "about":["Cognitive Architecture","TruthΩ","Coherence","L.O.N."],
+      "isPartOf":{"@id":"https://massimiliano.neocities.org/#website"},
+      "identifier":"https://doi.org/10.5281/zenodo.17270742",
+      "license":"https://opensource.org/licenses/MIT",
+      "dateModified":"2025-10-07",
+      "url":"https://massimiliano.neocities.org/mind_structure.html",
+      "mainEntityOfPage":"https://massimiliano.neocities.org/mind_structure.html"
+    },
+    {
+      "@type":"BreadcrumbList",
+      "@id":"https://massimiliano.neocities.org/mind_structure.html#breadcrumbs",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"L.O.N. Hub","item":"https://massimiliano.neocities.org/"},
+        {"@type":"ListItem","position":2,"name":"Modello Cognitivo MB-Mind","item":"https://massimiliano.neocities.org/mind_structure.html"}
+      ]
+    }
+  ]
 }
 </script>
 </head>
@@ -49,6 +90,11 @@ blockquote{border-left:3px solid var(--accent);margin:10px 0;padding:8px 12px;ba
 <div class="wrap">
 
   <header class="card">
+    <div class="nav">
+      <a href="/">← L.O.N. Hub</a>
+      <a href="/third_observer.html">Third Observer</a>
+      <a href="/truth_api.html">Truth API</a>
+    </div>
     <h1>MB-Mind · Struttura Cognitiva (Spec)</h1>
     <p class="muted">Specificazione architetturale della “Struttura Brighindi” — corrispondenze operative nel L.O.N. (MB-X.01).</p>
     <div class="badges">
@@ -58,6 +104,20 @@ blockquote{border-left:3px solid var(--accent);margin:10px 0;padding:8px 12px;ba
       <a class="badge" href="https://doi.org/10.5281/zenodo.17270742" target="_blank" rel="noopener">DOI: 10.5281/zenodo.17270742</a>
     </div>
   </header>
+
+  <section class="card" id="indice">
+    <h2>Indice rapido</h2>
+    <ul>
+      <li><a href="#executive">Executive Summary</a></li>
+      <li><a href="#triade">Triade Funzionale</a></li>
+      <li><a href="#emergenze">Proprietà emergenti</a></li>
+      <li><a href="#mapping">Mappatura nel L.O.N.</a></li>
+      <li><a href="#formale">Relazioni formali</a></li>
+      <li><a href="#uso">Uso pratico (demo)</a></li>
+      <li><a href="#dinamica">Comportamento dinamico</a></li>
+      <li><a href="#note">Note & Paternità</a></li>
+    </ul>
+  </section>
 
   <section class="card" id="executive">
     <h2>Executive Summary</h2>
@@ -144,6 +204,18 @@ blockquote{border-left:3px solid var(--accent);margin:10px 0;padding:8px 12px;ba
       <li>Esegui: <kbd>python batch_eval.py --input example_data.csv --output results_scored.csv</kbd></li>
       <li>Apri <code>results_scored.csv</code> → trovi TruthΩ, Co⁺, Score⁺ per riga.</li>
     </ol>
+  </section>
+
+  <section class="card" id="dinamica">
+    <h2>Comportamento dinamico (input incoerenti nel tempo)</h2>
+    <ol>
+      <li><strong>Rileva</strong> (Liv. 1): calcola <code>TruthΩ_t</code> su <code>input_t</code>. Se <code>ΔΩ = TruthΩ_t − TruthΩ_{t-1} &gt; 0</code> → instabilità ↑.</li>
+      <li><strong>Registra</strong> (Liv. 2): append <code>(t, input_t, TruthΩ_t, Co⁺_t, Score⁺_t, ΔΩ)</code> in Lya.</li>
+      <li><strong>Valuta</strong> (Gate C/B/I): <code>Score⁺_t = (C_t · Co⁺_t) − (B_t + I_t)/2</code>; sotto soglia → degrada ipotesi.</li>
+      <li><strong>Stabilizza</strong> (Liv. 3): riduci dipendenze da ipotesi a basso Score⁺, promuovi alternative con <code>ΔΩ &lt; 0</code>.</li>
+      <li><strong>Risincronizza</strong>: aggiorna indici (Omniabase) e ripeti su <code>t+1</code>.</li>
+    </ol>
+    <p class="small muted">Nessuna narrazione correttiva: misura → append → gating (C/B/I) → riallineamento.</p>
   </section>
 
   <section class="card" id="note">
