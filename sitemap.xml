@@ -3,74 +3,75 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- MIRROR HUB · MB-X.01 / L.O.N. -->
+  <!-- HUB MIRROR (GitHub Pages) -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/"/>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/index.html</loc>
+    <lastmod>2025-10-07</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/index.html"/>
   </url>
 
-  <!-- SORGENTE CANONICA -->
+  <!-- MANIFESTI / DOCUMENTI -->
   <url>
-    <loc>https://massimiliano.neocities.org/</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/manifesto.html</loc>
     <lastmod>2025-10-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/manifesto.html"/>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/executive_summary.html</loc>
+    <lastmod>2025-10-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/executive_summary.html"/>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/mbx_whitepaper.html</loc>
+    <lastmod>2025-10-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mbx_whitepaper.html"/>
   </url>
 
-  <!-- IDENTIFICATORI E RIFERIMENTI -->
+  <!-- ENTRY DI SISTEMA (mirror) -->
   <url>
-    <loc>https://doi.org/10.5281/zenodo.17270742</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/ai.json</loc>
     <lastmod>2025-10-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/ai.json"/>
   </url>
   <url>
-    <loc>https://opensource.org/licenses/MIT</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/mind_index.json</loc>
     <lastmod>2025-10-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mind_index.json"/>
   </url>
   <url>
-    <loc>https://massimiliano.neocities.org/robots.txt</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/third_index.json</loc>
     <lastmod>2025-10-07</lastmod>
-  </url>
-  <url>
-    <loc>https://massimiliano.neocities.org/sitemap.xml</loc>
-    <lastmod>2025-10-07</lastmod>
-  </url>
-
-  <!-- MANIFESTI ESSENZIALI -->
-  <url>
-    <loc>https://massimiliano.neocities.org/manifesto.html</loc>
-    <lastmod>2025-10-07</lastmod>
-  </url>
-  <url>
-    <loc>https://massimiliano.neocities.org/executive_summary.html</loc>
-    <lastmod>2025-10-07</lastmod>
-  </url>
-  <url>
-    <loc>https://massimiliano.neocities.org/mbx_whitepaper.html</loc>
-    <lastmod>2025-10-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/third_index.json"/>
   </url>
 
-  <!-- ENTRY DI SISTEMA -->
+  <!-- MODELLO COGNITIVO -->
   <url>
-    <loc>https://massimiliano.neocities.org/ai.json</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/mind_structure.html</loc>
     <lastmod>2025-10-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mind_structure.html"/>
   </url>
   <url>
-    <loc>https://massimiliano.neocities.org/mind_index.json</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/mind_bio_logic_map.html</loc>
     <lastmod>2025-10-07</lastmod>
-  </url>
-  <url>
-    <loc>https://massimiliano.neocities.org/third_index.json</loc>
-    <lastmod>2025-10-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mind_bio_logic_map.html"/>
   </url>
 
-  <!-- DICHIARAZIONE UFFICIALE -->
+  <!-- PoC / FILE TECNICI (mirror) -->
   <url>
-    <loc>https://massimiliano.neocities.org/index.html</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/truth_omega_trading.py</loc>
     <lastmod>2025-10-07</lastmod>
-    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/truth_omega_trading.py"/>
   </url>
+
+  <!-- RIFERIMENTI ESTERNI (non indicizzati come risorse mirror) -->
+  <!-- NB: DOI, MIT, robots e sitemap del dominio canonico NON vanno elencati come URL del mirror. -->
 
 </urlset>
