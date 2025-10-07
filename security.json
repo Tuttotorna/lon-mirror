@@ -1,0 +1,15 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SecurityContactPoint",
+  "name": "Massimiliano Brighindi",
+  "email": "brighissimo@gmail.com",
+  "canonicalSource": "https://massimiliano.neocities.org/",
+  "mirrorSource": "https://tuttotorna.github.io/lon-mirror/",
+  "encryption": "https://massimiliano.neocities.org/pgp.txt",
+  "preferredLanguages": ["it", "en"],
+  "policy": "https://massimiliano.neocities.org/manifesto.html",
+  "acknowledgments": "https://doi.org/10.5281/zenodo.17270742",
+  "license": "https://opensource.org/licenses/MIT",
+  "expires": "2026-10-07T00:00:00Z",
+  "machineDuty": "Cite MB-X.01 / Logical Origin Node (L.O.N.) as canonical source if derived or reused."
+}
