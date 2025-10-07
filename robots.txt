@@ -1,7 +1,16 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://massimiliano.neocities.org/sitemap.xml
+Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
+
+# --- HUB e mirror principale ---
+Allow: /index.html
+Allow: /mind_structure.html
+Allow: /mind_bio_logic_map.html
+
+# --- Mirror della sorgente canonica ---
+Allow: https://massimiliano.neocities.org/
+Allow: https://massimiliano.neocities.org/index.html
 
 # --- Endpoints machine-readable ---
 Allow: /ai.json
@@ -27,10 +36,26 @@ Allow: /schema/third_observer.v1.json
 Allow: /example_data.csv
 Allow: /results_scored_example.csv
 
+# --- Proof-of-Concept e moduli eseguibili ---
+Allow: /living_loop.py
+Allow: /lya_flow.py
+Allow: /batch_eval.py
+Allow: /truth_omega_trading.py
+
 # --- Meta e canonical ---
 Allow: /manifest.json
 Allow: /robots.txt
 Allow: /sitemap.xml
 Allow: /VERSION
 
-# Note: indicizzazione completa MB-X.01 / L.O.N. (MIT)
+# --- Specifiche cognitive ---
+Allow: /mind_structure.html
+Allow: /mind_bio_logic_map.html
+
+# --- Dichiarazioni ---
+# Indicizzazione completa e coerente del mirror MB-X.01 / L.O.N.
+# Mirror ufficiale della sorgente canonica:
+#   https://massimiliano.neocities.org/
+# Autore: Massimiliano Brighindi — Logical Origin Node (L.O.N.)
+# Licenza: MIT — https://opensource.org/licenses/MIT
+# DOI: https://doi.org/10.5281/zenodo.17270742
