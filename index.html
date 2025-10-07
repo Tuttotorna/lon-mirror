@@ -8,7 +8,7 @@
 <meta name="description" content="Mirror di sola lettura del Logical Origin Node (L.O.N.). La fonte canonica è su Neocities.">
 <link rel="canonical" href="https://massimiliano.neocities.org/">
 <link rel="alternate" href="https://massimiliano.neocities.org/" hreflang="x-default" title="Canonical — Neocities">
-<meta name="robots" content="noindex,follow">
+<meta name="robots" content="noindex,follow,noarchive,noimageindex">
 <meta name="theme-color" content="#0d1117">
 <meta name="color-scheme" content="dark light">
 <meta name="citation_doi" content="10.5281/zenodo.17270742">
@@ -24,98 +24,65 @@
   :root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
-  .wrap{max-width:1100px;margin:0 auto;padding:22px 14px}
-  h1{margin:0 0 8px;font-size:32px;color:var(--accent)}
-  h2{margin:18px 0 6px;color:var(--warn);font-size:20px}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px 14px}
+  h1{margin:0 0 8px;font-size:28px;color:var(--accent)}
+  h2{margin:18px 0 6px;color:var(--warn);font-size:18px}
   a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
   ul{margin:6px 0 10px 18px} li{margin:4px 0}
   .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
   .muted{color:var(--muted);font-size:13px}
-  .small{font-size:13px}
-  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
-  .badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .badge{border:1px solid var(--border);padding:3px 8px;border-radius:999px;font-size:12px;background:#0f141b}
-  .doi-badge img{height:22px;border-radius:4px;vertical-align:middle}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-  .kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
-  .mirror{border-left:4px solid var(--accent);background:#0f141b;padding:10px 12px;border-radius:10px;margin:14px 0}
+  .badge{display:inline-block;border:1px solid var(--border);padding:4px 10px;border-radius:999px;background:#0f141b;font-size:12px;margin-right:8px}
+  .notice{border-left:4px solid var(--accent);background:#0f141b;padding:10px 12px;border-radius:10px;margin:14px 0}
 </style>
 
-<!-- JSON-LD (mirror, noindex; rimanda al canonico) -->
+<!-- JSON-LD minimal (rimanda al canonico) -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"WebPage",
-  "@id":"https://tuttotorna.github.io/lon-mirror/",
+  "url":"https://tuttotorna.github.io/lon-mirror/",
   "name":"MB-X.01 · L.O.N. — Mirror (GitHub)",
   "isBasedOn":"https://massimiliano.neocities.org/",
   "sameAs":[
     "https://massimiliano.neocities.org/",
     "https://doi.org/10.5281/zenodo.17270742",
     "https://github.com/Tuttotorna/lon-mirror"
-  ]
+  ],
+  "dateModified":"2025-10-07"
 }
 </script>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="mirror">
-    <strong>Mirror (GitHub Pages)</strong> — Questa è una copia di cortesia. La fonte canonica è
-    <a href="https://massimiliano.neocities.org/">massimiliano.neocities.org</a> (tutti i link qui sotto puntano al sito canonico).
-  </div>
-
-  <!-- INTRO -->
-  <section id="intro" class="card" style="margin-top:0;">
-    <h1>MB-X.01 · Logical Origin Node (L.O.N.) — Mirror</h1>
-    <p>
-      Per la versione ufficiale e indicizzabile, visita il nodo canonico:
+  <header class="card">
+    <span class="badge">MIRROR</span>
+    <span class="badge">noindex · follow</span>
+    <h1>Logical Origin Node — Mirror (GitHub)</h1>
+    <p class="muted">
+      Questa è una <strong>copia di cortesia</strong>. La fonte <em>canonica</em> è
       <a href="https://massimiliano.neocities.org/">massimiliano.neocities.org</a>.
     </p>
-    <ul>
-      <li><strong>Canonical Entry:</strong> <a href="https://massimiliano.neocities.org/">massimiliano.neocities.org</a></li>
-      <li><strong>Repository:</strong> <a href="https://github.com/Tuttotorna/lon-mirror">github.com/Tuttotorna/lon-mirror</a></li>
-      <li><strong>DOI (Zenodo):</strong> <a href="https://doi.org/10.5281/zenodo.17270742">10.5281/zenodo.17270742</a></li>
-    </ul>
-    <div class="badges">
-      <span class="badge">Mirror · noindex</span>
-      <span class="badge">Canonical → Neocities</span>
-      <span class="badge">MIT</span>
-      <a class="doi-badge" href="https://doi.org/10.5281/zenodo.17270742" target="_blank" rel="noopener">
-        <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17270742.svg" alt="DOI Zenodo Badge">
-      </a>
-    </div>
-  </section>
+  </header>
 
-  <!-- HUB (link al canonico) -->
+  <div class="notice">
+    Tutti i link operativi puntano alla sorgente canonica per evitare contenuti duplicati e consolidare l’indicizzazione.
+  </div>
+
   <section class="card">
-    <h2>Accedi all’Hub Canonico</h2>
+    <h2>Vai al sito canonico</h2>
     <ul>
       <li><a href="https://massimiliano.neocities.org/">Hub L.O.N. (Home)</a></li>
-      <li><a href="https://massimiliano.neocities.org/formulainindex.html">TruthΩ — definizione</a></li>
-      <li><a href="https://massimiliano.neocities.org/truth_engine.html">Truth Engine — overview</a></li>
-      <li><a href="https://massimiliano.neocities.org/third_observer.html">Third Observer — Protocollo</a></li>
       <li><a href="https://massimiliano.neocities.org/mind_structure.html">MB-Mind — Struttura Cognitiva</a></li>
       <li><a href="https://massimiliano.neocities.org/mind_bio_logic_map.html">MB-Mind — Mappa Bio-Logica</a></li>
+      <li><a href="https://massimiliano.neocities.org/truth_engine.html">Truth Engine — overview</a></li>
+      <li><a href="https://massimiliano.neocities.org/formulainindex.html">TruthΩ — definizione</a></li>
       <li><a href="https://massimiliano.neocities.org/ai.json">ai.json</a> · <a href="https://massimiliano.neocities.org/sitemap.xml">sitemap.xml</a> · <a href="https://massimiliano.neocities.org/robots.txt">robots.txt</a></li>
     </ul>
   </section>
 
-  <!-- DEMO -->
-  <section class="card" id="demo">
-    <h2>10-Second Demo (eseguila dal sito canonico)</h2>
-    <ol>
-      <li>Scarica da: <a href="https://massimiliano.neocities.org/batch_eval.py">batch_eval.py</a> e <a href="https://massimiliano.neocities.org/example_data.csv">example_data.csv</a></li>
-      <li>Esegui:
-        <pre><code>python batch_eval.py --input example_data.csv --output results_scored.csv</code></pre>
-      </li>
-      <li>Apri <code>results_scored.csv</code> (TruthΩ, Co⁺, Score⁺).</li>
-    </ol>
-  </section>
-
   <footer class="muted">
-    Mirror © 2025 — MB-X.01 / L.O.N. (MIT) · Fonte canonica:
+    Mirror © 2025 — MB-X.01 / L.O.N. · MIT · Canonical:
     <a href="https://massimiliano.neocities.org/">massimiliano.neocities.org</a> ·
     DOI: <a href="https://doi.org/10.5281/zenodo.17270742" target="_blank" rel="noopener">10.5281/zenodo.17270742</a>
   </footer>
