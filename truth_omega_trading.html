@@ -18,22 +18,37 @@
   .wrap{max-width:1000px;margin:0 auto}
   .muted{color:var(--muted)}
   #chartWrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:12px}
+  a{color:#58a6ff;text-decoration:none} a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h2>TruthΩ Trading Demo (browser)</h2>
-  <p>Carica un CSV tipo <code>date,open,high,low,close,volume</code> e calcola <strong>TruthΩ → Co⁺ → Score⁺</strong>.</p>
+  <p>Carica un CSV con header <code>date,open,high,low,close,volume</code> e calcola <strong>TruthΩ → Co⁺ → Score⁺</strong>.</p>
 
   <div class="row">
-    <input type="file" id="fileInput" accept=".csv">
+    <input type="file" id="fileInput" accept=".csv" aria-label="Seleziona CSV">
     <button id="calcBtn">Calcola</button>
     <button id="downloadBtn" style="display:none;">Scarica risultati CSV</button>
   </div>
 
+  <!-- Help box + link CSV di esempio -->
+  <div style="max-width:1000px;margin:12px 0;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);text-align:left">
+    <strong>Come usarlo (mobile):</strong>
+    <ol style="margin:8px 0 10px 18px">
+      <li>Tocca <em>Scegli file</em>.</li>
+      <li>Se non hai un CSV, scarica l’esempio: <a href="sample_ohlcv.csv" download>sample_ohlcv.csv</a>.</li>
+      <li>Seleziona il file e poi tocca <em>Calcola</em>.</li>
+      <li>Per salvare l’output tocca <em>Scarica risultati CSV</em>.</li>
+    </ol>
+    <div class="muted" style="font-size:13px">
+      Formato richiesto: <code>date,open,high,low,close,volume</code> (una riga al giorno).
+    </div>
+  </div>
+
   <div id="chartWrap" style="display:none">
     <h3 style="margin:0 0 8px">Trend TruthΩ &amp; Score⁺</h3>
-    <canvas id="tosChart" height="120"></canvas>
+    <canvas id="tosChart" height="120" aria-label="Grafico TruthΩ e Score⁺"></canvas>
     <div class="row" style="margin-top:10px">
       <label class="muted"><input type="checkbox" id="toggleTruth" checked> TruthΩ</label>
       <label class="muted"><input type="checkbox" id="toggleScore" checked> Score⁺</label>
@@ -52,16 +67,14 @@ const fileEl = document.getElementById('fileInput');
 const outEl  = document.getElementById('output');
 const dlBtn  = document.getElementById('downloadBtn');
 const chartBox = document.getElementById('chartWrap');
-let chartRef = null; // istanza Chart.js corrente
-let resultsRows = []; // [{date,truth,co,score}]
+let chartRef = null;
+let resultsRows = [];
 
 function parseCSV(text){
-  // parser semplice (CSV senza virgole quotate): OK per i nostri file
   return text.trim().split(/\r?\n/).map(r => r.split(',').map(c => c.trim()));
 }
 
 function computeMetrics(rows){
-  // rows: con header in testa
   const header = rows.shift().map(h => h.toLowerCase());
   const idx = {
     date: header.indexOf('date'),
@@ -79,16 +92,11 @@ function computeMetrics(rows){
     if (!isFinite(open) || !isFinite(close) || !date) continue;
 
     const diff  = close - open;
-    const truth = Math.log(Math.abs(diff) + 1) * (diff >= 0 ? 1 : -1); // segno direzione
-    const co    = Math.exp(-Math.abs(truth));                           // ∈ (0,1]
-    const score = (co * 100 - Math.abs(truth * 10));                    // semplice gate demo
+    const truth = Math.log(Math.abs(diff) + 1) * (diff >= 0 ? 1 : -1);
+    const co    = Math.exp(-Math.abs(truth));
+    const score = (co * 100 - Math.abs(truth * 10));
 
-    out.push({
-      date,
-      truth: +truth.toFixed(4),
-      co:    +co.toFixed(4),
-      score: +score.toFixed(3)
-    });
+    out.push({ date, truth:+truth.toFixed(4), co:+co.toFixed(4), score:+score.toFixed(3) });
   }
   return out;
 }
@@ -107,7 +115,6 @@ function renderChart(arr){
   const score  = arr.map(r => r.score);
 
   chartBox.style.display = 'block';
-
   const ctx = document.getElementById('tosChart').getContext('2d');
   if (chartRef) chartRef.destroy();
   chartRef = new Chart(ctx, {
@@ -135,7 +142,6 @@ function renderChart(arr){
     }
   });
 
-  // Toggle visibilità
   document.getElementById('toggleTruth').onchange = (e)=>{
     chartRef.setDatasetVisibility(0, e.target.checked);
     chartRef.update();
@@ -145,14 +151,9 @@ function renderChart(arr){
     chartRef.update();
   };
 
-  // Summary rapido
   const s = document.getElementById('summary');
   const last = arr[arr.length-1];
-  if (last){
-    s.textContent = `Ultimo: TruthΩ ${last.truth} · Score⁺ ${last.score}`;
-  } else {
-    s.textContent = '';
-  }
+  s.textContent = last ? `Ultimo: TruthΩ ${last.truth} · Score⁺ ${last.score}` : '';
 }
 
 function enableDownload(arr){
@@ -184,6 +185,7 @@ document.getElementById('calcBtn').onclick = async () => {
     enableDownload(resultsRows);
   }catch(err){
     outEl.textContent = 'Errore: ' + (err.message || err);
+    document.getElementById('summary').textContent = '';
     chartBox.style.display = 'none';
     dlBtn.style.display = 'none';
   }
