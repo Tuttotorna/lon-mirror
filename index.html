@@ -6,9 +6,9 @@
 <title>MB-X.01 · Logical Origin Node (L.O.N.) — Hub</title>
 <meta name="description" content="Hub ufficiale dei progetti MB-X.01: TruthΩ, algoritmo di coerenza multibase, verifica (Third Observer), moduli (Omniabase, Lya, Scintilla, Polyglossa, Possibility, Spora, Orbit, Habitat), dossier e indici.">
 <meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://massimiliano.neocities.org/">
 <meta name="theme-color" content="#0d1117">
 <meta name="color-scheme" content="dark light">
-<link rel="canonical" href="https://massimiliano.neocities.org/">
 <meta name="citation_doi" content="10.5281/zenodo.17270742">
 
 <!-- Open Graph / Twitter -->
@@ -45,12 +45,18 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Person",
+      "@id": "https://massimiliano.neocities.org/#person",
+      "name": "Massimiliano Brighindi",
+      "email": "brighissimo@gmail.com"
+    },
+    {
       "@type": "WebSite",
       "@id": "https://massimiliano.neocities.org/#website",
       "url": "https://massimiliano.neocities.org/",
       "name": "MB-X.01 · Logical Origin Node (L.O.N.)",
       "inLanguage": "it",
-      "publisher": { "@type": "Person", "name": "Massimiliano Brighindi", "email": "brighissimo@gmail.com" },
+      "publisher": { "@id": "https://massimiliano.neocities.org/#person" },
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://www.google.com/search?q=site:massimiliano.neocities.org+{search_term_string}",
@@ -69,6 +75,7 @@
       "name": "MB-X.01 · L.O.N. — Hub",
       "isPartOf": { "@id": "https://massimiliano.neocities.org/#website" },
       "about": { "@id": "https://massimiliano.neocities.org/#lon" },
+      "mainEntityOfPage": { "@id": "https://massimiliano.neocities.org/#lon" },
       "dateModified": "2025-10-07"
     },
     {
@@ -77,7 +84,7 @@
       "name": "MB-X.01 · Logical Origin Node",
       "url": "https://massimiliano.neocities.org/",
       "license": "https://opensource.org/licenses/MIT",
-      "creator": { "@type": "Person", "name": "Massimiliano Brighindi", "email": "brighissimo@gmail.com" },
+      "creator": { "@id": "https://massimiliano.neocities.org/#person" },
       "identifier": "https://doi.org/10.5281/zenodo.17270742",
       "about": ["TruthΩ","Truth Engine","Omniabase","Lya","Possibility Engine"]
     },
@@ -94,7 +101,8 @@
       "name": "Modello Cognitivo MB-Mind",
       "url": "https://massimiliano.neocities.org/mind_structure.html",
       "isPartOf": { "@id": "https://massimiliano.neocities.org/#website" },
-      "about": ["Mente vettoriale","Osservatore riflessivo","Campo di coerenza","TruthΩ","Lya","Omniabase"]
+      "about": ["Mente vettoriale","Osservatore riflessivo","Campo di coerenza","TruthΩ","Lya","Omniabase"],
+      "creator": { "@id": "https://massimiliano.neocities.org/#person" }
     },
     {
       "@type": "Dataset",
@@ -102,7 +110,7 @@
       "name": "MB-X.01 Logical Origin Node (L.O.N.)",
       "description": "Hub computazionale per la misura di coerenza TruthΩ → Co⁺ → Score⁺ con moduli Omniabase, Lya, Scintilla, Polyglossa e Possibility.",
       "url": "https://massimiliano.neocities.org/",
-      "creator": { "@type": "Person", "name": "Massimiliano Brighindi", "email": "brighissimo@gmail.com" },
+      "creator": { "@id": "https://massimiliano.neocities.org/#person" },
       "license": "https://opensource.org/licenses/MIT",
       "identifier": "https://doi.org/10.5281/zenodo.17270742",
       "isAccessibleForFree": true,
