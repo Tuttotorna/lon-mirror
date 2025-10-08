@@ -1,9 +1,7 @@
 User-agent: *
-Disallow: /
+Disallow:
 
-# Mirror ufficiale del progetto MB-X.01 / L.O.N.
-# Origine canonica: https://massimiliano.neocities.org/
-# Ogni pagina del mirror espone <link rel="canonical" href="..."> verso la sorgente.
-# Licenza: MIT — https://opensource.org/licenses/MIT
-# DOI: https://doi.org/10.5281/zenodo.17270742
-# Ultimo aggiornamento: 2025-10-08
+# Indichiamo esplicitamente di non indicizzare le pagine del mirror
+# (molti crawler rispettano il meta robots per-pagina; qui non blocchiamo la scansione per mantenere i link funzionanti)
+# Le pagine del mirror includono: <meta name="robots" content="noindex,follow">
+Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
