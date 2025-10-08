@@ -15,13 +15,14 @@
 <meta name="color-scheme" content="dark light">
 <meta name="citation_doi" content="10.5281/zenodo.17270742">
 
-<!-- Open Graph / Twitter -->
 <meta property="og:title" content="MB-X.01 · L.O.N. — Mirror (GitHub)">
 <meta property="og:description" content="Mirror ufficiale di cortesia. La fonte canonica è massimiliano.neocities.org.">
 <meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="it_IT">
 <meta name="twitter:card" content="summary">
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'">
 
 <style>
   :root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
@@ -30,13 +31,14 @@
   .wrap{max-width:960px;margin:0 auto;padding:24px 14px}
   h1{font-size:30px;margin:0 0 10px;color:var(--accent)}
   h2{font-size:20px;margin:20px 0 8px;color:var(--warn)}
-  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
   .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
   .muted{color:var(--muted);font-size:13px}
-  ul{margin:6px 0 12px 20px} li{margin:5px 0}
+  ul{margin:6px 0 12px 20px}
+  li{margin:5px 0}
   .badge{display:inline-block;border:1px solid var(--border);padding:3px 9px;border-radius:999px;font-size:12px;background:#0f141b;margin-right:6px}
   .notice{border-left:4px solid var(--accent);background:#0f141b;padding:10px 12px;border-radius:10px;margin:14px 0}
-  /* HERO BRIDGE */
   .hero{background:linear-gradient(135deg,#0d1117 0%,#0f141b 60%,#10151d 100%);border:1px solid var(--border);border-radius:16px;padding:18px;margin-top:0}
   .hero h1{font-size:30px;margin:0 0 6px}
   .hero p{margin:6px 0 12px}
@@ -46,7 +48,6 @@
   .chip{padding:4px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted);background:#0f141b;font-size:12px}
 </style>
 
-<!-- JSON-LD minimale -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -66,7 +67,6 @@
 <body>
 <div class="wrap">
 
-  <!-- HERO: MBX-BRIDGE in cima -->
   <section class="hero" id="bridge-hero" aria-label="Ingresso rapido">
     <div>
       <span class="badge">MIRROR</span>
@@ -74,7 +74,7 @@
     </div>
     <h1>MBX-Bridge · Capire MB-X.01 in 60s</h1>
     <p class="muted">Traduzione operativa per umani e IA. Mini-demo di TruthΩ → Co⁺ e link chiari alla sorgente canonica.</p>
-    <p><a class="btn" href="mbx-bridge.html">Apri MBX-Bridge</a></p>
+    <p><a class="btn" href="mbx-bridge.html" rel="noopener">Apri MBX-Bridge</a></p>
     <div class="chips">
       <span class="chip">TruthΩ → Co⁺ → Score⁺</span>
       <span class="chip">L.O.N. · Logical Origin Node</span>
@@ -120,3 +120,4 @@
 </div>
 </body>
 </html>
+```0
