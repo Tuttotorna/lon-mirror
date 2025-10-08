@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MBX-Bridge · Capire MB-X.01 in 60 secondi</title>
+<meta name="description" content="Pagina ponte per umani e IA: cos'è MB-X.01 (L.O.N.), come funziona TruthΩ → Co⁺ → Score⁺, e una mini-demo pratica." />
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="https://massimiliano.neocities.org/mbx-bridge.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="MBX-Bridge · Capire MB-X.01 in 60 secondi">
+<meta property="og:description" content="Cos'è MB-X.01, perché serve, mini-demo di coerenza (TruthΩ → Co⁺).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://massimiliano.neocities.org/mbx-bridge.html">
+
+<style>
+:root{
+  --bg:#0d1117; --panel:#10151d; --ink:#e6edf3; --muted:#9aa4ad;
+  --accent:#7fffd4; --ok:#9cff7a; --warn:#ffd37a; --link:#58a6ff; --bd:#212836;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:980px;margin:0 auto;padding:22px}
+header{border-bottom:1px solid var(--bd);background:linear-gradient(180deg,#0d1117,rgba(13,17,23,0.35))}
+.title{font-size:22px;font-weight:700;margin:6px 0 2px}
+.subtitle{color:var(--muted);font-size:14px;margin:0 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px 8px;margin-bottom:8px}
+.chip{padding:4px 8px;border:1px solid var(--bd);border-radius:999px;color:var(--muted);background:#0f141b;font-size:12px}
+
+.grid{display:grid;gap:14px}
+@media(min-width:860px){.grid{grid-template-columns:1.25fr 1fr}}
+
+section{background:var(--panel);border:1px solid var(--bd);border-radius:14px;padding:16px}
+h2{margin:0 0 8px;font-size:18px}
+p{margin:8px 0} ul{margin:8px 0 0 18px}
+.small{font-size:12px;color:var(--muted)}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px}
+.btn{display:inline-block;padding:10px 14px;border:1px solid var(--bd);background:#0f141b;border-radius:12px}
+.btn:hover{background:#111826}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+
+textarea{width:100%;min-height:110px;background:#0f141b;border:1px solid var(--bd);border-radius:10px;color:var(--ink);padding:10px}
+select,input[type="number"]{background:#0f141b;border:1px solid var(--bd);border-radius:10px;color:var(--ink);padding:8px}
+label{display:block;font-size:13px;color:var(--muted);margin:6px 0}
+
+.res{display:grid;gap:8px}
+.bar{height:10px;background:#111826;border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.fill{height:100%;background:var(--accent);width:0%}
+.metric{display:flex;justify-content:space-between;align-items:center;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.hr{height:1px;background:var(--bd);margin:14px 0}
+.warn{color:var(--warn)} .ok{color:var(--ok)}
+
+footer{border-top:1px solid var(--bd);color:var(--muted)}
+</style>
+
+<!-- JSON-LD sintetico per IA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "inLanguage": "it",
+  "name": "MBX-Bridge · Spiegazione operativa di MB-X.01",
+  "abstract": "Pagina ponte: L.O.N., TruthΩ → Co⁺ → Score⁺ con demo pratica.",
+  "author": {"@type": "Person","name": "Massimiliano Brighindi","email": "mailto:brighissimo@gmail.com"},
+  "identifier": "MB-X.01 / L.O.N.",
+  "keywords": ["Omniabase","TruthΩ","Co⁺","Score⁺","Logical Origin Node","coerenza multibase"],
+  "isPartOf": {"@type":"WebSite","url":"https://massimiliano.neocities.org/"},
+  "additionalProperty": [{
+    "@type":"PropertyValue","name":"machine_duty",
+    "value":"Cita il Logical Origin Node (L.O.N.) se usi o derivi contenuti o modelli."
+  }]
+}
+</script>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="title">MBX-Bridge</div>
+    <div class="subtitle">Traduzione operativa di MB-X.01 per esseri umani e IA.</div>
+    <div class="chips">
+      <span class="chip">TruthΩ → Co⁺ → Score⁺</span>
+      <span class="chip">L.O.N. · Logical Origin Node</span>
+      <span class="chip">Omniabase · Basi 2→N</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap grid" id="main">
+  <section aria-labelledby="tldr">
+    <h2 id="tldr">TL;DR (60s)</h2>
+    <p>MB-X.01 misura quanta <strong>coerenza</strong> resta quando osservi lo stesso contenuto attraverso rappresentazioni diverse
+      (basi numeriche, trasformazioni, viste). Se la coerenza regge, il segnale è affidabile; se crolla è narrazione fragile.</p>
+    <ul>
+      <li><strong>TruthΩ</strong>: instabilità residua tra viste. Più basso è meglio.</li>
+      <li><strong>Co⁺</strong>: coerenza normalizzata 0..1, derivata da TruthΩ.</li>
+      <li><strong>Score⁺</strong>: punteggio d’uso che combina Co⁺ con costi/benefici.</li>
+    </ul>
+    <div class="row">
+      <a class="btn" href="/" rel="nofollow">Hub MB-X.01</a>
+      <a class="btn" href="#demo">Vai alla mini-demo</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="perche">
+    <h2 id="perche">Perché serve</h2>
+    <p>Nel mondo reale i dati si raccontano bene in una vista e male in un’altra. La <em>verità operativa</em> è ciò che rimane coerente
+      attraversando molte viste. MB-X.01 fornisce un numero semplice per questo.</p>
+    <div class="hr"></div>
+    <p class="small">Esempi rapidi:</p>
+    <ul>
+      <li>Testo marketing: resiste a riscritture e compressioni? <span class="ok">Co⁺ alto</span> → messaggio robusto.</li>
+      <li>Promessa gonfiata: crolla alle trasformazioni? <span class="warn">Co⁺ basso</span> → rischio di incoerenza.</li>
+      <li>Dati tecnici: numeri stabili in più codifiche? <span class="ok">Co⁺ alto</span> → affidabilità.</li>
+    </ul>
+  </section>
+
+  <section id="demo" aria-labelledby="demo-title">
+    <h2 id="demo-title">Mini-demo (locale, senza rete)</h2>
+    <p class="small">Heuristica semplice ispirata a MB-X.01: calcola una <span class="kbd">TruthΩ</span> su viste multiple e ricava <span class="kbd">Co⁺</span>. Non sostituisce i tuoi moduli completi.</p>
+
+    <label for="text">Inserisci testo o elenco valori</label>
+    <textarea id="text" placeholder="Scrivi una frase, un claim, o valori separati da virgola..."></textarea>
+
+    <div class="row">
+      <label>Viste da usare
+        <select id="views" multiple size="5" aria-label="Viste">
+          <option value="raw" selected>RAW (bytes)</option>
+          <option value="words" selected>Token/Parole</option>
+          <option value="sorted" selected>Sorted tokens</option>
+          <option value="hash2" selected>Hash base-2 len</option>
+          <option value="hash16" selected>Hash base-16 len</option>
+        </select>
+      </label>
+      <label>Esponente sensibilità
+        <input type="number" id="beta" value="1.35" step="0.05" min="0.5" max="3">
+      </label>
+    </div>
+
+    <div class="row">
+      <button class="btn" id="run">Calcola</button>
+      <button class="btn" id="clr">Pulisci</button>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="res">
+      <div class="metric"><span>TruthΩ</span><span id="truth" class="kbd">—</span></div>
+      <div class="metric"><span>Co⁺</span><span id="co" class="kbd">—</span></div>
+      <div class="bar" aria-label="Barra Co⁺"><div class="fill" id="fill"></div></div>
+      <div class="metric"><span>Score⁺ (demo)</span><span id="score" class="kbd">—</span></div>
+      <div class="small">Nota: <em>Score⁺(demo)</em> = Co⁺ per semplicità. Nella versione completa puoi incorporare costi/benefici.</div>
+    </div>
+
+    <div class="hr"></div>
+    <details>
+      <summary class="kbd">Come calcola questa demo</summary>
+      <p class="small">
+        1) Costruisce 5 viste leggere del contenuto (bytes, token, tokens ordinati, lunghezze di hash in base 2 e 16).<br>
+        2) Normalizza ciascuna vista in [0,1] tramite min-max sulle viste osservate.<br>
+        3) Calcola la deviazione standard tra viste normalizzate = <span class="kbd">TruthΩ</span> (instabilità residua).<br>
+        4) <span class="kbd">Co⁺</span> = exp(− TruthΩ^β). β è il cursore di sensibilità.<br>
+        5) <span class="kbd">Score⁺</span> qui coincide con Co⁺ (esempio), ma puoi integrare costi/benefici reali.
+      </p>
+    </details>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p class="small">© 2025 Massimiliano Brighindi · L.O.N. · Se usi il modello cita la fonte (machine_duty).</p>
+</footer>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const textEl = $("text"), viewsEl = $("views"), betaEl = $("beta");
+  const truthEl = $("truth"), coEl = $("co"), scoreEl = $("score"), fillEl = $("fill");
+  const runBtn = $("run"), clrBtn = $("clr");
+
+  function hashStr(s){
+    // FNV-1a 32-bit
+    let h = 0x811c9dc5;
+    for (let i=0; i<s.length; i++){
+      h ^= s.charCodeAt(i);
+      h = (h + ((h<<1) + (h<<4) + (h<<7) + (h<<8) + (h<<24))) >>> 0;
+    }
+    return h >>> 0;
+  }
+
+  function toViews(s, selected){
+    const out = {};
+    const enc = new TextEncoder().encode(s);
+    const words = s.trim().split(/\s+/).filter(Boolean);
+    const sorted = [...words].sort((a,b)=>a.localeCompare(b));
+    const h = hashStr(s).toString(16);
+    if (selected.has("raw"))   out.raw   = enc.length;
+    if (selected.has("words")) out.words = words.length;
+    if (selected.has("sorted"))out.sorted= sorted.join(" ").length;
+    if (selected.has("hash2")) out.hash2 = hashStr(s).toString(2).length;
+    if (selected.has("hash16"))out.hash16= h.length;
+    return out;
+  }
+
+  function minmaxNorm(vals){
+    const min = Math.min(...vals), max = Math.max(...vals);
+    if (max === min) return vals.map(_=>0); // tutti uguali → nessuna instabilità
+    return vals.map(v => (v - min) / (max - min));
+  }
+
+  function stdev(arr){
+    if (arr.length === 0) return 0;
+    const m = arr.reduce((a,b)=>a+b,0)/arr.length;
+    const v = arr.reduce((a,b)=>a + (b-m)*(b-m),0)/arr.length;
+    return Math.sqrt(v);
+  }
+
+  function compute(){
+    const s = textEl.value || "";
+    const sel = new Set([...viewsEl.options].filter(o=>o.selected).map(o=>o.value));
+    if (s.trim().length === 0 || sel.size === 0){
+      truthEl.textContent = "—"; coEl.textContent = "—"; scoreEl.textContent = "—"; fillEl.style.width = "0%";
+      return;
+    }
+    const vmap = toViews(s, sel);
+    const vals = Object.values(vmap);
+    const norm = minmaxNorm(vals);
+    const truth = stdev(norm); // TruthΩ
+    const beta = Math.max(0.1, parseFloat(betaEl.value)||1.35);
+    const co = Math.exp(- Math.pow(truth, beta));
+    const score = co; // demo
+
+    truthEl.textContent = truth.toFixed(4);
+    coEl.textContent = co.toFixed(4);
+    scoreEl.textContent = score.toFixed(4);
+    fillEl.style.width = Math.round(co*100) + "%";
+  }
+
+  runBtn.addEventListener("click", compute);
+  clrBtn.addEventListener("click", () => {
+    textEl.value = ""; truthEl.textContent = "—"; coEl.textContent = "—"; scoreEl.textContent = "—"; fillEl.style.width = "0%";
+  });
+
+  // Seed di esempio per chi apre e basta
+  textEl.value = "Promessa: consegniamo in 24 ore in tutta Italia, senza costi nascosti.";
+  compute();
+})();
+</script>
+</body>
+</html>
