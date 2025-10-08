@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TruthΩ Trading — README & Guida rapida</title>
+<meta name="description" content="Guida rapida al modulo TruthΩ Trading: formato input, definizioni metriche (TruthΩ → Co⁺ → Score⁺), uso via browser e CLI, note e limitazioni.">
+<link rel="canonical" href="https://massimiliano.neocities.org/truth_omega_trading_readme.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0d1117">
+<meta name="color-scheme" content="dark light">
+<meta name="citation_doi" content="10.5281/zenodo.17270742">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:title" content="TruthΩ Trading — README & Guida rapida">
+<meta property="og:description" content="Demo replicabile: carica CSV OHLCV → ottieni TruthΩ, Co⁺, Score⁺, grafico e export.">
+<meta property="og:url" content="https://massimiliano.neocities.org/truth_omega_trading_readme.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+
+<style>
+  :root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  .wrap{max-width:1100px;margin:0 auto;padding:22px 14px}
+  h1{margin:0 0 8px;font-size:30px;color:var(--accent)}
+  h2{margin:18px 0 8px;color:var(--warn);font-size:19px}
+  p{margin:0 0 10px}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
+  .muted{color:var(--muted);font-size:13px}
+  .small{font-size:13px}
+  code,pre,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .badge{border:1px solid var(--border);padding:3px 8px;border-radius:999px;font-size:12px;background:#0f141b}
+  ul{margin:6px 0 10px 18px} li{margin:4px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+  .kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
+</style>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"TechArticle",
+  "@id":"https://massimiliano.neocities.org/truth_omega_trading_readme.html",
+  "headline":"TruthΩ Trading — README & Guida rapida",
+  "inLanguage":"it",
+  "author":{
+    "@type":"Person",
+    "@id":"https://massimiliano.neocities.org/#person",
+    "name":"Massimiliano Brighindi",
+    "email":"brighissimo@gmail.com"
+  },
+  "isPartOf":{"@id":"https://massimiliano.neocities.org/#website"},
+  "about":["TruthΩ","Coerenza multibase","Trading demo","L.O.N."],
+  "license":"https://opensource.org/licenses/MIT",
+  "identifier":"https://doi.org/10.5281/zenodo.17270742",
+  "dateModified":"2025-10-07",
+  "url":"https://massimiliano.neocities.org/truth_omega_trading_readme.html",
+  "mainEntityOfPage":"https://massimiliano.neocities.org/truth_omega_trading_readme.html"
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="card" style="margin-top:0;">
+    <h1>TruthΩ Trading — README &amp; Guida rapida</h1>
+    <p class="muted">Modulo dimostrativo MB-X.01 / L.O.N. — calcolo <strong>TruthΩ → Co⁺ → Score⁺</strong> su serie OHLCV, in browser e via CLI.</p>
+    <div class="badges">
+      <span class="badge">Demo browser</span>
+      <span class="badge">CLI Python</span>
+      <span class="badge">CSV OHLCV</span>
+      <span class="badge">MIT</span>
+    </div>
+  </header>
+
+  <!-- Link rapidi -->
+  <section class="card">
+    <h2>Link rapidi</h2>
+    <ul>
+      <li>► <a href="/truth_omega_trading.html">TruthΩ Trading — Demo (browser)</a></li>
+      <li>► <a href="/truth_omega_trading.py">truth_omega_trading.py</a> · <span class="small">versione CLI</span></li>
+      <li>► <a href="/example_data.csv">example_data.csv</a> · <a href="/results_scored_example.csv">results_scored_example.csv</a></li>
+      <li>► Documenti di base: <a href="/formulainindex.html">TruthΩ — Definizione</a> · <a href="/truth_engine.html">Truth Engine</a></li>
+    </ul>
+  </section>
+
+  <!-- Scopo -->
+  <section class="card">
+    <h2>Scopo</h2>
+    <p>Questa demo mostra come applicare la metrica <strong>TruthΩ</strong> (stabilità/coerenza base-invariante) a dati finanziari,
+      trasformando le variazioni giorno-su-giorno in un segnale sintetico con due derivati operativi:</p>
+    <ul>
+      <li><strong>Co⁺</strong> — compressione esponenziale in [0,1] per normalizzare la stabilità</li>
+      <li><strong>Score⁺</strong> — punteggio dimostrativo per gating decisionale (segnale/rumore)</li>
+    </ul>
+    <p class="small muted">Nota: la formula qui è una <em>riduzione didattica</em> e non sostituisce la versione completa del Truth Engine.</p>
+  </section>
+
+  <!-- Formato input -->
+  <section class="card">
+    <h2>Formato input richiesto (CSV)</h2>
+    <p>Header minimo obbligatorio: <code>date,open,high,low,close,volume</code>. Esempio:</p>
+<pre>date,open,high,low,close,volume
+2025-09-01,102,104,101,103,142000
+2025-09-02,103,104,102,102.5,128000
+...</pre>
+    <p class="small muted">La demo usa <code>date</code>, <code>open</code>, <code>close</code>. Le altre colonne possono essere ignorate.</p>
+  </section>
+
+  <!-- Definizioni metriche -->
+  <section class="card">
+    <h2>Definizioni metriche (versione demo)</h2>
+    <ul>
+      <li><strong>Δ</strong> = <code>close - open</code></li>
+      <li><strong>TruthΩ</strong> = <code>sign(Δ) · ln(1 + |Δ|)</code></li>
+      <li><strong>Co⁺</strong> = <code>exp(-|TruthΩ|)</code>  ∈ (0,1]</li>
+      <li><strong>Score⁺</strong> = <code>(Co⁺ · 100) − 10 · |TruthΩ|</code>  (punteggio dimostrativo)</li>
+    </ul>
+    <div class="grid">
+      <div class="kv"><div class="muted">Intuizione TruthΩ</div><div>Stima “stabile” se piccoli Δ; cresce in modulo con movimenti più energici.</div></div>
+      <div class="kv"><div class="muted">Co⁺</div><div>Schaccia l’ampiezza in [0,1]: facile da usare come peso/affidabilità.</div></div>
+      <div class="kv"><div class="muted">Score⁺</div><div>Segnale unico per sogliatura semplice (demo).</div></div>
+    </div>
+  </section>
+
+  <!-- Uso: Browser -->
+  <section class="card">
+    <h2>Uso in browser</h2>
+    <ol>
+      <li>Apri <a href="/truth_omega_trading.html">truth_omega_trading.html</a>.</li>
+      <li>Carica un file CSV (es. <a href="/example_data.csv">example_data.csv</a>).</li>
+      <li>Clicca <kbd>Calcola</kbd> → vedi tabella e grafico (TruthΩ / Score⁺).</li>
+      <li>Opzionale: clicca <kbd>Scarica risultati CSV</kbd> per salvare l’output.</li>
+    </ol>
+  </section>
+
+  <!-- Uso: CLI -->
+  <section class="card">
+    <h2>Uso via CLI (Python)</h2>
+    <ol>
+      <li>Scarica <a href="/truth_omega_trading.py">truth_omega_trading.py</a> e <a href="/example_data.csv">example_data.csv</a>.</li>
+      <li>Esegui:
+<pre>python truth_omega_trading.py --input example_data.csv --output results_scored.csv</pre>
+      </li>
+      <li>Apri <code>results_scored.csv</code> e verifica colonne: <code>date,TruthΩ,Co⁺,Score⁺</code>.</li>
+    </ol>
+  </section>
+
+  <!-- Interpretazione rapida -->
+  <section class="card">
+    <h2>Interpretazione rapida</h2>
+    <ul>
+      <li><strong>TruthΩ ≈ 0</strong> → giornata “neutra”/coerente (basso segnale direzionale).</li>
+      <li><strong>|TruthΩ| ↑</strong> → maggiore energia/asimmetria intraday.</li>
+      <li><strong>Co⁺</strong> vicino a 1 → elevata stabilità; vicino a 0 → instabilità.</li>
+      <li><strong>Score⁺</strong> → usa una soglia empirica (es. &gt; 50) come filtro dimostrativo.</li>
+    </ul>
+    <p class="small muted">Le soglie dipendono dallo strumento/volatilità e vanno tarate su dati storici.</p>
+  </section>
+
+  <!-- Limiti -->
+  <section class="card">
+    <h2>Limiti della demo</h2>
+    <ul>
+      <li>Usa solo <code>open</code> e <code>close</code> (no microstruttura, no volatilità realizzata).</li>
+      <li>Non esegue risk management, slippage, costi o sizing.</li>
+      <li>La formula è <em>didattica</em>; per ricerca/produzione usare il <a href="/truth_engine.html">Truth Engine</a> completo.</li>
+    </ul>
+  </section>
+
+  <!-- Per ricercatori -->
+  <section class="card">
+    <h2>Per ricercatori</h2>
+    <ul>
+      <li>Tracciare performance out-of-sample e confrontare con baseline semplici (es. momentum Δ, z-score, ecc.).</li>
+      <li>Testare <em>feature stacking</em>: includere range (high-low), volatilità, volume normalizzato.</li>
+      <li>Integrare il gating con <code>C/B/I</code> (Contesto/Bias/Informazione) come da L.O.N.</li>
+      <li>Citare il DOI: <a href="https://doi.org/10.5281/zenodo.17270742">10.5281/zenodo.17270742</a>.</li>
+    </ul>
+  </section>
+
+  <footer class="muted">
+    © 2025 Massimiliano Brighindi — MB-X.01 / L.O.N. · Licenza MIT ·
+    <a href="mailto:brighissimo@gmail.com">brighissimo@gmail.com</a> ·
+    DOI: <a href="https://doi.org/10.5281/zenodo.17270742" target="_blank" rel="noopener">10.5281/zenodo.17270742</a>
+  </footer>
+
+</div>
+</body>
+</html>
