@@ -3,28 +3,18 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Home del mirror: punta al canonico via rel=alternate x-default -->
+  <!-- Home del mirror -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/</loc>
     <lastmod>2025-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/"/>
   </url>
 
-  <!-- Pagine mirror principali (se presenti) -->
+  <!-- MBX-Bridge -->
   <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/index.html</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/mbx-bridge.html</loc>
     <lastmod>2025-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mbx-bridge.html"/>
   </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/logical_integrator.html</loc>
-    <lastmod>2025-10-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.2</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/logical_integrator.html"/>
-  </url>
+
 </urlset>
