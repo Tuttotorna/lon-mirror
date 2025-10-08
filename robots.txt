@@ -1,16 +1,12 @@
+# lon-mirror (GitHub Pages) — mirror di cortesia
+# Origine canonica: https://massimiliano.neocities.org/
+# Ogni pagina del mirror espone rel="canonical" e meta robots "noindex,follow".
+# Licenza: MIT — https://opensource.org/licenses/MIT
+# DOI: https://doi.org/10.5281/zenodo.17270742
+# Ultimo aggiornamento: 2025-10-08
+
 User-agent: *
 Allow: /
 
-Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
-
-# Mirror ufficiale del progetto MB-X.01 / L.O.N.
-# Origine canonica: https://massimiliano.neocities.org/
-# Ogni pagina del mirror espone <link rel="canonical" href="..."> verso la sorgente.
-# Licenza: MIT — https://opensource.org/licenses/MIT
-# DOI: https://doi.org/10.5281/zenodo.17270742
-# Ultimo aggiornamento: 2025-10-07
-```0
-# --- Cross-domain sync ---
 Sitemap: https://massimiliano.neocities.org/sitemap.xml
-Link: <https://massimiliano.neocities.org/>; rel="canonical"
-Link: <https://massimiliano.neocities.org/>; rel="alternate"
+```0
