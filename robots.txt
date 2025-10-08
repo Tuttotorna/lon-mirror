@@ -1,7 +1,7 @@
 User-agent: *
-Disallow:
+Allow: /
 
-# Indichiamo esplicitamente di non indicizzare le pagine del mirror
-# (molti crawler rispettano il meta robots per-pagina; qui non blocchiamo la scansione per mantenere i link funzionanti)
-# Le pagine del mirror includono: <meta name="robots" content="noindex,follow">
+# Mirror ufficiale di sola lettura (GitHub Pages)
+# Le pagine contengono già meta noindex,follow.
+# Non bloccare la scansione: serve solo a mantenere link attivi verso il canonico.
 Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
