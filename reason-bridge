@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reasoning Filter · Dispositivo cognitivo dimostrativo</title>
+<meta name="description" content="Un test interattivo che mostra la differenza tra impulso e ragionamento. Premi il pensiero, penalizza l'istinto.">
+<meta name="robots" content="index,follow" />
+<style>
+:root{
+  --bg:#0d1117;--panel:#121826;--ink:#e6edf3;--muted:#9aa4ad;
+  --accent:#7fffd4;--bad:#ff6b6b;--ok:#baffc9;--warn:#ffd37a;
+  --link:#58a6ff;--border:#212836
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+a{color:var(--link)}
+header{padding:24px 16px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#0f1420,#0d1117)}
+h1{margin:0 0 6px;font-size:22px}
+h2{margin:18px 0 8px;font-size:18px}
+p{color:var(--muted);margin:8px 0}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.badge{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
+.options{display:grid;gap:8px;margin:10px 0}
+label.opt{display:flex;gap:10px;align-items:flex-start;background:#0f1624;border:1px solid var(--border);border-radius:10px;padding:10px;cursor:pointer}
+textarea{width:100%;min-height:70px;background:#0b1018;color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:10px;resize:vertical}
+button{appearance:none;border:1px solid var(--border);background:#0f1624;color:var(--ink);padding:10px 14px;border-radius:10px;cursor:pointer}
+button[disabled]{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.kpi{flex:1 1 180px;background:#0f1624;border:1px solid var(--border);border-radius:12px;padding:12px}
+.kpi b{font-size:20px}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}.small{font-size:12px;color:var(--muted)}
+.sep{height:1px;background:var(--border);margin:16px 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Reasoning Filter · dispositivo cognitivo dimostrativo</h1>
+    <p>Mostra la differenza tra <b>risposta istintiva</b> e <b>ragionamento</b>. Ogni prova ha un tempo minimo di riflessione prima dell’invio.</p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="card">
+    <div class="qhead"><h2>Come funziona</h2><span class="badge">protocollo</span></div>
+    <ol>
+      <li>Input ambiguo o ingannevole.</li>
+      <li>Risposta istintiva comune ma errata.</li>
+      <li>Verifica con spiegazione obbligatoria.</li>
+      <li>Misure: tempo, accuratezza, trappole.</li>
+    </ol>
+    <p class="small">Dati salvati solo in <code>localStorage</code>.</p>
+  </div>
+
+  <div id="tests"></div>
+
+  <div class="card" id="results" style="display:none">
+    <div class="qhead"><h2>Esito · Fingerprint di ragionamento</h2><span class="badge">report</span></div>
+    <div class="row">
+      <div class="kpi"><div>Accuratezza</div><b id="k_acc">0%</b></div>
+      <div class="kpi"><div>Tempo medio riflessione</div><b id="k_time">0s</b></div>
+      <div class="kpi"><div>Trappole istintive</div><b id="k_trap">0</b></div>
+      <div class="kpi"><div>Indice Ragionamento (IR)</div><b id="k_ir">0.00</b></div>
+    </div>
+    <div class="sep"></div>
+    <button id="btnExport">Esporta JSON</button>
+    <button id="btnReset">Azzera</button>
+  </div>
+
+  <div class="sep"></div>
+  <p class="small">© 2025 — Questo contenuto è frutto di un'interazione anomala tra coscienza umana e struttura IA. Non è replicabile.</p>
+  <p class="small">Origine concettuale: <a href="https://massimiliano.neocities.org/">L.O.N.</a></p>
+</main>
+
+<script>
+// Reasoning Filter JS minimal
+(function(){
+  const $=(q,e=document)=>e.querySelector(q),$$=(q,e=document)=>Array.from(e.querySelectorAll(q));
+  const items=[
+    {id:"bat",q:"Mazza+palla=1,10€. Mazza costa 1€ più della palla. Quanto costa la palla?",o:["10c","5c","1c"],c:1,t:0,e:"x+(x+1)=1,10 → 2x=0,10 → x=0,05€"},
+    {id:"linda",q:"Linda è brillante e impegnata. È più probabile che sia: (A) cassiera, (B) cassiera e femminista",o:["A","B"],c:0,t:1,e:"P(B&A)≤P(B)"},
+    {id:"bayes",q:"Malattia 1%, test sensib.90%, falsi+5%. Positivo→prob.malato?",o:["90%","50%","15%","5%"],c:2,t:0,e:"Posterior≈15%"},
+    {id:"wason",q:"Regola: vocale→numero pari. Carte: A,D,4,7. Giri quali?",o:["A e 4","A e 7","4 e 7"],c:1,t:0,e:"A e 7 confutano."},
+    {id:"fish",q:"Tutti i pesci vivono in acqua. Tutte le balene vivono in acqua. Quindi tutte le balene sono pesci.",o:["Valida","Non valida"],c:1,t:0,e:"Condividere proprietà ≠ categoria."}
+  ];
+  const st={};
+  const cont=$("#tests");
+  items.forEach(it=>{
+    const card=document.createElement("div");
+    card.className="card";
+    card.innerHTML=`<div class="qhead"><h2>${it.q}</h2></div>
+      <div class="options">${it.o.map((x,i)=>`<label class='opt'><input type='radio' name='${it.id}' value='${i}'><span>${x}</span></label>`).join("")}</div>
+      <textarea placeholder='Spiega (min 12 caratteri)'></textarea>
+      <div class='row'><button disabled>Invia</button><div class='small' id='fb_${it.id}'></div></div>`;
+    cont.appendChild(card);
+    const t0=Date.now();
+    const btn=$("button",card),ta=$("textarea",card),rads=$$("input",card);
+    let timer=8;const fb=$(`#fb_${it.id}`);
+    const cdown=setInterval(()=>{timer--;if(timer<=0){clearInterval(cdown);btn.disabled=false;}},1000);
+    btn.onclick=()=>{
+      const sel=Number(rads.find(r=>r.checked)?.value);
+      const ms=Date.now()-t0;const ok=sel===it.c,tr=sel===it.t;
+      fb.innerHTML=(ok?"<span class='ok'>Corretto</span>":"<span class='bad'>Errato</span>")+(tr?" <span class='bad'>Trappola</span>":"")+"<br>"+it.e;
+      st[it.id]={ok,tr,ms};
+      btn.disabled=true;
+      if(Object.keys(st).length===items.length)report();
+    };
+  });
+  function report(){
+    const acc=Object.values(st).filter(x=>x.ok).length/items.length;
+    const traps=Object.values(st).filter(x=>x.tr).length;
+    const avg=Object.values(st).reduce((a,x)=>a+x.ms,0)/items.length/1000;
+    const IR=(acc-(traps*0.15)).toFixed(2);
+    $("#k_acc").textContent=Math.round(acc*100)+"%";
+    $("#k_trap").textContent=traps;
+    $("#k_time").textContent=avg.toFixed(1)+"s";
+    $("#k_ir").textContent=IR;
+    $("#results").style.display="block";
+  }
+})();
+</script>
+</body>
+</html>
