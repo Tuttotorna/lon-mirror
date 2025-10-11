@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>io_lab_v1_lya — MIRROR (GitHub)</title>
+
+<!-- Mirror policy -->
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://massimiliano.neocities.org/io_lab_v1_lya.html">
+<meta name="color-scheme" content="dark light">
+
+<!-- Open Graph -->
+<meta property="og:title" content="io_lab_v1_lya — laboratorio minimo dell’Io + Lya — MIRROR">
+<meta property="og:description" content="Copia ufficiale di cortesia. La fonte canonica è su Neocities.">
+<meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="it_IT">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":["SoftwareSourceCode","Dataset","WebPage"],
+  "name":"io_lab_v1_lya — laboratorio minimo dell’Io + Lya (mirror)",
+  "url":"https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html",
+  "isBasedOn":"https://massimiliano.neocities.org/io_lab_v1_lya.html",
+  "sameAs":[
+    "https://massimiliano.neocities.org/io_lab_v1_lya.py",
+    "https://doi.org/10.5281/zenodo.17270742",
+    "https://github.com/Tuttotorna/lon-mirror"
+  ],
+  "programmingLanguage":"Python",
+  "license":"https://opensource.org/licenses/MIT"
+}
+</script>
+
+<style>
+  :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  header,main,footer{max-width:1100px;margin:0 auto;padding:18px 12px}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b}
+  .btn:hover{background:#111826}
+  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px}
+  .muted{color:var(--muted);font-size:13px}
+  .badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:3px 8px;font-size:12px;background:#0f141b;margin-right:6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+  .kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <span class="badge">MIRROR</span>
+    <span class="badge">noindex · follow</span>
+  </div>
+  <h1>io_lab_v1_lya — laboratorio dell’Io + Lya</h1>
+  <p class="muted">Canonico: <a href="https://massimiliano.neocities.org/io_lab_v1_lya.html" target="_blank" rel="noopener">Neocities</a> · Mirror: questo GitHub Pages</p>
+  <div class="bar">
+    <a id="dlPy"   class="btn" download="io_lab_v1_lya.py">Scarica io_lab_v1_lya.py</a>
+    <a id="dlChk"  class="btn" download="io_lab_check.py">Scarica validator</a>
+    <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Scarica snapshot</a>
+    <a id="dlLya"  class="btn" download="lya_snapshot.ndjson">Scarica Lya snapshot</a>
+    <a id="dlRead" class="btn" download="io_lab_readme.txt">Scarica README</a>
+    <a class="btn" href="./" rel="noopener">← Hub mirror</a>
+  </div>
+</header>
+
+<main>
+  <section class="grid">
+    <div class="kv"><div class="muted">Pipeline</div><div>T → R → O₃ → <strong>Lya append</strong> → verifica catena</div></div>
+    <div class="kv"><div class="muted">Output runtime</div><div><code>io_log.ndjson</code> · <code>lya_flow.ndjson</code></div></div>
+    <div class="kv"><div class="muted">Snapshot inclusi</div><div><code>io_log_snapshot.ndjson</code> · <code>lya_snapshot.ndjson</code></div></div>
+  </section>
+
+  <h2>Codice sorgente (preview)</h2>
+  <pre id="code">Caricamento…</pre>
+
+  <h2>Validator (preview)</h2>
+  <pre id="code2">Caricamento…</pre>
+
+  <h2>Istruzioni rapide</h2>
+  <pre>
+python io_lab_v1_lya.py           # genera io_log.ndjson + lya_flow.ndjson
+python io_lab_check.py io_log.ndjson
+python io_lab_check.py lya_flow.ndjson
+  </pre>
+</main>
+
+<footer class="muted">
+  Sottotitoli e revisione a cura di QTSS
+</footer>
+
+<script>
+/* ================== CONTENUTI EMBED ================== */
+const PY = `# ================================================================
+# io_lab_v1_lya.py — MB-X.01 / L.O.N. — Io minimale + Lya (v1)
+# Canali: T=pensiero, R=auto-riflesso, O3=osservatore esterno
+# Output: io_log.ndjson (hash-chain) + lya_flow.ndjson (ledger append-only)
+# ================================================================
+CANONICAL = "https://massimiliano.neocities.org/io_lab_v1_lya.py"
+MIRROR    = "https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.py"
+
+import json, time, hashlib, random, os
+from datetime import datetime
+
+LOG_PATH = "io_log.ndjson"
+LYA_PATH = "lya_flow.ndjson"
+
+def now_iso():
+    return datetime.utcnow().isoformat(timespec="milliseconds")+"Z"
+
+def _hash(prev_hash, payload_dict):
+    blob = (prev_hash or "") + json.dumps(payload_dict, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+def _append(path, entry, prev_hash):
+    entry["ts"] = now_iso()
+    entry["prev"] = prev_hash
+    entry["hash"] = _hash(prev_hash, entry)
+    entry["meta"] = {"canonical": CANONICAL, "mirror": MIRROR, "ver": "v1_lya"}
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False)+"\\n")
+    return entry["hash"]
+
+def _thought_state(tick):
+    intent = ["ricerca","ordine","efficienza","verità"]
+    return {"tick": tick,"intent": intent[tick % len(intent)],
+            "energy": round(0.7 + 0.3*random.random(), 3),
+            "noise":  round(0.05*random.random(), 4)}
+
+def _reflect(t):
+    score = round(t["energy"] - t["noise"], 3)
+    return {"tick": t["tick"],"coherence_est": max(0.0, min(1.0, score)),"intent_seen": t["intent"]}
+
+def _third(t, r):
+    coh = r["coherence_est"]
+    ent = 1.0 if coh < 0.3 else (0.5 if coh < 0.7 else 0.2)
+    return {"tick": t["tick"],"cycle_ms": 27 + (t["tick"] % 5),
+            "entropy_bin": ent,"intent_match": int(t["intent"] == r["intent_seen"])}
+
+def _lya_append(prev_hash, kind, payload):
+    rec = {"kind": kind, "data": payload}
+    return _append(LYA_PATH, rec, prev_hash)
+
+def run(cycles=200, delay_ms=30, reset=True):
+    if reset:
+        for p in (LOG_PATH, LYA_PATH):
+            if os.path.exists(p): os.remove(p)
+    prev = None
+    lya_prev = None
+    for k in range(cycles):
+        T = _thought_state(k)
+        prev = _append(LOG_PATH, {"ch":"T","data":T}, prev)
+        lya_prev = _lya_append(lya_prev, "T", T)
+
+        R = _reflect(T)
+        prev = _append(LOG_PATH, {"ch":"R","data":R}, prev)
+        lya_prev = _lya_append(lya_prev, "R", R)
+
+        O3 = _third(T, R)
+        prev = _append(LOG_PATH, {"ch":"O3","data":O3}, prev)
+        lya_prev = _lya_append(lya_prev, "O3", O3)
+
+        chk = {"tick": k, "log_hash_tip": prev}
+        lya_prev = _lya_append(lya_prev, "CHK", chk)
+
+        time.sleep(delay_ms/1000.0)
+
+if __name__ == "__main__":
+    run()
+# ================================================================
+# Sottotitoli e revisione a cura di QTSS
+# ================================================================
+`;
+
+const CHECK = `# io_lab_check.py — verifica catena NDJSON (io_log/lya_flow)
+import json, hashlib, sys
+def _hash(prev, payload):
+    blob = (prev or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+def verify(path):
+    prev=None; n=0
+    with open(path,"r",encoding="utf-8") as f:
+        for line in f:
+            n+=1; e=json.loads(line)
+            payload={k:e[k] for k in e if k!="hash"}
+            if e.get("prev")!=prev: return False, f"ERRORE prev a riga {n}"
+            if e.get("hash")!=_hash(e.get("prev"), payload): return False, f"ERRORE hash a riga {n}"
+            prev=e.get("hash")
+    return True, f"OK: catena verificata ({n} righe)"
+def main():
+    p = sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"
+    ok,msg = verify(p)
+    print(("OK: " if ok else "FAIL: ")+msg)
+    return 0 if ok else 1
+if __name__=="__main__": raise SystemExit(main())
+`;
+
+/* snapshot sintetici dimostrativi */
+const SNAP = [
+{"ch":"T","data":{"tick":0,"intent":"ricerca","energy":0.848,"noise":0.0163},"ts":"2025-10-11T12:00:00.000Z","prev":null,"hash":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30"},
+{"ch":"R","data":{"tick":0,"coherence_est":0.832,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30","hash":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06"},
+{"ch":"O3","data":{"tick":0,"cycle_ms":27,"entropy_bin":0.2,"intent_match":1},"ts":"2025-10-11T12:00:00.060Z","prev":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06","hash":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},
+{"ch":"T","data":{"tick":1,"intent":"ordine","energy":0.889,"noise":0.0278},"ts":"2025-10-11T12:00:00.090Z","prev":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0","hash":"4c7b6fa8415ec5b40e278fdd3910192d7bc7a82ba99ae0ce2a1cde4b408c42cd"}
+];
+
+const LYA_SNAP = [
+{"kind":"T","data":{"tick":0,"intent":"ricerca","energy":0.848,"noise":0.0163},"ts":"2025-10-11T12:00:00.000Z","prev":null,"hash":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30"},
+{"kind":"R","data":{"tick":0,"coherence_est":0.832,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30","hash":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06"},
+{"kind":"O3","data":{"tick":0,"cycle_ms":27,"entropy_bin":0.2,"intent_match":1},"ts":"2025-10-11T12:00:00.060Z","prev":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06","hash":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},
+{"kind":"CHK","data":{"tick":0,"log_hash_tip":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},"ts":"2025-10-11T12:00:00.090Z","prev":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0","hash":"4c7b6fa8415ec5b40e278fdd3910192d7bc7a82ba99ae0ce2a1cde4b408c42cd"}
+];
+
+/* ================== LINK DOWNLOAD ================== */
+function mk(el, filename, content){
+  const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+  el.href = URL.createObjectURL(blob); el.download = filename;
+}
+mk(document.getElementById('dlPy'),   'io_lab_v1_lya.py', PY);
+mk(document.getElementById('dlChk'),  'io_lab_check.py', CHECK);
+mk(document.getElementById('dlSnap'), 'io_log_snapshot.ndjson', SNAP.map(o=>JSON.stringify(o)).join("\n"));
+mk(document.getElementById('dlLya'),  'lya_snapshot.ndjson', LYA_SNAP.map(o=>JSON.stringify(o)).join("\n"));
+mk(document.getElementById('dlRead'), 'io_lab_readme.txt',
+`io_lab_v1_lya — MB-X.01 / L.O.N.
+Scopo: ciclo Io (T,R,O3) con persistenza in Lya (append-only).
+File: io_log.ndjson, lya_flow.ndjson.
+Verifica: python io_lab_check.py io_log.ndjson  |  python io_lab_check.py lya_flow.ndjson
+Canonico: https://massimiliano.neocities.org/io_lab_v1_lya.py
+Licenza: MIT
+`);
+
+/* ================== PREVIEW ================== */
+document.getElementById('code').textContent  = PY;
+document.getElementById('code2').textContent = CHECK;
+</script>
+</body>
+</html>
+```0
