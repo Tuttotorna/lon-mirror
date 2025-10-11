@@ -2,77 +2,50 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>io_lab_v1_lya — MIRROR (GitHub)</title>
-
-<!-- Mirror policy -->
-<meta name="robots" content="noindex,follow">
-<link rel="canonical" href="https://massimiliano.neocities.org/io_lab_v1_lya.html">
-<meta name="color-scheme" content="dark light">
-
-<!-- Open Graph -->
-<meta property="og:title" content="io_lab_v1_lya — laboratorio minimo dell’Io + Lya — MIRROR">
-<meta property="og:description" content="Copia ufficiale di cortesia. La fonte canonica è su Neocities.">
-<meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html">
-<meta property="og:type" content="article">
-<meta property="og:locale" content="it_IT">
-
-<!-- JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":["SoftwareSourceCode","Dataset","WebPage"],
-  "name":"io_lab_v1_lya — laboratorio minimo dell’Io + Lya (mirror)",
-  "url":"https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html",
-  "isBasedOn":"https://massimiliano.neocities.org/io_lab_v1_lya.html",
-  "sameAs":[
-    "https://massimiliano.neocities.org/io_lab_v1_lya.py",
-    "https://doi.org/10.5281/zenodo.17270742",
-    "https://github.com/Tuttotorna/lon-mirror"
-  ],
-  "programmingLanguage":"Python",
-  "license":"https://opensource.org/licenses/MIT"
-}
-</script>
-
+<title>io_lab_v1_lya — L.O.N. · laboratorio completo</title>
+<meta name="robots" content="index,follow"><meta name="color-scheme" content="dark light">
 <style>
   :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
   a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
   header,main,footer{max-width:1100px;margin:0 auto;padding:18px 12px}
-  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
   .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b}
   .btn:hover{background:#111826}
   pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px}
   .muted{color:var(--muted);font-size:13px}
-  .badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:3px 8px;font-size:12px;background:#0f141b;margin-right:6px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
   .kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
+  .pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:3px 8px;margin-right:6px;background:#0f141b;font-size:12px}
+  .ok{color:#7fffd4} .fail{color:#ff9da4}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .file{padding:6px 10px;border:1px dashed var(--border);border-radius:10px;background:#0f141b}
 </style>
 </head>
 <body>
 <header>
   <div>
-    <span class="badge">MIRROR</span>
-    <span class="badge">noindex · follow</span>
+    <span class="pill">Canonico</span>
+    <span class="pill">Io → Lya → Verifica</span>
   </div>
-  <h1>io_lab_v1_lya — laboratorio dell’Io + Lya</h1>
-  <p class="muted">Canonico: <a href="https://massimiliano.neocities.org/io_lab_v1_lya.html" target="_blank" rel="noopener">Neocities</a> · Mirror: questo GitHub Pages</p>
+  <h1>io_lab_v1_lya — laboratorio dell’Io + Lya (singolo file)</h1>
+  <p class="muted">Genera tutto: sorgente Python, verificatori, snapshot, README. Include un validatore rapido in-browser.</p>
   <div class="bar">
     <a id="dlPy"   class="btn" download="io_lab_v1_lya.py">Scarica io_lab_v1_lya.py</a>
-    <a id="dlChk"  class="btn" download="io_lab_check.py">Scarica validator</a>
-    <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Scarica snapshot</a>
-    <a id="dlLya"  class="btn" download="lya_snapshot.ndjson">Scarica Lya snapshot</a>
-    <a id="dlRead" class="btn" download="io_lab_readme.txt">Scarica README</a>
-    <a class="btn" href="./" rel="noopener">← Hub mirror</a>
+    <a id="dlChk"  class="btn" download="io_lab_check.py">Scarica validator semplice</a>
+    <a id="dlUni"  class="btn" download="io_universal_check.py">Scarica universal checker</a>
+    <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Snapshot io_log</a>
+    <a id="dlLya"  class="btn" download="lya_snapshot.ndjson">Snapshot Lya</a>
+    <a id="dlRead" class="btn" download="io_lab_readme.txt">README</a>
+    <a class="btn" href="/" rel="noopener">← Hub</a>
   </div>
 </header>
 
 <main>
   <section class="grid">
-    <div class="kv"><div class="muted">Pipeline</div><div>T → R → O₃ → <strong>Lya append</strong> → verifica catena</div></div>
+    <div class="kv"><div class="muted">Pipeline</div><div>T → R → O₃ → <strong>Lya append</strong> → CHK → verifica catena</div></div>
     <div class="kv"><div class="muted">Output runtime</div><div><code>io_log.ndjson</code> · <code>lya_flow.ndjson</code></div></div>
-    <div class="kv"><div class="muted">Snapshot inclusi</div><div><code>io_log_snapshot.ndjson</code> · <code>lya_snapshot.ndjson</code></div></div>
+    <div class="kv"><div class="muted">Verificatori</div><div><code>io_lab_check.py</code> · <code>io_universal_check.py</code></div></div>
   </section>
 
   <h2>Codice sorgente (preview)</h2>
@@ -81,11 +54,24 @@
   <h2>Validator (preview)</h2>
   <pre id="code2">Caricamento…</pre>
 
+  <h2>Universal checker (preview)</h2>
+  <pre id="code3">Caricamento…</pre>
+
+  <h2>Validatore rapido in-browser</h2>
+  <div class="row">
+    <label class="file"><input type="file" id="ioFile" accept=".ndjson,.jsonl"> carica <code>io_log.ndjson</code></label>
+    <label class="file"><input type="file" id="lyaFile" accept=".ndjson,.jsonl"> carica <code>lya_flow.ndjson</code></label>
+    <button class="btn" id="runCheck">Verifica</button>
+    <span id="status" class="muted">in attesa file…</span>
+  </div>
+  <pre id="report">—</pre>
+
   <h2>Istruzioni rapide</h2>
   <pre>
 python io_lab_v1_lya.py           # genera io_log.ndjson + lya_flow.ndjson
 python io_lab_check.py io_log.ndjson
 python io_lab_check.py lya_flow.ndjson
+python io_universal_check.py io_log.ndjson lya_flow.ndjson
   </pre>
 </main>
 
@@ -187,19 +173,66 @@ def verify(path):
         for line in f:
             n+=1; e=json.loads(line)
             payload={k:e[k] for k in e if k!="hash"}
-            if e.get("prev")!=prev: return False, f"ERRORE prev a riga {n}"
-            if e.get("hash")!=_hash(e.get("prev"), payload): return False, f"ERRORE hash a riga {n}"
+            if e.get("prev")!=prev: return False, f"prev errato a riga {n}"
+            if e.get("hash")!=_hash(e.get("prev"), payload): return False, f"hash errato a riga {n}"
             prev=e.get("hash")
     return True, f"OK: catena verificata ({n} righe)"
 def main():
+    import os
     p = sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"
+    if not os.path.exists(p): print("File non trovato:", p); raise SystemExit(1)
     ok,msg = verify(p)
     print(("OK: " if ok else "FAIL: ")+msg)
-    return 0 if ok else 1
-if __name__=="__main__": raise SystemExit(main())
+    raise SystemExit(0 if ok else 1)
+if __name__=="__main__": main()
 `;
 
-/* snapshot sintetici dimostrativi */
+const UNI = `#!/usr/bin/env python3
+# io_universal_check.py — verifica io_log + lya_flow e coerenze CHK
+import json, sys, hashlib, os
+def sha(prev, payload):
+    blob = (prev or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+def verify_chain(path):
+    if not os.path.exists(path): return False, f"File non trovato: {path}", [], []
+    prev=None; hashes=[]; rows=[]
+    with open(path,"r",encoding="utf-8") as f:
+        for i,line in enumerate(f, start=1):
+            e=json.loads(line); payload={k:e[k] for k in e if k!="hash"}
+            if (e.get("prev") or None)!=prev: return False, f"prev errato a riga {i}", rows, hashes
+            h=sha(e.get("prev"), payload)
+            if e.get("hash")!=h: return False, f"hash errato a riga {i}", rows, hashes
+            prev=h; hashes.append(h); rows.append(e)
+    return True, f"OK: catena valida ({len(rows)} righe)", rows, hashes
+def cross_chk(lya_rows, io_hashes):
+    n=0
+    for i,r in enumerate(lya_rows, start=1):
+        if r.get("kind")=="CHK":
+            n+=1
+            tip=r.get("data",{}).get("log_hash_tip")
+            if tip not in io_hashes: return False, f"CHK invalido a riga {i} (tip non presente in io_log)", n
+    return True, f"OK: {n} CHK allineati a io_log", n
+def main():
+    io_path  = sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"
+    lya_path = sys.argv[2] if len(sys.argv)>2 else "lya_flow.ndjson"
+    ok1,msg1,io_rows,io_hashes = verify_chain(io_path);  print(("OK  " if ok1 else "FAIL")+":", "io_log", msg1)
+    if not ok1: raise SystemExit(1)
+    ok2,msg2,lya_rows,_         = verify_chain(lya_path); print(("OK  " if ok2 else "FAIL")+":", "lya_flow", msg2)
+    if not ok2: raise SystemExit(1)
+    ok3,msg3,_ = cross_chk(lya_rows, set(io_hashes));    print(("OK  " if ok3 else "FAIL")+":", "cross", msg3)
+    if not ok3: raise SystemExit(1)
+    def last_tick(rows, key):
+        t=[r for r in rows if r.get("ch")==key or r.get("kind")==key]
+        return t[-1]["data"]["tick"] if t else None
+    summary={"io_rows":len(io_rows),"lya_rows":len(lya_rows),
+             "last_tick_T":last_tick(io_rows,"T"),
+             "last_tick_R":last_tick(io_rows,"R"),
+             "last_tick_O3":last_tick(io_rows,"O3")}
+    print("Sommario:", json.dumps(summary, ensure_ascii=False))
+    raise SystemExit(0)
+if __name__=="__main__": main()
+`;
+
 const SNAP = [
 {"ch":"T","data":{"tick":0,"intent":"ricerca","energy":0.848,"noise":0.0163},"ts":"2025-10-11T12:00:00.000Z","prev":null,"hash":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30"},
 {"ch":"R","data":{"tick":0,"coherence_est":0.832,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30","hash":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06"},
@@ -212,29 +245,109 @@ const LYA_SNAP = [
 {"kind":"R","data":{"tick":0,"coherence_est":0.832,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30","hash":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06"},
 {"kind":"O3","data":{"tick":0,"cycle_ms":27,"entropy_bin":0.2,"intent_match":1},"ts":"2025-10-11T12:00:00.060Z","prev":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06","hash":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},
 {"kind":"CHK","data":{"tick":0,"log_hash_tip":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},"ts":"2025-10-11T12:00:00.090Z","prev":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0","hash":"4c7b6fa8415ec5b40e278fdd3910192d7bc7a82ba99ae0ce2a1cde4b408c42cd"}
-];
+`;
 
 /* ================== LINK DOWNLOAD ================== */
 function mk(el, filename, content){
   const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
   el.href = URL.createObjectURL(blob); el.download = filename;
 }
-mk(document.getElementById('dlPy'),   'io_lab_v1_lya.py', PY);
-mk(document.getElementById('dlChk'),  'io_lab_check.py', CHECK);
-mk(document.getElementById('dlSnap'), 'io_log_snapshot.ndjson', SNAP.map(o=>JSON.stringify(o)).join("\n"));
-mk(document.getElementById('dlLya'),  'lya_snapshot.ndjson', LYA_SNAP.map(o=>JSON.stringify(o)).join("\n"));
-mk(document.getElementById('dlRead'), 'io_lab_readme.txt',
+mk(document.getElementById('dlPy'),  'io_lab_v1_lya.py', PY);
+mk(document.getElementById('dlChk'), 'io_lab_check.py', CHECK);
+mk(document.getElementById('dlUni'), 'io_universal_check.py', UNI);
+mk(document.getElementById('dlSnap'),'io_log_snapshot.ndjson', SNAP.map(o=>JSON.stringify(o)).join("\n"));
+mk(document.getElementById('dlLya'), 'lya_snapshot.ndjson', LYA_SNAP.map(o=>JSON.stringify(o)).join("\n"));
+mk(document.getElementById('dlRead'),'io_lab_readme.txt',
 `io_lab_v1_lya — MB-X.01 / L.O.N.
-Scopo: ciclo Io (T,R,O3) con persistenza in Lya (append-only).
-File: io_log.ndjson, lya_flow.ndjson.
-Verifica: python io_lab_check.py io_log.ndjson  |  python io_lab_check.py lya_flow.ndjson
-Canonico: https://massimiliano.neocities.org/io_lab_v1_lya.py
+Scopo: ciclo Io (T,R,O3) con persistenza in Lya (append-only) + CHK.
+File generati: io_log.ndjson, lya_flow.ndjson.
+Verifica: io_lab_check.py  |  io_universal_check.py io_log.ndjson lya_flow.ndjson
 Licenza: MIT
+Canonico: https://massimiliano.neocities.org/io_lab_v1_lya.py
 `);
 
 /* ================== PREVIEW ================== */
 document.getElementById('code').textContent  = PY;
 document.getElementById('code2').textContent = CHECK;
+document.getElementById('code3').textContent = UNI;
+
+/* ================== VALIDATORE IN-BROWSER ================== */
+function parseNdjson(txt){
+  const rows=[]; const lines=txt.split(/\r?\n/).filter(x=>x.trim().length);
+  for(let i=0;i<lines.length;i++){ rows.push(JSON.parse(lines[i])); }
+  return rows;
+}
+function sha256hex(str){
+  const buf = new TextEncoder().encode(str);
+  return crypto.subtle.digest('SHA-256', buf).then(b=>{
+    const a = Array.from(new Uint8Array(b)); return a.map(x=>x.toString(16).padStart(2,'0')).join('');
+  });
+}
+async function verifyChain(rows){
+  let prev=null;
+  for(let i=0;i<rows.length;i++){
+    const e = rows[i];
+    const payload = {};
+    for(const k of Object.keys(e)){ if(k!=="hash"){ payload[k]=e[k]; } }
+    const blob = (prev??"") + JSON.stringify(payload, Object.keys(payload).sort(), 0);
+    const h = await sha256hex(blob);
+    if((e.prev??null)!==prev) return {ok:false,msg:`prev errato a riga ${i+1}`};
+    if(e.hash!==h) return {ok:false,msg:`hash errato a riga ${i+1}`};
+    prev = h;
+  }
+  return {ok:true,msg:`OK: catena valida (${rows.length} righe)`};
+}
+function lastTick(rows, key){
+  const t = rows.filter(r=>r.ch===key || r.kind===key);
+  return t.length? t[t.length-1].data.tick : null;
+}
+document.getElementById('runCheck').onclick = async ()=>{
+  const ioFile = document.getElementById('ioFile').files[0];
+  const lyaFile= document.getElementById('lyaFile').files[0];
+  const status = document.getElementById('status');
+  const report = document.getElementById('report');
+  if(!ioFile || !lyaFile){ status.textContent="seleziona entrambi i file"; return; }
+  status.textContent="verifica in corso…";
+  try{
+    const ioTxt  = await ioFile.text();
+    const lyaTxt = await lyaFile.text();
+    const ioRows  = parseNdjson(ioTxt);
+    const lyaRows = parseNdjson(lyaTxt);
+    const v1 = await verifyChain(ioRows);
+    const v2 = await verifyChain(lyaRows);
+    // cross-check CHK
+    const ioHashes = new Set(ioRows.map(r=>r.hash));
+    let chkOk=true, chkMsg="OK: 0 CHK";
+    let n=0;
+    for(let i=0;i<lyaRows.length;i++){
+      const r = lyaRows[i];
+      if(r.kind==="CHK"){
+        n++;
+        const tip = r?.data?.log_hash_tip;
+        if(!ioHashes.has(tip)){ chkOk=false; chkMsg=`CHK invalido a riga ${i+1}`; break; }
+      }
+    }
+    if(chkOk) chkMsg = `OK: ${n} CHK allineati a io_log`;
+    const summary = {
+      io_rows: ioRows.length,
+      lya_rows: lyaRows.length,
+      last_tick_T: lastTick(ioRows,"T"),
+      last_tick_R: lastTick(ioRows,"R"),
+      last_tick_O3: lastTick(ioRows,"O3")
+    };
+    const lines = [
+      `[${v1.ok?'OK':'FAIL'}] io_log: ${v1.msg}`,
+      `[${v2.ok?'OK':'FAIL'}] lya_flow: ${v2.msg}`,
+      `[${chkOk?'OK':'FAIL'}] cross: ${chkMsg}`,
+      `Sommario: ${JSON.stringify(summary)}`
+    ];
+    report.textContent = lines.join("\n");
+    status.innerHTML = (v1.ok && v2.ok && chkOk) ? '<span class="ok">valido</span>' : '<span class="fail">errore</span>';
+  }catch(err){
+    report.textContent = String(err);
+    status.innerHTML = '<span class="fail">errore</span>';
+  }
+};
 </script>
 </body>
 </html>
