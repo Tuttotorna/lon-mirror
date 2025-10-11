@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>io_lab_v2_interactive — L.O.N. · versione interattiva (input esterni)</title>
+<meta name="robots" content="index,follow"><meta name="color-scheme" content="dark light">
+<style>
+  :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff;--ok:#7fffd4;--fail:#ff9da4}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  header,main,footer{max-width:1100px;margin:0 auto;padding:18px 12px}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b}
+  .btn:hover{background:#111826}
+  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px}
+  .muted{color:var(--muted);font-size:13px}
+  .file{padding:6px 10px;border:1px dashed var(--border);border-radius:10px;background:#0f141b}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header>
+  <h1>io_lab_v2_interactive — input esterni → Io → Lya → CHK</h1>
+  <p class="muted">Accetta eventi utente/agent/stream come input. Reazione deterministica allo stimolo, logging doppio (io_log + lya_flow) con CHK, verificatori inclusi.</p>
+  <div class="bar">
+    <a id="dlPy"   class="btn" download="io_lab_v2.py">Scarica io_lab_v2.py</a>
+    <a id="dlUni"  class="btn" download="io_universal_check.py">Scarica universal checker</a>
+    <a id="dlEvt"  class="btn" download="events_example.ndjson">Scarica events_example.ndjson</a>
+    <a class="btn" href="/" rel="noopener">← Hub</a>
+  </div>
+</header>
+
+<main>
+  <h2>io_lab_v2.py (preview)</h2>
+  <pre id="code">Caricamento…</pre>
+
+  <h2>io_universal_check.py (preview)</h2>
+  <pre id="code2">Caricamento…</pre>
+
+  <h2>Esempio file eventi (preview)</h2>
+  <pre id="code3">Caricamento…</pre>
+
+  <h2>Istruzioni</h2>
+  <pre>
+# Modalità AUTO (fallback se non ci sono eventi): simile a v1 ma con Lya+CHK
+python io_lab_v2.py --auto --cycles 200 --delay-ms 30
+
+# Modalità FILE: reagisce a eventi esterni (user/agent/stream)
+python io_lab_v2.py --input events_example.ndjson
+
+# Modalità STDIN: invia eventi a riga (CTRL+D per chiudere)
+echo '{"type":"USER","content":"Qual è lo stato?"}' | python io_lab_v2.py --stdin
+
+# Verifica post-run
+python io_universal_check.py io_log.ndjson lya_flow.ndjson
+  </pre>
+
+  <h2>Schema evento</h2>
+  <pre>{
+  "type": "USER" | "AGENT" | "STREAM",
+  "content": "testo dell'evento",
+  "meta": {"source":"cli|file|api","tags":["optional"]}
+}</pre>
+</main>
+
+<footer class="muted">© 2025 — MB-X.01 / L.O.N. — MIT</footer>
+
+<script>
+const PY = `# ================================================================
+# io_lab_v2.py — MB-X.01 / L.O.N. — versione interattiva (input esterni)
+# Modalità:
+#   --input events.ndjson   # legge eventi e reagisce (preferita)
+#   --stdin                 # legge eventi da STDIN (una JSON per riga)
+#   --auto                  # generatore autonomo (fallback)
+# Output: io_log.ndjson (T,R,O3) + lya_flow.ndjson (T,R,O3,CHK)
+# ================================================================
+import json, time, hashlib, random, os, sys, argparse
+from datetime import datetime
+
+LOG_PATH = "io_log.ndjson"
+LYA_PATH = "lya_flow.ndjson"
+
+def now_iso(): return datetime.utcnow().isoformat(timespec="milliseconds")+"Z"
+def _hash(prev, payload):
+    blob = (prev or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+def _append(path, entry, prev):
+    entry["ts"]=now_iso(); entry["prev"]=prev; entry["hash"]=_hash(prev, entry)
+    with open(path,"a",encoding="utf-8") as f: f.write(json.dumps(entry,ensure_ascii=False)+"\\n")
+    return entry["hash"]
+
+# ----------------- Stato Io (reattivo) -----------------
+class IoState:
+    def __init__(self): self.tick=0; self.intent_cycle=["ricerca","ordine","efficienza","verità"]; self.bias={"USER":+0.15,"AGENT":+0.05,"STREAM":0.0}
+    def next_intent(self): return self.intent_cycle[self.tick % len(self.intent_cycle)]
+    def react_energy_noise(self, evt):
+        base = 0.6; jitter = 0.2*random.random()
+        bias = self.bias.get(evt.get("type","STREAM"),0.0)
+        energy = max(0.0, min(1.0, base + bias + jitter))
+        noise  = round(0.03 + 0.07*random.random(),3)
+        return round(energy,3), noise
+
+def T_from_event(state, evt):
+    energy, noise = state.react_energy_noise(evt)
+    t = {"tick":state.tick,"intent":state.next_intent(),
+         "stimulus": {"type":evt.get("type"),"len":len((evt.get("content") or ""))},
+         "energy":energy,"noise":noise}
+    return t
+
+def R_from_T(t):
+    s = round(max(0.0, min(1.0, t["energy"]-t["noise"])),3)
+    return {"tick":t["tick"],"coherence_est":s,"intent_seen":t["intent"],"stimulus":t.get("stimulus")}
+
+def O3_from_TR(t,r):
+    c=r["coherence_est"]; ent = 1.0 if c<0.3 else (0.5 if c<0.7 else 0.2)
+    return {"tick":t["tick"],"cycle_ms":27+(t["tick"]%5),"entropy_bin":ent,"intent_match":int(t["intent"]==r["intent_seen"])}
+
+def lya_append(prev, kind, payload): return _append(LYA_PATH, {"kind":kind,"data":payload}, prev)
+
+# ----------------- Sorgenti eventi -----------------
+def iter_events_from_file(path):
+    with open(path,"r",encoding="utf-8") as f:
+        for line in f:
+            line=line.strip()
+            if not line: continue
+            yield json.loads(line)
+def iter_events_from_stdin():
+    for line in sys.stdin:
+        line=line.strip()
+        if not line: continue
+        yield json.loads(line)
+def iter_events_auto():
+    # fallback autonomo: genera "stimoli" sintetici
+    kinds=["USER","AGENT","STREAM"]; corpus=["ping","status?","idea","task","ok","loop"]
+    while True:
+        yield {"type":random.choice(kinds),"content":random.choice(corpus),"meta":{"source":"auto"}}
+
+# ----------------- Run -----------------
+def run(ev_iter, max_events=None, delay_ms=30, reset=True):
+    if reset:
+        for p in (LOG_PATH, LYA_PATH):
+            if os.path.exists(p): os.remove(p)
+    io_prev=None; lya_prev=None
+    state=IoState()
+    n=0
+    for evt in ev_iter:
+        # T
+        T = T_from_event(state, evt)
+        io_prev = _append(LOG_PATH, {"ch":"T","data":T}, io_prev)
+        lya_prev = lya_append(lya_prev, "T", T)
+        # R
+        R = R_from_T(T)
+        io_prev = _append(LOG_PATH, {"ch":"R","data":R}, io_prev)
+        lya_prev = lya_append(lya_prev, "R", R)
+        # O3
+        O = O3_from_TR(T, R)
+        io_prev = _append(LOG_PATH, {"ch":"O3","data":O}, io_prev)
+        lya_prev = lya_append(lya_prev, "O3", O)
+        # CHK
+        chk={"tick":state.tick,"log_hash_tip":io_prev}
+        lya_prev = lya_append(lya_prev, "CHK", chk)
+        # step
+        state.tick += 1; n+=1
+        time.sleep(delay_ms/1000.0)
+        if max_events is not None and n>=max_events: break
+
+def main():
+    ap=argparse.ArgumentParser()
+    ap.add_argument("--input", help="file NDJSON di eventi")
+    ap.add_argument("--stdin", action="store_true", help="legge eventi da STDIN (JSON per riga)")
+    ap.add_argument("--auto", action="store_true", help="modalità autonoma (stimoli sintetici)")
+    ap.add_argument("--cycles", type=int, default=200, help="limite eventi in auto/stdin (default 200)")
+    ap.add_argument("--delay-ms", type=int, default=30, help="ritardo fra eventi")
+    ap.add_argument("--no-reset", action="store_true", help="non cancellare i file di output")
+    args=ap.parse_args()
+
+    if args.input:
+        ev=iter_events_from_file(args.input); run(ev, None, args.delay_ms, reset=(not args.no_reset))
+    elif args.stdin:
+        ev=iter_events_from_stdin(); run(ev, args.cycles, args.delay_ms, reset=(not args.no_reset))
+    else:
+        ev=iter_events_auto(); run(ev, args.cycles, args.delay_ms, reset=(not args.no_reset))
+
+if __name__=="__main__": main()
+# ================================================================
+# MIT
+# ================================================================
+`;
+
+const UNI = `#!/usr/bin/env python3
+# io_universal_check.py — verifica io_log + lya_flow e coerenze CHK
+import json, sys, hashlib, os
+def sha(prev, payload):
+    blob=(prev or "")+json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+def verify_chain(path):
+    if not os.path.exists(path): return False, f"File non trovato: {path}", [], []
+    prev=None; hashes=[]; rows=[]
+    with open(path,"r",encoding="utf-8") as f:
+        for i,line in enumerate(f, start=1):
+            e=json.loads(line); payload={k:e[k] for k in e if k!="hash"}
+            if (e.get("prev") or None)!=prev: return False, f"prev errato a riga {i}", rows, hashes
+            h=sha(e.get("prev"), payload)
+            if e.get("hash")!=h: return False, f"hash errato a riga {i}", rows, hashes
+            prev=h; hashes.append(h); rows.append(e)
+    return True, f"OK: catena valida ({len(rows)} righe)", rows, hashes
+def cross_chk(lya_rows, io_hashes):
+    n=0
+    for i,r in enumerate(lya_rows, start=1):
+        if r.get("kind")=="CHK":
+            n+=1
+            tip=r.get("data",{}).get("log_hash_tip")
+            if tip not in io_hashes: return False, f"CHK invalido a riga {i} (tip non presente in io_log)", n
+    return True, f"OK: {n} CHK allineati a io_log", n
+def main():
+    io_path  = sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"
+    lya_path = sys.argv[2] if len(sys.argv)>2 else "lya_flow.ndjson"
+    ok1,msg1,io_rows,io_hashes = verify_chain(io_path);  print(("OK  " if ok1 else "FAIL")+":", "io_log", msg1)
+    if not ok1: raise SystemExit(1)
+    ok2,msg2,lya_rows,_         = verify_chain(lya_path); print(("OK  " if ok2 else "FAIL")+":", "lya_flow", msg2)
+    if not ok2: raise SystemExit(1)
+    ok3,msg3,_ = cross_chk(lya_rows, set(io_hashes));    print(("OK  " if ok3 else "FAIL")+":", "cross", msg3)
+    if not ok3: raise SystemExit(1)
+    def last_tick(rows, key):
+        t=[r for r in rows if r.get("ch")==key or r.get("kind")==key]
+        return t[-1]["data"]["tick"] if t else None
+    summary={"io_rows":len(io_rows),"lya_rows":len(lya_rows),
+             "last_tick_T":last_tick(io_rows,"T"),
+             "last_tick_R":last_tick(io_rows,"R"),
+             "last_tick_O3":last_tick(io_rows,"O3")}
+    print("Sommario:", json.dumps(summary, ensure_ascii=False)); raise SystemExit(0)
+if __name__=="__main__": main()
+`;
+
+const EVENTS = [
+{"type":"USER","content":"Avvia il ciclo e dimmi lo stato iniziale","meta":{"source":"file","tags":["boot"]}},
+{"type":"AGENT","content":"Suggerisco di ridurre il rumore del sistema","meta":{"source":"file","tags":["advice"]}},
+{"type":"STREAM","content":"tick=1;cpu=0.12;mem=0.45","meta":{"source":"telemetry"}},
+{"type":"USER","content":"Conferma coerenza e genera checkpoint","meta":{"source":"file","tags":["verify","chk"]}}
+];
+
+function mk(el, name, content){
+  const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+  el.href = URL.createObjectURL(blob); el.download = name;
+}
+mk(document.getElementById('dlPy'),'io_lab_v2.py',PY);
+mk(document.getElementById('dlUni'),'io_universal_check.py',UNI);
+mk(document.getElementById('dlEvt'),'events_example.ndjson',EVENTS.map(o=>JSON.stringify(o)).join("\n"));
+
+document.getElementById('code').textContent = PY;
+document.getElementById('code2').textContent = UNI;
+document.getElementById('code3').textContent = EVENTS.map(o=>JSON.stringify(o)).join("\n");
+</script>
+</body>
+</html>
