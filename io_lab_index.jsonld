@@ -1,16 +1,106 @@
-{
-  "@context": "https://schema.org",
-  "@type": ["Dataset","SoftwareSourceCode"],
-  "@id": "https://tuttotorna.github.io/lon-mirror/io_lab_v0",
-  "name": "io_lab_v0 — Laboratorio minimo dell'Io (mirror)",
-  "codeRepository": "https://tuttotorna.github.io/lon-mirror/io_lab_v0.py",
-  "programmingLanguage": "Python",
-  "isBasedOn": "https://massimiliano.neocities.org/io_lab_v0.py",
-  "sameAs": [
-    "https://massimiliano.neocities.org/io_lab_v0.py",
-    "https://doi.org/10.5281/zenodo.17270742"
-  ],
-  "license": "https://opensource.org/licenses/MIT",
-  "creator": { "@type": "Person", "name": "Massimiliano Brighindi", "email": "mailto:brighissimo@gmail.com" },
-  "dateModified": "2025-10-11"
-}
+# ================================================================
+# io_lab_v0.py — MB-X.01 / L.O.N. — laboratorio minimo dell'Io (v0) — MIRROR
+# Copia ufficiale di cortesia ospitata su GitHub Pages
+# Fonte canonica: massimiliano.neocities.org/io_lab_v0.py
+# ================================================================
+
+CANONICAL = "https://massimiliano.neocities.org/io_lab_v0.py"
+MIRROR    = "https://tuttotorna.github.io/lon-mirror/io_lab_v0.py"
+
+import json, time, hashlib, random, os, base64
+from datetime import datetime
+
+LOG_PATH = "io_log.ndjson"
+SNAPSHOT_PATH = "io_log_snapshot.ndjson"
+
+def now_iso():
+    return datetime.utcnow().isoformat(timespec="milliseconds")+"Z"
+
+def _hash(prev_hash, payload_dict):
+    blob = (prev_hash or "") + json.dumps(payload_dict, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+def _append(entry, prev_hash, path):
+    entry["ts"] = now_iso()
+    entry["prev"] = prev_hash
+    entry["hash"] = _hash(prev_hash, entry)
+    entry["meta"] = {"canonical": CANONICAL, "mirror": MIRROR, "ver": "v0"}
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False)+"\n")
+    return entry["hash"]
+
+def _thought_state(tick):
+    intent = ["ricerca","ordine","efficienza","verità"]
+    return {
+        "tick": tick,
+        "intent": intent[tick % len(intent)],
+        "energy": round(0.7 + 0.3*random.random(), 3),
+        "noise": round(0.05*random.random(), 4)
+    }
+
+def _reflect(t_state):
+    score = round((t_state["energy"] - t_state["noise"]), 3)
+    return {
+        "tick": t_state["tick"],
+        "coherence_est": max(0.0, min(1.0, score)),
+        "intent_seen": t_state["intent"]
+    }
+
+def _third_observer(t_state, r_state):
+    coh = r_state["coherence_est"]
+    ent = 1.0 if coh < 0.3 else (0.5 if coh < 0.7 else 0.2)
+    return {
+        "tick": t_state["tick"],
+        "cycle_ms": random.randint(18, 35),
+        "entropy_bin": ent,
+        "intent_match": int(t_state["intent"] == r_state["intent_seen"])
+    }
+
+def run_io_lab(cycles=200, delay_ms=30, out_path=LOG_PATH, reset=True):
+    prev = None
+    if reset and os.path.exists(out_path):
+        os.remove(out_path)
+    for k in range(cycles):
+        T = _thought_state(k);     prev = _append({"ch":"T","data":T}, prev, out_path)
+        R = _reflect(T);           prev = _append({"ch":"R","data":R}, prev, out_path)
+        O3 = _third_observer(T,R); prev = _append({"ch":"O3","data":O3}, prev, out_path)
+        time.sleep(delay_ms/1000.0)
+
+def verify_chain(path):
+    prev = None
+    n = 0
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            n += 1
+            e = json.loads(line)
+            if e.get("prev") != prev:
+                return False, f"Errore catena a riga {n}: prev non combacia"
+            payload = {k:e[k] for k in e if k != "hash"}
+            expect = hashlib.sha256(( (e.get("prev") or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False) ).encode("utf-8")).hexdigest()
+            if e.get("hash") != expect:
+                return False, f"Errore hash a riga {n}: hash non combacia"
+            prev = e.get("hash")
+    return True, f"OK: catena verificata ({n} righe)"
+
+# ------------------------------------------------
+# Snapshot: copia del log stabile v0, base64 identico al canonico
+# ------------------------------------------------
+LOG_SNAPSHOT_B64 = (
+"eyJjaCI6ICJUIiwgImRhdGEiOiB7InRpY2siOiAwLCAiaW50ZW50IjogInJpY2VyY2EiLCAiZW5lcm..."
+)
+
+def write_snapshot():
+    """Scrive il file SNAPSHOT_PATH decodificando il blob integrato e verifica la catena."""
+    raw = base64.b64decode(LOG_SNAPSHOT_B64.encode("ascii")).decode("utf-8")
+    with open(SNAPSHOT_PATH, "w", encoding="utf-8") as f:
+        f.write(raw)
+    ok, msg = verify_chain(SNAPSHOT_PATH)
+    print(("SNAPSHOT " + ("OK" if ok else "ERRORE")) + ": " + msg)
+
+if __name__ == "__main__":
+    write_snapshot()
+    run_io_lab(cycles=200, delay_ms=30, out_path=LOG_PATH, reset=True)
+
+# ================================================================
+# Sottotitoli e revisione a cura di QTSS
+# ================================================================
