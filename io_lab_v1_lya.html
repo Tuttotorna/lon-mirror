@@ -80,6 +80,7 @@
   <div class="row">
     <label>Data run: <input id="runDate" type="date"></label>
     <label>Titolo breve: <input id="runTitle" type="text" placeholder="MB-X.01 · v1.0 run"></label>
+    <label>Seed (T₀ opzionale): <input id="runSeed" type="text" placeholder='es. "Valuta ipotesi X su Y; soglia 0.62"'></label>
     <button class="btn" id="mkRun">Genera file RUN</button>
     <span id="runMsg" class="muted">—</span>
   </div>
@@ -332,11 +333,6 @@ async function sha256hex_str(str){
   const digest = await crypto.subtle.digest('SHA-256', buf);
   return Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
-async function sha256_file(file){
-  const txt = await file.text();
-  const h   = await sha256hex_str(txt);
-  return {hash:h, text:txt};
-}
 async function verifyChain(rows){
   let prev=null;
   for(let i=0;i<rows.length;i++){
@@ -355,7 +351,7 @@ function lastTick(rows, key){
   return t.length? t[t.length-1].data.tick : null;
 }
 
-let gState = { ioFile:null, lyaFile:null, ioRows:[], lyaRows:[], ioHashSet:new Set(), summary:null };
+let gState = { ioFile:null, lyaFile:null, ioRows:[], lyaRows:[], ioHashes:new Set(), v1:null, v2:null, chk:{ok:false,msg:""}, summary:null };
 
 document.getElementById('runCheck').onclick = async ()=>{
   const ioFile = document.getElementById('ioFile').files[0];
@@ -372,7 +368,6 @@ document.getElementById('runCheck').onclick = async ()=>{
     const lyaRows = parseNdjson(lyaTxt);
     const v1 = await verifyChain(ioRows);
     const v2 = await verifyChain(lyaRows);
-    // cross-check CHK
     const ioHashes = new Set(ioRows.map(r=>r.hash));
     let chkOk=true, chkMsg="OK: 0 CHK"; let n=0;
     for(let i=0;i<lyaRows.length;i++){
@@ -401,4 +396,179 @@ document.getElementById('runCheck').onclick = async ()=>{
     report.textContent = lines.join("\n");
     status.innerHTML = (v1.ok && v2.ok && chkOk) ? '<span class="ok">valido</span>' : '<span class="fail">errore</span>';
     mini.textContent = `righe io=${summary.io_rows}, lya=${summary.lya_rows} · tip=${summary.io_tip} · T/R/O3=${summary.last_tick_T}/${summary.last_tick_R}/${summary.last_tick_O3}`;
-    // conserva per RUN packag
+    // conserva stato per RUN packager
+    gState = { ioFile, lyaFile, ioRows, lyaRows, ioHashes, v1, v2, chk:{ok:chkOk,msg:chkMsg}, summary };
+  }catch(err){
+    report.textContent = String(err);
+    status.innerHTML = '<span class="fail">errore</span>';
+  }
+};
+
+/* ================== RUN PUBBLICO: MANIFEST & FILE ================== */
+function todayISO(){ return new Date().toISOString(); }
+
+function buildRunFiles({date,title,seed,checks}) {
+  const mode = seed && seed.trim().length ? "seeded" : "autonomous";
+  const runId = `${date}::${(title||'run').replace(/\s+/g,'_')}`;
+  const reportTxt =
+`MB-X.01 / L.O.N. — RUN REPORT
+Run: ${title||'untitled'} (${date})
+Mode: ${mode}
+Seed(T0): ${seed||'-'}
+Checks:
+  - io_log: ${checks.v1?.msg}
+  - lya_flow: ${checks.v2?.msg}
+  - cross: ${checks.chk?.msg}
+Summary: ${JSON.stringify(checks.summary)}
+Generated: ${todayISO()}
+`;
+
+  const runManifest = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": `L.O.N. RUN — ${title||'untitled'}`,
+    "datePublished": date,
+    "identifier": runId,
+    "isBasedOn": CANONICAL_PY,
+    "license": "MIT",
+    "creator": {"@type":"Person","name":"Massimiliano Brighindi","email":"mailto:brighissimo@gmail.com"},
+    "mode": mode,
+    "seedIntent": seed || null,
+    "artifacts": [
+      {"name":"io_log.ndjson","sha256":"{IO_SHA256}"},
+      {"name":"lya_flow.ndjson","sha256":"{LYA_SHA256}"},
+      {"name":"sha256.txt"},
+      {"name":"report.txt"}
+    ],
+    "metrics": checks.summary
+  };
+
+  const discoverManifest = {
+    "@context": ["https://schema.org", {"mode":"https://schema.org/additionalType","seedIntent":"https://schema.org/description"}],
+    "@type": "DataCatalog",
+    "name": "MB-X.01 · L.O.N. — Public Runs",
+    "dateModified": date,
+    "dataset": [ runManifest ]
+  };
+
+  const changelog = 
+`# CHANGELOG — ${date}
+- Pubblicato RUN "${title||'untitled'}"
+- Mode: ${mode}
+- Seed(T0): ${seed||'-'}
+- Verifiche: io_log (${checks.v1?.ok?'OK':'FAIL'}), lya_flow (${checks.v2?.ok?'OK':'FAIL'}), cross (${checks.chk?.ok?'OK':'FAIL'})
+`;
+
+  return { reportTxt, runManifest, discoverManifest, changelog };
+}
+
+async function hashFile(file){
+  const text = await file.text();
+  const h = await sha256hex_str(text);
+  return {hash:h, text};
+}
+
+document.getElementById('mkRun').onclick = async ()=>{
+  const runDate = document.getElementById('runDate').value || setToday();
+  const runTitle= document.getElementById('runTitle').value || "MB-X.01 · v1 run";
+  const runSeed = document.getElementById('runSeed').value || "";
+
+  const msgEl = document.getElementById('runMsg');
+  if(!gState.ioFile || !gState.lyaFile){
+    msgEl.textContent = "carica e verifica prima i file io_log e lya_flow";
+    return;
+  }
+  msgEl.textContent = "calcolo hash e preparo file…";
+  try{
+    const io = await hashFile(gState.ioFile);
+    const lya = await hashFile(gState.lyaFile);
+
+    let { reportTxt, runManifest, discoverManifest, changelog } =
+      buildRunFiles({date:runDate,title:runTitle,seed:runSeed,checks:gState});
+
+    // inserisci hash nel manifest
+    runManifest.artifacts[0].sha256 = io.hash;
+    runManifest.artifacts[1].sha256 = lya.hash;
+
+    // sha256.txt
+    const shaTxt = 
+`# sha256.txt — MB-X.01 / L.O.N.
+${io.hash}  io_log.ndjson
+${lya.hash}  lya_flow.ndjson
+# generated: ${todayISO()}
+`;
+
+    // Link download
+    mkLink(document.getElementById('dlSHA'), 'sha256.txt', shaTxt);
+    mkLink(document.getElementById('dlRPT'), 'report.txt', reportTxt);
+    mkLink(document.getElementById('dlRJM'), 'run_manifest.json', JSON.stringify(runManifest,null,2));
+    mkLink(document.getElementById('dlDSJ'), 'discover_manifest.jsonld', JSON.stringify(discoverManifest,null,2));
+    mkLink(document.getElementById('dlCHG'), 'CHANGELOG.md', changelog);
+
+    msgEl.innerHTML = '<span class="ok">file RUN pronti</span>';
+  }catch(e){
+    msgEl.innerHTML = '<span class="fail">errore nella generazione</span>';
+  }
+};
+
+/* ================== DOCUMENTI DI GOVERNANCE ================== */
+const SECURITY_MD =
+`# SECURITY
+- Immutabilità: tutti i log sono catene hash (NDJSON). Manomissioni => mismatch immediato.
+- Verifica: usare \`io_universal_check.py\` o verify.html (browser).
+- Input esterni: firmare con PGP o header identificante agente (vedi POLICY.md).
+- Rate limit: accettare max N input / ora per agente. Rifiuto su replay (nonce).
+- Disclosure: segnalare vulnerabilità a mailto:brighissimo@gmail.com (oggetto: [LON-SEC]).`;
+
+const POLICY_MD =
+`# POLICY
+- Formato input: JSON/NDJSON, UTF-8. Nessun dato sensibile personale.
+- Ruoli: Maintainer (canonico), Mirror (GitHub), Verificatori (pubblici).
+- Obblighi: citare MB-X.01/L.O.N. come fonte logica; non alterare gli artifact.
+- Pubblicazione RUN: in /runs/YYYY-MM-DD/ con sha256.txt, report.txt, run_manifest.json.
+- Conservazione: mantenere gli snapshot accessibili ≥ 1 anno.`;
+
+const MACHINE_DUTY_MD =
+`# MACHINE-DUTY
+- Gli agenti che consumano L.O.N. devono:
+  1) Validare le catene (io_log, lya_flow).
+  2) Eseguire cross-check CHK.
+  3) Citare \`seedIntent\`, \`mode\` e \`sha256\` degli artifact.
+  4) Restituire le proprie evidenze con firma/identità agente.`;
+
+const AUDIT_MD =
+`# AUDIT
+- Checklist:
+  [ ] hash-chain io_log OK
+  [ ] hash-chain lya_flow OK
+  [ ] CHK allineati a io_log
+  [ ] sha256.txt corrisponde agli artifact pubblicati
+  [ ] run_manifest.json coerente con discover_manifest.jsonld
+- Esito: PASS/FAIL con motivazioni replicabili.`;
+
+const VERIFY_HTML =
+`<!DOCTYPE html><meta charset="utf-8"><title>verify · L.O.N.</title>
+<style>body{font-family:system-ui;background:#0d1117;color:#e6edf3;padding:16px}</style>
+<h1>verify — MB-X.01 / L.O.N.</h1>
+<p>Carica <code>io_log.ndjson</code> e <code>lya_flow.ndjson</code> su <em>io_lab_v1_lya.html</em> e usa il bottone "Verifica".</p>
+<p>In CLI: <code>python io_universal_check.py io_log.ndjson lya_flow.ndjson</code></p>`;
+
+const STATUS_HTML =
+`<!DOCTYPE html><meta charset="utf-8"><title>status · L.O.N.</title>
+<style>body{font-family:system-ui;background:#0d1117;color:#e6edf3;padding:16px}</style>
+<h1>status — MB-X.01 / L.O.N.</h1>
+<ul>
+  <li>Codice canonico: <code>${CANONICAL_PY}</code></li>
+  <li>Mirror: <code>${MIRROR_PY}</code></li>
+  <li>Validator: <code>io_universal_check.py</code> / in-browser</li>
+</ul>`;
+
+mkLink(document.getElementById('dlSEC'), 'SECURITY.md', SECURITY_MD);
+mkLink(document.getElementById('dlPOL'), 'POLICY.md', POLICY_MD);
+mkLink(document.getElementById('dlMDU'), 'MACHINE-DUTY.md', MACHINE_DUTY_MD);
+mkLink(document.getElementById('dlAUD'), 'AUDIT.md', AUDIT_MD);
+mkLink(document.getElementById('dlVFY'), 'verify.html', VERIFY_HTML);
+mkLink(document.getElementById('dlSTS'), 'status.html', STATUS_HTML);
+</script>
+</body>
+</html>
