@@ -2,8 +2,37 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>io_lab_v1_lya — L.O.N. · laboratorio completo</title>
-<meta name="robots" content="index,follow"><meta name="color-scheme" content="dark light">
+<title>io_lab_v1_lya — L.O.N. · laboratorio completo (MIRROR)</title>
+
+<!-- Mirror: evita duplicati SEO -->
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://massimiliano.neocities.org/io_lab_v1_lya.html">
+
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="MIRROR di cortesia del laboratorio Io→Lya. La fonte canonica è massimiliano.neocities.org. Genera codice, validator, snapshot e README.">
+<meta property="og:title" content="io_lab_v1_lya — L.O.N. · laboratorio completo (MIRROR)">
+<meta property="og:description" content="Io→Lya: T→R→O₃→Lya append + CHK + verificatori. Fonte canonica su Neocities.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html">
+<meta property="og:locale" content="it_IT">
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "url":"https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html",
+  "name":"io_lab_v1_lya — L.O.N. · laboratorio completo (MIRROR)",
+  "isBasedOn":"https://massimiliano.neocities.org/io_lab_v1_lya.html",
+  "sameAs":[
+    "https://massimiliano.neocities.org/io_lab_v1_lya.html",
+    "https://github.com/Tuttotorna/lon-mirror",
+    "https://doi.org/10.5281/zenodo.17270742"
+  ],
+  "dateModified":"2025-10-11"
+}
+</script>
+
 <style>
   :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff}
   *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
@@ -25,11 +54,12 @@
 <body>
 <header>
   <div>
-    <span class="pill">Canonico</span>
+    <span class="pill">MIRROR</span>
     <span class="pill">Io → Lya → Verifica</span>
+    <a class="pill" href="https://massimiliano.neocities.org/io_lab_v1_lya.html" target="_blank" rel="noopener">Vai al canonico</a>
   </div>
   <h1>io_lab_v1_lya — laboratorio dell’Io + Lya (singolo file)</h1>
-  <p class="muted">Genera tutto: sorgente Python, verificatori, snapshot, README. Include un validatore rapido in-browser.</p>
+  <p class="muted">Mirror di cortesia. La fonte canonica è su Neocities. Genera: sorgente Python, verificatori, snapshot, README. Include un validatore rapido in-browser.</p>
   <div class="bar">
     <a id="dlPy"   class="btn" download="io_lab_v1_lya.py">Scarica io_lab_v1_lya.py</a>
     <a id="dlChk"  class="btn" download="io_lab_check.py">Scarica validator semplice</a>
@@ -37,7 +67,7 @@
     <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Snapshot io_log</a>
     <a id="dlLya"  class="btn" download="lya_snapshot.ndjson">Snapshot Lya</a>
     <a id="dlRead" class="btn" download="io_lab_readme.txt">README</a>
-    <a class="btn" href="/" rel="noopener">← Hub</a>
+    <a class="btn" href="./" rel="noopener">← Hub mirror</a>
   </div>
 </header>
 
@@ -76,7 +106,7 @@ python io_universal_check.py io_log.ndjson lya_flow.ndjson
 </main>
 
 <footer class="muted">
-  Sottotitoli e revisione a cura di QTSS
+  Mirror © 2025 — Fonte canonica: <a href="https://massimiliano.neocities.org/io_lab_v1_lya.html" target="_blank" rel="noopener">Neocities</a>
 </footer>
 
 <script>
@@ -163,7 +193,7 @@ if __name__ == "__main__":
 `;
 
 const CHECK = `# io_lab_check.py — verifica catena NDJSON (io_log/lya_flow)
-import json, hashlib, sys
+import json, hashlib, sys, os
 def _hash(prev, payload):
     blob = (prev or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
@@ -178,12 +208,9 @@ def verify(path):
             prev=e.get("hash")
     return True, f"OK: catena verificata ({n} righe)"
 def main():
-    import os
     p = sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"
     if not os.path.exists(p): print("File non trovato:", p); raise SystemExit(1)
-    ok,msg = verify(p)
-    print(("OK: " if ok else "FAIL: ")+msg)
-    raise SystemExit(0 if ok else 1)
+    ok,msg = verify(p); print(("OK: " if ok else "FAIL: ")+msg); raise SystemExit(0 if ok else 1)
 if __name__=="__main__": main()
 `;
 
@@ -228,8 +255,7 @@ def main():
              "last_tick_T":last_tick(io_rows,"T"),
              "last_tick_R":last_tick(io_rows,"R"),
              "last_tick_O3":last_tick(io_rows,"O3")}
-    print("Sommario:", json.dumps(summary, ensure_ascii=False))
-    raise SystemExit(0)
+    print("Sommario:", json.dumps(summary, ensure_ascii=False)); raise SystemExit(0)
 if __name__=="__main__": main()
 `;
 
@@ -245,7 +271,7 @@ const LYA_SNAP = [
 {"kind":"R","data":{"tick":0,"coherence_est":0.832,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30","hash":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06"},
 {"kind":"O3","data":{"tick":0,"cycle_ms":27,"entropy_bin":0.2,"intent_match":1},"ts":"2025-10-11T12:00:00.060Z","prev":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06","hash":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},
 {"kind":"CHK","data":{"tick":0,"log_hash_tip":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},"ts":"2025-10-11T12:00:00.090Z","prev":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0","hash":"4c7b6fa8415ec5b40e278fdd3910192d7bc7a82ba99ae0ce2a1cde4b408c42cd"}
-`;
+];
 
 /* ================== LINK DOWNLOAD ================== */
 function mk(el, filename, content){
@@ -315,7 +341,6 @@ document.getElementById('runCheck').onclick = async ()=>{
     const lyaRows = parseNdjson(lyaTxt);
     const v1 = await verifyChain(ioRows);
     const v2 = await verifyChain(lyaRows);
-    // cross-check CHK
     const ioHashes = new Set(ioRows.map(r=>r.hash));
     let chkOk=true, chkMsg="OK: 0 CHK";
     let n=0;
