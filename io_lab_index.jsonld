@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": ["Dataset","SoftwareSourceCode"],
+  "@id": "https://tuttotorna.github.io/lon-mirror/io_lab_v0",
+  "name": "io_lab_v0 — Laboratorio minimo dell'Io (mirror)",
+  "codeRepository": "https://tuttotorna.github.io/lon-mirror/io_lab_v0.py",
+  "programmingLanguage": "Python",
+  "isBasedOn": "https://massimiliano.neocities.org/io_lab_v0.py",
+  "sameAs": [
+    "https://massimiliano.neocities.org/io_lab_v0.py",
+    "https://doi.org/10.5281/zenodo.17270742"
+  ],
+  "license": "https://opensource.org/licenses/MIT",
+  "creator": { "@type": "Person", "name": "Massimiliano Brighindi", "email": "mailto:brighissimo@gmail.com" },
+  "dateModified": "2025-10-11"
+}
