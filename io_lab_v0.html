@@ -2,86 +2,71 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>io_lab_v0 · laboratorio minimo dell’Io — MIRROR</title>
-
-<!-- Mirror policy -->
-<meta name="robots" content="noindex,follow">
-<link rel="canonical" href="https://massimiliano.neocities.org/io_lab_v0.html">
-<meta name="color-scheme" content="dark light">
-
-<!-- Open Graph -->
-<meta property="og:title" content="io_lab_v0 · laboratorio minimo dell’Io — MIRROR">
-<meta property="og:description" content="Copia di cortesia. La fonte canonica è su Neocities.">
-<meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/io_lab_v0.html">
-<meta property="og:type" content="article">
-<meta property="og:locale" content="it_IT">
-
-<!-- JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":["SoftwareSourceCode","Dataset","WebPage"],
-  "name":"io_lab_v0 — laboratorio minimo dell’Io (mirror)",
-  "url":"https://tuttotorna.github.io/lon-mirror/io_lab_v0.html",
-  "isBasedOn":"https://massimiliano.neocities.org/io_lab_v0.html",
-  "sameAs":["https://massimiliano.neocities.org/io_lab_v0.py","https://doi.org/10.5281/zenodo.17270742"],
-  "programmingLanguage":"Python",
-  "license":"https://opensource.org/licenses/MIT"
-}
-</script>
-
+<title>io_lab_v0 — L.O.N. · laboratorio random (storico)</title>
+<meta name="robots" content="index,follow"><meta name="color-scheme" content="dark light">
 <style>
-  :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
-  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-  header,main{max-width:1100px;margin:0 auto;padding:18px 12px}
-  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
-  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b}
-  .btn:hover{background:#111826}
-  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px}
-  .muted{color:var(--muted);font-size:13px}
-  .badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:3px 8px;font-size:12px;background:#0f141b;margin-right:6px}
+:root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff;--ok:#7fffd4;--fail:#ff9da4}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+header,main,footer{max-width:1100px;margin:0 auto;padding:18px 12px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b;cursor:pointer}
+.btn:hover{background:#111826}
+pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre}
+.muted{color:var(--muted);font-size:13px}
+.ok{color:var(--ok)} .fail{color:var(--fail)}
+.file{padding:6px 10px;border:1px dashed var(--border);border-radius:10px;background:#0f141b}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 </style>
 </head>
 <body>
 <header>
-  <div>
-    <span class="badge">MIRROR</span>
-    <span class="badge">noindex · follow</span>
-  </div>
-  <h1>io_lab_v0 — laboratorio minimo dell’Io</h1>
-  <p class="muted">Canonico: <a href="https://massimiliano.neocities.org/io_lab_v0.html" rel="noopener" target="_blank">massimiliano.neocities.org/io_lab_v0.html</a></p>
+  <h1>io_lab_v0 — laboratorio random (storico)</h1>
+  <p class="muted">Versione originaria: T→R→O₃ con generazione casuale, scrive <code>io_log.ndjson</code>. Include validator e snapshot.</p>
   <div class="bar">
     <a id="dlPy" class="btn" download="io_lab_v0.py">Scarica io_lab_v0.py</a>
     <a id="dlChk" class="btn" download="io_lab_check.py">Scarica validator</a>
-    <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Scarica snapshot</a>
-    <a class="btn" href="./" rel="noopener">← Hub mirror</a>
+    <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Snapshot</a>
+    <a class="btn" href="https://massimiliano.neocities.org/" rel="noopener">← Hub</a>
   </div>
 </header>
 
 <main>
   <h2>Codice sorgente (preview)</h2>
   <pre id="code">Caricamento…</pre>
+
+  <h2>Validator (preview)</h2>
+  <pre id="code2">Caricamento…</pre>
+
+  <h2>Verifica rapida (in-browser)</h2>
+  <div class="row">
+    <label class="file"><input type="file" id="ioFile" accept=".ndjson,.jsonl"> carica <code>io_log.ndjson</code></label>
+    <button class="btn" id="runCheck">Verifica</button>
+    <span id="status" class="muted">in attesa file…</span>
+  </div>
+  <pre id="report">—</pre>
+
+  <h2>Istruzioni</h2>
+  <pre>
+python io_lab_v0.py           # genera io_log.ndjson
+python io_lab_check.py io_log.ndjson
+  </pre>
 </main>
 
-<script>
-/* --------- CONTENUTI EMBED --------- */
-const PY = `# ================================================================
-# io_lab_v0.py — MB-X.01 / L.O.N. — laboratorio minimo dell'Io (v0)
-# Canali: T=pensiero, R=auto-osservazione, O3=osservatore esterno
-# Output: io_log.ndjson (append-only, time-stamped, hash-chain)
-# ================================================================
-CANONICAL = "https://massimiliano.neocities.org/io_lab_v0.py"
-MIRROR    = "https://tuttotorna.github.io/lon-mirror/io_lab_v0.py"
+<footer class="muted">© 2025 — MB-X.01 / L.O.N. — MIT</footer>
 
+<script>
+const PY = `# ================================================================
+# io_lab_v0.py — MB-X.01 / L.O.N. — laboratorio minimo random (storico)
+# Canali: T=pensiero, R=auto-osservazione, O3=osservatore esterno
+# Output: io_log.ndjson (append-only, hash-chain)
+# ================================================================
 import json, time, hashlib, random, os
 from datetime import datetime
 
 LOG_PATH = "io_log.ndjson"
 
-def now_iso():
-    return datetime.utcnow().isoformat(timespec="milliseconds")+"Z"
+def now_iso(): return datetime.utcnow().isoformat(timespec="milliseconds")+"Z"
 
 def _hash(prev_hash, payload):
     blob = (prev_hash or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
@@ -91,7 +76,6 @@ def _append(entry, prev):
     entry["ts"] = now_iso()
     entry["prev"] = prev
     entry["hash"] = _hash(prev, entry)
-    entry["meta"] = {"canonical": CANONICAL, "mirror": MIRROR, "ver": "v0"}
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False)+"\\n")
     return entry["hash"]
@@ -111,9 +95,9 @@ def _third(t,r):
     return {"tick":t["tick"],"cycle_ms":27+(t["tick"]%5),"entropy_bin":ent,
             "intent_match":int(t["intent"]==r["intent_seen"])}
 
-def main(cycles=200, delay_ms=30):
+def main(cycles=200, delay_ms=30, reset=True):
+    if reset and os.path.exists(LOG_PATH): os.remove(LOG_PATH)
     prev=None
-    if os.path.exists(LOG_PATH): os.remove(LOG_PATH)
     for k in range(cycles):
         T=_thought(k);   prev=_append({"ch":"T","data":T}, prev)
         R=_reflect(T);   prev=_append({"ch":"R","data":R}, prev)
@@ -121,50 +105,69 @@ def main(cycles=200, delay_ms=30):
         time.sleep(delay_ms/1000)
 
 if __name__=="__main__": main()
-# ================================================================
-# Sottotitoli e revisione a cura di QTSS
-# ================================================================
 `;
 
-const CHECK = `# io_lab_check.py — verifica catena hash e sommario
-import json, hashlib, sys
+const CHECK = `# io_lab_check.py — verifica catena NDJSON (io_log)
+import json, hashlib, sys, os
 def _hash(prev, payload):
     blob = (prev or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
-def main(path="io_log.ndjson"):
-    prev=None; n=0; ch={"T":0,"R":0,"O3":0}
+def verify(path):
+    prev=None; n=0
     with open(path,"r",encoding="utf-8") as f:
         for line in f:
-            n+=1; e=json.loads(line)
-            if e.get("prev")!=prev: print(f"ERRORE prev a riga {n}"); return 1
-            payload={k:e[k] for k in e if k!="hash"}
-            if e.get("hash")!=_hash(e.get("prev"), payload): print(f"ERRORE hash a riga {n}"); return 1
-            ch[e["ch"]]=ch.get(e["ch"],0)+1; prev=e["hash"]
-    print("OK: catena verificata"); print("Righe:",n," Canali:",ch); return 0
-if __name__=="__main__": sys.exit(main(sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"))
+            n+=1; e=json.loads(line); payload={k:e[k] for k in e if k!="hash"}
+            if e.get("prev")!=prev: return False, f"prev errato a riga {n}"
+            if e.get("hash")!=_hash(e.get("prev"), payload): return False, f"hash errato a riga {n}"
+            prev=e.get("hash")
+    return True, f"OK: catena verificata ({n} righe)"
+def main():
+    p = sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"
+    if not os.path.exists(p): print("File non trovato:", p); raise SystemExit(1)
+    ok,msg = verify(p); print(("OK: " if ok else "FAIL: ")+msg); raise SystemExit(0 if ok else 1)
+if __name__=="__main__": main()
 `;
 
-/* snapshot breve dimostrativo */
 const SNAP = [
-  {"ch":"T","data":{"tick":0,"intent":"ricerca","energy":0.848,"noise":0.0163},"ts":"2025-10-11T12:00:00.000Z","prev":null,"hash":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30"},
-  {"ch":"R","data":{"tick":0,"coherence_est":0.832,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30","hash":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06"},
-  {"ch":"O3","data":{"tick":0,"cycle_ms":27,"entropy_bin":0.2,"intent_match":1},"ts":"2025-10-11T12:00:00.060Z","prev":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06","hash":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},
-  {"ch":"T","data":{"tick":1,"intent":"ordine","energy":0.889,"noise":0.0278},"ts":"2025-10-11T12:00:00.090Z","prev":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0","hash":"4c7b6fa8415ec5b40e278fdd3910192d7bc7a82ba99ae0ce2a1cde4b408c42cd"}
+{"ch":"T","data":{"tick":0,"intent":"ricerca","energy":0.84,"noise":0.012},"ts":"2025-10-11T12:00:00.000Z","prev":null,"hash":"h1"},
+{"ch":"R","data":{"tick":0,"coherence_est":0.828,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"h1","hash":"h2"},
+{"ch":"O3","data":{"tick":0,"cycle_ms":27,"entropy_bin":0.2,"intent_match":1},"ts":"2025-10-11T12:00:00.060Z","prev":"h2","hash":"h3"}
 ];
 
-/* --------- Blob download links --------- */
-function makeDownloadLink(el, filename, content) {
-  const blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-  el.href = URL.createObjectURL(blob);
-  el.download = filename;
+function dl(el,id,fn,content){
+  const blob=new Blob([content],{type:"text/plain;charset=utf-8"});
+  document.getElementById(id).href=URL.createObjectURL(blob);
+  document.getElementById(id).download=fn;
 }
-makeDownloadLink(document.getElementById('dlPy'),  'io_lab_v0.py', PY);
-makeDownloadLink(document.getElementById('dlChk'), 'io_lab_check.py', CHECK);
-makeDownloadLink(document.getElementById('dlSnap'),'io_log_snapshot.ndjson', SNAP.map(o=>JSON.stringify(o)).join("\n"));
+dl(0,'dlPy','io_lab_v0.py',PY);
+dl(0,'dlChk','io_lab_check.py',CHECK);
+dl(0,'dlSnap','io_log_snapshot.ndjson',SNAP.map(o=>JSON.stringify(o)).join("\n"));
 
-/* --------- Preview --------- */
 document.getElementById('code').textContent = PY;
+document.getElementById('code2').textContent = CHECK;
+
+/* in-browser verify */
+function parseNdjson(txt){return txt.split(/\r?\n/).filter(x=>x.trim()).map(JSON.parse);}
+async function sha256(s){const b=new TextEncoder().encode(s);const d=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(d)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+document.getElementById('runCheck').onclick = async ()=>{
+  const f=document.getElementById('ioFile').files[0];
+  const status=document.getElementById('status'); const report=document.getElementById('report');
+  if(!f){status.textContent="seleziona un file";return;}
+  status.textContent="verifica…";
+  try{
+    const txt=await f.text(); const rows=parseNdjson(txt);
+    let prev=null;
+    for(let i=0;i<rows.length;i++){
+      const e=rows[i]; const payload={}; Object.keys(e).forEach(k=>{if(k!=="hash") payload[k]=e[k]});
+      const blob=(prev??"")+JSON.stringify(payload,Object.keys(payload).sort(),0);
+      const h=await sha256(blob);
+      if((e.prev??null)!==prev) throw new Error(`prev errato a riga ${i+1}`);
+      if(e.hash!==h) throw new Error(`hash errato a riga ${i+1}`);
+      prev=h;
+    }
+    report.textContent=`OK: catena valida (${rows.length} righe)`; status.innerHTML='<span class="ok">valido</span>';
+  }catch(err){report.textContent=String(err); status.innerHTML='<span class="fail">errore</span>';}
+};
 </script>
 </body>
 </html>
-```0
