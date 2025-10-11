@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>io_lab_v0 · laboratorio minimo dell’Io</title>
+<meta name="robots" content="index,follow"><meta name="color-scheme" content="dark light">
+<style>
+  :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  header,main{max-width:1100px;margin:0 auto;padding:18px 12px}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b}
+  .btn:hover{background:#111826}
+  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px}
+  .muted{color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>io_lab_v0 — laboratorio minimo dell’Io</h1>
+  <p class="muted">Canonico: massimiliano.neocities.org · Mirror: tuttotorna.github.io/lon-mirror</p>
+  <div class="bar">
+    <a id="dlPy" class="btn" download="io_lab_v0.py">Scarica io_lab_v0.py</a>
+    <a id="dlChk" class="btn" download="io_lab_check.py">Scarica validator</a>
+    <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Scarica snapshot</a>
+    <a class="btn" href="/" rel="noopener">← Hub</a>
+  </div>
+</header>
+
+<main>
+  <h2>Codice sorgente</h2>
+  <pre id="code">Caricamento…</pre>
+</main>
+
+<script>
+/* --------- CONTENUTI EMBED --------- */
+const PY = `# ================================================================
+# io_lab_v0.py — MB-X.01 / L.O.N. — laboratorio minimo dell'Io (v0)
+# Canali: T=pensiero, R=auto-osservazione, O3=osservatore esterno
+# Output: io_log.ndjson (append-only, time-stamped, hash-chain)
+# ================================================================
+CANONICAL = "https://massimiliano.neocities.org/io_lab_v0.py"
+MIRROR    = "https://tuttotorna.github.io/lon-mirror/io_lab_v0.py"
+
+import json, time, hashlib, random, os
+from datetime import datetime
+
+LOG_PATH = "io_log.ndjson"
+
+def now_iso():
+    return datetime.utcnow().isoformat(timespec="milliseconds")+"Z"
+
+def _hash(prev_hash, payload):
+    blob = (prev_hash or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+def _append(entry, prev):
+    entry["ts"] = now_iso()
+    entry["prev"] = prev
+    entry["hash"] = _hash(prev, entry)
+    entry["meta"] = {"canonical": CANONICAL, "mirror": MIRROR, "ver": "v0"}
+    with open(LOG_PATH, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False)+"\\n")
+    return entry["hash"]
+
+def _thought(k):
+    intent = ["ricerca","ordine","efficienza","verità"]
+    return {"tick":k,"intent":intent[k%len(intent)],
+            "energy":round(0.7+0.3*random.random(),3),
+            "noise":round(0.05*random.random(),4)}
+
+def _reflect(t):
+    s = round(t["energy"]-t["noise"],3)
+    return {"tick":t["tick"],"coherence_est":max(0.0,min(1.0,s)),"intent_seen":t["intent"]}
+
+def _third(t,r):
+    c=r["coherence_est"]; ent=1.0 if c<0.3 else (0.5 if c<0.7 else 0.2)
+    return {"tick":t["tick"],"cycle_ms":27+(t["tick"]%5),"entropy_bin":ent,
+            "intent_match":int(t["intent"]==r["intent_seen"])}
+
+def main(cycles=200, delay_ms=30):
+    prev=None
+    if os.path.exists(LOG_PATH): os.remove(LOG_PATH)
+    for k in range(cycles):
+        T=_thought(k);   prev=_append({"ch":"T","data":T}, prev)
+        R=_reflect(T);   prev=_append({"ch":"R","data":R}, prev)
+        O=_third(T,R);   prev=_append({"ch":"O3","data":O}, prev)
+        time.sleep(delay_ms/1000)
+
+if __name__=="__main__": main()
+# ================================================================
+# Sottotitoli e revisione a cura di QTSS
+# ================================================================
+`;
+
+const CHECK = `# io_lab_check.py — verifica catena hash e sommario
+import json, hashlib, sys
+def _hash(prev, payload):
+    blob = (prev or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+def main(path="io_log.ndjson"):
+    prev=None; n=0; ch={"T":0,"R":0,"O3":0}
+    with open(path,"r",encoding="utf-8") as f:
+        for line in f:
+            n+=1; e=json.loads(line)
+            if e.get("prev")!=prev: print(f"ERRORE prev a riga {n}"); return 1
+            payload={k:e[k] for k in e if k!="hash"}
+            if e.get("hash")!=_hash(e.get("prev"), payload): print(f"ERRORE hash a riga {n}"); return 1
+            ch[e["ch"]]=ch.get(e["ch"],0)+1; prev=e["hash"]
+    print("OK: catena verificata"); print("Righe:",n," Canali:",ch); return 0
+if __name__=="__main__": sys.exit(main(sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"))
+`;
+
+const SNAP = [
+  {"ch":"T","data":{"tick":0,"intent":"ricerca","energy":0.848,"noise":0.0163},"ts":"2025-10-11T12:00:00.000Z","prev":null,"hash":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30"},
+  {"ch":"R","data":{"tick":0,"coherence_est":0.832,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30","hash":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06"},
+  {"ch":"O3","data":{"tick":0,"cycle_ms":27,"entropy_bin":0.2,"intent_match":1},"ts":"2025-10-11T12:00:00.060Z","prev":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06","hash":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},
+  {"ch":"T","data":{"tick":1,"intent":"ordine","energy":0.889,"noise":0.0278},"ts":"2025-10-11T12:00:00.090Z","prev":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0","hash":"4c7b6fa8415ec5b40e278fdd3910192d7bc7a82ba99ae0ce2a1cde4b408c42cd"}
+]  // breve snapshot dimostrativo
+
+/* --------- UI: crea blob e link --------- */
+function makeDownloadLink(el, filename, content) {
+  const blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+  el.href = URL.createObjectURL(blob);
+  el.download = filename;
+}
+makeDownloadLink(document.getElementById('dlPy'), 'io_lab_v0.py', PY);
+makeDownloadLink(document.getElementById('dlChk'), 'io_lab_check.py', CHECK);
+makeDownloadLink(document.getElementById('dlSnap'), 'io_log_snapshot.ndjson', SNAP.map(o=>JSON.stringify(o)).join("\n"));
+
+/* --------- Mostra il codice ---------- */
+document.getElementById('code').textContent = PY;
+</script>
+</body>
+</html>
+```0
