@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>io_lab_v0 — L.O.N. · laboratorio random (storico)</title>
+<meta name="robots" content="index,follow"><meta name="color-scheme" content="dark light">
+<style>
+  :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  header,main,footer{max-width:1100px;margin:0 auto;padding:18px 12px}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b}
+  .btn:hover{background:#111826}
+  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px}
+  .muted{color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>io_lab_v0 — laboratorio “random” (storico)</h1>
+  <p class="muted">Versione originale: input casuale puro, log T→R→O₃ in <code>io_log.ndjson</code>. Niente Lya.</p>
+  <div class="bar">
+    <a id="dlPy"  class="btn" download="io_lab_v0.py">Scarica io_lab_v0.py</a>
+    <a id="dlChk" class="btn" download="io_lab_check.py">Scarica validator</a>
+    <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Snapshot io_log</a>
+    <a class="btn" href="/" rel="noopener">← Hub</a>
+  </div>
+</header>
+
+<main>
+  <h2>Codice (preview)</h2>
+  <pre id="code">Caricamento…</pre>
+
+  <h2>Validator (preview)</h2>
+  <pre id="code2">Caricamento…</pre>
+
+  <h2>Istruzioni rapide</h2>
+  <pre>
+python io_lab_v0.py               # genera io_log.ndjson
+python io_lab_check.py io_log.ndjson
+  </pre>
+</main>
+
+<footer class="muted">© 2025 — MB-X.01 / L.O.N. — MIT</footer>
+
+<script>
+const PY = `# ================================================================
+# io_lab_v0.py — MB-X.01 / L.O.N. — versione storica random
+# Pipeline: T (random) -> R (stima) -> O3 (osservatore) -> io_log.ndjson
+# ================================================================
+import json, time, hashlib, random, os
+from datetime import datetime
+LOG_PATH = "io_log.ndjson"
+
+def now_iso():
+    return datetime.utcnow().isoformat(timespec="milliseconds")+"Z"
+
+def _hash(prev, payload):
+    blob = (prev or "") + json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+def _append(entry, prev):
+    entry["ts"] = now_iso()
+    entry["prev"] = prev
+    entry["hash"] = _hash(prev, entry)
+    with open(LOG_PATH, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False)+"\\n")
+    return entry["hash"]
+
+def _thought(k):
+    intents=["ricerca","ordine","efficienza","verità"]
+    return {"tick":k,
+            "intent":random.choice(intents),     # RANDOM PURO
+            "energy":round(random.random(),3),
+            "noise": round(random.random()*0.2,3)}
+
+def _reflect(t):
+    s = max(0.0, min(1.0, t["energy"]-t["noise"]))
+    return {"tick":t["tick"],"coherence_est":s,"intent_seen":t["intent"]}
+
+def _third(t,r):
+    c=r["coherence_est"]
+    return {"tick":t["tick"],
+            "cycle_ms":random.randint(20,40),
+            "entropy_bin":round(1.0-c,3),
+            "intent_match":int(t["intent"]==r["intent_seen"])}
+
+def main(cycles=200, delay_ms=20, reset=True):
+    if reset and os.path.exists(LOG_PATH): os.remove(LOG_PATH)
+    prev=None
+    for k in range(cycles):
+        T=_thought(k); prev=_append({"ch":"T","data":T}, prev)
+        R=_reflect(T); prev=_append({"ch":"R","data":R}, prev)
+        O=_third(T,R); prev=_append({"ch":"O3","data":O}, prev)
+        time.sleep(delay_ms/1000)
+
+if __name__=="__main__": main()
+# ================================================================
+# MIT
+# ================================================================
+`;
+
+const CHECK = `# io_lab_check.py — verifica catena NDJSON
+import json, hashlib, sys, os
+def _h(prev, payload):
+    blob=(prev or "")+json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    import hashlib; return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+def verify(path):
+    if not os.path.exists(path): return False, "file mancante"
+    prev=None; n=0
+    for n,line in enumerate(open(path,"r",encoding="utf-8"), start=1):
+        e=json.loads(line); payload={k:e[k] for k in e if k!="hash"}
+        if (e.get("prev") or None)!=prev: return False, f"prev errato riga {n}"
+        if e.get("hash")!=_h(e.get("prev"), payload): return False, f"hash errato riga {n}"
+        prev=e.get("hash")
+    return True, f"OK: catena valida ({n} righe)"
+if __name__=="__main__":
+    p=sys.argv[1] if len(sys.argv)>1 else "io_log.ndjson"
+    ok,msg=verify(p); print(("OK: " if ok else "FAIL: ")+msg); raise SystemExit(0 if ok else 1)
+`;
+
+const SNAP = [
+{"ch":"T","data":{"tick":0,"intent":"ricerca","energy":0.723,"noise":0.081},"ts":"2025-01-01T00:00:00.000Z","prev":null,"hash":"a1"},
+{"ch":"R","data":{"tick":0,"coherence_est":0.642,"intent_seen":"ricerca"},"ts":"2025-01-01T00:00:00.020Z","prev":"a1","hash":"a2"},
+{"ch":"O3","data":{"tick":0,"cycle_ms":33,"entropy_bin":0.358,"intent_match":1},"ts":"2025-01-01T00:00:00.040Z","prev":"a2","hash":"a3"}
+];
+
+function mk(el, name, content){
+  const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+  el.href = URL.createObjectURL(blob); el.download = name;
+}
+mk(document.getElementById('dlPy'),'io_lab_v0.py',PY);
+mk(document.getElementById('dlChk'),'io_lab_check.py',CHECK);
+mk(document.getElementById('dlSnap'),'io_log_snapshot.ndjson',SNAP.map(o=>JSON.stringify(o)).join("\n"));
+
+document.getElementById('code').textContent = PY;
+document.getElementById('code2').textContent = CHECK;
+</script>
+</body>
+</html>
