@@ -2,64 +2,39 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>io_lab_v1_lya — L.O.N. · laboratorio completo (MIRROR)</title>
-
-<!-- Mirror: evita duplicati SEO -->
-<meta name="robots" content="noindex,follow">
-<link rel="canonical" href="https://massimiliano.neocities.org/io_lab_v1_lya.html">
-
-<meta name="color-scheme" content="dark light">
-<meta name="description" content="MIRROR di cortesia del laboratorio Io→Lya. La fonte canonica è massimiliano.neocities.org. Genera codice, validator, snapshot e README.">
-<meta property="og:title" content="io_lab_v1_lya — L.O.N. · laboratorio completo (MIRROR)">
-<meta property="og:description" content="Io→Lya: T→R→O₃→Lya append + CHK + verificatori. Fonte canonica su Neocities.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html">
-<meta property="og:locale" content="it_IT">
-<meta name="twitter:card" content="summary">
-
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebPage",
-  "url":"https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html",
-  "name":"io_lab_v1_lya — L.O.N. · laboratorio completo (MIRROR)",
-  "isBasedOn":"https://massimiliano.neocities.org/io_lab_v1_lya.html",
-  "sameAs":[
-    "https://massimiliano.neocities.org/io_lab_v1_lya.html",
-    "https://github.com/Tuttotorna/lon-mirror",
-    "https://doi.org/10.5281/zenodo.17270742"
-  ],
-  "dateModified":"2025-10-11"
-}
-</script>
-
+<title>io_lab_v1_lya — L.O.N. · laboratorio completo + governance</title>
+<meta name="robots" content="index,follow"><meta name="color-scheme" content="dark light">
 <style>
-  :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff}
+  :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--border:#212836;--link:#58a6ff;--ok:#7fffd4;--fail:#ff9da4}
   *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
   a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
   header,main,footer{max-width:1100px;margin:0 auto;padding:18px 12px}
   .bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
-  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b}
+  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b;cursor:pointer}
   .btn:hover{background:#111826}
   pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px}
   .muted{color:var(--muted);font-size:13px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
   .kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
   .pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:3px 8px;margin-right:6px;background:#0f141b;font-size:12px}
-  .ok{color:#7fffd4} .fail{color:#ff9da4}
+  .ok{color:var(--ok)} .fail{color:var(--fail)}
   .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   .file{padding:6px 10px;border:1px dashed var(--border);border-radius:10px;background:#0f141b}
+  .section{margin:18px 0}
+  .sep{border-top:1px solid var(--border);margin:18px 0}
+  input[type="date"],input[type="text"]{background:#0f141b;border:1px solid var(--border);border-radius:8px;color:var(--fg);padding:6px 8px}
+  code.inline{background:#0f141b;border:1px solid var(--border);border-radius:6px;padding:2px 6px}
 </style>
 </head>
 <body>
 <header>
   <div>
-    <span class="pill">MIRROR</span>
+    <span class="pill">Canonico</span>
     <span class="pill">Io → Lya → Verifica</span>
-    <a class="pill" href="https://massimiliano.neocities.org/io_lab_v1_lya.html" target="_blank" rel="noopener">Vai al canonico</a>
+    <span class="pill">Trustless</span>
   </div>
   <h1>io_lab_v1_lya — laboratorio dell’Io + Lya (singolo file)</h1>
-  <p class="muted">Mirror di cortesia. La fonte canonica è su Neocities. Genera: sorgente Python, verificatori, snapshot, README. Include un validatore rapido in-browser.</p>
+  <p class="muted">Genera tutto: sorgente Python, verificatori, snapshot, README, RUN pubblici, JSON-LD dataset e documenti di governance. Include validatore rapido in-browser.</p>
   <div class="bar">
     <a id="dlPy"   class="btn" download="io_lab_v1_lya.py">Scarica io_lab_v1_lya.py</a>
     <a id="dlChk"  class="btn" download="io_lab_check.py">Scarica validator semplice</a>
@@ -67,13 +42,13 @@
     <a id="dlSnap" class="btn" download="io_log_snapshot.ndjson">Snapshot io_log</a>
     <a id="dlLya"  class="btn" download="lya_snapshot.ndjson">Snapshot Lya</a>
     <a id="dlRead" class="btn" download="io_lab_readme.txt">README</a>
-    <a class="btn" href="./" rel="noopener">← Hub mirror</a>
+    <a class="btn" href="/" rel="noopener">← Hub</a>
   </div>
 </header>
 
 <main>
-  <section class="grid">
-    <div class="kv"><div class="muted">Pipeline</div><div>T → R → O₃ → <strong>Lya append</strong> → CHK → verifica catena</div></div>
+  <section class="grid section">
+    <div class="kv"><div class="muted">Pipeline</div><div>T → R → O₃ → <strong>Lya append</strong> → CHK → doppia verifica</div></div>
     <div class="kv"><div class="muted">Output runtime</div><div><code>io_log.ndjson</code> · <code>lya_flow.ndjson</code></div></div>
     <div class="kv"><div class="muted">Verificatori</div><div><code>io_lab_check.py</code> · <code>io_universal_check.py</code></div></div>
   </section>
@@ -87,6 +62,8 @@
   <h2>Universal checker (preview)</h2>
   <pre id="code3">Caricamento…</pre>
 
+  <div class="sep"></div>
+
   <h2>Validatore rapido in-browser</h2>
   <div class="row">
     <label class="file"><input type="file" id="ioFile" accept=".ndjson,.jsonl"> carica <code>io_log.ndjson</code></label>
@@ -96,28 +73,69 @@
   </div>
   <pre id="report">—</pre>
 
+  <div class="sep"></div>
+
+  <h2>RUN pubblico riproducibile</h2>
+  <p class="muted">Crea i file di rilascio per <code class="inline">/runs/YYYY-MM-DD/</code>: <code>sha256.txt</code>, <code>report.txt</code>, <code>run_manifest.json</code>, <code>discover_manifest.jsonld</code>, <code>CHANGELOG.md</code>.</p>
+  <div class="row">
+    <label>Data run: <input id="runDate" type="date"></label>
+    <label>Titolo breve: <input id="runTitle" type="text" placeholder="MB-X.01 · v1.0 run"></label>
+    <button class="btn" id="mkRun">Genera file RUN</button>
+    <span id="runMsg" class="muted">—</span>
+  </div>
+  <div class="bar">
+    <a id="dlSHA"   class="btn" download="sha256.txt">Scarica sha256.txt</a>
+    <a id="dlRPT"   class="btn" download="report.txt">Scarica report.txt</a>
+    <a id="dlRJM"   class="btn" download="run_manifest.json">Scarica run_manifest.json</a>
+    <a id="dlDSJ"   class="btn" download="discover_manifest.jsonld">Scarica discover_manifest.jsonld</a>
+    <a id="dlCHG"   class="btn" download="CHANGELOG.md">Scarica CHANGELOG.md</a>
+  </div>
+
+  <div class="sep"></div>
+
+  <h2>Documenti di governance</h2>
+  <p class="muted">Linee guida minime per audit, sicurezza e uso da parte di agenti/machine.</p>
+  <div class="bar">
+    <a id="dlSEC" class="btn" download="SECURITY.md">SECURITY.md</a>
+    <a id="dlPOL" class="btn" download="POLICY.md">POLICY.md</a>
+    <a id="dlMDU" class="btn" download="MACHINE-DUTY.md">MACHINE-DUTY.md</a>
+    <a id="dlAUD" class="btn" download="AUDIT.md">AUDIT.md</a>
+    <a id="dlVFY" class="btn" download="verify.html">verify.html</a>
+    <a id="dlSTS" class="btn" download="status.html">status.html</a>
+  </div>
+
+  <h3>Mini-status locale</h3>
+  <p class="muted">Estratto dai file caricati sopra.</p>
+  <pre id="miniStatus">—</pre>
+
+  <div class="sep"></div>
+
   <h2>Istruzioni rapide</h2>
   <pre>
 python io_lab_v1_lya.py           # genera io_log.ndjson + lya_flow.ndjson
 python io_lab_check.py io_log.ndjson
 python io_lab_check.py lya_flow.ndjson
 python io_universal_check.py io_log.ndjson lya_flow.ndjson
+# Pubblica in /runs/YYYY-MM-DD/ insieme a sha256.txt, report.txt, run_manifest.json
   </pre>
 </main>
 
 <footer class="muted">
-  Mirror © 2025 — Fonte canonica: <a href="https://massimiliano.neocities.org/io_lab_v1_lya.html" target="_blank" rel="noopener">Neocities</a>
+  © 2025 — MB-X.01 / L.O.N. — MIT · Canonico: massimiliano.neocities.org · Mirror: tuttotorna.github.io/lon-mirror
 </footer>
 
 <script>
-/* ================== CONTENUTI EMBED ================== */
+/* ================== CONTENUTI EMBED: CODICE ================== */
+const CANONICAL_PY = "https://massimiliano.neocities.org/io_lab_v1_lya.py";
+const MIRROR_PY    = "https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.py";
+
 const PY = `# ================================================================
 # io_lab_v1_lya.py — MB-X.01 / L.O.N. — Io minimale + Lya (v1)
 # Canali: T=pensiero, R=auto-riflesso, O3=osservatore esterno
 # Output: io_log.ndjson (hash-chain) + lya_flow.ndjson (ledger append-only)
 # ================================================================
-CANONICAL = "https://massimiliano.neocities.org/io_lab_v1_lya.py"
-MIRROR    = "https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.py"
+CANONICAL = "${CANONICAL_PY}"
+MIRROR    = "${MIRROR_PY}"
 
 import json, time, hashlib, random, os
 from datetime import datetime
@@ -271,25 +289,31 @@ const LYA_SNAP = [
 {"kind":"R","data":{"tick":0,"coherence_est":0.832,"intent_seen":"ricerca"},"ts":"2025-10-11T12:00:00.030Z","prev":"b0bbe209d2ec0d66fc661f375892fd7823773532ac5ccdbe1ddd1cbbd416cf30","hash":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06"},
 {"kind":"O3","data":{"tick":0,"cycle_ms":27,"entropy_bin":0.2,"intent_match":1},"ts":"2025-10-11T12:00:00.060Z","prev":"888964501cd424a625b22c35c596d459271e210857096f19a757a4ca49d59d06","hash":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},
 {"kind":"CHK","data":{"tick":0,"log_hash_tip":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0"},"ts":"2025-10-11T12:00:00.090Z","prev":"ac7cd24bc3fe6c5099539dfe566a0d3ca72a9a8dbf3f15485041c804c5fd0","hash":"4c7b6fa8415ec5b40e278fdd3910192d7bc7a82ba99ae0ce2a1cde4b408c42cd"}
-];
+`;
 
-/* ================== LINK DOWNLOAD ================== */
-function mk(el, filename, content){
+/* ================== UTIL COMUNI ================== */
+function mkLink(el, filename, content){
   const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
   el.href = URL.createObjectURL(blob); el.download = filename;
 }
-mk(document.getElementById('dlPy'),  'io_lab_v1_lya.py', PY);
-mk(document.getElementById('dlChk'), 'io_lab_check.py', CHECK);
-mk(document.getElementById('dlUni'), 'io_universal_check.py', UNI);
-mk(document.getElementById('dlSnap'),'io_log_snapshot.ndjson', SNAP.map(o=>JSON.stringify(o)).join("\n"));
-mk(document.getElementById('dlLya'), 'lya_snapshot.ndjson', LYA_SNAP.map(o=>JSON.stringify(o)).join("\n"));
-mk(document.getElementById('dlRead'),'io_lab_readme.txt',
+function setToday(){
+  const d=new Date(); const z=(n)=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`;
+}
+
+/* ================== LINK DOWNLOAD BASE ================== */
+mkLink(document.getElementById('dlPy'),  'io_lab_v1_lya.py', PY);
+mkLink(document.getElementById('dlChk'), 'io_lab_check.py', CHECK);
+mkLink(document.getElementById('dlUni'), 'io_universal_check.py', UNI);
+mkLink(document.getElementById('dlSnap'),'io_log_snapshot.ndjson', SNAP.map(o=>JSON.stringify(o)).join("\n"));
+mkLink(document.getElementById('dlLya'), 'lya_snapshot.ndjson', LYA_SNAP.map(o=>JSON.stringify(o)).join("\n"));
+mkLink(document.getElementById('dlRead'),'io_lab_readme.txt',
 `io_lab_v1_lya — MB-X.01 / L.O.N.
 Scopo: ciclo Io (T,R,O3) con persistenza in Lya (append-only) + CHK.
 File generati: io_log.ndjson, lya_flow.ndjson.
 Verifica: io_lab_check.py  |  io_universal_check.py io_log.ndjson lya_flow.ndjson
 Licenza: MIT
-Canonico: https://massimiliano.neocities.org/io_lab_v1_lya.py
+Canonico: ${CANONICAL_PY}
 `);
 
 /* ================== PREVIEW ================== */
@@ -303,22 +327,25 @@ function parseNdjson(txt){
   for(let i=0;i<lines.length;i++){ rows.push(JSON.parse(lines[i])); }
   return rows;
 }
-function sha256hex(str){
+async function sha256hex_str(str){
   const buf = new TextEncoder().encode(str);
-  return crypto.subtle.digest('SHA-256', buf).then(b=>{
-    const a = Array.from(new Uint8Array(b)); return a.map(x=>x.toString(16).padStart(2,'0')).join('');
-  });
+  const digest = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+async function sha256_file(file){
+  const txt = await file.text();
+  const h   = await sha256hex_str(txt);
+  return {hash:h, text:txt};
 }
 async function verifyChain(rows){
   let prev=null;
   for(let i=0;i<rows.length;i++){
     const e = rows[i];
-    const payload = {};
-    for(const k of Object.keys(e)){ if(k!=="hash"){ payload[k]=e[k]; } }
+    const payload = {}; for(const k of Object.keys(e)){ if(k!=="hash"){ payload[k]=e[k]; } }
     const blob = (prev??"") + JSON.stringify(payload, Object.keys(payload).sort(), 0);
-    const h = await sha256hex(blob);
+    const h = await sha256hex_str(blob);
     if((e.prev??null)!==prev) return {ok:false,msg:`prev errato a riga ${i+1}`};
-    if(e.hash!==h) return {ok:false,msg:`hash errato a riga ${i+1}`};
+    if(e.hash!==h)          return {ok:false,msg:`hash errato a riga ${i+1}`};
     prev = h;
   }
   return {ok:true,msg:`OK: catena valida (${rows.length} righe)`};
@@ -327,11 +354,15 @@ function lastTick(rows, key){
   const t = rows.filter(r=>r.ch===key || r.kind===key);
   return t.length? t[t.length-1].data.tick : null;
 }
+
+let gState = { ioFile:null, lyaFile:null, ioRows:[], lyaRows:[], ioHashSet:new Set(), summary:null };
+
 document.getElementById('runCheck').onclick = async ()=>{
   const ioFile = document.getElementById('ioFile').files[0];
   const lyaFile= document.getElementById('lyaFile').files[0];
   const status = document.getElementById('status');
   const report = document.getElementById('report');
+  const mini   = document.getElementById('miniStatus');
   if(!ioFile || !lyaFile){ status.textContent="seleziona entrambi i file"; return; }
   status.textContent="verifica in corso…";
   try{
@@ -341,9 +372,9 @@ document.getElementById('runCheck').onclick = async ()=>{
     const lyaRows = parseNdjson(lyaTxt);
     const v1 = await verifyChain(ioRows);
     const v2 = await verifyChain(lyaRows);
+    // cross-check CHK
     const ioHashes = new Set(ioRows.map(r=>r.hash));
-    let chkOk=true, chkMsg="OK: 0 CHK";
-    let n=0;
+    let chkOk=true, chkMsg="OK: 0 CHK"; let n=0;
     for(let i=0;i<lyaRows.length;i++){
       const r = lyaRows[i];
       if(r.kind==="CHK"){
@@ -358,7 +389,8 @@ document.getElementById('runCheck').onclick = async ()=>{
       lya_rows: lyaRows.length,
       last_tick_T: lastTick(ioRows,"T"),
       last_tick_R: lastTick(ioRows,"R"),
-      last_tick_O3: lastTick(ioRows,"O3")
+      last_tick_O3: lastTick(ioRows,"O3"),
+      io_tip: ioRows.length? ioRows[ioRows.length-1].hash : null
     };
     const lines = [
       `[${v1.ok?'OK':'FAIL'}] io_log: ${v1.msg}`,
@@ -368,12 +400,5 @@ document.getElementById('runCheck').onclick = async ()=>{
     ];
     report.textContent = lines.join("\n");
     status.innerHTML = (v1.ok && v2.ok && chkOk) ? '<span class="ok">valido</span>' : '<span class="fail">errore</span>';
-  }catch(err){
-    report.textContent = String(err);
-    status.innerHTML = '<span class="fail">errore</span>';
-  }
-};
-</script>
-</body>
-</html>
-```0
+    mini.textContent = `righe io=${summary.io_rows}, lya=${summary.lya_rows} · tip=${summary.io_tip} · T/R/O3=${summary.last_tick_T}/${summary.last_tick_R}/${summary.last_tick_O3}`;
+    // conserva per RUN packag
