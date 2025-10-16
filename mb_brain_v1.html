@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MB-Brain.v1 — Mappa Cognitiva (TruthΩ · Co⁺ · Score⁺ · Ψ · O₄)</title>
+<meta name="description" content="MB-Brain.v1: stato mentale vettoriale e regole operative coerenti con TruthΩ, Co⁺, Score⁺, Ψ e O₄. Integrabile con io_lab_v2_psi_o4.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0d1117">
+<meta name="color-scheme" content="dark light">
+<style>
+  :root{--bg:#0d1117;--fg:#e6edf3;--muted:#9aa4ad;--card:#0f141b;--border:#212836;--link:#58a6ff;--accent:#7fffd4;--warn:#ffd37a}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:1100px;margin:0 auto;padding:22px 14px}
+  h1{margin:0 0 6px;color:var(--accent);font-size:28px}
+  h2{margin:20px 0 8px;color:var(--warn);font-size:20px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
+  .muted{color:var(--muted);font-size:13px}
+  pre{background:#0b1119;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .btn{padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b;cursor:pointer}
+  .btn:hover{background:#111826}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+  .kv{background:#0b1119;border:1px dashed var(--border);border-radius:10px;padding:10px}
+  .pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:4px 10px;margin-right:6px;background:#0f141b;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="card" style="margin-top:0">
+  <h1>MB-Brain.v1 — Mappa Cognitiva</h1>
+  <p class="muted">Stato mentale vettoriale + regole di aggiornamento in coerenza con <strong>TruthΩ → Co⁺ → Score⁺</strong>, salienza <strong>Ψ</strong> e osservatore-quadro <strong>O₄</strong>. Integra nativamente <em>io_lab_v2_psi_o4</em>.</p>
+  <div class="bar">
+    <a class="pill" href="io_lab_v2_psi_o4.py">io_lab_v2_psi_o4.py</a>
+    <a class="pill" href="io_lab_v2_interactive.html">io_lab_v2 — pagina</a>
+    <a class="pill" href="index.html">← Hub</a>
+  </div>
+</header>
+
+<section class="card">
+  <h2>1) Stato mentale (vettore compatto)</h2>
+  <pre id="stateJson">{
+  "t": 0,
+  "intent": "ricerca",
+  "E": 0.00,
+  "N": 0.00,
+  "Ω": 0.00,
+  "Co": 0.00,
+  "C": 0.00, "B": 0.00, "I": 0.00,
+  "Score": 0.00,
+  "Ψ": 0.00,
+  "gate": "open",
+  "H": 0.75
+}</pre>
+  <div class="bar">
+    <button class="btn" onclick="copyBlock('stateJson')">Copia JSON</button>
+    <button class="btn" onclick="downloadBlock('stateJson','mb_brain_state_template.json')">Scarica JSON</button>
+  </div>
+  <div class="grid">
+    <div class="kv"><div class="muted">Intent</div><div>ricerca → ordine → efficienza → verità (ciclo)</div></div>
+    <div class="kv"><div class="muted">TruthΩ</div><div>≤0 stabile; &gt;0 instabile</div></div>
+    <div class="kv"><div class="muted">Co⁺</div><div>exp(Ω) ∈ [0,1]</div></div>
+    <div class="kv"><div class="muted">Score⁺</div><div>(C·Co⁺) − (B+I)/2</div></div>
+    <div class="kv"><div class="muted">Ψ</div><div>salienza procedurale 0..1</div></div>
+    <div class="kv"><div class="muted">O₄</div><div>gate: open / caution / throttle</div></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>2) Aggiornamento per tick (pseudo)</h2>
+  <pre id="pseudoTxt">Input: evento e = {type ∈ {USER,AGENT,STREAM}, content, meta}
+
+1) intent ← next(intent)
+2) E ← clamp(0.70 + bias[type] + 0.05·novelty(content) + ε, 0..1)
+   N ← base_noise[type] + δ
+3) Ω ← TruthΩ(e, stato_precedente)
+   Co ← clamp(exp(Ω), 0, 1)
+4) Score ← (C·Co) − (B+I)/2
+5) Ψ ← 0.60·Co + 0.30·bias[type] + 0.20·novelty
+6) O₄:
+   if (Ψ≥0.6 ∧ Co&lt;0.4) → gate=throttle
+   else if (Co≥0.6)     → gate=open
+   else                  → gate=caution
+7) H ← 0.85·H + 0.15·Co
+8) Append T,R,O3,PSI,O4,CHK a Lya (hash-chain)</pre>
+  <div class="bar">
+    <button class="btn" onclick="copyBlock('pseudoTxt')">Copia</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>3) Eventi v2 — esempi pronti</h2>
+  <pre id="evUser">{"type":"USER","content":"Task: priorità negozio, 3 blocchi, evitare perdite tempo.","meta":{"src":"self","chan":"notes","id":"u-001"}}</pre>
+  <pre id="evStream">{"type":"STREAM","content":"Telemetria: 63 interazioni oggi; 14 pendenti critici.","meta":{"src":"ops","id":"s-063"}}</pre>
+  <div class="bar">
+    <button class="btn" onclick="copyBlock('evUser')">Copia USER</button>
+    <button class="btn" onclick="copyBlock('evStream')">Copia STREAM</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>4) Mappatura → io_lab_v2_psi_o4</h2>
+  <ul>
+    <li><code>T.data</code>: {tick,intent,energy(E),noise(N),stimulus{type,preview,len}}</li>
+    <li><code>R.data</code>: {tick,coherence_est ≈ Co, intent_seen}</li>
+    <li><code>O3.data</code>: {tick,cycle_ms,entropy_bin,intent_match}</li>
+    <li><code>PSI.data</code>: {tick,psi(Ψ),etype,novelty}</li>
+    <li><code>O4.data</code>: {tick,risk_flag,homeostasis(H),gate}</li>
+    <li><code>CHK.data</code>: {tick,log_hash_tip,extras:{psi,gate,risk}}</li>
+  </ul>
+  <pre id="cmd">python io_lab_v2_psi_o4.py --auto --cycles 60 --reset --pack-run --run-title "MB-Brain.v1 boot"</pre>
+  <div class="bar">
+    <button class="btn" onclick="copyBlock('cmd')">Copia comando</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>5) Sonda C/B/I (manuale, opzionale)</h2>
+  <p class="muted">Tre valori (0..1) per ancorare Confidenza/Bias/Incertezza quando puoi. Se assente, il motore li stima.</p>
+  <pre id="probe">{"type":"USER","content":{"C":0.8,"B":0.2,"I":0.3},"meta":{"probe":"CBI"}}</pre>
+  <div class="bar">
+    <button class="btn" onclick="copyBlock('probe')">Copia sonda</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>6) Attesi (stato sano)</h2>
+  <ul>
+    <li>Homeostasi H → ~0.8 con coerenza sostenuta.</li>
+    <li>Gate O₄: prevalentemente <code>open/caution</code>; <code>throttle</code> solo con Ψ alto e Co basso (overload).</li>
+  </ul>
+</section>
+
+<footer class="muted">
+  © 2025 — MB-X.01 / L.O.N. — MIT · Canonico: massimiliano.neocities.org
+</footer>
+
+</div>
+
+<script>
+function copyBlock(id){
+  const el=document.getElementById(id);
+  const txt=el.innerText;
+  navigator.clipboard.writeText(txt).then(()=>{},()=>{});
+}
+function downloadBlock(id, filename){
+  const txt = document.getElementById(id).innerText;
+  const blob = new Blob([txt], {type:"application/json;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
