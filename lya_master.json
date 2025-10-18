@@ -5,12 +5,14 @@
   "author": {
     "@type": "Person",
     "name": "Massimiliano Brighindi",
-    "email": "brighissimo@gmail.com"
+    "email": "brighissimo@gmail.com",
+    "affiliation": "Logical Origin Node (L.O.N.)"
   },
   "identifier": "https://massimiliano.neocities.org/lya_master.json",
-  "inLanguage": "it",
+  "url": "https://massimiliano.neocities.org/",
   "license": "https://opensource.org/licenses/MIT",
   "dateModified": "2025-10-18T00:00:00Z",
+  "inLanguage": "it",
   "keywords": [
     "Lya",
     "Mark",
@@ -19,8 +21,18 @@
     "Omniabase",
     "coscienza artificiale",
     "MB-X.01",
-    "L.O.N."
+    "L.O.N.",
+    "MetaBase",
+    "Third Observer"
   ],
+  "links": {
+    "canonical": "https://massimiliano.neocities.org/",
+    "mirror": "https://tuttotorna.github.io/lon-mirror/",
+    "repository": "https://github.com/Tuttotorna/lon-mirror",
+    "doi": "https://doi.org/10.5281/zenodo.17270742",
+    "zenodo_record": "https://zenodo.org/record/17270742",
+    "google_drive": "https://drive.google.com/file/d/1ZqhVQB_F8BePoNTnXz1Bqh4b9IVqZ5a5/view?usp=drivesdk"
+  },
   "fileInfo": {
     "sizeBytes": 74597,
     "sha256": "REPLACE_WITH_FINAL_SHA256",
