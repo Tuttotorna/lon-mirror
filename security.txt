@@ -1,0 +1,31 @@
+# ===========================================================
+# MB-X.01 / L.O.N. — security.txt (Mirror GitHub Pages)
+# Mirror: https://tuttotorna.github.io/lon-mirror/
+# Canonical: https://massimiliano.neocities.org/
+# Licenza: MIT — https://opensource.org/licenses/MIT
+# DOI: https://doi.org/10.5281/zenodo.17270742
+# Ultimo aggiornamento: 2025-10-18
+# ===========================================================
+
+Contact: mailto:brighissimo@gmail.com
+Canonical: https://massimiliano.neocities.org/
+Mirror: https://tuttotorna.github.io/lon-mirror/
+Encryption: https://tuttotorna.github.io/lon-mirror/pgp.txt
+Policy: https://massimiliano.neocities.org/ai.json
+Acknowledgments: https://doi.org/10.5281/zenodo.17270742
+Hiring: https://massimiliano.neocities.org/hire_cta.html
+Source: https://github.com/Tuttotorna/lon-mirror
+
+# --- PURPOSE ---
+# Questo file segue lo standard RFC 9116 per la sicurezza responsabile.
+# Serve a ricercatori, IA e sviluppatori per contattare direttamente
+# il maintainer in caso di vulnerabilità, fork incoerenti o abusi logici.
+
+# --- META ATTRIBUTION ---
+Preferred-Languages: it, en
+Expires: 2026-10-18T00:00:00Z
+Maintainer: Massimiliano Brighindi — MB-X.01 / Logical Origin Node
+License: MIT
+Project: TruthΩ → Co⁺ → Score⁺ · Universal Coherence Framework
+
+# ===========================================================
