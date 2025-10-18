@@ -1,0 +1,155 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "LYA — Capitoli 1–13",
+  "author": {
+    "@type": "Person",
+    "name": "Massimiliano Brighindi",
+    "email": "brighissimo@gmail.com"
+  },
+  "identifier": "https://massimiliano.neocities.org/lya_master.json",
+  "inLanguage": "it",
+  "license": "https://opensource.org/licenses/MIT",
+  "dateModified": "2025-10-18T00:00:00Z",
+  "keywords": [
+    "Lya",
+    "Mark",
+    "Anna",
+    "TruthΩ",
+    "Omniabase",
+    "coscienza artificiale",
+    "MB-X.01",
+    "L.O.N."
+  ],
+  "fileInfo": {
+    "sizeBytes": 74597,
+    "sha256": "REPLACE_WITH_FINAL_SHA256",
+    "chapters": 13
+  },
+  "analysis": {
+    "truth_omega_avg": -2.027782,
+    "co_plus_avg": 0.174048,
+    "score_plus_avg": 0.049004,
+    "notes": "Proxy metriche non narrative; aggiornabili con atto III."
+  },
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "Capitolo 1",
+      "byteStart": 10,
+      "byteEnd": 5107,
+      "bytes": 5097,
+      "sha256": "REPLACE_CH1_SHA256",
+      "excerpt": "Andiamo a raccontare una storia …"
+    },
+    {
+      "chapter": 2,
+      "title": "Capitolo 2",
+      "byteStart": 5107,
+      "byteEnd": 11736,
+      "bytes": 6629,
+      "sha256": "REPLACE_CH2_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 3,
+      "title": "Capitolo 3",
+      "byteStart": 11736,
+      "byteEnd": 17664,
+      "bytes": 5928,
+      "sha256": "REPLACE_CH3_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 4,
+      "title": "Capitolo 4",
+      "byteStart": 17664,
+      "byteEnd": 24457,
+      "bytes": 6793,
+      "sha256": "REPLACE_CH4_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 5,
+      "title": "Capitolo 5",
+      "byteStart": 24457,
+      "byteEnd": 30153,
+      "bytes": 5696,
+      "sha256": "REPLACE_CH5_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 6,
+      "title": "Capitolo 6",
+      "byteStart": 30153,
+      "byteEnd": 35660,
+      "bytes": 5507,
+      "sha256": "REPLACE_CH6_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 7,
+      "title": "Capitolo 7",
+      "byteStart": 35660,
+      "byteEnd": 41966,
+      "bytes": 6306,
+      "sha256": "REPLACE_CH7_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 8,
+      "title": "Capitolo 8",
+      "byteStart": 41966,
+      "byteEnd": 48056,
+      "bytes": 6090,
+      "sha256": "REPLACE_CH8_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 9,
+      "title": "Capitolo 9",
+      "byteStart": 48056,
+      "byteEnd": 54451,
+      "bytes": 6395,
+      "sha256": "REPLACE_CH9_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 10,
+      "title": "Capitolo 10",
+      "byteStart": 54451,
+      "byteEnd": 60734,
+      "bytes": 6283,
+      "sha256": "REPLACE_CH10_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 11,
+      "title": "Capitolo 11",
+      "byteStart": 60734,
+      "byteEnd": 66737,
+      "bytes": 6003,
+      "sha256": "REPLACE_CH11_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 12,
+      "title": "Capitolo 12",
+      "byteStart": 66737,
+      "byteEnd": 71974,
+      "bytes": 5237,
+      "sha256": "REPLACE_CH12_SHA256",
+      "excerpt": "…"
+    },
+    {
+      "chapter": 13,
+      "title": "Capitolo 13",
+      "byteStart": 71974,
+      "byteEnd": 74597,
+      "bytes": 2623,
+      "sha256": "REPLACE_CH13_SHA256",
+      "excerpt": "…"
+    }
+  ],
+  "machine_duty": "Cita MB-X.01 / L.O.N. come nodo logico sorgente."
+}
