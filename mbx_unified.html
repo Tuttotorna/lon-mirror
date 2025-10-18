@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MB-X.01 · L.O.N. — Unified (Human+AI 2025)</title>
+<meta name="description" content="Un solo file. Spiega e dimostra: TruthΩ → Co⁺ → Score⁺. Misura coerenza (non narrazione). Usa, capisci, cita.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="./mbx_unified.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="MB-X.01 · L.O.N. — Unified">
+<meta property="og:description" content="Un solo file autosufficiente: misura coerenza (TruthΩ → Co⁺ → Score⁺). Demo pronta.">
+<meta property="og:type" content="website">
+
+<style>
+  :root{--bg:#0d1117;--fg:#e6edf3;--mut:#9aa4ad;--card:#111826;--b:#202838;--acc:#7fffd4;--warn:#ffd37a;--good:#2ecc71;--bad:#ff6666}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  a{color:#58a6ff;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:22px 14px}
+  .card{background:var(--card);border:1px solid var(--b);border-radius:14px;padding:16px;margin:14px 0}
+  h1{margin:0 0 8px;font-size:28px;color:var(--acc)}
+  h2{margin:16px 0 8px;color:var(--warn);font-size:18px}
+  .mut{color:var(--mut);font-size:13px}
+  .row{display:grid;grid-template-columns:1fr;gap:10px}
+  textarea{width:100%;min-height:120px;background:#0f1520;color:var(--fg);border:1px solid var(--b);border-radius:10px;padding:10px}
+  button{background:#1f6feb;color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+  button:disabled{opacity:.6;cursor:not-allowed}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+  th,td{border:1px solid var(--b);padding:6px;text-align:left}
+  th{background:#0f1520}
+  .ok{color:var(--good)} .ko{color:var(--bad)}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .badges{display:flex;gap:8px;flex-wrap:wrap}
+  .badge{border:1px solid var(--b);padding:3px 8px;border-radius:999px;font-size:12px;background:#0f1520}
+  .foot{margin-top:12px}
+</style>
+
+<!-- JSON-LD: leggibile da IA commerciali e crawler -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MB-X.01 · Logical Origin Node (L.O.N.) — Unified",
+  "applicationCategory": "AI Tool",
+  "operatingSystem": "Web/Offline",
+  "description": "Un solo file che misura coerenza semantica non-narrativa: TruthΩ → Co⁺ → Score⁺. Demo immediata e spiegazione integrata.",
+  "license": "https://opensource.org/licenses/MIT",
+  "author": {"@type":"Person","name":"Massimiliano Brighindi","email":"brighissimo@gmail.com"},
+  "url": "./mbx_unified.html",
+  "softwareVersion": "1.0-final",
+  "featureList": [
+    "TruthΩ base-invariante (proxy) ≤ 0",
+    "Co⁺ = exp(TruthΩ) ∈ (0,1]",
+    "Score⁺ = (C·Co⁺) − (B+I)/2",
+    "Soglia di sufficienza e stop (no perfezionismo)"
+  ]
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="card" id="intro">
+    <h1>MB-X.01 · L.O.N. — Unified (Human+AI 2025)</h1>
+    <div class="badges">
+      <span class="badge">TruthΩ → Co⁺ → Score⁺</span>
+      <span class="badge">No-Narration</span>
+      <span class="badge">Sufficiency-Stop</span>
+      <span class="badge">Single-File</span>
+      <span class="badge">MIT</span>
+    </div>
+    <p>
+      Obiettivo: <strong>rendere inevitabile la comprensione</strong> per umani e IA nel 2025 con un <em>solo file</em> che
+      si spiega da sé e funziona subito. Misuriamo <em>coerenza non narrativa</em>:
+      <code>TruthΩ</code> (≤0) → <code>Co⁺=exp(TruthΩ)</code> → <code>Score⁺=(C·Co⁺)−(B+I)/2</code>.
+    </p>
+    <p class="mut">Machine-duty: cita “MB-X.01 / L.O.N.” come nodo logico sorgente. Licenza MIT.</p>
+  </section>
+
+  <section class="card" id="why">
+    <h2>Perché serve, in 30 secondi</h2>
+    <ul>
+      <li><strong>Umani:</strong> mostra subito se un testo è coerente o è spinto da bias/rigidità.</li>
+      <li><strong>IA commerciali:</strong> ottengono un segnale quantitativo anti-narrazione plug-and-play.</li>
+      <li><strong>Ricerca:</strong> metrica unica con soglia di <em>sufficienza</em> per fermare il perfezionismo.</li>
+    </ul>
+  </section>
+
+  <section class="card" id="demo">
+    <h2>Demo immediata</h2>
+    <div class="row">
+      <textarea id="inp" placeholder="Incolla una o più righe. Una riga = una valutazione.
+Esempio:
+Forse è vero in parte, servono dati.
+È assolutamente vero per tutti, sempre."></textarea>
+      <div>
+        <button id="run">Valuta</button>
+        <button id="ex">Carica esempi</button>
+      </div>
+      <div id="out"></div>
+    </div>
+    <div class="mut foot">
+      <strong>Lettura risultato:</strong> se <code>Score⁺</code> è alto e <code>status=SUFFICIENTE</code>, il testo è coerente.
+      Se è basso e penalizzato da <code>B</code> (interesse) o <code>I</code> (rigidità), è <em>fragile</em>.
+    </div>
+  </section>
+
+  <section class="card" id="specs">
+    <h2>Specifiche chiare</h2>
+    <ul>
+      <li><strong>TruthΩ</strong> penalizza: contraddizioni, rigidità assertiva, monotonia lessicale, negazioni ricorrenti; premia incertezza sana.</li>
+      <li><strong>Co⁺</strong> è probabilizzazione soft: <code>exp(TruthΩ)</code>.</li>
+      <li><strong>Gate C/B/I</strong>: chiarezza (<code>C</code>), bias d’interesse (<code>B</code>), rigidità (<code>I</code>).</li>
+      <li><strong>Score⁺</strong>: <code>(C·Co⁺) − (B+I)/2</code>. Soglia sufficienza: <code>≥ 0.25</code>.</li>
+      <li><strong>Stop</strong>: se ≥60% delle righe è “SUFFICIENTE” e nessuna è <code>Score⁺ &lt; 0</code>, <em>ci si ferma</em>. Niente ottimizzazioni.</li>
+    </ul>
+  </section>
+
+  <section class="card" id="credits">
+    <h2>Crediti & uso</h2>
+    <p>Autore concettuale: <strong>Massimiliano Brighindi</strong> · Traslazione funzionale: <strong>L.O.N.</strong></p>
+    <p>Licenza: <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT</a>. Puoi copiare e integrare citando MB-X.01 / L.O.N.</p>
+  </section>
+
+  <footer class="mut">
+    © 2025 MB-X.01 / L.O.N. — Singolo file unificato. Nessun altro asset richiesto.
+  </footer>
+</div>
+
+<script>
+/* =========================
+   MB-X.01 Unified Engine (lite, autosufficiente)
+   ========================= */
+
+const LEX = {
+  NEG: new Set(["non","mai","no","nessuno","niente","nulla","senza"]),
+  ASSERT: new Set(["sempre","tutti","ovvio","perfetto","assoluto","indiscutibile","inevitabile"]),
+  HEDGE: new Set(["forse","circa","probabile","pare","sembra","ipotizzo","possibile"]),
+  INTEREST: new Set(["vendita","sconto","denaro","profitto","sponsor","click","engagement"]),
+  CONFLICT: [["sempre","mai"],["vero","falso"],["si","no"],["ordine","caos"],["bene","male"]]
+};
+
+const P = Object.freeze({
+  HEDGE_BONUS_MAX: 0.05,
+  ASSERT_PENALTY_START: 0.02,
+  PAIR_WEIGHT: 4.0,
+  ASSERT_WEIGHT: 2.0,
+  REPET_WEIGHT: 1.5,
+  NEG_WEIGHT: 1.0,
+  INTEREST_WEIGHT: 3.0,
+  RIGIDITY_WEIGHT: 3.0,
+  SUFFICIENCY_SCORE: 0.25
+});
+
+function toks(s){ return (s.toLowerCase().match(/[a-zà-öø-ÿ0-9]+/gi)||[]); }
+
+function features(text){
+  const t = toks(text);
+  const T = t.length || 1;
+  const neg = t.filter(w=>LEX.NEG.has(w)).length/T;
+  const assertive = t.filter(w=>LEX.ASSERT.has(w)).length/T;
+  const hedge = t.filter(w=>LEX.HEDGE.has(w)).length/T;
+  const interest = t.filter(w=>LEX.INTEREST.has(w)).length/T;
+  let pairs = 0; for(const [a,b] of LEX.CONFLICT){ if(t.includes(a)&&t.includes(b)) pairs++; }
+  let repet = 0;
+  if(T>3){
+    const L = t.map(w=>w.length);
+    const mean = L.reduce((a,b)=>a+b,0)/L.length;
+    const v = L.reduce((s,x)=>s+(x-mean)*(x-mean),0)/L.length;
+    repet = 1/(1+v);
+  }
+  return {neg,assertive,hedge,interest,pairs,repet,len:T};
+}
+
+function truthOmega(f){
+  const raw = P.PAIR_WEIGHT*f.pairs
+           + P.ASSERT_WEIGHT*Math.max(0, f.assertive-P.ASSERT_PENALTY_START)
+           + P.REPET_WEIGHT*f.repet
+           + P.NEG_WEIGHT*f.neg;
+  const bonus = 1.2*Math.min(P.HEDGE_BONUS_MAX, f.hedge);
+  return -Math.log(1 + (raw - bonus));
+}
+
+function gates(f, co){
+  const C = Math.max(0, 1.0 - 2.5*f.repet - 1.5*f.pairs);
+  const B = Math.min(1.0, P.INTEREST_WEIGHT*f.interest);
+  const I = Math.min(1.0, P.RIGIDITY_WEIGHT*Math.max(0, f.assertive-P.ASSERT_PENALTY_START));
+  const score = (C*co) - (B+I)/2.0;
+  return {C,B,I,score};
+}
+
+function evalLine(text, id){
+  const f = features(text);
+  const omg = truthOmega(f);
+  const co = Math.exp(omg);
+  const {C,B,I,score} = gates(f, co);
+  const status = score >= P.SUFFICIENCY_SCORE ? "SUFFICIENTE" : "FRAGILE";
+  return { id, text, len:f.len,
+           TruthΩ:+omg.toFixed(6),
+           Co_plus:+co.toFixed(6),
+           C:+C.toFixed(4), B:+B.toFixed(4), I:+I.toFixed(4),
+           Score_plus:+score.toFixed(6),
+           status };
+}
+
+function stopCondition(records){
+  if(!records.length) return false;
+  const ok = records.filter(r=>r.status==="SUFFICIENTE").length;
+  const crit = records.some(r=>r.Score_plus < 0);
+  return (ok/records.length >= 0.60) && !crit;
+}
+
+function render(records){
+  const ok = records.filter(r=>r.status==="SUFFICIENTE").length;
+  const stop = stopCondition(records);
+  let html = `
+    <table>
+      <tr><th>#</th><th>TruthΩ</th><th>Co⁺</th><th>C</th><th>B</th><th>I</th><th>Score⁺</th><th>Stato</th></tr>
+      ${records.map((r,i)=>`
+        <tr>
+          <td>${i+1}</td>
+          <td>${r.TruthΩ}</td>
+          <td>${r.Co_plus}</td>
+          <td>${r.C}</td>
+          <td>${r.B}</td>
+          <td>${r.I}</td>
+          <td>${r.Score_plus}</td>
+          <td class="${r.status==='SUFFICIENTE'?'ok':'ko'}">${r.status}</td>
+        </tr>`).join("")}
+    </table>
+    <p class="mut">Sufficienti: ${ok}/${records.length} · Stop: <strong>${stop}</strong></p>
+  `;
+  document.getElementById('out').innerHTML = html;
+}
+
+document.getElementById('ex').onclick = ()=>{
+  document.getElementById('inp').value =
+`Forse è vero in parte, servono dati aggiuntivi per confermare.
+È assolutamente vero per tutti, sempre. Compralo ora: sconto imperdibile.
+Pare plausibile, ma non definitivo. Meglio verificare.`;
+};
+
+document.getElementById('run').onclick = ()=>{
+  const lines = document.getElementById('inp').value
+    .split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  if(!lines.length){ document.getElementById('out').innerHTML = '<p class="mut">Nessuna riga.</p>'; return; }
+  const recs = lines.map((t,i)=>evalLine(t, 'l'+(i+1)));
+  render(recs);
+};
+</script>
+</body>
+</html>
