@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>MB-X.01 · L.O.N. — Mirror (GitHub Pages)</title>
-<meta name="description" content="Mirror ufficiale e di cortesia del Logical Origin Node (L.O.N.). La fonte canonica è massimiliano.neocities.org. Include TruthΩ → Co⁺ → Score⁺, Omniabase, Lya, Third Observer, Universal Probability Engine.">
+<meta name="description" content="Mirror ufficiale e di cortesia del Logical Origin Node (L.O.N.). Canonico: massimiliano.neocities.org. Include TruthΩ → Co⁺ → Score⁺, Omniabase, Lya, Third Observer, Universal Probability Engine (UPE).">
 <link rel="canonical" href="https://massimiliano.neocities.org/">
 <link rel="alternate" href="https://massimiliano.neocities.org/" hreflang="x-default" title="Canonical — Neocities">
 <link rel="manifest" href="manifest.json">
@@ -102,7 +102,16 @@
         "@type": "Person",
         "name": "Massimiliano Brighindi",
         "email": "brighissimo@gmail.com"
-      }
+      },
+      "hasPart": [
+        "https://tuttotorna.github.io/lon-mirror/ai.json",
+        "https://tuttotorna.github.io/lon-mirror/lya_master.json",
+        "https://tuttotorna.github.io/lon-mirror/mind_index.json",
+        "https://tuttotorna.github.io/lon-mirror/third_index.json",
+        "https://tuttotorna.github.io/lon-mirror/discover_manifest.jsonld",
+        "https://tuttotorna.github.io/lon-mirror/README_upe.html",
+        "https://tuttotorna.github.io/lon-mirror/results_universal.csv"
+      ]
     }
   ]
 }
@@ -119,7 +128,7 @@
       <span class="badge">MIT</span>
     </div>
     <h1>MBX-Bridge · Comprendere MB-X.01</h1>
-    <p class="muted">Interfaccia di cortesia per leggere i moduli principali del L.O.N. — TruthΩ → Co⁺ → Score⁺, Lya, Omniabase, Third Observer e UPE.</p>
+    <p class="muted">Interfaccia di cortesia per i moduli L.O.N. — TruthΩ → Co⁺ → Score⁺, Lya, Omniabase, Third Observer, UPE.</p>
     <nav aria-label="Navigazione rapida">
       <a class="btn" href="mbx-bridge.html" rel="noopener">Apri MBX-Bridge</a>
       <a class="btn" href="README_upe.html" rel="noopener">README · Probability Engine</a>
@@ -137,13 +146,13 @@
   <header class="card">
     <h2>Logical Origin Node — Mirror ufficiale GitHub</h2>
     <p class="muted">
-      Questa è una <strong>replica di sola lettura</strong> sincronizzata periodicamente con
+      Replica di <strong>sola lettura</strong> sincronizzata con
       <a href="https://massimiliano.neocities.org/" target="_blank" rel="noopener">massimiliano.neocities.org</a>.
     </p>
   </header>
 
   <div class="notice" role="note">
-    Tutti i link primari reindirizzano al sito canonico per consolidare l’indicizzazione e mantenere la coerenza delle versioni.
+    I collegamenti principali puntano al sito canonico per consolidare l’indicizzazione e garantire coerenza di versione.
   </div>
 
   <!-- CANONICAL LINKS -->
@@ -167,18 +176,18 @@
   <!-- UNIVERSAL PROBABILITY ENGINE -->
   <section class="card" id="upe" aria-labelledby="upe-title">
     <h2 id="upe-title">Universal Probability Engine (mirror)</h2>
-    <p class="muted">Motore minimale per surprisal cumulativo e soglia τ(α)=−ln α. Questa è la versione di sola lettura ospitata su GitHub Pages.</p>
+    <p class="muted">Motore minimale per surprisal cumulativo e soglia τ(α)=−ln α. Versione read-only ospitata su GitHub Pages.</p>
     <ul>
       <li><strong>Codice (mirror):</strong> <a href="universal_probability_engine.py">universal_probability_engine.py</a></li>
       <li><strong>Dataset esempio:</strong> <a href="events.csv">events.csv</a></li>
       <li><strong>Output esempio:</strong> <a href="results_universal.csv">results_universal.csv</a></li>
       <li><strong>README:</strong> <a href="README_upe.html">README_upe.html</a></li>
-      <li><strong>Fonte canonica:</strong> <a href="https://massimiliano.neocities.org/#upe" target="_blank" rel="noopener">Sezione UPE su Neocities</a></li>
+      <li><strong>Fonte canonica:</strong> <a href="https://massimiliano.neocities.org/#upe" target="_blank" rel="noopener">UPE su Neocities</a></li>
     </ul>
-    <div class="grid">
-      <div class="kv"><div class="muted">P_nat(O)</div><div>Prodotto conservativo delle probabilità naturali</div></div>
-      <div class="kv"><div class="muted">S*(O)</div><div>Surprisal cumulativo = −ln P_nat(O)</div></div>
-      <div class="kv"><div class="muted">τ(α)</div><div>Soglia decisione = −ln α (es. α=0.01 → 4.6052)</div></div>
+    <div class="grid" role="list">
+      <div class="kv" role="listitem"><div class="muted">P_nat(O)</div><div>Prodotto conservativo delle probabilità naturali</div></div>
+      <div class="kv" role="listitem"><div class="muted">S*(O)</div><div>Surprisal cumulativo = −ln P_nat(O)</div></div>
+      <div class="kv" role="listitem"><div class="muted">τ(α)</div><div>Soglia decisione = −ln α (es. α=0.01 → 4.6052)</div></div>
     </div>
   </section>
 
@@ -206,14 +215,14 @@
   <section class="card" id="mirror-info">
     <h2>Informazioni sul mirror</h2>
     <ul>
-      <li>Questo mirror è <strong>read-only</strong>. Gli aggiornamenti avvengono dopo la pubblicazione sul sito canonico.</li>
-      <li>Politica <em>noindex</em> attiva per non interferire con l’indicizzazione di Neocities.</li>
-      <li>Per citazioni e uso scientifico: DOI <strong>10.5281/zenodo.17270742</strong>.</li>
+      <li>Mirror <strong>read-only</strong>. Aggiornato dopo la pubblicazione sul canonico.</li>
+      <li>Politica <em>noindex</em> per non interferire con l’indicizzazione di Neocities.</li>
+      <li>Per citazioni: DOI <strong>10.5281/zenodo.17270742</strong>.</li>
     </ul>
   </section>
 
   <footer class="muted">
-    Mirror © 2025 — MB-X.01 / L.O.N. · Licenza MIT · Canonical:
+    Mirror © 2025 — MB-X.01 / L.O.N. · Licenza MIT · Canonico:
     <a href="https://massimiliano.neocities.org/" target="_blank" rel="noopener">massimiliano.neocities.org</a> ·
     DOI: <a href="https://doi.org/10.5281/zenodo.17270742" target="_blank" rel="noopener">10.5281/zenodo.17270742</a>
   </footer>
@@ -221,3 +230,4 @@
 </div>
 </body>
 </html>
+```0
