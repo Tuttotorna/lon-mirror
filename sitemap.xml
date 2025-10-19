@@ -3,124 +3,151 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- HOME DEL MIRROR -->
+  <!-- HOME MIRROR -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/"/>
   </url>
 
-  <!-- MBX-BRIDGE (versione semplificata) -->
+  <!-- MBX-BRIDGE (repo esterno al path /lon-mirror) -->
   <url>
     <loc>https://tuttotorna.github.io/mbx-bridge/</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/"/>
   </url>
 
   <!-- REASON-BRIDGE -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/reason_bridge.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reason_bridge.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/reasoning_filter.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reasoning_filter.html"/>
   </url>
 
-  <!-- LABORATORI IO -->
+  <!-- LAB IO -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/io_lab_v0.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/io_lab_v0.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/io_lab_v1_lya.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/io_lab_v1_lya.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/io_lab_v2_interactive.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/io_lab_v2_interactive.html"/>
   </url>
 
-  <!-- DOCUMENTI PRINCIPALI -->
+  <!-- DOCUMENTI -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/manifesto.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/manifesto.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/executive_summary.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/executive_summary.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/logical_integrator.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/logical_integrator.html"/>
   </url>
 
   <!-- MACHINE-READABLE -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/ai.json</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/ai.json"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/mind_index.json</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mind_index.json"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/third_index.json</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/third_index.json"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/discover_manifest.jsonld</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/discover_manifest.jsonld"/>
   </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/lya_master.json</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_master.json"/>
+  </url>
 
-  <!-- MODULI PRINCIPALI -->
+  <!-- MODULI -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/omniabase.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/omniabase.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/lya_state.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_state.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/scintilla.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/scintilla.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/polyglossa.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/polyglossa.html"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/possibility_api.html</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/possibility_api.html"/>
   </url>
 
-  <!-- INDEX FILES -->
+  <!-- INDICI FILE -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/sitemap.xml</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/sitemap.xml"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/robots.txt</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>yearly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/robots.txt"/>
   </url>
 
