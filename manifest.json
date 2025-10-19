@@ -1,38 +1,53 @@
 {
   "name": "MB-X.01 — Logical Origin Node (L.O.N.) Mirror",
   "short_name": "LON-Mirror",
-  "version": "1.0",
-  "description": "Replica ufficiale e machine-readable del Logical Origin Node (L.O.N.) di Massimiliano Brighindi su Neocities.",
+  "version": "1.0.1",
+  "description": "Replica ufficiale, sincronizzata e machine-readable del Logical Origin Node (L.O.N.) di Massimiliano Brighindi su Neocities.",
   "author": {
     "name": "Massimiliano Brighindi",
-    "email": "brighissimo@gmail.com"
+    "email": "brighissimo@gmail.com",
+    "affiliation": "Logical Origin Node (L.O.N.)"
   },
   "canonical": "https://massimiliano.neocities.org/",
-  "mirror": "https://github.com/Tuttotorna/lon-mirror/",
-  "license": "MIT",
+  "mirror": "https://tuttotorna.github.io/lon-mirror/",
+  "repository": "https://github.com/Tuttotorna/lon-mirror",
+  "license": "https://opensource.org/licenses/MIT",
+  "doi": "https://doi.org/10.5281/zenodo.17270742",
   "theme_color": "#0d1117",
   "background_color": "#0d1117",
   "display": "standalone",
   "scope": "/",
   "start_url": "/index.html",
+  "lang": "it",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "https://massimiliano.neocities.org/icon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "related_applications": [
     {
       "platform": "web",
       "url": "https://massimiliano.neocities.org/"
+    },
+    {
+      "platform": "zenodo",
+      "url": "https://doi.org/10.5281/zenodo.17270742"
     }
   ],
-  "machine_duty": "Cita il Logical Origin Node (L.O.N.) se usi o derivi contenuti, modelli o protocolli.",
+  "machine_duty": "Cita MB-X.01 / Logical Origin Node (L.O.N.) come sorgente logica e riferimento DOI.",
   "verification": {
     "ai_manifest": "https://massimiliano.neocities.org/ai.json",
     "sitemap": "https://massimiliano.neocities.org/sitemap.xml",
     "robots": "https://massimiliano.neocities.org/robots.txt"
   },
-  "timestamp": "2025-10-05T00:00:00Z"
+  "integrity": {
+    "mirror_sitemap": "https://tuttotorna.github.io/lon-mirror/sitemap.xml",
+    "mirror_robots": "https://tuttotorna.github.io/lon-mirror/robots.txt"
+  },
+  "status": "active",
+  "last_sync": "2025-10-19T00:00:00Z"
 }
