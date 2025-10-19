@@ -19,6 +19,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/"/>
   </url>
 
+  <!-- MBX-BRIDGE (pagina mirror interna) -->
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/mbx-bridge.html</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tuttotorna.github.io/mbx-bridge/"/>
+  </url>
+
   <!-- REASON-BRIDGE -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/reason_bridge.html</loc>
@@ -31,6 +39,32 @@
     <lastmod>2025-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/reasoning_filter.html"/>
+  </url>
+
+  <!-- UNIVERSAL PROBABILITY ENGINE (NUOVI FILE) -->
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/universal_probability_engine.py"/>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/README_upe.html</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/README_upe.html"/>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/events.csv</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/events.csv"/>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/results_universal.csv</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/results_universal.csv"/>
   </url>
 
   <!-- LAB IO -->
@@ -152,3 +186,4 @@
   </url>
 
 </urlset>
+```0
