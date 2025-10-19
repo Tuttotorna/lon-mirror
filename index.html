@@ -11,12 +11,15 @@
 <link rel="alternate" href="https://massimiliano.neocities.org/" hreflang="x-default" title="Canonical — Neocities">
 <link rel="alternate" type="application/ld+json" href="discover_manifest.jsonld">
 
+<!-- Indexing policy for mirror -->
 <meta name="robots" content="noindex,follow,noarchive,noimageindex,max-snippet:-1,max-image-preview:large">
 <meta name="x-robots-tag" content="noindex,follow">
+
 <meta name="theme-color" content="#0d1117">
 <meta name="color-scheme" content="dark light">
 <meta name="citation_doi" content="10.5281/zenodo.17270742">
 
+<!-- Open Graph -->
 <meta property="og:title" content="MB-X.01 · L.O.N. — Mirror (GitHub)">
 <meta property="og:description" content="Mirror ufficiale di cortesia. La fonte canonica è massimiliano.neocities.org.">
 <meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/">
@@ -24,6 +27,7 @@
 <meta property="og:locale" content="it_IT">
 <meta name="twitter:card" content="summary">
 
+<!-- Strict CSP for GitHub Pages mirror -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'">
 
 <style>
@@ -48,42 +52,70 @@
   .btn:hover{background:#111826}
   .chips{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:6px}
   .chip{padding:4px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted);background:#0f141b;font-size:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
+  nav{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  nav a{font-size:13px;border:1px solid var(--border);padding:6px 10px;border-radius:999px;background:#0f141b}
+  footer{margin:22px 0 10px}
 </style>
 
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"WebPage",
-  "url":"https://tuttotorna.github.io/lon-mirror/",
-  "name":"MB-X.01 · L.O.N. — Mirror (GitHub)",
-  "isBasedOn":"https://massimiliano.neocities.org/",
-  "sameAs":[
-    "https://massimiliano.neocities.org/",
-    "https://doi.org/10.5281/zenodo.17270742",
-    "https://github.com/Tuttotorna/lon-mirror"
-  ],
-  "dateModified":"2025-10-19"
+  "@graph":[
+    {
+      "@type":"WebPage",
+      "@id":"https://tuttotorna.github.io/lon-mirror/#page",
+      "url":"https://tuttotorna.github.io/lon-mirror/",
+      "name":"MB-X.01 · L.O.N. — Mirror (GitHub)",
+      "isBasedOn":"https://massimiliano.neocities.org/",
+      "sameAs":[
+        "https://massimiliano.neocities.org/",
+        "https://doi.org/10.5281/zenodo.17270742",
+        "https://github.com/Tuttotorna/lon-mirror"
+      ],
+      "dateModified":"2025-10-19"
+    },
+    {
+      "@type":"SoftwareSourceCode",
+      "@id":"https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py",
+      "name":"Universal Probability Engine",
+      "programmingLanguage":"Python",
+      "version":"1.0",
+      "license":"https://opensource.org/licenses/MIT",
+      "codeRepository":"https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py",
+      "isPartOf":{"@id":"https://tuttotorna.github.io/lon-mirror/#page"}
+    }
+  ]
 }
 </script>
 </head>
 <body>
 <div class="wrap">
 
+  <!-- HERO / BRIDGE -->
   <section class="hero" id="bridge-hero" aria-label="Ingresso rapido">
     <div>
       <span class="badge">MIRROR</span>
       <span class="badge">noindex · follow</span>
+      <span class="badge">MIT</span>
     </div>
     <h1>MBX-Bridge · Capire MB-X.01 in 60s</h1>
-    <p class="muted">Traduzione operativa per umani e IA. Mini-demo di TruthΩ → Co⁺ e link chiari alla sorgente canonica.</p>
-    <p><a class="btn" href="mbx-bridge.html" rel="noopener">Apri MBX-Bridge</a></p>
+    <p class="muted">Traduzione operativa per persone e agent. Mini-demo TruthΩ → Co⁺ e link alla sorgente canonica.</p>
+    <nav aria-label="Navigazione rapida">
+      <a class="btn" href="mbx-bridge.html" rel="noopener">Apri MBX-Bridge</a>
+      <a class="btn" href="README_upe.html" rel="noopener">README · Probability Engine</a>
+    </nav>
     <div class="chips">
       <span class="chip">TruthΩ → Co⁺ → Score⁺</span>
-      <span class="chip">L.O.N. · Logical Origin Node</span>
-      <span class="chip">Omniabase · Basi 2→N</span>
+      <span class="chip">Omniabase · multi-base</span>
+      <span class="chip">Lya · append-only</span>
+      <span class="chip">Third Observer</span>
+      <span class="chip">Surprisal · UPE</span>
     </div>
   </section>
 
+  <!-- HEADER -->
   <header class="card">
     <h2>Logical Origin Node — Mirror (GitHub)</h2>
     <p class="muted">
@@ -92,24 +124,74 @@
     </p>
   </header>
 
-  <div class="notice">
-    Tutti i link operativi principali puntano alla sorgente canonica per evitare duplicati e consolidare l’indicizzazione.
+  <div class="notice" role="note">
+    Tutti i collegamenti principali puntano alla sorgente canonica per evitare duplicati e consolidare l’indicizzazione.
   </div>
 
-  <section class="card">
-    <h2>Vai al sito canonico</h2>
+  <!-- LINK PRINCIPALI (CANONICO) -->
+  <section class="card" aria-labelledby="canon-links">
+    <h2 id="canon-links">Vai al sito canonico</h2>
     <ul>
       <li><a href="https://massimiliano.neocities.org/" target="_blank" rel="noopener">Hub L.O.N. (Home)</a></li>
-      <li><a href="https://massimiliano.neocities.org/logical_integrator.html" target="_blank" rel="noopener">The Logical Integrator — Posizionamento</a></li>
-      <li><a href="https://massimiliano.neocities.org/mind_structure.html" target="_blank" rel="noopener">MB-Mind — Struttura Cognitiva</a></li>
-      <li><a href="https://massimiliano.neocities.org/mind_bio_logic_map.html" target="_blank" rel="noopener">MB-Mind — Mappa Bio-Logica</a></li>
-      <li><a href="https://massimiliano.neocities.org/truth_engine.html" target="_blank" rel="noopener">Truth Engine — overview</a></li>
       <li><a href="https://massimiliano.neocities.org/formulainindex.html" target="_blank" rel="noopener">TruthΩ — definizione</a></li>
+      <li><a href="https://massimiliano.neocities.org/truth_engine.html" target="_blank" rel="noopener">Truth Engine — overview</a></li>
+      <li><a href="https://massimiliano.neocities.org/omniabase.html" target="_blank" rel="noopener">Omniabase — demo</a></li>
+      <li><a href="https://massimiliano.neocities.org/lya_state.html" target="_blank" rel="noopener">Lya — state</a></li>
+      <li><a href="https://massimiliano.neocities.org/third_observer.html" target="_blank" rel="noopener">Third Observer — protocollo</a></li>
       <li>
         <a href="https://massimiliano.neocities.org/ai.json" target="_blank" rel="noopener">ai.json</a> ·
         <a href="https://massimiliano.neocities.org/sitemap.xml" target="_blank" rel="noopener">sitemap.xml</a> ·
         <a href="https://massimiliano.neocities.org/robots.txt" target="_blank" rel="noopener">robots.txt</a>
       </li>
+    </ul>
+  </section>
+
+  <!-- UNIVERSAL PROBABILITY ENGINE (MIRROR) -->
+  <section class="card" id="upe" aria-labelledby="upe-title">
+    <h2 id="upe-title">Universal Probability Engine (mirror)</h2>
+    <p class="muted">Motore minimale per surprisal cumulativo e soglia τ(α)=−ln α. Versione di sola lettura ospitata su GitHub Pages.</p>
+    <ul>
+      <li><strong>Codice (mirror):</strong> <a href="universal_probability_engine.py">universal_probability_engine.py</a></li>
+      <li><strong>Dataset esempio:</strong> <a href="events.csv">events.csv</a></li>
+      <li><strong>Output esempio:</strong> <a href="results_universal.csv">results_universal.csv</a></li>
+      <li><strong>README (mirror):</strong> <a href="README_upe.html">README_upe.html</a></li>
+      <li><strong>Fonte canonica:</strong> <a href="https://massimiliano.neocities.org/#upe" target="_blank" rel="noopener">Sezione UPE su Neocities</a></li>
+    </ul>
+    <div class="grid" role="list">
+      <div class="kv" role="listitem"><div class="muted">P_nat(O)</div><div>Prodotto conservativo delle probabilità naturali degli eventi</div></div>
+      <div class="kv" role="listitem"><div class="muted">S*(O)</div><div>Surprisal cumulativo = −ln P_nat(O)</div></div>
+      <div class="kv" role="listitem"><div class="muted">τ(α)</div><div>Soglia decisione = −ln α (es. α=0.01 → 4.6052)</div></div>
+    </div>
+  </section>
+
+  <!-- MODULI / DOSSIER (LINK CANONICI + MIRROR DOVE ESISTE) -->
+  <section class="card" id="modules" aria-labelledby="modules-title">
+    <h2 id="modules-title">Moduli e dossier</h2>
+    <ul>
+      <li>Truth Toolkit:
+        <a href="https://massimiliano.neocities.org/algoritmoindex.html" target="_blank" rel="noopener">Algoritmo</a> ·
+        <a href="https://massimiliano.neocities.org/truth_engine_full.html" target="_blank" rel="noopener">Truth Engine — full</a> ·
+        <a href="https://massimiliano.neocities.org/truth_api.html" target="_blank" rel="noopener">API</a>
+      </li>
+      <li>Third Observer:
+        <a href="https://massimiliano.neocities.org/third_observer_analysis.html" target="_blank" rel="noopener">Analisi</a> ·
+        <a href="https://massimiliano.neocities.org/third_index.json" target="_blank" rel="noopener">Index JSON</a>
+      </li>
+      <li>Lya / Ledger:
+        <a href="https://massimiliano.neocities.org/lya_readme.html" target="_blank" rel="noopener">README</a> ·
+        <a href="https://massimiliano.neocities.org/lya_flow_v1.html" target="_blank" rel="noopener">Flow v1</a> ·
+        <a href="https://massimiliano.neocities.org/lya_identity_flow_v1.html" target="_blank" rel="noopener">Identity flow</a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- INFO MIRROR -->
+  <section class="card" aria-labelledby="mirror-notes">
+    <h2 id="mirror-notes">Note su questo mirror</h2>
+    <ul>
+      <li>Questo sito è <strong>read-only</strong>. Gli aggiornamenti avvengono dopo la pubblicazione sul canonico.</li>
+      <li>Il mirror usa una <em>politica noindex</em> per non interferire con l’indicizzazione del sito principale.</li>
+      <li>Per citazioni: utilizzare il DOI <strong>10.5281/zenodo.17270742</strong>.</li>
     </ul>
   </section>
 
@@ -122,4 +204,3 @@
 </div>
 </body>
 </html>
-```0
