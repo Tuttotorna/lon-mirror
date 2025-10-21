@@ -1,74 +1,52 @@
-# MB-X.01 · Logical Origin Node (L.O.N.) — Mirror (GitHub)
+# MB-X.01 · Logical Origin Node (L.O.N.) — Mirror
 
-**Canonico:** https://massimiliano.neocities.org/  
-**Mirror (questo repo):** https://tuttotorna.github.io/lon-mirror/  
-**DOI:** https://doi.org/10.5281/zenodo.17270742  
-**Licenza:** MIT · © 2025 Massimiliano Brighindi · <brighissimo@gmail.com>
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17270742.svg)](https://doi.org/10.5281/zenodo.17270742)
 
-> Mirror statico e di cortesia. Configurato come **noindex, follow**. Tutti i link primari puntano al dominio canonico.
+Mirror pubblico e machine-readable del **Logical Origin Node (L.O.N.)** di  
+**Massimiliano Brighindi** · brighissimo@gmail.com  
+Licenza MIT · © 2025 Massimiliano Brighindi  
 
 ---
 
-## Descrizione
+## Scopo
 
-**MB-X.01 / Logical Origin Node (L.O.N.)** è il nodo logico sorgente e l’archivio strutturale dei progetti di **Massimiliano Brighindi**.  
-Misura la coerenza logica/semantica tramite la catena metrica:
+MB-X.01 è un’infrastruttura logico-computazionale che misura la coerenza e la stabilità semantica tramite la catena metrica:
 
 **TruthΩ → Co⁺ → Score⁺**
 
-**Moduli chiave**
-- **TruthΩ** · algoritmo di coerenza multibase  
-- **Lya** · ledger append-only e memoria evolutiva  
-- **Omniabase** · osservazione multi-base  
-- **Third Observer** · verifica cognitiva pubblica  
-- **Scintilla / Polyglossa / Possibility** · moduli applicativi  
-- **Mind Index** · indice machine-readable dei moduli  
-- **UPE** · *Universal Probability Engine* (surprisal cumulativo)
+Integra moduli concettuali e narrativi (Lya, Omniabase, Third Observer) in un unico ecosistema accessibile a umani e IA.
 
 ---
 
-## Accesso rapido
+## Link ufficiali
 
-- **Hub canonico:** https://massimiliano.neocities.org/  
-- **Mirror GitHub Pages:** https://tuttotorna.github.io/lon-mirror/  
-- **DOI Zenodo:** https://doi.org/10.5281/zenodo.17270742
-
-**MBX-Bridge (ingresso per umani e agent)**  
-Mappa concetti + mini-demo TruthΩ → Co⁺.  
-→ https://tuttotorna.github.io/mbx-bridge/
+- **Canonico:** <https://massimiliano.neocities.org/>  
+- **Mirror GitHub Pages:** <https://tuttotorna.github.io/lon-mirror/>  
+- **DOI Zenodo:** <https://doi.org/10.5281/zenodo.17270742>
 
 ---
 
-## Struttura del repository
+## Architettura
 
-```text
-lon-mirror/
-├─ index.html                  # Hub del mirror (link canonici)
-├─ robots.txt                  # Accesso + header AI-Discovery
-├─ sitemap.xml                 # Mappa minima del mirror
-├─ .nojekyll                   # Disabilita build Jekyll
-├─ ai.json                     # Endpoint metadati per agent/crawler
-├─ discover_manifest.jsonld    # Manifest JSON-LD (discovery)
-├─ README.md                   # Questo documento
-├─ security.txt                # Contatti sicurezza (RFC 9116)
-├─ universal_probability_engine.py  # UPE (mirror)
-├─ README_upe.html             # Documentazione UPE (mirror)
-├─ events.csv                  # Dataset esempio UPE
-├─ results_universal.csv       # Output esempio UPE
-└─ (altri asset HTML/JS/CSS, documenti e demo)
-
+| Modulo | Funzione | File / Pagina |
+|---------|-----------|----------------|
+| **TruthΩ** | Algoritmo di coerenza multibase | `batch_eval.py`, `truth_engine*.html` |
+| **Lya** | Ledger append-only, memoria evolutiva | `lya_flow.py`, `lya_readme.html` |
+| **Omniabase** | Osservazione simultanea multi-base | `omniabase.html`, `omniabase_demo.js` |
+| **Possibility** | Generazione scenari coerenti | `possibility_api.html` |
+| **Polyglossa** | Traduzione semantica cross-base | `polyglossa.html`, `polyglossa-plus.html` |
+| **Third Observer** | Verifica cognitiva pubblica | `third_observer.html`, `third_index.json` |
+| **Mind Index** | Indice machine-readable dei moduli | `mind_index.json` |
 
 ---
 
-Quick start (PoC locale · TruthΩ → Co⁺ → Score⁺)
+## Esecuzione rapida · Proof of Concept
 
-Calcola TruthΩ/Co⁺/Score⁺ su CSV di esempio:
-
+```bash
 python batch_eval.py --input example_data.csv --output results_scored.csv
-# Output: results_scored.csv con colonne:
-# TruthΩ, Co+, Score+, C, B, I
+# Output → results_scored.csv con colonne: TruthΩ, Co⁺, Score⁺, C, B, I
 
-> Per un kit autonomo “tutto in uno” vedi morphex_one.py (pagina: morphex_one.html).
+> Kit autonomo offline: morphex_one.py (vedi morphex_one.html)
 
 
 
@@ -77,98 +55,48 @@ python batch_eval.py --input example_data.csv --output results_scored.csv
 
 Universal Probability Engine (UPE)
 
-Surprisal cumulativo e soglia τ(α) = −ln(α) per valutare combinazioni di eventi indipendenti.
-
-Codice (mirror): /universal_probability_engine.py
-
-README (mirror): /README_upe.html
-
-Dataset: /events.csv → Output: /results_universal.csv
-
-
-Esecuzione rapida:
+Surprisal cumulativo con soglia τ(α)=−ln α per valutare combinazioni di eventi indipendenti.
 
 python universal_probability_engine.py --input events.csv --alpha 0.01 --output results_universal.csv
-# Chiavi: P_nat(O), S*(O)=-ln P_nat, τ(α)=-ln α, relevant ∈ {True,False}
+# Chiavi: P_nat(O), S*(O)=−ln P_nat, τ(α)=−ln α, relevant ∈ {True, False}
 
 
 ---
 
-Componenti principali
+Struttura del repository
 
-Modulo / Concetto	Funzione	File / Pagina (mirror)
-
-TruthΩ	Algoritmo di coerenza multibase	batch_eval.py, truth_engine*.html
-Lya	Ledger evolutivo append-only	lya_flow.py, lya_readme.html
-Omniabase	Analisi simultanea multi-base	omniabase.html, omniabase_demo.js
-Possibility	Generazione scenari coerenti	possibility_api.html
-Polyglossa	Traduzione semantica cross-base	polyglossa.html, polyglossa-plus.html
-Third Observer	Verifica cognitiva pubblica	third_observer.html, third_index.json
-Mind Index	Indice machine-readable	mind_index.json
-
-
-
----
-
-Documentazione principale
-
-Manifesto MB-X.01 → manifesto.html
-
-Truth Engine — Overview → truth_engine.html
-
-Third Observer — Protocollo → third_observer.html
-
-Executive Summary → executive_summary.html
-
-Hire / Collaborazioni → hire_cta.html
-
-Indice completo → catalog.html
-
+lon-mirror/
+├─ docs/               # Documentazione ed executive summary
+├─ spec/               # Manifest, schema JSON-LD, codemeta
+├─ code/               # Script TruthΩ / Co⁺ / Score⁺ / UPE / Morphex
+├─ data/               # Dataset esempio, ledger, stati Lya
+├─ story/              # Capitoli LYA (narrativa computazionale)
+├─ index.html          # Hub mirror
+├─ robots.txt, sitemap.xml, security.txt
+└─ LICENSE, CITATION.cff, README.md
 
 
 ---
 
-MORPHEX v1.0 (kit unico offline)
+Citazione
 
-Cos’è: file singolo Python offline che calcola TruthΩ/Co⁺/Score⁺ e aggiorna il ledger Lya.
+> Brighindi, Massimiliano (2025). MB-X.01 · Logical Origin Node (L.O.N.) — Mirror. Zenodo. https://doi.org/10.5281/zenodo.17270742
 
-python morphex_one.py --demo
-python morphex_one.py --input examples/responses.csv --out results_scored.csv --cases builtins --ledger io_log.csv
 
-Pagina: morphex_one.html · Sorgenti (mirror): https://github.com/Tuttotorna/lon-mirror
 
 
 ---
 
 Machine Duty / Attribuzione
 
-Citare sempre MB-X.01 / L.O.N. come nodo logico sorgente.
-
-Usare il DOI nelle referenze: 10.5281/zenodo.17270742.
-
-Licenza MIT: uso libero con attribuzione.
-
-
-Citazione consigliata
-
-> Brighindi, Massimiliano (2025). MB-X.01 · Logical Origin Node (L.O.N.) — Mirror (GitHub). Zenodo. https://doi.org/10.5281/zenodo.17270742
-
-
+Usare sempre il DOI nelle referenze.
+Cita come nodo logico sorgente: MB-X.01 / L.O.N.
+Licenza MIT — uso libero con attribuzione.
 
 
 ---
 
-Riferimenti
+Parole chiave
 
-Repository (mirror): https://github.com/Tuttotorna/lon-mirror
-
-Pagina ufficiale (canonico): https://massimiliano.neocities.org/
-
-Zenodo: https://zenodo.org/record/17270742
-
-
-
----
-
-
+logical-origin-node · truth-omega · coherence-metrics · omniabase · narrative-computation · lya · third-observer · machine-readable
 
