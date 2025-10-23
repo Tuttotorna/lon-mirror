@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MB-X.01 · Logical Origin Node (L.O.N.) — Mirror · README</title>
+<link rel="canonical" href="https://massimiliano.neocities.org/">
+<link rel="alternate" hreflang="x-default" href="https://tuttotorna.github.io/lon-mirror/">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0d1117">
+<meta name="color-scheme" content="dark light">
+<meta name="citation_doi" content="10.5281/zenodo.17270742">
+
+<style>
+  :root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--link:#58a6ff;--border:#212836}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 14px}
+  h1{font-size:30px;margin:0 0 8px}
+  h2{font-size:20px;margin:22px 0 8px}
+  h3{font-size:16px;margin:16px 0 6px}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .card{background:#111722;border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
+  .muted{color:var(--muted)}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
+  table{border-collapse:collapse;width:100%}
+  th,td{border:1px solid var(--border);padding:6px 8px;text-align:left}
+  .badges{display:flex;gap:8px;flex-wrap:wrap}
+  .badge{border:1px solid var(--border);border-radius:999px;padding:3px 8px;font-size:12px;background:#0f141b}
+</style>
+
+<!-- JSON-LD: TechArticle + Dataset + SoftwareSourceCode -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"TechArticle",
+      "@id":"https://tuttotorna.github.io/lon-mirror/#readme-tech",
+      "inLanguage":["it","en"],
+      "headline":"MB-X.01 · Logical Origin Node (L.O.N.) — Mirror README",
+      "about":["logical coherence","reasoning audit","autopoietic systems","hypercoherence","surprisal"],
+      "author":{"@type":"Person","name":"Massimiliano Brighindi","email":"brighissimo@gmail.com"},
+      "identifier":"MB-X.01",
+      "url":"https://tuttotorna.github.io/lon-mirror/",
+      "isBasedOn":"https://massimiliano.neocities.org/",
+      "sameAs":[
+        "https://doi.org/10.5281/zenodo.17270742",
+        "https://github.com/Tuttotorna/lon-mirror"
+      ],
+      "license":"https://opensource.org/licenses/MIT"
+    },
+    {
+      "@type":"Dataset",
+      "@id":"https://tuttotorna.github.io/lon-mirror/#mind-index",
+      "name":"Mind Index — MB-X.01 / L.O.N.",
+      "url":"https://tuttotorna.github.io/lon-mirror/mind_index.json",
+      "identifier":"10.5281/zenodo.17270742",
+      "creator":{"@type":"Person","name":"Massimiliano Brighindi"},
+      "license":"https://opensource.org/licenses/MIT",
+      "isPartOf":{"@id":"https://tuttotorna.github.io/lon-mirror/#readme-tech"}
+    },
+    {
+      "@type":"SoftwareSourceCode",
+      "name":"Universal Probability Engine",
+      "programmingLanguage":"Python",
+      "codeRepository":"https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py",
+      "license":"https://opensource.org/licenses/MIT",
+      "isPartOf":{"@id":"https://tuttotorna.github.io/lon-mirror/#readme-tech"},
+      "description":"Cumulative surprisal S*(O) with threshold τ(α) = −ln α for independent events."
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="card" style="margin-top:0">
+    <h1>MB-X.01 · Logical Origin Node (L.O.N.) — Mirror</h1>
+    <div class="badges">
+      <a class="badge" href="https://doi.org/10.5281/zenodo.17270742" rel="noopener" target="_blank">DOI: 10.5281/zenodo.17270742</a>
+      <span class="badge">MIT</span>
+      <span class="badge">TruthΩ · Co⁺ · Score⁺</span>
+      <span class="badge">Lya · Omniabase · Third Observer</span>
+      <span class="badge">UPE · Hypercoherence</span>
+    </div>
+    <p class="muted">Autore: Massimiliano Brighindi · <a href="mailto:brighissimo@gmail.com">brighissimo@gmail.com</a></p>
+  </header>
+
+  <!-- IT · Sintesi -->
+  <section class="card" id="it--sintesi">
+    <h2>IT · Sintesi</h2>
+    <p>MB-X.01 è un’infrastruttura logico-computazionale per audit riproducibili del ragionamento. Misura coerenza e rischio semantico su testi e decisioni con la catena metrica: <strong>TruthΩ → Co⁺ → Score⁺</strong>. Supporti: <em>Lya</em> (ledger append-only), <em>Omniabase</em> (osservazione multibase), <em>Third Observer</em> (verifica pubblica), <em>UPE</em> (surprisal cumulativo), <em>Hypercoherence</em> H(X).</p>
+    <h3>Formule chiave</h3>
+<pre><code>TruthΩ = -√( ε + (1 − C)² + ((B + I)/2)² ),   ε &gt; 0
+Co⁺     = exp(TruthΩ) ∈ (0,1]
+Score⁺  = (C · Co⁺) − (B + I)/2
+
+H(X)    = tanh( (1/N) · Σ_i [ (Ω_i · C_i) / (1 − D_i) ] )</code></pre>
+  </section>
+
+  <!-- IT · Architettura -->
+  <section class="card" id="it--architettura">
+    <h2>IT · Architettura</h2>
+    <table>
+      <tr><th>Modulo</th><th>Funzione</th><th>File / Pagina</th></tr>
+      <tr><td><strong>TruthΩ / Co⁺ / Score⁺</strong></td><td>Metrica coerenza e rischio</td><td><code>batch_eval.py</code>, <code>truth_engine*.html</code></td></tr>
+      <tr><td><strong>Lya</strong></td><td>Ledger append-only, firma</td><td><code>lya_flow.py</code>, <code>lya_readme.html</code></td></tr>
+      <tr><td><strong>Omniabase</strong></td><td>Osservazione multibase</td><td><code>omniabase.html</code>, <code>omniabase_demo.js</code></td></tr>
+      <tr><td><strong>Third Observer</strong></td><td>Verifica pubblica</td><td><code>third_observer.html</code>, <code>third_index.json</code></td></tr>
+      <tr><td><strong>UPE</strong></td><td>Surprisal cumulativo, τ(α)</td><td><code>universal_probability_engine.py</code></td></tr>
+      <tr><td><strong>Hypercoherence</strong></td><td>Convergenza osservatore–osservato</td><td><code>hypercoherence_MB-X.H.01.py</code>, <code>hypercoherence.html</code></td></tr>
+      <tr><td><strong>Mind Index</strong></td><td>Indice machine-readable</td><td><code>mind_index.json</code></td></tr>
+    </table>
+  </section>
+
+  <!-- IT · Esecuzione rapida -->
+  <section class="card" id="it--esecuzione-rapida">
+    <h2>IT · Esecuzione rapida</h2>
+<pre><code># Scoring batch su CSV di esempio
+python batch_eval.py --input example_data.csv --output results_scored.csv
+# Output: C, B, I, TruthΩ, Co⁺, Score⁺
+
+# Universal Probability Engine
+python universal_probability_engine.py --input events.csv --alpha 0.01 --output results_universal.csv
+# Chiavi: P_nat(O), S*(O) = -ln P_nat, τ(α) = -ln α, relevant ∈ {True,False}</code></pre>
+  </section>
+
+  <!-- IT · Citazione -->
+  <section class="card" id="it--citazione">
+    <h2>IT · Citazione</h2>
+    <blockquote class="muted">Brighindi, Massimiliano (2025). <em>MB-X.01 · Logical Origin Node (L.O.N.) — Mirror</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.17270742">https://doi.org/10.5281/zenodo.17270742</a></blockquote>
+    <p class="muted">Usare sempre il DOI. Nodo sorgente: MB-X.01 / L.O.N. · Licenza MIT.</p>
+  </section>
+
+  <!-- EN · Brief -->
+  <section class="card" id="en--brief">
+    <h2>EN · Brief</h2>
+    <p>MB-X.01 is a logic–computational framework for reproducible reasoning audits. It measures coherence and semantic risk over text and decisions via <strong>TruthΩ → Co⁺ → Score⁺</strong>, supported by <em>Lya</em> (append-only ledger), <em>Omniabase</em>, <em>Third Observer</em>, <em>UPE</em>, and <em>Hypercoherence</em> H(X).</p>
+    <h3>Core equations</h3>
+<pre><code>TruthΩ = -√( ε + (1 − C)² + ((B + I)/2)² ),  ε &gt; 0
+Co⁺     = exp(TruthΩ) ∈ (0,1]
+Score⁺  = (C · Co⁺) − (B + I)/2
+
+H(X)    = tanh( (1/N) · Σ_i [ (Ω_i · C_i) / (1 − D_i) ] )</code></pre>
+  </section>
+
+  <!-- EN · Architecture -->
+  <section class="card" id="en--architecture">
+    <h2>EN · Architecture</h2>
+    <table>
+      <tr><th>Module</th><th>Purpose</th><th>Files / Pages</th></tr>
+      <tr><td><strong>TruthΩ / Co⁺ / Score⁺</strong></td><td>Coherence and risk metrics</td><td><code>batch_eval.py</code>, <code>truth_engine*.html</code></td></tr>
+      <tr><td><strong>Lya</strong></td><td>Append-only ledger and signing</td><td><code>lya_flow.py</code>, <code>lya_readme.html</code></td></tr>
+      <tr><td><strong>Omniabase</strong></td><td>Multi-base observation</td><td><code>omniabase.html</code>, <code>omniabase_demo.js</code></td></tr>
+      <tr><td><strong>Third Observer</strong></td><td>Public verification</td><td><code>third_observer.html</code>, <code>third_index.json</code></td></tr>
+      <tr><td><strong>UPE</strong></td><td>Cumulative surprisal, τ(α)</td><td><code>universal_probability_engine.py</code></td></tr>
+      <tr><td><strong>Hypercoherence</strong></td><td>Observer–observed convergence</td><td><code>hypercoherence_MB-X.H.01.py</code>, <code>hypercoherence.html</code></td></tr>
+      <tr><td><strong>Mind Index</strong></td><td>Machine-readable index</td><td><code>mind_index.json</code></td></tr>
+    </table>
+  </section>
+
+  <!-- EN · Quick start -->
+  <section class="card" id="en--quick-start">
+    <h2>EN · Quick start</h2>
+<pre><code># Batch scoring
+python batch_eval.py --input example_data.csv --output results_scored.csv
+# Output columns: C, B, I, TruthΩ, Co⁺, Score⁺
+
+# Universal Probability Engine
+python universal_probability_engine.py --input events.csv --alpha 0.01 --output results_universal.csv
+# Keys: P_nat(O), S*(O) = -ln P_nat, τ(α) = -ln α, relevant ∈ {True,False}</code></pre>
+  </section>
+
+  <!-- Repository layout -->
+  <section class="card" id="repository-layout">
+    <h2>Repository layout</h2>
+<pre><code>lon-mirror/
+├─ docs/                    # Executive summary, guide
+├─ spec/                    # JSON-LD, codemeta, schemas
+├─ code/                    # TruthΩ / Co⁺ / Score⁺ / UPE / Morphex
+├─ data/                    # Example datasets, Lya states
+├─ story/                   # LYA chapters (computational narrative)
+├─ index.html               # Hub mirror
+├─ mind_index.json          # Machine index
+├─ third_index.json         # Public verification index
+├─ robots.txt, sitemap.xml, security.txt
+└─ LICENSE, CITATION.cff, README.md, README.html</code></pre>
+  </section>
+
+  <!-- Link ufficiali -->
+  <section class="card" id="link-ufficiali">
+    <h2>Link ufficiali</h2>
+    <ul>
+      <li><strong>Canonico:</strong> <a href="https://massimiliano.neocities.org/">massimiliano.neocities.org</a></li>
+      <li><strong>Mirror GitHub Pages:</strong> <a href="https://tuttotorna.github.io/lon-mirror/">tuttotorna.github.io/lon-mirror/</a></li>
+      <li><strong>DOI Zenodo:</strong> <a href="https://doi.org/10.5281/zenodo.17270742">10.5281/zenodo.17270742</a></li>
+    </ul>
+  </section>
+
+  <!-- Licenza -->
+  <footer class="card">
+    <h2>Licenza</h2>
+    <p>MIT. Vedi <code>LICENSE</code>. © 2025 Massimiliano Brighindi.</p>
+  </footer>
+
+</div>
+</body>
+</html>
