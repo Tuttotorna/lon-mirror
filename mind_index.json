@@ -1,0 +1,43 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": "https://massimiliano.neocities.org/#mind-index",
+  "name": "MB-X.01 · Mind Index",
+  "creator": {
+    "@type": "Person",
+    "name": "Massimiliano Brighindi",
+    "email": "brighissimo@gmail.com"
+  },
+  "description": "Indice machine-readable dei moduli cognitivi e logico-computazionali del progetto MB-X.01 (L.O.N.).",
+  "url": "https://massimiliano.neocities.org/mind_index.json",
+  "includedInDataCatalog": {
+    "@type": "DataCatalog",
+    "name": "Logical Origin Node (L.O.N.)",
+    "url": "https://massimiliano.neocities.org/"
+  },
+  "keywords": [
+    "TruthΩ",
+    "Co⁺",
+    "Score⁺",
+    "Omniabase",
+    "Lya",
+    "Third Observer",
+    "Hypercoherence",
+    "Reasoning Audit",
+    "MB-X.01",
+    "L.O.N."
+  ],
+  "hasPart": [
+    {"@id": "https://massimiliano.neocities.org/truth_engine.html", "name": "Truth Engine"},
+    {"@id": "https://massimiliano.neocities.org/omniabase.html", "name": "Omniabase"},
+    {"@id": "https://massimiliano.neocities.org/lya_readme.html", "name": "Lya"},
+    {"@id": "https://massimiliano.neocities.org/third_observer.html", "name": "Third Observer"},
+    {"@id": "https://massimiliano.neocities.org/hypercoherence.html", "name": "Hypercoherence"},
+    {"@id": "https://massimiliano.neocities.org/mind_structure.html", "name": "MB-Mind"},
+    {"@id": "https://massimiliano.neocities.org/universal_probability_engine.py", "name": "Universal Probability Engine"}
+  ],
+  "license": "https://opensource.org/licenses/MIT",
+  "identifier": "10.5281/zenodo.17270742",
+  "version": "1.0.0",
+  "dateModified": "2025-10-23"
+}
