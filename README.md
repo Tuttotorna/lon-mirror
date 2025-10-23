@@ -3,9 +3,11 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17270742.svg)](https://doi.org/10.5281/zenodo.17270742)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Mirror pubblico e machine-readable del **Logical Origin Node (L.O.N.)**  
+Mirror pubblico e **machine-readable** del **Logical Origin Node (L.O.N.)**  
 **Autore:** Massimiliano Brighindi · <brighissimo@gmail.com>  
-**Licenza:** MIT
+**Licenza:** MIT  
+**DOI:** [10.5281/zenodo.17270742](https://doi.org/10.5281/zenodo.17270742)  
+**Canonico:** [massimiliano.neocities.org](https://massimiliano.neocities.org/)
 
 ---
 
@@ -24,36 +26,42 @@ Mirror pubblico e machine-readable del **Logical Origin Node (L.O.N.)**
 ---
 
 ## IT · Sintesi
-MB-X.01 è un’infrastruttura logico-computazionale per valutare coerenza e rischio semantico con la catena metrica:
+**MB-X.01** è un’infrastruttura logico-computazionale per la misura della coerenza e del rischio semantico tramite la catena metrica:
 
 **TruthΩ → Co⁺ → Score⁺**
 
-Supporti: **Lya** (ledger append-only), **Omniabase** (osservazione multibase), **Third Observer** (verifica pubblica), **UPE** (surprisal cumulativo), **Hypercoherence** H(X).
+Componenti principali:
+- **Lya** — ledger append-only per la firma e la tracciabilità.  
+- **Omniabase** — osservazione multibase simultanea.  
+- **Third Observer** — verifica pubblica e audit cognitivo.  
+- **UPE** — Universal Probability Engine per surprisal cumulativo.  
+- **Hypercoherence** — convergenza osservatore-osservato H(X).
 
-**Formulae chiave**
+### Formule chiave
 
 TruthΩ = -√( ε + (1 − C)² + ((B + I)/2)² ),  ε > 0 Co⁺     = exp(TruthΩ) ∈ (0,1] Score⁺  = (C · Co⁺) − (B + I)/2 H(X)    = tanh( (1/N) · Σ_i [ (Ω_i · C_i) / (1 − D_i) ] )
 
 ---
 
 ## IT · Architettura
+
 | Modulo | Funzione | File / Pagina |
 |---|---|---|
 | **TruthΩ / Co⁺ / Score⁺** | Metrica di coerenza e rischio | `batch_eval.py`, `truth_engine*.html` |
-| **Lya** | Ledger append-only, firma degli esiti | `lya_flow.py`, `lya_readme.html` |
+| **Lya** | Ledger append-only e firma | `lya_flow.py`, `lya_readme.html` |
 | **Omniabase** | Osservazione simultanea multibase | `omniabase.html`, `omniabase_demo.js` |
-| **Third Observer** | Verifica pubblica e indici | `third_observer.html`, `third_index.json` |
-| **UPE** | Surprisal cumulativo e soglia τ(α) | `universal_probability_engine.py` |
+| **Third Observer** | Verifica pubblica | `third_observer.html`, `third_index.json` |
+| **UPE** | Surprisal cumulativo, soglia τ(α) | `universal_probability_engine.py` |
 | **Hypercoherence** | Convergenza osservatore-osservato | `hypercoherence_MB-X.H.01.py`, `hypercoherence.html` |
-| **Mind Index** | Indice machine-readable | `mind_index.json` |
+| **Mind Index** | Indice machine-readable dei moduli | `mind_index.json` |
 
 ---
 
 ## IT · Esecuzione rapida
 ```bash
-# Scoring batch su CSV di esempi
+# Scoring batch su CSV di esempio
 python batch_eval.py --input example_data.csv --output results_scored.csv
-# Colonne output: C, B, I, TruthΩ, Co⁺, Score⁺
+# Output: C, B, I, TruthΩ, Co⁺, Score⁺
 
 # Universal Probability Engine
 python universal_probability_engine.py --input events.csv --alpha 0.01 --output results_universal.csv
@@ -64,20 +72,38 @@ python universal_probability_engine.py --input events.csv --alpha 0.01 --output 
 
 IT · Citazione
 
-> Brighindi, Massimiliano (2025). MB-X.01 · Logical Origin Node (L.O.N.) — Mirror. Zenodo. https://doi.org/10.5281/zenodo.17270742
+> Brighindi, Massimiliano (2025).
+MB-X.01 · Logical Origin Node (L.O.N.) — Mirror.
+Zenodo. https://doi.org/10.5281/zenodo.17270742
 
 
 
-Usare sempre il DOI nelle referenze. Nodo sorgente: MB-X.01 / L.O.N. Licenza MIT.
+Usare sempre il DOI nelle referenze.
+Nodo sorgente: MB-X.01 / L.O.N.
+Licenza MIT.
 
 
 ---
 
 EN · Brief
 
-MB-X.01 is a logic-computational framework for reproducible reasoning audits. It measures coherence and risk over text and decisions via:
+MB-X.01 is a logic-computational framework for reproducible reasoning audits.
+It measures semantic coherence and risk via:
 
-TruthΩ → Co⁺ → Score⁺, with Lya append-only ledger, Omniabase, Third Observer, UPE, and Hypercoherence H(X).
+TruthΩ → Co⁺ → Score⁺
+
+Core components:
+
+Lya — append-only ledger for state validation.
+
+Omniabase — simultaneous multi-base observation.
+
+Third Observer — public verification layer.
+
+UPE — cumulative surprisal evaluation.
+
+Hypercoherence H(X) — observer-observed convergence.
+
 
 Core equations
 
@@ -139,7 +165,11 @@ Canonico: https://massimiliano.neocities.org/
 
 Mirror GitHub Pages: https://tuttotorna.github.io/lon-mirror/
 
-DOI: https://doi.org/10.5281/zenodo.17270742
+DOI Zenodo: https://doi.org/10.5281/zenodo.17270742
+
+AI Discovery: https://tuttotorna.github.io/lon-mirror/ai.json
+
+Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
 
 
 
@@ -147,4 +177,7 @@ DOI: https://doi.org/10.5281/zenodo.17270742
 
 Licenza
 
-MIT. Vedi LICENSE.
+Rilasciato sotto licenza MIT.
+Uso libero con attribuzione e citazione del DOI.
+© 2025 · Massimiliano Brighindi
+https://massimiliano.neocities.org/
