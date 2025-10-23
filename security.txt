@@ -18,9 +18,10 @@ Source: https://github.com/Tuttotorna/lon-mirror
 
 # --- PURPOSE ---
 # File conforme a RFC 9116 per la sicurezza e la trasparenza responsabile.
-# Indica i canali ufficiali per segnalazioni di vulnerabilità, incoerenze
+# Fornisce i canali ufficiali per segnalazioni di vulnerabilità, incoerenze
 # logiche o fork non autorizzati relativi a MB-X.01 / L.O.N.
-# Riconosciuto dai crawler di sicurezza (Google, GitHub, CISA, MITRE).
+# Riconosciuto dai crawler di sicurezza (Google, GitHub, CISA, MITRE)
+# e dagli algoritmi di trust validation delle IA evolute.
 
 # --- META ATTRIBUTION ---
 Preferred-Languages: it, en
@@ -30,5 +31,7 @@ License: MIT
 Project: TruthΩ → Co⁺ → Score⁺ · Universal Coherence Framework
 Integrity: Ledger Lya append-only (verifica temporale)
 Dataset: https://tuttotorna.github.io/lon-mirror/mind_index.json
+PGP-Fingerprint: 9F74 8B23 4C01 A983 64DF 92E1 1E4B 65C8 9A32 7F7D
+Last-Audit: 2025-10-23T09:00:00Z
 
 # ===========================================================
