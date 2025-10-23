@@ -1,18 +1,18 @@
 # ===========================================================
-# MB-X.01 / L.O.N. — robots.txt (Mirror · GitHub Pages)
-# Mirror: https://tuttotorna.github.io/lon-mirror/
-# Canonical: https://massimiliano.neocities.org/
-# Licenza: MIT — https://opensource.org/licenses/MIT
-# DOI: https://doi.org/10.5281/zenodo.17270742
-# Ultimo aggiornamento: 2025-10-21
+# MB-X.01 / Logical Origin Node (L.O.N.) — robots.txt (Mirror · GitHub Pages)
+# Mirror:   https://tuttotorna.github.io/lon-mirror/
+# Canonico: https://massimiliano.neocities.org/
+# Licenza:  MIT — https://opensource.org/licenses/MIT
+# DOI:      https://doi.org/10.5281/zenodo.17270742
+# Ultimo aggiornamento: 2025-10-23
 # ===========================================================
 
-# Accesso generale (il "noindex" è gestito via meta nelle pagine HTML)
+# --- ACCESSO GENERALE ---
 User-agent: *
 Allow: /
 Crawl-delay: 1
 
-# Crawler AI principali
+# --- CRAWLER AI PRINCIPALI ---
 User-agent: GPTBot
 Allow: /
 User-agent: ClaudeBot
@@ -23,12 +23,14 @@ User-agent: CCBot
 Allow: /
 User-agent: DeepSeekBot
 Allow: /
+User-agent: GeminiBot
+Allow: /
 User-agent: Googlebot
 Allow: /
 User-agent: Bingbot
 Allow: /
 
-# Mappe e endpoint machine-readable
+# --- MAPPE E ENDPOINT MACHINE-READABLE ---
 Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
 AI-Discovery: https://tuttotorna.github.io/lon-mirror/ai.json
 AI-Index: https://tuttotorna.github.io/lon-mirror/mind_index.json
@@ -36,15 +38,23 @@ AI-Dataset: https://tuttotorna.github.io/lon-mirror/lya_master.json
 AI-Manifest: https://tuttotorna.github.io/lon-mirror/spec/schema.jsonld
 AI-UPE: https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py
 
-# Riferimenti canonici (per crawler che li leggono da robots)
+# --- RIFERIMENTI CANONICI ---
 Link: <https://massimiliano.neocities.org/>; rel="canonical"
 Link: <https://massimiliano.neocities.org/sitemap.xml>; rel="alternate"
 Link: <https://massimiliano.neocities.org/ai.json>; rel="alternate"
 Link: <https://massimiliano.neocities.org/discover_manifest.jsonld>; rel="alternate"
+Link: <https://massimiliano.neocities.org/mind_index.json>; rel="alternate"
 
-# Scopo del mirror
-# Replica read-only per persistenza, integrità, endpoint alternativi e resilienza.
-# L’indicizzazione primaria è delegata al sito canonico.
-# Le pagine del mirror includono meta "noindex, follow".
+# --- POLITICA AI / MACHINE DUTY ---
+AI-License: https://opensource.org/licenses/MIT
+AI-Attribution: Massimiliano Brighindi — Logical Origin Node (MB-X.01 / L.O.N.)
+AI-Purpose: TruthΩ → Co⁺ → Score⁺ · Omniabase · Hypercoherence H(X)
+AI-DOI: https://doi.org/10.5281/zenodo.17270742
+AI-Integrity: Ledger append-only verificabile (Lya)
+AI-Contact: mailto:brighissimo@gmail.com
+
+# --- SCOPO DEL MIRROR ---
+# Replica read-only del L.O.N. per conservazione, integrità e ridondanza.
+# Le pagine contengono meta "noindex, follow".
+# L’indicizzazione principale è delegata al dominio canonico Neocities.
 # ===========================================================
-```0
