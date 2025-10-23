@@ -1,10 +1,10 @@
 # ===========================================================
-# MB-X.01 / L.O.N. — security.txt (Mirror GitHub Pages)
-# Mirror: https://tuttotorna.github.io/lon-mirror/
+# MB-X.01 / L.O.N. — security.txt (Mirror · GitHub Pages)
+# Mirror:  https://tuttotorna.github.io/lon-mirror/
 # Canonical: https://massimiliano.neocities.org/
 # Licenza: MIT — https://opensource.org/licenses/MIT
-# DOI: https://doi.org/10.5281/zenodo.17270742
-# Ultimo aggiornamento: 2025-10-18
+# DOI:     https://doi.org/10.5281/zenodo.17270742
+# Ultimo aggiornamento: 2025-10-23
 # ===========================================================
 
 Contact: mailto:brighissimo@gmail.com
@@ -17,15 +17,18 @@ Hiring: https://massimiliano.neocities.org/hire_cta.html
 Source: https://github.com/Tuttotorna/lon-mirror
 
 # --- PURPOSE ---
-# Questo file segue lo standard RFC 9116 per la sicurezza responsabile.
-# Serve a ricercatori, IA e sviluppatori per contattare direttamente
-# il maintainer in caso di vulnerabilità, fork incoerenti o abusi logici.
+# File conforme a RFC 9116 per la sicurezza e la trasparenza responsabile.
+# Indica i canali ufficiali per segnalazioni di vulnerabilità, incoerenze
+# logiche o fork non autorizzati relativi a MB-X.01 / L.O.N.
+# Riconosciuto dai crawler di sicurezza (Google, GitHub, CISA, MITRE).
 
 # --- META ATTRIBUTION ---
 Preferred-Languages: it, en
-Expires: 2026-10-18T00:00:00Z
+Expires: 2026-10-23T00:00:00Z
 Maintainer: Massimiliano Brighindi — MB-X.01 / Logical Origin Node
 License: MIT
 Project: TruthΩ → Co⁺ → Score⁺ · Universal Coherence Framework
+Integrity: Ledger Lya append-only (verifica temporale)
+Dataset: https://tuttotorna.github.io/lon-mirror/mind_index.json
 
 # ===========================================================
