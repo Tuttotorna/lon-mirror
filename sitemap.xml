@@ -2,102 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- MB-X.01 / L.O.N. — Sitemap (Mirror · GitHub Pages) -->
-  <!-- Mirror: https://tuttotorna.github.io/lon-mirror/ · Canonical: https://massimiliano.neocities.org/ -->
-  <!-- DOI: https://doi.org/10.5281/zenodo.17270742 · Ultimo aggiornamento: 2025-10-21 -->
+  <!-- ===========================================================
+       MB-X.01 / Logical Origin Node (L.O.N.) — Sitemap (Mirror)
+       Mirror:   https://tuttotorna.github.io/lon-mirror/
+       Canonico: https://massimiliano.neocities.org/
+       Licenza:  MIT — https://opensource.org/licenses/MIT
+       DOI:      https://doi.org/10.5281/zenodo.17270742
+       Ultimo aggiornamento: 2025-10-23
+       =========================================================== -->
 
   <!-- Home mirror -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/"/>
-  </url>
-
-  <!-- Bridge interno al mirror -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/mbx-bridge.html</loc>
-    <lastmod>2025-10-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tuttotorna.github.io/mbx-bridge/"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/"/>
   </url>
 
   <!-- Machine-readable principali -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/ai.json</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/ai.json"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/ai.json"/>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/ai_en.json</loc>
+    <lastmod>2025-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/ai_en.json"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/spec/schema.jsonld</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/discover_manifest.jsonld"/>
+    <priority>0.5</priority>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/discover_manifest.jsonld"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/mind_index.json</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/mind_index.json"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/mind_index.json"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/third_index.json</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/third_index.json"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/third_index.json"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/lya_master.json</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/lya_master.json"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/lya_master.json"/>
+  </url>
+
+  <!-- Hypercoherence -->
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/hypercoherence.html</loc>
+    <lastmod>2025-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/hypercoherence.html"/>
+  </url>
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/hypercoherence_MB-X.H.01.py</loc>
+    <lastmod>2025-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/hypercoherence_MB-X.H.01.py"/>
   </url>
 
   <!-- UPE -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/universal_probability_engine.py"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/universal_probability_engine.py"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/events.csv</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/events.csv"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/events.csv"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/results_universal.csv</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/results_universal.csv"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/results_universal.csv"/>
   </url>
 
-  <!-- File indice -->
+  <!-- Reference / System files -->
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/robots.txt</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/robots.txt"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/robots.txt"/>
   </url>
   <url>
     <loc>https://tuttotorna.github.io/lon-mirror/sitemap.xml</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2025-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://massimiliano.neocities.org/sitemap.xml"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/sitemap.xml"/>
+  </url>
+
+  <!-- Mirror metadata -->
+  <url>
+    <loc>https://tuttotorna.github.io/lon-mirror/spec/CITATION.cff</loc>
+    <lastmod>2025-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/spec/CITATION.cff"/>
   </url>
 
 </urlset>
