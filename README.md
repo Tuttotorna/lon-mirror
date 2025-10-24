@@ -54,7 +54,7 @@ TruthΩ  = −√( ε + (1 − C)² + ((B + I)/2)² ),  ε > 0 Co⁺     = exp(T
 | **Omniabase** | Osservazione simultanea multibase | `omniabase.html` |
 | **Third Observer** | Verifica pubblica | `third_observer.html` |
 | **UPE** | Surprisal cumulativo, soglia τ(α) | `universal_probability_engine.py` |
-| **Hypercoherence** | Convergenza osservatore-osservato | `lon_unified.py` |
+| **Hypercoherence** | Convergenza osservatore–osservato | `lon_unified.py` |
 | **Mind Index** | Indice machine-readable dei moduli | `mind_index.json` |
 
 ---
@@ -62,9 +62,10 @@ TruthΩ  = −√( ε + (1 − C)² + ((B + I)/2)² ),  ε > 0 Co⁺     = exp(T
 ## IT · Engine v1.0.1
 
 Motore unificato per CLI + API + ledger Lya.  
-File principale: [`lon_unified.py`](https://github.com/Tuttotorna/lon-mirror/blob/main/lon_unified.py)
+**File principale:** [`lon_unified.py`](https://github.com/Tuttotorna/lon-mirror/blob/main/lon_unified.py)
 
 ### Installazione minima
+
 ```bash
 # Python ≥ 3.10
 git clone https://github.com/Tuttotorna/lon-mirror.git
@@ -77,7 +78,8 @@ python lon_unified.py cli \
   --input data/example_data.csv \
   --out out/results.jsonl
 
-Output: C, B, I, TruthΩ, Co⁺, Score⁺, H, decision, lya.hash
+Output:
+C, B, I, TruthΩ, Co⁺, Score⁺, H, decision, lya.hash
 
 Decisioni:
 
@@ -96,10 +98,10 @@ Endpoint:
 
 Endpoint	Output
 
-/health	{"ok":true}
-/version	{"version":"v1.0.1"}
-/verify	{"ledger_ok":true}
-/evaluate	Analizza testo e restituisce JSON completo
+/health	{"ok": true}
+/version	{"version": "v1.0.1"}
+/verify	{"ledger_ok": true}
+/evaluate	JSON completo con metriche e decisione
 
 
 Esempio:
@@ -138,7 +140,7 @@ Nodo sorgente: MB-X.01 / L.O.N. · Licenza MIT.
 
 EN · Brief
 
-MB-X.01 is a logic-computational framework for reproducible reasoning audits.
+MB-X.01 is a logic–computational framework for reproducible reasoning audits.
 It measures semantic coherence and risk through:
 
 TruthΩ → Co⁺ → Score⁺ → H(X)
@@ -153,7 +155,7 @@ Third Observer — public verification layer.
 
 UPE — cumulative surprisal evaluation.
 
-Hypercoherence H(X) — observer-observed convergence.
+Hypercoherence H(X) — observer–observed convergence.
 
 
 
@@ -212,15 +214,14 @@ lon-mirror/
 
 Link ufficiali
 
-Canonico: https://massimiliano.neocities.org/
+Risorsa	URL
 
-Mirror GitHub Pages: https://tuttotorna.github.io/lon-mirror/
-
-DOI Zenodo: https://doi.org/10.5281/zenodo.17270742
-
-AI Discovery Index: https://tuttotorna.github.io/lon-mirror/ai.json
-
-Sitemap: https://tuttotorna.github.io/lon-mirror/sitemap.xml
+Canonico	https://massimiliano.neocities.org/
+Mirror GitHub Pages	https://tuttotorna.github.io/lon-mirror/
+DOI Zenodo	https://doi.org/10.5281/zenodo.17270742
+Engine Neocities	https://massimiliano.neocities.org/engine.html
+AI Discovery Index	https://tuttotorna.github.io/lon-mirror/ai.json
+Sitemap	https://tuttotorna.github.io/lon-mirror/sitemap.xml
 
 
 
@@ -230,18 +231,13 @@ Licenza
 
 Rilasciato sotto licenza MIT.
 Uso libero con attribuzione e citazione del DOI.
+
 © 2025 · Massimiliano Brighindi
 https://massimiliano.neocities.org/
 
 ---
 
-Dopo averlo incollato:
-
-1. Su GitHub apri `lon-mirror`.  
-2. Clicca **Edit file** (su `README.md`).  
-3. Sostituisci tutto con questo contenuto.  
-4. Commit message:
+Questo è già ottimizzato per GitHub (markdown puro, nessuna rottura di layout).  
+Prossimo passo: incollalo in `README.md`, poi conferma **commit** con messaggio:
 
 docs: aggiornato README integrale (engine v1.0.1 + mirror Neocities)
-
-5. Conferma su branch `main`.
