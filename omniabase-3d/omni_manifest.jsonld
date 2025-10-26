@@ -1,0 +1,48 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "@id": "https://tuttotorna.github.io/lon-mirror/omniabase-3d/omni_manifest.jsonld",
+  "name": "Omniabase 3D · Multibase Spatial Mathematics Engine",
+  "description": "Computational framework for three-dimensional base-shifting logic (Cx, Cy, Cz) extending MB-X.01 / Logical Origin Node (L.O.N.). It generalizes Omniabase to spatial mathematical modeling with multi-base fusion and adaptive coherence surfaces.",
+  "url": "https://tuttotorna.github.io/lon-mirror/omniabase-3d/",
+  "codeRepository": "https://github.com/Tuttotorna/lon-mirror/tree/main/omniabase-3d",
+  "programmingLanguage": "Python",
+  "license": "https://opensource.org/licenses/MIT",
+  "version": "1.0.0",
+  "dateModified": "2025-10-26",
+  "applicationCategory": "MathematicalEngine",
+  "isPartOf": {
+    "@type": "Dataset",
+    "@id": "https://tuttotorna.github.io/lon-mirror/#mirror",
+    "name": "MB-X.01 / Logical Origin Node (L.O.N.)"
+  },
+  "keywords": [
+    "omniabase",
+    "multibase",
+    "3d mathematics",
+    "coherence surfaces",
+    "spatial logic",
+    "adaptive base fusion",
+    "truth-omega",
+    "meta-mathematics"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Massimiliano Brighindi",
+    "email": "brighissimo@gmail.com",
+    "affiliation": "Logical Origin Node (L.O.N.) — Neocities / GitHub Mirror"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.0.1",
+    "identifier": "https://doi.org/10.5281/zenodo.17270742"
+  },
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://tuttotorna.github.io/lon-mirror/omniabase-3d/omni_manifest.jsonld",
+      "name": "Omniabase 3D Manifest"
+    }
+  ]
+}
