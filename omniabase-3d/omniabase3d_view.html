@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Omniabase-3D · Viewer (MB-X.01 / L.O.N.)</title>
+<meta name="description" content="Visualizzazione interattiva dei risultati Omniabase-3D: tensor I3, ipercoerenza H3 e metriche.">
+<link rel="canonical" href="https://massimiliano.neocities.org/">
+<meta name="theme-color" content="#0d1117">
+<meta name="color-scheme" content="dark light">
+
+<!-- Nota: questa pagina usa Plotly da CDN. NON impostare CSP con script-src 'self' qui. -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+<style>
+:root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 14px}
+h1{font-size:28px;margin:0 0 10px;color:var(--accent)}
+h2{font-size:19px;margin:18px 0 8px;color:var(--warn)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
+.muted{color:var(--muted);font-size:13px}
+.btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);background:#0f141b;border-radius:10px;color:var(--fg);text-decoration:none}
+.btn:hover{background:#111826}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
+.badge{display:inline-block;border:1px solid var(--border);padding:3px 9px;border-radius:999px;font-size:12px;background:#0f141b;margin-right:6px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input[type="text"]{background:#0f141b;border:1px solid var(--border);color:var(--fg);border-radius:8px;padding:6px 8px;min-width:260px}
+small{color:var(--muted)}
+footer{margin:22px 0 10px}
+.plot{width:100%;height:420px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="row">
+      <span class="badge">Omniabase-3D</span>
+      <span class="badge">Viewer</span>
+      <span class="badge">MIT</span>
+    </div>
+    <h1>Omniabase-3D · Visualizzatore risultati</h1>
+    <p class="muted">Carica i file generati dal motore (<code>omniabase3d_engine.py</code>) e visualizza <b>Cx,Cy,Cz</b>, il tensore <b>I3</b> e la superficie di ipercoerenza <b>H3</b>.</p>
+    <div class="row" style="margin-top:8px">
+      <label class="muted">Percorsi (relativi al repo):</label>
+      <input id="pTensor" type="text" value="omniabase-3d/metrics/tensor_I3.csv">
+      <input id="pH3" type="text" value="omniabase-3d/metrics/surface_H3.csv">
+      <input id="pMetrics" type="text" value="omniabase-3d/metrics/metrics.json">
+      <a class="btn" href="javascript:void(0)" onclick="loadAll()">Carica</a>
+      <a class="btn" href="omniabase3d_engine.py" target="_blank" rel="noopener">Motore · sorgente</a>
+    </div>
+    <small>Se i file non esistono ancora, esegui prima il motore per generarli.</small>
+  </div>
+
+  <div class="card">
+    <h2>Metriche sintetiche</h2>
+    <div class="grid" id="metricsBox">
+      <div class="kv"><div class="muted">Basi</div><div id="mBases">—</div></div>
+      <div class="kv"><div class="muted">Steps</div><div id="mSteps">—</div></div>
+      <div class="kv"><div class="muted">α / τ(α)</div><div id="mAlpha">—</div></div>
+      <div class="kv"><div class="muted">Mean Coherence</div><div id="mC">—</div></div>
+      <div class="kv"><div class="muted">Mean Divergence</div><div id="mD">—</div></div>
+      <div class="kv"><div class="muted">Mean Surprisal</div><div id="mS">—</div></div>
+      <div class="kv"><div class="muted">Mean H3</div><div id="mH">—</div></div>
+      <div class="kv"><div class="muted">Accept Ratio (div)</div><div id="mAR">—</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Coerenze Cx, Cy, Cz</h2>
+    <div id="plotC" class="plot"></div>
+  </div>
+
+  <div class="card">
+    <h2>Ipercoerenza H3</h2>
+    <div id="plotH" class="plot"></div>
+  </div>
+
+  <div class="card">
+    <h2>Tensore I3 · proiezioni 3D</h2>
+    <div id="plotI3" class="plot" style="height:520px"></div>
+  </div>
+
+  <footer class="muted">
+    © 2025 · MB-X.01 / L.O.N. · Licenza MIT · DOI: 10.5281/zenodo.17270742
+  </footer>
+</div>
+
+<script>
+async function fetchText(path){
+  const r = await fetch(path, {cache:'no-store'});
+  if(!r.ok) throw new Error(path+': '+r.status);
+  return await r.text();
+}
+async function fetchJSON(path){
+  const r = await fetch(path, {cache:'no-store'});
+  if(!r.ok) throw new Error(path+': '+r.status);
+  return await r.json();
+}
+function parseCSV(csv){
+  const [head, ...rows] = csv.trim().split(/\r?\n/);
+  const cols = head.split(',');
+  return rows.map(line=>{
+    const cells = line.split(',');
+    const obj = {};
+    cols.forEach((k,i)=>obj[k.trim()] = parseFloat(cells[i]) || cells[i]);
+    return obj;
+  });
+}
+
+function showMetrics(m){
+  try{
+    const b = m.bases ? m.bases : {};
+    document.getElementById('mBases').textContent = b.x!==undefined ? `(${b.x},${b.y},${b.z})` : '—';
+    document.getElementById('mSteps').textContent = m.metrics?.steps ?? '—';
+    const alpha = m.metrics?.alpha, tau = m.metrics?.tau;
+    document.getElementById('mAlpha').textContent = (alpha!==undefined && tau!==undefined) ? `${alpha} / ${tau.toFixed(3)}` : '—';
+    document.getElementById('mC').textContent = m.metrics?.mean_coherence?.toFixed(6) ?? '—';
+    document.getElementById('mD').textContent = m.metrics?.mean_divergence?.toFixed(6) ?? '—';
+    document.getElementById('mS').textContent = m.metrics?.mean_surprisal?.toFixed(6) ?? '—';
+    document.getElementById('mH').textContent = m.metrics?.mean_H3?.toFixed(6) ?? '—';
+    document.getElementById('mAR').textContent = m.metrics?.accept_ratio_divergence?.toFixed(3) ?? '—';
+  }catch(e){
+    console.warn('metrics render:', e);
+  }
+}
+
+function plotCoherence(rows){
+  const t = rows.map(r=>+r.t);
+  const Cx = rows.map(r=>+r.Cx), Cy = rows.map(r=>+r.Cy), Cz = rows.map(r=>+r.Cz);
+  const layout = {paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:'#e6edf3'},
+                  margin:{l:50,r:15,t:10,b:40},yaxis:{range:[0,1]}};
+  Plotly.newPlot('plotC', [
+    {x:t,y:Cx,mode:'lines',name:'Cx'},
+    {x:t,y:Cy,mode:'lines',name:'Cy'},
+    {x:t,y:Cz,mode:'lines',name:'Cz'}
+  ], layout, {displayModeBar:false});
+}
+
+function plotH3(hrows){
+  const t = hrows.map(r=>+r.t), H = hrows.map(r=>+r.H3);
+  const layout = {paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:'#e6edf3'},
+                  margin:{l:50,r:15,t:10,b:40},yaxis:{rangemode:'tozero'}};
+  Plotly.newPlot('plotH', [{x:t,y:H,mode:'lines',name:'H3'}], layout, {displayModeBar:false});
+}
+
+function plotI3(rows){
+  const I3x = rows.map(r=>+r.I3x), I3y = rows.map(r=>+r.I3y), I3z = rows.map(r=>+r.I3z);
+  const H = rows.map(r=>+r.H3);
+  const trace = {type:'scatter3d', mode:'markers', x:I3x, y:I3y, z:I3z,
+                 marker:{size:3, color:H, colorscale:'Viridis', showscale:true, colorbar:{title:'H3'}}};
+  const layout = {scene:{xaxis:{title:'I3x'}, yaxis:{title:'I3y'}, zaxis:{title:'I3z'}},
+                  paper_bgcolor:'rgba(0,0,0,0)',font:{color:'#e6edf3'},
+                  margin:{l:0,r:0,t:0,b:0}};
+  Plotly.newPlot('plotI3', [trace], layout, {displayModeBar:false});
+}
+
+async function loadAll(){
+  const pT = document.getElementById('pTensor').value.trim();
+  const pH = document.getElementById('pH3').value.trim();
+  const pM = document.getElementById('pMetrics').value.trim();
+
+  try{
+    const [csvT, csvH, jM] = await Promise.all([
+      fetchText(pT), fetchText(pH), fetchJSON(pM)
+    ]);
+    const rowsT = parseCSV(csvT);
+    const rowsH = parseCSV(csvH);
+    showMetrics(jM);
+    plotCoherence(rowsT);
+    plotH3(rowsH);
+    plotI3(rowsT);
+  }catch(e){
+    alert("Impossibile caricare uno o più file.\n\nDettagli: " + e.message +
+          "\n\nVerifica che i percorsi siano corretti e che i file siano stati generati.");
+    console.error(e);
+  }
+}
+
+// Autocarica se i file esistono con i percorsi di default
+document.addEventListener('DOMContentLoaded', ()=>{ loadAll(); });
+</script>
+</body>
+</html>
