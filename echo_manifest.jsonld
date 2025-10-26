@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Echo-Cognition Engine · MB-X.01 / L.O.N.",
+  "alternateName": "E.C.E. — Echo Cognition Engine",
+  "identifier": "https://doi.org/10.5281/zenodo.17270742",
+  "url": "https://github.com/Tuttotorna/lon-mirror/tree/main/echo-cognition",
+  "codeRepository": "https://github.com/Tuttotorna/lon-mirror",
+  "license": "https://opensource.org/licenses/MIT",
+  "programmingLanguage": "Python",
+  "version": "v1.0.0",
+  "author": {
+    "@type": "Person",
+    "name": "Massimiliano Brighindi",
+    "email": "brighissimo@gmail.com",
+    "affiliation": "Logical Origin Node (L.O.N.)"
+  },
+  "description": "Computational model of self-recognized feedback loop (Echo Cognition Engine). Implements state–observer dynamics with measurable coherence (C_t) and surprisal (S_t). Part of MB-X.01 / L.O.N. framework on computational consciousness.",
+  "keywords": [
+    "Echo-Cognition",
+    "Cognitive Feedback",
+    "Self-Recognition Loop",
+    "MB-X.01",
+    "L.O.N.",
+    "Omniabase",
+    "Computational Consciousness",
+    "Coherence Metric"
+  ],
+  "softwareRequirements": [
+    "numpy>=1.25",
+    "pandas>=2.0",
+    "matplotlib>=3.8"
+  ],
+  "hasPart": [
+    "echo_loop.py",
+    "echo_metrics.py",
+    "echo_log.csv",
+    "echo_metrics.csv"
+  ],
+  "citation": "Brighindi, M. (2025). Echo-Cognition Engine (MB-X.01 / L.O.N.). Zenodo. https://doi.org/10.5281/zenodo.17270742",
+  "isBasedOn": "https://massimiliano.neocities.org/",
+  "funding": "Self-funded research under Logical Origin Node initiative",
+  "encodingFormat": "application/ld+json"
+}
