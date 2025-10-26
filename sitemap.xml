@@ -1,149 +1,180 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="content-language" content="it">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ===========================================================
-       MB-X.01 / Logical Origin Node (L.O.N.) — Sitemap (Mirror)
-       Mirror:   https://tuttotorna.github.io/lon-mirror/
-       Canonico: https://massimiliano.neocities.org/
-       Licenza:  MIT — https://opensource.org/licenses/MIT
-       DOI:      https://doi.org/10.5281/zenodo.17270742
-       Ultimo aggiornamento: 2025-10-26
-       =========================================================== -->
+<title>MB-X.01 · L.O.N. — Mirror (GitHub Pages)</title>
+<meta name="description" content="Mirror ufficiale e verificabile del Logical Origin Node (L.O.N.). Canonico: massimiliano.neocities.org. Include TruthΩ → Co⁺ → Score⁺, Omniabase, Lya, Third Observer, UPE, Echo-Cognition e Omniabase 3D.">
+<link rel="canonical" href="https://massimiliano.neocities.org/">
+<link rel="alternate" href="https://massimiliano.neocities.org/" hreflang="x-default" title="Canonical — Neocities">
 
-  <!-- Home mirror -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/"/>
-  </url>
+<link rel="manifest" href="manifest.json">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<link rel="alternate" type="application/ld+json" href="schema.jsonld">
 
-  <!-- Machine-readable principali -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/ai.json</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/ai.json"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/ai_en.json</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/ai_en.json"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/schema.jsonld</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/schema.jsonld"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/mind_index.json</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/mind_index.json"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/third_index.json</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/third_index.json"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/lya_master.json</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/lya_master.json"/>
-  </url>
+<!-- Mirror indexing policy -->
+<meta name="robots" content="noindex,follow,noarchive,noimageindex,max-snippet:-1,max-image-preview:large">
+<meta name="x-robots-tag" content="noindex,follow">
 
-  <!-- Hypercoherence -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/hypercoherence.html</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/hypercoherence.html"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/hypercoherence_MB-X.H.01.py</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/hypercoherence_MB-X.H.01.py"/>
-  </url>
+<meta name="theme-color" content="#0d1117">
+<meta name="color-scheme" content="dark light">
+<meta name="citation_doi" content="10.5281/zenodo.17276691">
 
-  <!-- UPE -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/universal_probability_engine.py"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/events.csv</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/events.csv"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/results_universal.csv</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/results_universal.csv"/>
-  </url>
+<!-- Open Graph / Twitter -->
+<meta property="og:title" content="MB-X.01 · L.O.N. — Mirror (GitHub)">
+<meta property="og:description" content="Mirror ufficiale di cortesia. Fonte canonica: massimiliano.neocities.org.">
+<meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://massimiliano.neocities.org/og.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://massimiliano.neocities.org/og.png">
 
-  <!-- Echo-Cognition -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/echo-cognition/echo_manifest.jsonld</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/echo-cognition/echo_manifest.jsonld"/>
-  </url>
+<!-- Security / CSP -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://massimiliano.neocities.org; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'">
 
-  <!-- Omniabase 3D -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/omniabase-3d/schema_omniabase3d.jsonld</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/omniabase-3d/schema_omniabase3d.jsonld"/>
-  </url>
+<style>
+:root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+.wrap{max-width:960px;margin:0 auto;padding:24px 14px}
+h1{font-size:30px;margin:0 0 10px;color:var(--accent)}
+h2{font-size:20px;margin:20px 0 8px;color:var(--warn)}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
+.muted{color:var(--muted);font-size:13px}
+ul{margin:6px 0 12px 20px}
+li{margin:5px 0}
+.badge{display:inline-block;border:1px solid var(--border);padding:3px 9px;border-radius:999px;font-size:12px;background:#0f141b;margin-right:6px}
+.notice{border-left:4px solid var(--accent);background:#0f141b;padding:10px 12px;border-radius:10px;margin:14px 0}
+.hero{background:linear-gradient(135deg,#0d1117 0%,#0f141b 60%,#10151d 100%);border:1px solid var(--border);border-radius:16px;padding:18px;margin-top:0}
+.hero h1{font-size:30px;margin:0 0 6px}
+.hero p{margin:6px 0 12px}
+.btn{display:inline-block;padding:10px 14px;border:1px solid var(--border);background:#0f141b;border-radius:12px}
+.btn:hover{background:#111826}
+.chips{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:6px}
+.chip{padding:4px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted);background:#0f141b;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+nav a{font-size:13px;border:1px solid var(--border);padding:6px 10px;border-radius:999px;background:#0f141b}
+footer{margin:22px 0 10px}
+</style>
 
-  <!-- Reference / System files -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/robots.txt</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/robots.txt"/>
-  </url>
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/sitemap.xml</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.2</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/sitemap.xml"/>
-  </url>
+<!-- Minimal inline JSON-LD referencing the full graph in schema.jsonld -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "@id":"https://tuttotorna.github.io/lon-mirror/#page",
+  "url":"https://tuttotorna.github.io/lon-mirror/",
+  "name":"MB-X.01 · L.O.N. — Mirror (GitHub Pages)",
+  "description":"Read-only mirror of MB-X.01 / Logical Origin Node. Canonical: https://massimiliano.neocities.org/.",
+  "isBasedOn":"https://massimiliano.neocities.org/",
+  "dateModified":"2025-10-26",
+  "inLanguage":"it",
+  "mainEntityOfPage":{"@id":"https://tuttotorna.github.io/lon-mirror/schema.jsonld"}
+}
+</script>
+</head>
+<body>
+<div class="wrap">
 
-  <!-- Mirror metadata -->
-  <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/CITATION.cff</loc>
-    <lastmod>2025-10-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/CITATION.cff"/>
-  </url>
+  <section class="hero" id="bridge-hero" aria-label="Ingresso rapido">
+    <div>
+      <span class="badge">Mirror</span>
+      <span class="badge">noindex · follow</span>
+      <span class="badge">MIT</span>
+    </div>
+    <h1>MBX-Bridge · Comprendere MB-X.01</h1>
+    <p class="muted">Interfaccia di cortesia per i moduli L.O.N. — TruthΩ → Co⁺ → Score⁺, Lya, Omniabase, Third Observer, UPE, Echo-Cognition, Omniabase 3D.</p>
+    <nav aria-label="Navigazione rapida">
+      <a class="btn" href="mbx-bridge.html" rel="noopener noreferrer">Apri MBX-Bridge</a>
+      <a class="btn" href="README_upe.html" rel="noopener noreferrer">README · Probability Engine</a>
+      <a class="btn" href="echo-cognition/README_echo.md" rel="noopener noreferrer">Echo-Cognition</a>
+      <a class="btn" href="omniabase-3d/README_omniabase.md" rel="noopener noreferrer">Omniabase 3D</a>
+    </nav>
+    <div class="chips">
+      <span class="chip">TruthΩ → Co⁺ → Score⁺</span>
+      <span class="chip">Omniabase</span>
+      <span class="chip">Lya · append-only</span>
+      <span class="chip">Third Observer</span>
+      <span class="chip">Surprisal · UPE</span>
+      <span class="chip">Echo · C_t / S_t</span>
+      <span class="chip">Omniabase 3D · H3</span>
+    </div>
+  </section>
 
-</urlset>
+  <header class="card">
+    <h2>Logical Origin Node — Mirror ufficiale GitHub</h2>
+    <p class="muted">
+      Replica di <strong>sola lettura</strong> sincronizzata con
+      <a href="https://massimiliano.neocities.org/" target="_blank" rel="noopener noreferrer">massimiliano.neocities.org</a>.
+    </p>
+  </header>
+
+  <div class="notice" role="note">
+    I collegamenti principali puntano al sito canonico per consolidare l’indicizzazione e garantire coerenza di versione.
+  </div>
+
+  <section class="card" id="canon">
+    <h2>Vai al sito canonico</h2>
+    <ul>
+      <li><a href="https://massimiliano.neocities.org/" target="_blank" rel="noopener noreferrer">Hub L.O.N. — Home</a></li>
+      <li><a href="https://massimiliano.neocities.org/formulainindex.html" target="_blank" rel="noopener noreferrer">TruthΩ — definizione</a></li>
+      <li><a href="https://massimiliano.neocities.org/truth_engine.html" target="_blank" rel="noopener noreferrer">Truth Engine — overview</a></li>
+      <li><a href="https://massimiliano.neocities.org/omniabase.html" target="_blank" rel="noopener noreferrer">Omniabase — demo</a></li>
+      <li><a href="https://massimiliano.neocities.org/lya_state.html" target="_blank" rel="noopener noreferrer">Lya — state</a></li>
+      <li><a href="https://massimiliano.neocities.org/third_observer.html" target="_blank" rel="noopener noreferrer">Third Observer — protocollo</a></li>
+      <li>
+        <a href="https://massimiliano.neocities.org/ai.json" target="_blank" rel="noopener noreferrer">ai.json</a> ·
+        <a href="https://massimiliano.neocities.org/sitemap.xml" target="_blank" rel="noopener noreferrer">sitemap.xml</a> ·
+        <a href="https://massimiliano.neocities.org/robots.txt" target="_blank" rel="noopener noreferrer">robots.txt</a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="card" id="upe" aria-labelledby="upe-title">
+    <h2 id="upe-title">Universal Probability Engine (mirror)</h2>
+    <p class="muted">Motore minimale per surprisal cumulativo e soglia τ(α)=−ln α. Versione read-only ospitata su GitHub Pages.</p>
+    <ul>
+      <li><strong>Codice (mirror):</strong> <a href="universal_probability_engine.py">universal_probability_engine.py</a></li>
+      <li><strong>Dataset esempio:</strong> <a href="events.csv">events.csv</a></li>
+      <li><strong>Output esempio:</strong> <a href="results_universal.csv">results_universal.csv</a></li>
+      <li><strong>README:</strong> <a href="README_upe.html">README_upe.html</a></li>
+      <li><strong>Fonte canonica:</strong> <a href="https://massimiliano.neocities.org/#upe" target="_blank" rel="noopener noreferrer">UPE su Neocities</a></li>
+    </ul>
+  </section>
+
+  <section class="card" id="echo">
+    <h2>Echo-Cognition Engine</h2>
+    <p class="muted">Modello computazionale di eco cognitivo con coerenza C_t e surprisal S_t.</p>
+  </section>
+
+  <section class="card" id="omniabase3d">
+    <h2>Omniabase 3D</h2>
+    <p class="muted">Matematica triassiale cross-base: coerenza Cx, Cy, Cz, invarianza I3 e score H3.</p>
+  </section>
+
+  <section class="card" id="mirror-info">
+    <h2>Informazioni sul mirror</h2>
+    <ul>
+      <li>Mirror read-only. Aggiornato dopo la pubblicazione sul canonico.</li>
+      <li>Politica noindex per non interferire con l’indicizzazione di Neocities.</li>
+      <li>Per citazioni: DOI <strong>10.5281/zenodo.17276691</strong>.</li>
+      <li>Metadati estesi: <a href="schema.jsonld">schema.jsonld</a></li>
+    </ul>
+  </section>
+
+  <footer class="muted">
+    Mirror © 2025 — MB-X.01 / L.O.N. · Licenza MIT · Canonico:
+    <a href="https://massimiliano.neocities.org/" target="_blank" rel="noopener noreferrer">massimiliano.neocities.org</a> ·
+    DOI: <a href="https://doi.org/10.5281/zenodo.17276691" target="_blank" rel="noopener noreferrer">10.5281/zenodo.17276691</a>
+  </footer>
+
+</div>
+</body>
+</html>
