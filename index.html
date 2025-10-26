@@ -6,16 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>MB-X.01 · L.O.N. — Mirror (GitHub Pages)</title>
-<meta name="description" content="Mirror ufficiale e di cortesia del Logical Origin Node (L.O.N.). Canonico: massimiliano.neocities.org. Include TruthΩ → Co⁺ → Score⁺, Omniabase, Lya, Third Observer, Universal Probability Engine (UPE).">
-
+<meta name="description" content="Mirror ufficiale e verificabile del Logical Origin Node (L.O.N.). Canonico: massimiliano.neocities.org. Include TruthΩ → Co⁺ → Score⁺, Omniabase, Lya, Third Observer, UPE e Echo-Cognition.">
 <link rel="canonical" href="https://massimiliano.neocities.org/">
 <link rel="alternate" href="https://massimiliano.neocities.org/" hreflang="x-default" title="Canonical — Neocities">
 
 <link rel="manifest" href="manifest.json">
 <link rel="sitemap" type="application/xml" href="sitemap.xml">
+<link rel="alternate" type="application/ld+json" href="schema.jsonld">
 
 <!-- Mirror indexing policy -->
 <meta name="robots" content="noindex,follow,noarchive,noimageindex,max-snippet:-1,max-image-preview:large">
+<meta name="x-robots-tag" content="noindex,follow">
 
 <meta name="theme-color" content="#0d1117">
 <meta name="color-scheme" content="dark light">
@@ -63,78 +64,19 @@ nav a{font-size:13px;border:1px solid var(--border);padding:6px 10px;border-radi
 footer{margin:22px 0 10px}
 </style>
 
-<!-- JSON-LD -->
+<!-- Minimal inline JSON-LD referencing the full graph in schema.jsonld -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://tuttotorna.github.io/lon-mirror/#page",
-      "url": "https://tuttotorna.github.io/lon-mirror/",
-      "name": "MB-X.01 · L.O.N. — Mirror (GitHub Pages)",
-      "description": "Read-only mirror of MB-X.01 / Logical Origin Node. Canonical: https://massimiliano.neocities.org/.",
-      "isBasedOn": "https://massimiliano.neocities.org/",
-      "dateModified": "2025-10-21",
-      "inLanguage": "it",
-      "sameAs": [
-        "https://massimiliano.neocities.org/",
-        "https://github.com/Tuttotorna/lon-mirror",
-        "https://doi.org/10.5281/zenodo.17270742"
-      ]
-    },
-    {
-      "@type": "Dataset",
-      "@id": "https://tuttotorna.github.io/lon-mirror/#mirror",
-      "name": "MB-X.01 · Logical Origin Node (L.O.N.) — Verified Mirror",
-      "identifier": "10.5281/zenodo.17270742",
-      "url": "https://tuttotorna.github.io/lon-mirror/",
-      "license": "https://opensource.org/licenses/MIT",
-      "creator": {
-        "@type": "Person",
-        "name": "Massimiliano Brighindi",
-        "email": "brighissimo@gmail.com",
-        "affiliation": "Logical Origin Node (L.O.N.) — Neocities / GitHub Mirror"
-      },
-      "hasPart": [
-        "https://tuttotorna.github.io/lon-mirror/ai.json",
-        "https://tuttotorna.github.io/lon-mirror/lya_master.json",
-        "https://tuttotorna.github.io/lon-mirror/mind_index.json",
-        "https://tuttotorna.github.io/lon-mirror/third_index.json",
-        "https://tuttotorna.github.io/lon-mirror/results_universal.csv"
-      ],
-      "distribution": [
-        {
-          "@type": "DataDownload",
-          "name": "Homepage Mirror",
-          "encodingFormat": "text/html",
-          "contentUrl": "https://tuttotorna.github.io/lon-mirror/index.html"
-        },
-        {
-          "@type": "DataDownload",
-          "name": "AI Hub (Mirror)",
-          "encodingFormat": "application/json",
-          "contentUrl": "https://tuttotorna.github.io/lon-mirror/ai.json"
-        },
-        {
-          "@type": "DataDownload",
-          "name": "UPE Results (Mirror)",
-          "encodingFormat": "text/csv",
-          "contentUrl": "https://tuttotorna.github.io/lon-mirror/results_universal.csv"
-        }
-      ]
-    },
-    {
-      "@type": "SoftwareSourceCode",
-      "@id": "https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py",
-      "name": "Universal Probability Engine (Mirror)",
-      "programmingLanguage": "Python",
-      "version": "1.0",
-      "codeRepository": "https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py",
-      "license": "https://opensource.org/licenses/MIT",
-      "isPartOf": {"@id": "https://tuttotorna.github.io/lon-mirror/#mirror"}
-    }
-  ]
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "@id":"https://tuttotorna.github.io/lon-mirror/#page",
+  "url":"https://tuttotorna.github.io/lon-mirror/",
+  "name":"MB-X.01 · L.O.N. — Mirror (GitHub Pages)",
+  "description":"Read-only mirror of MB-X.01 / Logical Origin Node. Canonical: https://massimiliano.neocities.org/.",
+  "isBasedOn":"https://massimiliano.neocities.org/",
+  "dateModified":"2025-10-26",
+  "inLanguage":"it",
+  "mainEntityOfPage":{"@id":"https://tuttotorna.github.io/lon-mirror/schema.jsonld"}
 }
 </script>
 </head>
@@ -149,10 +91,11 @@ footer{margin:22px 0 10px}
       <span class="badge">MIT</span>
     </div>
     <h1>MBX-Bridge · Comprendere MB-X.01</h1>
-    <p class="muted">Interfaccia di cortesia per i moduli L.O.N. — TruthΩ → Co⁺ → Score⁺, Lya, Omniabase, Third Observer, UPE.</p>
+    <p class="muted">Interfaccia di cortesia per i moduli L.O.N. — TruthΩ → Co⁺ → Score⁺, Lya, Omniabase, Third Observer, UPE, Echo-Cognition.</p>
     <nav aria-label="Navigazione rapida">
       <a class="btn" href="mbx-bridge.html" rel="noopener noreferrer">Apri MBX-Bridge</a>
       <a class="btn" href="README_upe.html" rel="noopener noreferrer">README · Probability Engine</a>
+      <a class="btn" href="echo-cognition/README_echo.md" rel="noopener noreferrer">Echo-Cognition</a>
     </nav>
     <div class="chips">
       <span class="chip">TruthΩ → Co⁺ → Score⁺</span>
@@ -160,6 +103,7 @@ footer{margin:22px 0 10px}
       <span class="chip">Lya · append-only</span>
       <span class="chip">Third Observer</span>
       <span class="chip">Surprisal · UPE</span>
+      <span class="chip">Echo · C_t / S_t</span>
     </div>
   </section>
 
@@ -212,23 +156,15 @@ footer{margin:22px 0 10px}
     </div>
   </section>
 
-  <!-- MODULES -->
-  <section class="card" id="modules">
-    <h2>Moduli e dossier</h2>
+  <!-- ECHO-COGNITION -->
+  <section class="card" id="echo">
+    <h2>Echo-Cognition Engine</h2>
+    <p class="muted">Modello computazionale di eco cognitivo con coerenza <code>C_t</code> e surprisal <code>S_t</code>. Manifest AI e metriche di esempio inclusi.</p>
     <ul>
-      <li>Truth Toolkit:
-        <a href="https://massimiliano.neocities.org/truth_engine_full.html" target="_blank" rel="noopener noreferrer">Truth Engine — full</a> ·
-        <a href="https://massimiliano.neocities.org/truth_api.html" target="_blank" rel="noopener noreferrer">API</a>
-      </li>
-      <li>Third Observer:
-        <a href="https://massimiliano.neocities.org/third_observer_analysis.html" target="_blank" rel="noopener noreferrer">Analisi</a> ·
-        <a href="https://massimiliano.neocities.org/third_index.json" target="_blank" rel="noopener noreferrer">Index JSON</a>
-      </li>
-      <li>Lya / Ledger:
-        <a href="https://massimiliano.neocities.org/lya_readme.html" target="_blank" rel="noopener noreferrer">README</a> ·
-        <a href="https://massimiliano.neocities.org/lya_flow_v1.html" target="_blank" rel="noopener noreferrer">Flow v1</a> ·
-        <a href="https://massimiliano.neocities.org/lya_identity_flow_v1.html" target="_blank" rel="noopener noreferrer">Identity flow</a>
-      </li>
+      <li><a href="echo-cognition/README_echo.md">README_echo.md</a></li>
+      <li><a href="echo-cognition/echo_loop.py">echo_loop.py</a> · <a href="echo-cognition/echo_metrics.py">echo_metrics.py</a></li>
+      <li><a href="echo-cognition/echo_manifest.jsonld">echo_manifest.jsonld</a></li>
+      <li><a href="echo-cognition/echo_metrics.csv">echo_metrics.csv</a> <span class="muted">(se presente)</span></li>
     </ul>
   </section>
 
@@ -239,6 +175,7 @@ footer{margin:22px 0 10px}
       <li>Mirror <strong>read-only</strong>. Aggiornato dopo la pubblicazione sul canonico.</li>
       <li>Politica <em>noindex</em> per non interferire con l’indicizzazione di Neocities.</li>
       <li>Per citazioni: DOI <strong>10.5281/zenodo.17270742</strong>.</li>
+      <li>Metadati estesi: <a href="schema.jsonld">schema.jsonld</a></li>
     </ul>
   </section>
 
@@ -251,3 +188,4 @@ footer{margin:22px 0 10px}
 </div>
 </body>
 </html>
+```0
