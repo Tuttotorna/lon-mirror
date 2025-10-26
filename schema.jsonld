@@ -1,0 +1,128 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Dataset",
+      "@id": "https://tuttotorna.github.io/lon-mirror/#dataset",
+      "name": "MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine",
+      "description": "Verified, machine-readable mirror of MB-X.01 (Logical Origin Node). Provides reproducible metrics for semantic coherence and cognitive risk: TruthΩ → Co⁺ → Score⁺ → H(X). Includes Echo-Cognition Engine logs and artifacts.",
+      "identifier": "https://doi.org/10.5281/zenodo.17270742",
+      "url": "https://tuttotorna.github.io/lon-mirror/",
+      "isBasedOn": "https://massimiliano.neocities.org/",
+      "sameAs": [
+        "https://massimiliano.neocities.org/",
+        "https://github.com/Tuttotorna/lon-mirror/",
+        "https://zenodo.org/record/17270742"
+      ],
+      "license": "https://opensource.org/licenses/MIT",
+      "keywords": [
+        "MB-X.01",
+        "Logical Origin Node",
+        "TruthΩ",
+        "Co⁺",
+        "Score⁺",
+        "Hypercoherence",
+        "Lya",
+        "Omniabase",
+        "Third Observer",
+        "UPE",
+        "Echo-Cognition",
+        "Coherence Metrics",
+        "Reasoning Audit",
+        "Cognitive Architecture"
+      ],
+      "creator": {
+        "@type": "Person",
+        "name": "Massimiliano Brighindi",
+        "email": "brighissimo@gmail.com",
+        "affiliation": "Logical Origin Node (L.O.N.)"
+      },
+      "version": "v1.0.1",
+      "dateModified": "2025-10-26",
+      "isAccessibleForFree": true,
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "name": "AI Discovery Index",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://tuttotorna.github.io/lon-mirror/ai.json"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "Mind Index",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://tuttotorna.github.io/lon-mirror/mind_index.json"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "Third Observer Index",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://tuttotorna.github.io/lon-mirror/third_index.json"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "Discover Manifest",
+          "encodingFormat": "application/ld+json",
+          "contentUrl": "https://tuttotorna.github.io/lon-mirror/discover_manifest.jsonld"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "UPE — Universal Probability Engine (mirror)",
+          "encodingFormat": "text/x-python",
+          "contentUrl": "https://tuttotorna.github.io/lon-mirror/universal_probability_engine.py"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "UPE results (example)",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://tuttotorna.github.io/lon-mirror/results_universal.csv"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "Echo-Cognition Manifest",
+          "encodingFormat": "application/ld+json",
+          "contentUrl": "https://tuttotorna.github.io/lon-mirror/echo-cognition/echo_manifest.jsonld"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "Echo-Cognition Metrics (example)",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://tuttotorna.github.io/lon-mirror/echo-cognition/echo_metrics.csv"
+        }
+      ],
+      "citation": "Brighindi, M. (2025). MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.0.1. Zenodo. https://doi.org/10.5281/zenodo.17270742"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://tuttotorna.github.io/lon-mirror/#engine",
+      "name": "MB-X.01 Unified Engine",
+      "description": "Unified core for TruthΩ, Co⁺, Score⁺, Hypercoherence, and Lya ledger verification. CLI and local REST API.",
+      "codeRepository": "https://github.com/Tuttotorna/lon-mirror",
+      "programmingLanguage": "Python",
+      "license": "https://opensource.org/licenses/MIT",
+      "version": "v1.0.1",
+      "url": "https://github.com/Tuttotorna/lon-mirror/blob/main/lon_unified.py",
+      "identifier": "https://doi.org/10.5281/zenodo.17270742",
+      "author": {
+        "@type": "Person",
+        "name": "Massimiliano Brighindi"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://tuttotorna.github.io/lon-mirror/#echo",
+      "name": "Echo-Cognition Engine",
+      "description": "Computational model of self-recognized feedback loop with coherence (C_t) and surprisal (S_t) metrics.",
+      "codeRepository": "https://github.com/Tuttotorna/lon-mirror/tree/main/echo-cognition",
+      "programmingLanguage": "Python",
+      "license": "https://opensource.org/licenses/MIT",
+      "version": "v1.0.0",
+      "url": "https://tuttotorna.github.io/lon-mirror/echo-cognition/",
+      "author": {
+        "@type": "Person",
+        "name": "Massimiliano Brighindi"
+      },
+      "isPartOf": { "@id": "https://tuttotorna.github.io/lon-mirror/#dataset" }
+    }
+  ]
+}
