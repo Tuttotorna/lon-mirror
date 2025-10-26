@@ -1,0 +1,52 @@
+# Echo-Cognition Metrics Analyzer — MB-X.01 / L.O.N.
+# Author: Massimiliano Brighindi
+# License: MIT
+# DOI: https://doi.org/10.5281/zenodo.17270742
+
+import pandas as pd
+import numpy as np
+import argparse
+import matplotlib.pyplot as plt
+
+def analyze_echo(log_csv, out_summary="echo_summary.csv", show_plot=True):
+    """Analyzes coherence/surprisal dynamics from echo_loop simulation."""
+    df = pd.read_csv(log_csv)
+    C = df["C"].values
+    S = df["S"].values
+
+    # Basic metrics
+    metrics = {
+        "C_mean": np.mean(C),
+        "S_mean": np.mean(S),
+        "C_std": np.std(C),
+        "S_std": np.std(S),
+        "C_min": np.min(C),
+        "C_max": np.max(C),
+        "S_min": np.min(S),
+        "S_max": np.max(S),
+        "C_median": np.median(C),
+        "S_median": np.median(S),
+    }
+
+    pd.DataFrame(metrics.items(), columns=["metric", "value"]).to_csv(out_summary, index=False)
+    print(f"Analysis complete → {out_summary}")
+
+    if show_plot:
+        plt.figure(figsize=(8,4))
+        plt.plot(df["t"], C, label="Coherence (C_t)")
+        plt.plot(df["t"], S, label="Surprisal (S_t)", alpha=0.6)
+        plt.xlabel("t")
+        plt.ylabel("Value")
+        plt.title("Echo-Cognition Dynamics")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Analyze Echo-Cognition Logs")
+    parser.add_argument("--log_csv", default="echo_log.csv")
+    parser.add_argument("--out_summary", default="echo_summary.csv")
+    parser.add_argument("--no_plot", action="store_true")
+    args = parser.parse_args()
+
+    analyze_echo(args.log_csv, out_summary=args.out_summary, show_plot=not args.no_plot)
