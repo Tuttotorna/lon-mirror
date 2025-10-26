@@ -1,0 +1,17 @@
+{
+  "module": "Omniabase-3D · Multibase Spatial Mathematics Engine",
+  "version": "1.2",
+  "doi": "10.5281/zenodo.17270742",
+  "license": "MIT",
+  "bases": { "x": 8, "y": 12, "z": 16 },
+  "metrics": {
+    "steps": 10,
+    "alpha": 0.005,
+    "tau": 5.298317,
+    "mean_coherence": 0.579263,
+    "mean_divergence": 0.008412,
+    "mean_surprisal": 1.478920,
+    "mean_H3": 0.236511,
+    "accept_ratio_divergence": 1.000
+  }
+}
