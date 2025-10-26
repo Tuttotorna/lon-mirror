@@ -1,0 +1,83 @@
+{
+  "name": "Omniabase 3D — Multibase Spatial Mathematics Engine",
+  "module": "MB-X.01 / Logical Origin Node (L.O.N.)",
+  "version": "1.0.0",
+  "description": "Prototype of multibase spatial mathematics. Computes tri-axis coherence tensors (I3), hypercoherence field (H3), and divergence metrics (Δ3) across independent numeric bases.",
+  "license": "MIT",
+  "doi": "10.5281/zenodo.17270742",
+  "canonical": "https://massimiliano.neocities.org/",
+  "mirror": "https://tuttotorna.github.io/lon-mirror/omniabase-3d/",
+  "repository": "https://github.com/Tuttotorna/lon-mirror/tree/main/omniabase-3d",
+  "schema_ld": "https://tuttotorna.github.io/lon-mirror/omniabase-3d/schema_omniabase3d.jsonld",
+  "author": {
+    "name": "Massimiliano Brighindi",
+    "email": "brighissimo@gmail.com",
+    "affiliation": "Logical Origin Node (L.O.N.) — Neocities / GitHub Mirror"
+  },
+  "runtime": {
+    "language": "Python",
+    "version": ">=3.10",
+    "dependencies": [
+      "numpy>=1.24 (optional)",
+      "scipy>=1.10 (optional)",
+      "matplotlib>=3.8 (optional)"
+    ]
+  },
+  "entrypoints": {
+    "cli": "omniabase3d_engine.py",
+    "examples": [
+      "python omniabase3d_engine.py --bases 8 12 16 --steps 1000 --alpha 0.005",
+      "python omniabase3d_engine.py --bases 6 10 14 --steps 5000 --alpha 0.001 --smooth 0.1 --seed 42"
+    ],
+    "args": {
+      "--bases": "three integers >=2 (BX BY BZ)",
+      "--steps": "int, default 1000",
+      "--alpha": "float in (0,1], default 0.005 (divergence significance)",
+      "--smooth": "float in (0,1], default 0.15 (EWMA)",
+      "--seed": "int or null, default null",
+      "--outdir": "string, default omniabase-3d/metrics"
+    }
+  },
+  "signals": {
+    "Cx": "coherence along X base",
+    "Cy": "coherence along Y base",
+    "Cz": "coherence along Z base",
+    "I3": "normalized tensor <Cx,Cy,Cz>/||<Cx,Cy,Cz>||",
+    "H3": "tanh((Cx*Cy*Cz)/(1+|∇C|))",
+    "Δ3(divergence)": "|(I3_t - I3_{t-1})•1|",
+    "τ(alpha)": "-ln(alpha)"
+  },
+  "outputs": {
+    "tensor_csv": "metrics/tensor_I3.csv",
+    "surface_csv": "metrics/surface_H3.csv",
+    "metrics_json": "metrics/metrics.json"
+  },
+  "metrics": [
+    "mean_coherence",
+    "mean_divergence",
+    "mean_surprisal",
+    "mean_H3",
+    "accept_ratio_divergence"
+  ],
+  "keywords": [
+    "omniabase",
+    "multibase mathematics",
+    "3D logic",
+    "coherence tensor",
+    "hypercoherence",
+    "reasoning audit",
+    "MB-X.01",
+    "L.O.N."
+  ],
+  "integrity": {
+    "policy": "read-only mirror; cite DOI; validate with Lya where applicable",
+    "hashing": "sha256 (recommended for published datasets)"
+  },
+  "discovery": {
+    "ai_manifest": "https://tuttotorna.github.io/lon-mirror/ai.json",
+    "sitemap": "https://tuttotorna.github.io/lon-mirror/sitemap.xml",
+    "robots": "https://tuttotorna.github.io/lon-mirror/robots.txt"
+  },
+  "updated": "2025-10-26"
+}
+```0
