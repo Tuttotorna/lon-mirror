@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemmaps.org/schemas/sitemap/0.9"
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <!-- ===========================================================
@@ -114,11 +114,11 @@
 
   <!-- Omniabase 3D -->
   <url>
-    <loc>https://tuttotorna.github.io/lon-mirror/omniabase-3d/omni_manifest.jsonld</loc>
+    <loc>https://tuttotorna.github.io/lon-mirror/omniabase-3d/schema_omniabase3d.jsonld</loc>
     <lastmod>2025-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/omniabase-3d/omni_manifest.jsonld"/>
+    <xhtml:link rel="canonical" href="https://massimiliano.neocities.org/omniabase-3d/schema_omniabase3d.jsonld"/>
   </url>
 
   <!-- Reference / System files -->
