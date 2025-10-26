@@ -1,13 +1,13 @@
 # MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.1.0
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17270742.svg)](https://doi.org/10.5281/zenodo.17270742)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17276691.svg)](https://doi.org/10.5281/zenodo.17276691)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Public and **machine-readable mirror** of the **Logical Origin Node (L.O.N.)**
 
 **Author:** Massimiliano Brighindi — [brighissimo@gmail.com](mailto:brighissimo@gmail.com)  
 **License:** MIT  
-**DOI:** [10.5281/zenodo.17270742](https://doi.org/10.5281/zenodo.17270742)  
+**DOI:** [10.5281/zenodo.17276691](https://doi.org/10.5281/zenodo.17276691)  
 **Canonical:** [massimiliano.neocities.org](https://massimiliano.neocities.org/)
 
 ---
@@ -27,14 +27,14 @@ Public and **machine-readable mirror** of the **Logical Origin Node (L.O.N.)**
 
 ## Overview
 
-**MB-X.01** is a logical-computational architecture for evaluating **semantic coherence** and **cognitive risk** through the metric chain:
+**MB-X.01** is a logical–computational architecture for evaluating **semantic coherence** and **cognitive risk** through the metric chain:
 
 **TruthΩ → Co⁺ → Score⁺**
 
 Core modules:
 
 - **Lya** — append-only ledger for signature and traceability  
-- **Omniabase 3D** — multibase observation and hypercoherence mapping  
+- **Omniabase-3D** — multibase observation and hypercoherence mapping  
 - **Third Observer** — public verification protocol  
 - **UPE** — Universal Probability Engine for surprisal and τ(α)  
 - **Hypercoherence H(X)** — convergence between observer and model  
@@ -54,7 +54,7 @@ H(X)    = tanh( (Co⁺ · C) / (1 − D) )
 |:--|:--|:--|
 | **TruthΩ / Co⁺ / Score⁺** | Coherence & risk metrics | `lon_unified.py` |
 | **Lya** | Append-only ledger | `lon_unified.py` |
-| **Omniabase-3D** | Tri-axial multibase analysis (I3, H3) | `omniabase3d_engine.py`, `omniabase3d_view.html` |
+| **Omniabase-3D** | Tri-axial multibase analysis (I3, H3) | `analysis/omniabase3d_engine.py`, `omniabase3d_view.html` |
 | **Third Observer** | Public audit | `third_observer.html` |
 | **UPE** | Surprisal & τ(α) threshold | `universal_probability_engine.py` |
 | **Hypercoherence** | Observer–observed feedback | `lon_unified.py` |
@@ -65,12 +65,12 @@ H(X)    = tanh( (Co⁺ · C) / (1 − D) )
 ## Omniabase-3D Engine
 
 **File:** [`analysis/omniabase3d_engine.py`](https://github.com/Tuttotorna/lon-mirror/blob/main/analysis/omniabase3d_engine.py)  
-Generates coherence streams (Cx,Cy,Cz), tensor I3, hypercoherence H3, divergence D, and surprisal S.
+Generates coherence streams (Cx, Cy, Cz), tensor I3, hypercoherence H3, divergence D, and surprisal S.
 
-Outputs (JSON or CSV):  
+**Outputs (JSON or CSV):**  
 `omni_tensor_I3.json` · `omni_surface_H3.json` · `omni_metrics.json`
 
-Demo viewer (Plotly):  
+**Demo viewer (Plotly):**  
 [Omniabase-3D Viewer](https://massimiliano.neocities.org/omniabase3d_view.html)
 
 ---
@@ -94,6 +94,9 @@ Score⁺ ≥ 0.0 and H ≥ 0.3	REVISE
 Score⁺ < 0.0 or H < 0.3	REJECT
 
 
+
+---
+
 Local API
 
 python lon_unified.py serve --host 127.0.0.1 --port 8088
@@ -102,7 +105,7 @@ Endpoint	Output
 
 /health	{"ok": true}
 /version	{"version":"v1.1.0"}
-/evaluate	Full JSON with metrics and decision
+/evaluate	Full JSON with metrics + decision
 
 
 Example:
@@ -126,7 +129,7 @@ Citation
 
 > Brighindi, Massimiliano (2025).
 MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.1.0.
-Zenodo. 10.5281/zenodo.17270742
+Zenodo. 10.5281/zenodo.17276691
 
 
 
@@ -178,7 +181,7 @@ Resource	URL
 
 Canonical	https://massimiliano.neocities.org/
 Mirror (GitHub Pages)	https://tuttotorna.github.io/lon-mirror/
-DOI (Zenodo)	https://doi.org/10.5281/zenodo.17270742
+DOI (Zenodo)	https://doi.org/10.5281/zenodo.17276691
 Omniabase-3D Viewer	https://massimiliano.neocities.org/omniabase3d_view.html
 Engine (Neocities)	https://massimiliano.neocities.org/engine.html
 AI Discovery Index	https://tuttotorna.github.io/lon-mirror/ai.json
