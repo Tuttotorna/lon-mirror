@@ -1,0 +1,53 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "@id": "https://tuttotorna.github.io/lon-mirror/omniabase-3d/#schema",
+  "name": "Omniabase 3D — Multibase Spatial Mathematics Engine",
+  "alternateName": "MB-X.01 · L.O.N. — Omniabase 3D Module",
+  "version": "1.0.0",
+  "description": "Prototype of multibase spatial mathematics extending the Logical Origin Node (L.O.N.) toward volumetric coherence modeling. Computes tri-axis coherence tensors (I₃), hypercoherence fields (H₃), and divergence metrics (Δ₃) across independent numeric bases.",
+  "programmingLanguage": "Python",
+  "runtimePlatform": "Python ≥ 3.10",
+  "license": "https://opensource.org/licenses/MIT",
+  "applicationCategory": "ScientificComputing",
+  "isPartOf": {
+    "@type": "Dataset",
+    "@id": "https://tuttotorna.github.io/lon-mirror/#mirror",
+    "name": "MB-X.01 · Logical Origin Node (L.O.N.) — Verified Mirror"
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Massimiliano Brighindi",
+    "email": "brighissimo@gmail.com",
+    "affiliation": "Logical Origin Node (L.O.N.) — Neocities / GitHub Mirror"
+  },
+  "codeRepository": "https://github.com/Tuttotorna/lon-mirror/tree/main/omniabase-3d",
+  "url": "https://tuttotorna.github.io/lon-mirror/omniabase-3d/",
+  "sameAs": [
+    "https://massimiliano.neocities.org/omniabase.html",
+    "https://doi.org/10.5281/zenodo.17270742"
+  ],
+  "keywords": [
+    "omniabase",
+    "multibase mathematics",
+    "3D logic",
+    "volumetric coherence",
+    "hypercoherence",
+    "tri-axis tensor",
+    "MB-X.01",
+    "L.O.N.",
+    "Massimiliano Brighindi"
+  ],
+  "softwareRequirements": [
+    "numpy >= 1.24",
+    "scipy >= 1.10",
+    "matplotlib >= 3.8"
+  ],
+  "dateCreated": "2025-10-26",
+  "dateModified": "2025-10-26",
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "DOI",
+    "value": "10.5281/zenodo.17270742"
+  }
+}
