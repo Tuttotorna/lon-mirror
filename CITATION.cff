@@ -1,10 +1,11 @@
 cff-version: 1.2.0
-message: "Se utilizzi questo lavoro, cita come indicato qui sotto."
-title: "MB-X.01 · Logical Origin Node (L.O.N.) — Mirror"
+message: "If you use this work, please cite it as indicated below."
+title: "MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.0.1"
 abstract: >
-  Replica ufficiale, verificabile e machine-readable del Logical Origin Node (L.O.N.) di Massimiliano Brighindi.
-  Il progetto MB-X.01 integra TruthΩ, Lya, Omniabase, Third Observer e Hypercoherence come architettura cognitiva
-  autopoietica per la misura della coerenza logica e semantica (TruthΩ → Co⁺ → Score⁺).
+  Verified, machine-readable mirror of the Logical Origin Node (L.O.N.) by Massimiliano Brighindi.
+  The MB-X.01 project integrates TruthΩ, Lya, Omniabase, Third Observer, UPE, and Hypercoherence
+  as a self-consistent cognitive architecture for measuring logical and semantic coherence
+  (TruthΩ → Co⁺ → Score⁺ → H(X)).
 authors:
   - family-names: Brighindi
     given-names: Massimiliano
@@ -21,19 +22,22 @@ keywords:
   - logical-origin-node
   - mb-x.01
   - truth-omega
-  - omniabase
-  - lya
+  - co-plus
+  - score-plus
   - hypercoherence
+  - lya
+  - omniabase
+  - third-observer
+  - upe
   - cognitive-architecture
+  - coherence-algorithm
   - reasoning-audit
   - bias-reduction
   - self-referential-logic
-  - coherence-algorithm
-  - third-observer
-date-released: "2025-10-23"
+date-released: "2025-10-26"
 preferred-citation:
   type: article
-  title: "MB-X.01 · Logical Origin Node (L.O.N.): Struttura Cognitiva Autoanalizzante"
+  title: "MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.0.1"
   authors:
     - family-names: Brighindi
       given-names: Massimiliano
