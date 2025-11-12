@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage{hyperref}
+\title{MB-X.01: A Coherence-and-Truth Module Integrable in the Tecnologia delle Espressioni}
+\author{Massimiliano Brighindi}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present MB-X.01 as a \emph{validation/measurement module} for TE: it estimates functional truth via base-invariant coherence. The metric $\mathrm{Truth}\Omega$ quantifies the stability of an expression under cross-representation; its mapped measures $Co^{+}$ and $Score^{+}$ support gating and auditing. This work clarifies the distinction between \emph{coerenza} (content prior to form) and \emph{decoderenza} (manifest expression), addressing prior feedback by making MB-X.01 explicitly non-derivative and function-oriented for TE integration.
+\end{abstract}
+
+\section{Positioning w.r.t. TE}
+MB-X.01 is not a partial derivation of TE. It is a \emph{tool} that supplies:
+(i) a reproducible cross-representation check,
+(ii) a scalar readout usable as \emph{misura della coerenza} within TE pipelines,
+(iii) auditable logs (Lya).
+Identity and semantic generation remain TE’s domain; MB-X.01 contributes only a measurement/validation function.
+
+\section{Metric}
+Given bases $B$ and extractor $\varphi_k$ on representations $r_b(x)$:
+\[
+\mathrm{Truth}\Omega(x) = -\log\!\Big(1 + \frac{1}{|B|}\sum_{b\in B}\mathrm{Var}_b[\varphi_k(r_b(x))]\Big).
+\]
+We report $Co^{+}(x)=e^{\mathrm{Truth}\Omega(x)}\in[0,1]$, and
+\[
+Score^{+}(x)= C\cdot Co^{+}(x) - \tfrac{1}{2}(B+I).
+\]
+Here $C$ is confidence; $B$ bias; $I$ interest/novelty. These are operational knobs, not truth proper.
+
+\section{Algorithmic view}
+Normalize text/data; compute multi-base signatures; estimate coherence and divergence; estimate bias via ego-markers and context priors; compute views $\{base,no\text{-}ego\}\times B$; aggregate median score. Pseudocode and complexity $O(|x|\cdot |B|)$ are provided in the demo.
+
+\section{Integration in TE}
+\textbf{Contract:} MB-X.01 accepts an expression $x$ and returns $(\mathrm{Truth}\Omega, Co^{+}, Score^{+})$ plus per-view diagnostics. TE may use $Co^{+}$ as a \emph{misura di coerenza} or as a \emph{valvola di validazione} before expression. We expose JSON-LD schemas and a CLI.
+
+\section{Limits}
+MB-X.01 measures \emph{stability under cross-representation}. It does not generate identity nor ontological content. High coherence is necessary, not sufficient, for semantic truth; TE supplies the generative semantics.
+
+\section*{Code and Data}
+Repository: \url{https://github.com/Tuttotorna/lon-mirror}. Demo script: \texttt{batch\_eval.py}. Schema: \texttt{schema\_omniabase3d.jsonld}. License: MIT.
+
+\end{document}
