@@ -5,8 +5,8 @@
 <meta http-equiv="content-language" content="it">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>MB-X.01 · L.O.N. — Mirror (GitHub Pages)</title>
-<meta name="description" content="Mirror ufficiale e verificabile del Logical Origin Node (L.O.N.). Canonico: massimiliano.neocities.org. Include TruthΩ → Co⁺ → Score⁺, Omniabase, Lya, Third Observer, UPE, Echo-Cognition e Omniabase 3D.">
+<title>MB-X.01 · L.O.N. — Mirror (GitHub Pages) + TE Integration Module</title>
+<meta name="description" content="Mirror ufficiale verificabile del Logical Origin Node (L.O.N.) e pagina unificata del modulo MB-X.01 per Tecnologia delle Espressioni (TE). Canonico: massimiliano.neocities.org.">
 <link rel="canonical" href="https://massimiliano.neocities.org/">
 <link rel="alternate" href="https://massimiliano.neocities.org/" hreflang="x-default" title="Canonical — Neocities">
 
@@ -23,8 +23,8 @@
 <meta name="citation_doi" content="10.5281/zenodo.17276691">
 
 <!-- Open Graph / Twitter -->
-<meta property="og:title" content="MB-X.01 · L.O.N. — Mirror (GitHub)">
-<meta property="og:description" content="Mirror ufficiale di cortesia. Fonte canonica: massimiliano.neocities.org.">
+<meta property="og:title" content="MB-X.01 · L.O.N. — Mirror (GitHub) + TE Module">
+<meta property="og:description" content="Mirror ufficiale di cortesia con modulo MB-X.01 per Tecnologia delle Espressioni. Fonte canonica: massimiliano.neocities.org.">
 <meta property="og:url" content="https://tuttotorna.github.io/lon-mirror/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="it_IT">
@@ -39,9 +39,10 @@
 :root{--bg:#0d1117;--card:#10151d;--fg:#e6edf3;--muted:#9aa4ad;--accent:#7fffd4;--warn:#ffd37a;--link:#58a6ff;--border:#212836}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
-.wrap{max-width:960px;margin:0 auto;padding:24px 14px}
+.wrap{max-width:980px;margin:0 auto;padding:24px 14px}
 h1{font-size:30px;margin:0 0 10px;color:var(--accent)}
 h2{font-size:20px;margin:20px 0 8px;color:var(--warn)}
+h3{font-size:18px;margin:16px 0 8px}
 a{color:var(--link);text-decoration:none}
 a:hover{text-decoration:underline}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0}
@@ -58,23 +59,24 @@ li{margin:5px 0}
 .chips{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:6px}
 .chip{padding:4px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted);background:#0f141b;font-size:12px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.eq{background:#161b22;padding:12px;border-radius:8px;overflow-x:auto}
 .kv{background:#0f141b;border:1px dashed var(--border);border-radius:10px;padding:10px}
 nav{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
 nav a{font-size:13px;border:1px solid var(--border);padding:6px 10px;border-radius:999px;background:#0f141b}
 footer{margin:22px 0 10px}
+.sep{height:1px;background:var(--border);margin:22px 0}
 </style>
 
-<!-- Minimal inline JSON-LD referencing the full graph in schema.jsonld -->
+<!-- Minimal inline JSON-LD for the page; full graph can live in schema.jsonld -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"WebPage",
   "@id":"https://tuttotorna.github.io/lon-mirror/#page",
   "url":"https://tuttotorna.github.io/lon-mirror/",
-  "name":"MB-X.01 · L.O.N. — Mirror (GitHub Pages)",
-  "description":"Read-only mirror of MB-X.01 / Logical Origin Node. Canonical: https://massimiliano.neocities.org/.",
+  "name":"MB-X.01 · L.O.N. — Mirror (GitHub Pages) + TE Integration Module",
+  "description":"Read-only mirror of MB-X.01 / Logical Origin Node with the unified TE Integration Module. Canonical: https://massimiliano.neocities.org/.",
   "isBasedOn":"https://massimiliano.neocities.org/",
-  "dateModified":"2025-10-26",
   "inLanguage":"it",
   "mainEntityOfPage":{"@id":"https://tuttotorna.github.io/lon-mirror/schema.jsonld"}
 }
@@ -83,6 +85,7 @@ footer{margin:22px 0 10px}
 <body>
 <div class="wrap">
 
+  <!-- HERO -->
   <section class="hero" id="bridge-hero" aria-label="Ingresso rapido">
     <div>
       <span class="badge">Mirror</span>
@@ -120,6 +123,7 @@ footer{margin:22px 0 10px}
     I collegamenti principali puntano al sito canonico per consolidare l’indicizzazione e garantire coerenza di versione.
   </div>
 
+  <!-- CANONICAL LINKS -->
   <section class="card" id="canon">
     <h2>Vai al sito canonico</h2>
     <ul>
@@ -137,6 +141,7 @@ footer{margin:22px 0 10px}
     </ul>
   </section>
 
+  <!-- UPE -->
   <section class="card" id="upe" aria-labelledby="upe-title">
     <h2 id="upe-title">Universal Probability Engine (mirror)</h2>
     <p class="muted">Motore minimale per surprisal cumulativo e soglia τ(α)=−ln α. Versione read-only ospitata su GitHub Pages.</p>
@@ -149,21 +154,66 @@ footer{margin:22px 0 10px}
     </ul>
   </section>
 
+  <!-- ECHO -->
   <section class="card" id="echo">
     <h2>Echo-Cognition Engine</h2>
     <p class="muted">Modello computazionale di eco cognitivo con coerenza C_t e surprisal S_t.</p>
   </section>
 
+  <!-- OMNIABASE 3D -->
   <section class="card" id="omniabase3d">
     <h2>Omniabase 3D</h2>
     <p class="muted">Matematica triassiale cross-base: coerenza Cx, Cy, Cz, invarianza I3 e score H3.</p>
   </section>
 
+  <div class="sep"></div>
+
+  <!-- TE INTEGRATION MODULE (English block, unified inside this page) -->
+  <section class="card" id="te-module">
+    <h2>MB-X.01 — TE Integration Module <span class="muted">(English)</span></h2>
+    <p class="muted">Author: <strong>Massimiliano Brighindi</strong> · License: MIT</p>
+
+    <div class="card">
+      <h3>Abstract</h3>
+      <p>MB-X.01 is reformulated here as an internal module of <em>Tecnologia delle Espressioni (TE)</em>, not as a derivative system but as its native extension. The central function measures the semantic and logical stability of an expression through <em>multi-base coherence</em>, providing an operational index of functional truth.</p>
+    </div>
+
+    <div class="card">
+      <h3>Coherence Function</h3>
+      <div class="eq"><code>Coherence<sub>TE</sub>(x) = f(TruthΩ, Co<sup>+</sup>, Score<sup>+</sup>)</code></div>
+      <ul>
+        <li><strong>TruthΩ</strong>: stability of the expression under base transformations;</li>
+        <li><strong>Co<sup>+</sup></strong>: normalized exponential measure of coherence;</li>
+        <li><strong>Score<sup>+</sup></strong>: integrates bias (B), interest (I), and confidence (C) to provide a weighted measure of functional truth.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>TE Co-Observation Arc</h3>
+      <p>The <strong>Dual-Echo Framework</strong> of MB-X.01 becomes the <em>TE Co-Observation Arc</em>: two mirrored networks observe each other to maintain representational identity continuity. The interference between the two cognitive flows produces a dynamic convergence signal that computationally replicates TE’s reflective principle — the act of observing the observer.</p>
+    </div>
+
+    <div class="card">
+      <h3>Role in the TE System</h3>
+      <p>MB-X.01 functions as an <strong>internal validation unit</strong> and a <strong>semantic co-resonance measure</strong> between content (coherence) and form (decoherence). It enables TE to quantify the degree of stability and alignment of a representation with respect to its semantic field.</p>
+    </div>
+
+    <div class="card">
+      <h3>Summary</h3>
+      <p>MB-X.01 is not a derivative but a <strong>coherent extension</strong> of TE: an operational module translating the theory of interferential consciousness into a TE-native architecture, fully compatible with dual logic and the functional measure of truth.</p>
+    </div>
+
+    <p class="muted">Original LaTeX Source: <a href="MB-X.01_TE-Integration_Module.tex" download>Download</a> · Machine-readable: <a href="mbx01-te.json" download>mbx01-te.json</a></p>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- MIRROR INFO -->
   <section class="card" id="mirror-info">
     <h2>Informazioni sul mirror</h2>
     <ul>
       <li>Mirror read-only. Aggiornato dopo la pubblicazione sul canonico.</li>
-      <li>Politica noindex per non interferire con l’indicizzazione di Neocities.</li>
+      <li>Politica <code>noindex</code> per non interferire con l’indicizzazione di Neocities.</li>
       <li>Per citazioni: DOI <strong>10.5281/zenodo.17276691</strong>.</li>
       <li>Metadati estesi: <a href="schema.jsonld">schema.jsonld</a></li>
     </ul>
@@ -178,3 +228,4 @@ footer{margin:22px 0 10px}
 </div>
 </body>
 </html>
+```0
