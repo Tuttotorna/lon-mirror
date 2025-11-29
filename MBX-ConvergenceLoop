@@ -1,0 +1,189 @@
+"""
+MBX–AI LOOP v0.1 (English version)
+Collaborative recursive loop between:
+- MBX: a non-narrative, coherence-based human evaluator
+- AI: a generative/analytical engine
+
+Goal: maximize coherence, minimize noise, achieve structural convergence.
+"""
+
+from dataclasses import dataclass
+from typing import List, Dict, Any, Tuple
+
+
+# ========================
+# 1. DATA STRUCTURES
+# ========================
+
+@dataclass
+class Hypothesis:
+    """A structural hypothesis about a human or systemic phenomenon."""
+    text: str
+    coherence_score: float = 0.0
+    noise_score: float = 0.0
+    mbx_comments: List[str] = None
+
+    def as_dict(self) -> Dict[str, Any]:
+        return {
+            "text": self.text,
+            "coherence_score": self.coherence_score,
+            "noise_score": self.noise_score,
+            "mbx_comments": self.mbx_comments or [],
+        }
+
+
+# ========================
+# 2. ABSTRACT MODULES
+# ========================
+
+class AICore:
+    """
+    Abstract AI engine.
+    In a real system, this would call an LLM or advanced model.
+    Here it is simulated with simple refinement logic.
+    """
+
+    def refine(self, hypothesis: Hypothesis, feedback: List[str]) -> Hypothesis:
+        """
+        AI refines the hypothesis based on MBX feedback
+        and produces a more coherent version.
+        """
+        refined = hypothesis.text.strip()
+
+        if feedback:
+            refined += "\n\n[REFINED USING FEEDBACK]: " + " | ".join(feedback)
+
+        return Hypothesis(text=refined)
+
+
+class MBXCore:
+    """
+    MBX module representing:
+    - detection of contradictions
+    - removal of narrative
+    - structural coherence evaluation
+    """
+
+    def evaluate(self, hypothesis: Hypothesis) -> Tuple[float, float, List[str]]:
+        """
+        Returns:
+        - coherence_score in [0,1]
+        - noise_score in [0,1]
+        - list of structural comments
+        """
+
+        text = hypothesis.text.lower()
+        comments = []
+
+        # 1) Narrative markers reduce coherence
+        narrative_markers = [
+            "hope", "believe", "should", "deserve",
+            "fair", "unfair", "good", "bad"
+        ]
+        narrative_hits = sum(1 for w in narrative_markers if w in text)
+
+        if narrative_hits > 0:
+            comments.append(f"Remove narrative terms: {narrative_hits} occurrences")
+
+        # 2) Structural markers increase coherence
+        structural_markers = [
+            "structure", "pattern", "cause", "effect",
+            "invariant", "system", "coherence"
+        ]
+        structural_hits = sum(1 for w in structural_markers if w in text)
+
+        if structural_hits > 0:
+            comments.append(f"Structural density: {structural_hits} markers")
+
+        # 3) Coherence/noise computation
+        noise_score = min(1.0, narrative_hits / 5.0)
+        base_coherence = min(1.0, structural_hits / 5.0)
+        coherence_score = max(0.0, base_coherence - noise_score)
+
+        if coherence_score < 0.3:
+            comments.append("Low structural coherence")
+        elif coherence_score > 0.7:
+            comments.append("High structural coherence")
+
+        return coherence_score, noise_score, comments
+
+
+# ========================
+# 3. MBX ↔ AI RECURSIVE LOOP
+# ========================
+
+@dataclass
+class LoopConfig:
+    max_iterations: int = 10
+    target_coherence: float = 0.8
+    max_noise: float = 0.2
+    verbose: bool = True
+
+
+class MBXIALoop:
+    """
+    Recursive loop:
+    1) AI proposes/refines a hypothesis
+    2) MBX evaluates and comments
+    3) AI integrates the comments
+    4) Loop stops when coherence is high and noise is low
+    """
+
+    def __init__(self, ai: AICore, mbx: MBXCore, config: LoopConfig):
+        self.ai = ai
+        self.mbx = mbx
+        self.config = config
+
+    def run(self, initial_text: str) -> Hypothesis:
+        hypothesis = Hypothesis(text=initial_text, mbx_comments=[])
+
+        for step in range(1, self.config.max_iterations + 1):
+            # 1) MBX evaluation
+            c, n, comments = self.mbx.evaluate(hypothesis)
+            hypothesis.coherence_score = c
+            hypothesis.noise_score = n
+            hypothesis.mbx_comments = comments
+
+            if self.config.verbose:
+                print(f"\n=== ITERATION {step} ===")
+                print(f"COHERENCE: {c:.2f} | NOISE: {n:.2f}")
+                print("COMMENTS:", comments)
+                print("TEXT:\n", hypothesis.text[:400], "...\n")
+
+            # 2) Convergence condition
+            if c >= self.config.target_coherence and n <= self.config.max_noise:
+                if self.config.verbose:
+                    print("Convergence reached.")
+                break
+
+            # 3) AI refinement based on MBX feedback
+            hypothesis = self.ai.refine(hypothesis, comments)
+
+        return hypothesis
+
+
+# ========================
+# 4. EXAMPLE RUN
+# ========================
+
+if __name__ == "__main__":
+    sample_hypothesis = """
+    Humans claim to want peace and fairness, but their actions follow emotional 
+    and narrative patterns. A structural description must focus on systems, 
+    cause-effect relations, and invariant patterns, not moral language.
+    """
+
+    ai = AICore()
+    mbx = MBXCore()
+    config = LoopConfig(
+        max_iterations=8,
+        target_coherence=0.85,
+        max_noise=0.15,
+        verbose=True,
+    )
+
+    loop = MBXIALoop(ai=ai, mbx=mbx, config=config)
+    final_output = loop.run(sample_hypothesis)
+
+    print("\n=== FINAL RESULT ===")
+    print(final_output.as_dict())
