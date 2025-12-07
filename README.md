@@ -1,236 +1,202 @@
-# MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.1.0
+```markdown
+# MB-X.01 — Logical Origin Node (L.O.N.)  
+Mirror + Engine v1.1.0  
+December 7, 2025
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17276691.svg)](https://doi.org/10.5281/zenodo.17276691)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Public and **machine-readable mirror** of the **Logical Origin Node (L.O.N.)**.
+**An open-source logical-computational framework for reproducible measurement of semantic coherence and cognitive risk.**  
+Born as the formal synthesis of 4+ years of daily self-observation (Omniabase-Totale v1→v6), MB-X.01 is the first fully auditable, machine-readable, and portable Logical Origin Node.
 
-**Author:** Massimiliano Brighindi — [brighissimo@gmail.com](mailto:brighissimo@gmail.com)  
-**License:** MIT  
-**DOI:** [10.5281/zenodo.17276691](https://doi.org/10.5281/zenodo.17276691)  
-**Canonical:** [massimiliano.neocities.org](https://massimiliano.neocities.org/)
-
----
-
-## Index
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Omniabase-3D Engine](#omniabase-3d-engine)
-- [Unified Engine v1.1.0](#unified-engine-v110)
-  - [CLI](#cli)
-  - [Local API](#local-api)
-  - [Ledger Verification](#ledger-verification)
-- [TE Integration Module](#te-integration-module)
-- [Citation](#citation)
-- [English Brief](#english-brief)
-- [Repository Layout](#repository-layout)
-- [Official Links](#official-links)
-- [License](#license)
+**Author:** Massimiliano Brighindi  
+**Contact:** brighissimo@gmail.com  
+**Canonical site:** https://massimiliano.neocities.org  
+**Permanent DOI:** https://doi.org/10.5281/zenodo.17276691  
 
 ---
 
-## Overview
+## Evolutionary Lineage: Omniabase-Totale (2021 → 2025)
 
-**MB-X.01** is a logical–computational architecture for evaluating **semantic coherence** and **cognitive risk** through the metric chain:
+| Version                     | First release | Cumulative entries | Key milestones                                                    | Status      |
+|-----------------------------|---------------|--------------------|-------------------------------------------------------------------|-------------|
+| Omniabase-Totale v1         | 2021-11-11    | ~2 800             | First public append-only ledger, initial C/B/I metrics           | Archived    |
+| Omniabase-Totale v2         | Jun 2022      | ~12 000            | TruthΩ, Co⁺, Lya v1 protocol                                      | Archived    |
+| Omniabase-Totale v3         | Jan 2023      | ~28 000            | Omniabase-3D (I3/H3 tensors), Third Observer                      | Mirrored    |
+| Omniabase-Totale v4         | Dec 2023      | ~47 000            | Echo-Cognition Engine (Cₜ, Sₜ), hypercoherence H(X)               | Active      |
+| Omniabase-Totale v5         | Sep 2024      | ~68 000            | Universal Probability Engine + τ(α) thresholds                    | Active      |
+| **Omniabase-Totale v6**     | Mar 2025 → today | **≥ 92 000** (Dec 7, 2025) | Native MB-X.01 integration + Score⁺ + automated decisions | **LIVE**    |
 
-**TruthΩ → Co⁺ → Score⁺**
-
-Core modules:
-
-- **Lya** — append-only ledger for signature and traceability  
-- **Omniabase-3D** — multi-base observation and hypercoherence mapping  
-- **Third Observer** — public verification protocol  
-- **UPE** — Universal Probability Engine for surprisal and τ(α)  
-- **Hypercoherence H(X)** — observer ↔ model convergence
-
-### Key formulas
-
-```text
-TruthΩ  = −√( ε + (1 − C)² + ((B + I)/2)² ),  ε > 0
-Co⁺     = exp(TruthΩ) ∈ (0, 1]
-Score⁺  = (C · Co⁺) − (B + I)/2
-H(X)    = tanh( (Co⁺ · C) / (1 − D) )
-
+Full historical ledger (v1–v6): https://massimiliano.neocities.org/omnia_totale  
+**MB-X.01 is the definitive, portable formalisation of everything Omniabase-Totale learned over four years.**
 
 ---
 
-Architecture
+## What is MB-X.01?
 
-Module	Function	File / Page
+A unified engine that turns any text (or text stream) into an interconnected chain of three metrics:
 
-TruthΩ / Co⁺ / Score⁺	Coherence & risk metrics	lon_unified.py
-Lya	Append-only ledger	lon_unified.py
-Omniabase-3D	Tri-axial multi-base analysis (I3, H3)	analysis/omniabase3d_engine.py, omniabase3d_view.html
-Third Observer	Public audit	third_observer.html
-UPE	Surprisal & τ(α) threshold	universal_probability_engine.py
-Hypercoherence	Observer–observed feedback	lon_unified.py
-Mind Index	Machine-readable index	mind_index.json
+```
+TruthΩ  →  Co⁺  →  Score⁺  →  Automated decision
+```
 
+and produces an immutable, publicly verifiable audit trail (Lya ledger).
 
+### Core equations (v1.1.0)
+
+```math
+\begin{aligned}
+\text{TruthΩ} &= -\sqrt{\varepsilon + (1-C)^2 + \left(\frac{B+I}{2}\right)^2} \quad (\varepsilon > 0) \\
+\text{Co⁺}    &= \exp(\text{TruthΩ}) \;\in (0,1] \\
+\text{Score⁺} &= C \cdot \text{Co⁺} - \frac{B+I}{2} \\
+\text{H(X)}   &= \tanh\!\Big(\frac{\text{Co⁺} \cdot C}{1-D}\Big)
+\end{aligned}
+```
+
+| Symbol | Meaning                            | Range       |
+|--------|------------------------------------|-------------|
+| C      | Semantic coherence                 | [0,1]       |
+| B      | Systematic bias                    | [0,1]       |
+| I      | Residual uncertainty               | [0,1]       |
+| D      | Observer–model divergence          | [0,1]       |
+| TruthΩ | Structural stability               | (−∞,0]      |
+| Co⁺    | Normalised coherence               | (0,1]       |
+| Score⁺ | Synthetic decision variable        | ℝ           |
+| H(X)   | Recursive hypercoherence           | [0,1)       |
+
+### Automated decisions (v1.1.0)
+
+| Condition                             | Decision   | Practical meaning                          |
+|---------------------------------------|------------|--------------------------------------------|
+| Score⁺ ≥ 0.55 ∧ H ≥ 0.65              | **ACCEPT** | High coherence, low cognitive risk         |
+| Score⁺ ≥ 0.00 ∧ H ≥ 0.30              | **REVISE** | Acceptable with corrections                |
+| Otherwise                             | **REJECT** | Incoherence or high cognitive risk        |
 
 ---
 
-Omniabase-3D Engine
+## System components
 
-File: analysis/omniabase3d_engine.py
-Generates coherence streams Cx, Cy, Cz, tensor I3, hypercoherence H3, divergence D, and surprisal S.
-
-Outputs (JSON or CSV):
-omni_tensor_I3.json · omni_surface_H3.json · omni_metrics.json
-
-Demo viewer (Plotly):
-omniabase3d_view.html (see Official Links)
-
+| Component            | Role                                              | Main file / resource                                 |
+|----------------------|---------------------------------------------------|------------------------------------------------------|
+| Lya                  | Cryptographically signed append-only ledger       | `lon_unified.py`                                     |
+| Omniabase-3D         | Tri-axial analysis & hypercoherence tensors       | `analysis/omniabase3d_engine.py`                     |
+| Third Observer       | Independent public verification protocol          | https://massimiliano.neocities.org/third_observer.html |
+| UPE                  | Surprisal calculation & τ(α) thresholds           | `universal_probability_engine.py`                    |
+| Echo-Cognition       | Temporal metrics Cₜ, Sₜ                            | folder `echo-cognition/`                             |
+| TE Integration       | Native Tecnologia delle Espressioni module        | `mbx01-te/` (site) + LaTeX + JSON-LD                 |
 
 ---
 
-Unified Engine v1.1.0
+## Quickstart
 
-File: lon_unified.py
-CLI, local REST API, and Lya ledger verification in a single entrypoint.
+```bash
+git clone https://github.com/Tuttotorna/lon-mirror.git
+cd lon-mirror
+pip install -r requirements.txt
+```
 
-CLI
+### 1. CLI (fastest)
 
-python lon_unified.py cli \
-  --input data/example_data.csv \
-  --out out/results.jsonl
+```bash
+python lon_unified.py cli --input data/example_data.csv --out results.jsonl
+```
 
-Decision thresholds
+### 2. Local REST API
 
-Condition	Decision
+```bash
+# Start server
+python lon_unified.py serve --port 8088
+```
 
-Score⁺ ≥ 0.55 and H ≥ 0.65	ACCEPT
-Score⁺ ≥ 0.0 and H ≥ 0.3	REVISE
-Score⁺ < 0.0 or H < 0.3	REJECT
+```bash
+# Evaluate a single text
+curl -X POST http://127.0.0.1:8088/evaluate \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Clear proposal with measurable goals and no ambiguity."}'
+```
 
+Typical ACCEPT response:
+```json
+{
+  "C": 1.0, "B": 0.0, "I": 0.0,
+  "TruthΩ": -0.001, "Co⁺": 0.999, "Score⁺": 0.999,
+  "H": 0.795, "decision": "ACCEPT"
+}
+```
 
-Local API
+### 3. Verify Lya ledger integrity
 
-Start server:
-
-python lon_unified.py serve --host 127.0.0.1 --port 8088
-
-Endpoints
-
-Endpoint	Output
-
-/health	{"ok": true}
-/version	{"version": "v1.1.0"}
-/evaluate	Full JSON with metrics + decision
-
-
-Example
-
-curl -s -X POST http://127.0.0.1:8088/evaluate \
- -H "Content-Type: application/json" \
- -d '{"text":"Clear proposal with measurable goals."}'
-
-Result:
-
-{"C":1.0,"B":0.0,"I":0.0,"TruthΩ":-0.001,"Co⁺":0.999,"Score⁺":0.999,"H":0.795,"decision":"ACCEPT"}
-
-Ledger Verification
-
+```bash
 python lon_unified.py verify-ledger --path data/ledger.jsonl
-
-Returns True if all Lya hashes are coherent.
-
-
----
-
-TE Integration Module
-
-Formalization of MB-X.01 as a native module of Tecnologia delle Espressioni (TE).
-Page and machine-readable bundle live under mbx01-te/ in the canonical site and are mirrored here as needed.
-
-Hub reference (Neocities): /mbx01-te/
-
-Source (LaTeX): MB-X.01_TE-Integration_Module.tex
-
-Companion JSON: mbx01-te.json
-
-
-> Coherence function: Coherence_TE(x) = f(TruthΩ, Co⁺, Score⁺)
-Roles: internal validation unit, semantic co-resonance between content (coherence) and form (decoherence).
-
-
-
+# → True if all hashes are coherent
+```
 
 ---
 
-Citation
+## Live demos
 
-> Brighindi, Massimiliano (2025).
-MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.1.0.
-Zenodo. 10.5281/zenodo.17276691
-
-
-
-Always cite the DOI when referencing this project.
-
+- **Omniabase-3D interactive viewer** (Plotly):  
+  https://massimiliano.neocities.org/omniabase3d_view.html
+- **Third Observer** (public verification):  
+  https://massimiliano.neocities.org/third_observer.html
+- **Engine hub**:  
+  https://massimiliano.neocities.org/engine.html
 
 ---
 
-English Brief
+## Repository structure
 
-MB-X.01 defines a reproducible logical model for cross-base reasoning and semantic-risk calibration.
-It links numerical invariance, linguistic coherence, and probabilistic convergence into an auditable framework.
-
-Symbol	Meaning
-
-TruthΩ	Structural stability metric
-Co⁺	Coherence normalization
-Score⁺	Synthetic decision variable
-H(X)	Recursive hypercoherence
-
-
-Each layer acts as a self-referential feedback loop ensuring reasoning consistency.
-
-
----
-
-Repository Layout
-
+```
 lon-mirror/
-├─ analysis/                 # Omniabase-3D engine and metrics
-├─ code/                     # Core LON components (optional split)
-├─ data/                     # Datasets + Lya ledger
-├─ docs/                     # Exec summary & guides
-├─ spec/                     # JSON-LD schemas
-├─ story/                    # Lya narrative
-├─ echo-cognition/           # Echo-Cognition Engine (C_t, S_t)
-├─ index.html                # Hub (mirror)
-├─ engine.html               # Technical index
-├─ mind_index.json           # Machine index
-├─ third_index.json          # Verification index
-├─ omniabase3d_view.html     # Plotly viewer
+├─ analysis/              → Omniabase-3D engine
+├─ data/                  → example datasets + Lya ledger
+├─ echo-cognition/        → temporal metrics
+├─ spec/                  → JSON-LD schemas
+├─ lon_unified.py         → single entrypoint (CLI + API + ledger)
 ├─ universal_probability_engine.py
-├─ lon_unified.py
-├─ README.md
+├─ omniabase3d_view.html
+├─ mind_index.json        → machine-readable index
+├─ third_index.json
+├─ index.html             → mirror hub
 └─ LICENSE
-
-
----
-
-Official Links
-
-Resource	URL
-
-Canonical	https://massimiliano.neocities.org/
-Mirror (GitHub Pages)	https://tuttotorna.github.io/lon-mirror/
-DOI (Zenodo)	https://doi.org/10.5281/zenodo.17276691
-Omniabase-3D Viewer	https://massimiliano.neocities.org/omniabase3d_view.html
-Engine (Neocities)	https://massimiliano.neocities.org/engine.html
-AI Discovery Index	https://tuttotorna.github.io/lon-mirror/ai.json
-Sitemap	https://tuttotorna.github.io/lon-mirror/sitemap.xml
-
-
+```
 
 ---
 
-License
+## Official citation
 
-Released under the MIT License.
-Free use with attribution and DOI citation.
+```bibtex
+@software{mb_x_01_2025,
+  author       = {Brighindi, Massimiliano},
+  title        = {MB-X.01 — Logical Origin Node (L.O.N.) — Mirror + Engine v1.1.0},
+  year         = 2025,
+  month        = dec,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.17276691},
+  url          = {https://doi.org/10.5281/zenodo.17276691}
+}
+```
 
-© 2025 Massimiliano Brighindi — massimiliano.neocities.org
+**Always cite the DOI** when referencing or using the project.
+
+---
+
+## Official links
+
+| Resource                        | URL                                                               |
+|---------------------------------|-------------------------------------------------------------------|
+| Canonical site                  | https://massimiliano.neocities.org                                |
+| GitHub Pages mirror             | https://tuttotorna.github.io/lon-mirror/                          |
+| Zenodo DOI                      | https://doi.org/10.5281/zenodo.17276691                           |
+| Omniabase-3D live viewer        | https://massimiliano.neocities.org/omniabase3d_view.html          |
+| Full Omniabase-Totale ledger    | https://massimiliano.neocities.org/omnia_totale                  |
+| AI Discovery Index (JSON)       | https://tuttotorna.github.io/lon-mirror/ai.json                   |
+
+---
+
+## License
+
+**MIT License** – free to use, modify, and distribute with attribution and DOI citation.  
+© 2025 Massimiliano Brighindi – https://massimiliano.neocities.org
+```
+
