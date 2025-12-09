@@ -7,7 +7,7 @@ Wraps:
 - omniacausa  (lagged causal edges)
 - tokenlens   (token-level Ω-map for LLM traces)
 
-and exposes:
+Exposes:
 - build_default_engine(): OmniaKernel preconfigurato
 - run_omnia_totale(...): scorciatoia ad alto livello
 """
@@ -15,7 +15,7 @@ and exposes:
 from __future__ import annotations
 
 from dataclasses import asdict
-from typing import Dict, Iterable, Mapping, Any, Optional
+from typing import Dict, Iterable, Mapping, Any, Optional, List
 
 import numpy as np
 
@@ -56,7 +56,7 @@ def _lens_omniabase(ctx: OmniaContext) -> LensResult:
     Richiede:
     - ctx.n (int)
 
-    Produces:
+    Produce:
     - scores: {
         'omega': base_instability (PBII),
         'sigma_mean': sigma_mean,
@@ -65,6 +65,7 @@ def _lens_omniabase(ctx: OmniaContext) -> LensResult:
     - metadata: full OmniabaseSignature as dict
     """
     if ctx.n is None:
+        # nessun intero → lens “spenta”
         return LensResult(
             name="omniabase",
             scores={"omega": 0.0},
@@ -95,7 +96,7 @@ def _lens_omniatempo(ctx: OmniaContext) -> LensResult:
     Richiede:
     - ctx.series (Iterable[float])
 
-    Produces:
+    Produce:
     - scores: {
         'omega': log(1 + regime_change_score),
         'regime_change_score': raw,
@@ -135,7 +136,7 @@ def _lens_omniacausa(ctx: OmniaContext) -> LensResult:
     Richiede:
     - ctx.series_dict (Mapping[str, Iterable[float]])
 
-    Produces:
+    Produce:
     - scores: {
         'omega': mean |strength|,
         'edge_count': number of edges,
@@ -185,40 +186,46 @@ def _lens_omniacausa(ctx: OmniaContext) -> LensResult:
 
 def _lens_token(ctx: OmniaContext) -> LensResult:
     """
-    Lens wrapper per token-level Ω-map.
+    Lens wrapper per la mappa token-level Ω.
 
-    Richiede:
-    - ctx.tokens (Iterable[str])
-    - ctx.token_numbers (Iterable[int])
+    Richiede in ctx.extra:
+    - 'tokens': list[str]
+    - 'token_numbers': list[int] (proxy numerico per token)
 
-    Produces:
+    Produce:
     - scores: {
-        'omega': mean_abs_z,
+        'omega': mean |z|,
+        'mean_pbii': media PBII sui token,
       }
-    - metadata: per-token PBII e z-score
+    - metadata: TokenOmegaMap as dict
     """
-    if ctx.tokens is None or ctx.token_numbers is None:
+    extra = ctx.extra or {}
+    tokens: Optional[List[str]] = extra.get("tokens")
+    token_numbers: Optional[List[int]] = extra.get("token_numbers")
+
+    if not tokens or not token_numbers or len(tokens) != len(token_numbers):
         return LensResult(
             name="tokenlens",
             scores={"omega": 0.0},
-            metadata={"warning": "ctx.tokens or ctx.token_numbers is None"},
+            metadata={
+                "warning": "missing or inconsistent tokens/token_numbers in ctx.extra",
+            },
         )
 
-    tom: TokenOmegaMap = compute_token_omega_map(
-        list(ctx.tokens),
-        list(ctx.token_numbers),
-    )
+    tok_map: TokenOmegaMap = compute_token_omega_map(tokens, token_numbers)
 
     scores = {
-        "omega": float(tom.mean_abs_z),
+        "omega": float(tok_map.mean_abs_z),
+        "mean_pbii": float(tok_map.mean_pbii),
     }
 
-    meta = {
-        "tokens": tom.tokens,
-        "numbers": tom.numbers,
-        "pbii_scores": tom.pbii_scores,
-        "z_scores": tom.z_scores,
-        "mean_abs_z": tom.mean_abs_z,
+    meta: Dict[str, Any] = {
+        "tokens": tok_map.tokens,
+        "token_numbers": tok_map.token_numbers,
+        "pbii_scores": tok_map.pbii_scores,
+        "z_scores": tok_map.z_scores,
+        "mean_abs_z": tok_map.mean_abs_z,
+        "mean_pbii": tok_map.mean_pbii,
     }
 
     return LensResult(
@@ -262,8 +269,6 @@ def run_omnia_totale(
     w_tempo: float = 1.0,
     w_causa: float = 1.0,
     w_token: float = 1.0,
-    tokens: Optional[Iterable[str]] = None,
-    token_numbers: Optional[Iterable[int]] = None,
     extra: Optional[Dict[str, Any]] = None,
 ) -> KernelResult:
     """
@@ -271,10 +276,15 @@ def run_omnia_totale(
 
     - costruisce un OmniaContext
     - crea un engine di default
-    - esegue tutte le lenti (base, tempo, causa, token)
+    - esegue tutte le lenti
     - restituisce KernelResult
 
-    Questo sostituisce l'uso diretto di OMNIA_TOTALE_v2.0.py come script monolitico.
+    Questo sostituisce l'uso diretto di OMNIA_TOTALE_v2.0.py monolitico.
+    Per attivare la lente TOKEN, passa in extra:
+      extra = {
+          "tokens": [...],
+          "token_numbers": [...],
+      }
     """
     if extra is None:
         extra = {}
@@ -283,8 +293,6 @@ def run_omnia_totale(
         n=n,
         series=series,
         series_dict=series_dict,
-        tokens=list(tokens) if tokens is not None else None,
-        token_numbers=list(token_numbers) if token_numbers is not None else None,
         extra=extra,
     )
     engine = build_default_engine(
