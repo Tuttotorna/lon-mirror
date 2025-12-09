@@ -1,16 +1,17 @@
 """
-OMNIABASE — multi-base structural lens + PBII
-Author: Massimiliano Brighindi (MBX)
+omnia.core.omniabase — multi-base numeric lens (PBII, signatures)
 
-Exposes:
-- digits_in_base_np
-- normalized_entropy_base
-- sigma_b
-- omniabase_signature
-- pbii_index
+Provides:
+- digits_in_base_np: integer → digits in base b (NumPy, MSB first)
+- normalized_entropy_base: Shannon entropy of digits, normalized [0,1]
+- sigma_b: base symmetry score (low entropy + divisibility bonus)
+- OmniabaseSignature: dataclass with per-base scores and means
+- omniabase_signature: compute multi-base signature for n
+- pbii_index: Prime Base Instability Index (PBII)
 """
 
 from __future__ import annotations
+
 from dataclasses import dataclass, asdict
 from typing import Dict, List, Iterable
 import math
@@ -38,7 +39,7 @@ def digits_in_base_np(n: int, b: int) -> np.ndarray:
 
 
 def normalized_entropy_base(n: int, b: int) -> float:
-    """Normalized Shannon entropy of digits of n in base b (0..1)."""
+    """Normalized Shannon entropy of digits of n in base b."""
     digits = digits_in_base_np(n, b)
     L = len(digits)
     if L == 0:
@@ -52,6 +53,10 @@ def normalized_entropy_base(n: int, b: int) -> float:
     return float(H / Hmax) if Hmax > 0 else 0.0
 
 
+# =========================
+# 2. SIGMA_b + SIGNATURE
+# =========================
+
 def sigma_b(
     n: int,
     b: int,
@@ -62,9 +67,8 @@ def sigma_b(
     """
     Base Symmetry Score (NumPy version).
 
-    sigma_b(n) =
-        length_weight * (1 - H_norm) / L^length_exponent
-        + divisibility_bonus * I[n % b == 0]
+    sigma_b(n) = length_weight * (1 - H_norm) / L^length_exponent
+                 + divisibility_bonus * I[n % b == 0]
     """
     digits = digits_in_base_np(n, b)
     L = len(digits)
@@ -84,10 +88,6 @@ def sigma_b(
     div_term = divisibility_bonus * (1.0 if n % b == 0 else 0.0)
     return float(length_term + div_term)
 
-
-# =========================
-# 2. SIGNATURE + PBII
-# =========================
 
 @dataclass
 class OmniabaseSignature:
@@ -109,7 +109,7 @@ def omniabase_signature(
     length_exponent: float = 1.0,
     divisibility_bonus: float = 0.5,
 ) -> OmniabaseSignature:
-    """Compute multi-base Omniabase signature for integer n."""
+    """Compute multi-base signature for integer n."""
     bases = list(bases)
     sigmas: Dict[int, float] = {}
     entropy: Dict[int, float] = {}
@@ -136,23 +136,11 @@ def omniabase_signature(
     )
 
 
+# =========================
+# 3. PBII INDEX
+# =========================
+
 def pbii_index(
     n: int,
     composite_window: Iterable[int] = (4, 6, 8, 9, 10, 12, 14, 15),
-    bases: Iterable[int] = (2, 3, 5, 7, 11, 13, 17, 19),
-) -> float:
-    """
-    Prime Base Instability Index (PBII) — NumPy variant.
-
-    PBII(n) = mean_sigma(composites) - mean_sigma(n)
-    (Higher values ~ more prime-like multi-base instability)
-    """
-    bases = list(bases)
-    comp = list(composite_window)
-    comp_sigmas = []
-    for c in comp:
-        sig_c = omniabase_signature(c, bases=bases).sigma_mean
-        comp_sigmas.append(sig_c)
-    sat = float(np.mean(comp_sigmas)) if comp_sigmas else 0.0
-    sig_n = omniabase_signature(n, bases=bases).sigma_mean
-    return float(sat - sig_n)
+    bases: Iterable[int] = (2, 3, 5,
