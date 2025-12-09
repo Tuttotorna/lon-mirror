@@ -1,14 +1,20 @@
 """
-omnia.engine — OMNIA_TOTALE engine on top of OMNIA_KERN
+omnia.engine — OMNIA_TOTALE v2.0 engine on top of OMNIA_KERN
 
-Wraps:
-- omniabase (PBII, multi-base signatures)
-- omniatempo (regime-change detection)
-- omniacausa (lagged causal edges)
+Wraps three structural lenses:
 
-and exposes:
-- build_default_engine(): OmniaKernel preconfigurato
-- run_omnia_totale(...): scorciatoia ad alto livello
+- omniabase   → multi-base numeric lens (PBII, signatures)
+- omniatempo  → temporal stability / regime-change lens
+- omniacausa  → lagged causal-structure lens
+
+Exposes:
+
+- build_default_engine(...)
+    → returns a preconfigured OmniaKernel with the three lenses.
+
+- run_omnia_totale(...)
+    → high-level entrypoint: builds context, runs all lenses,
+      returns KernelResult with fused Ω-score and per-lens details.
 """
 
 from __future__ import annotations
@@ -48,19 +54,21 @@ def _lens_omniabase(ctx: OmniaContext) -> LensResult:
     """
     Lens wrapper for Omniabase / PBII.
 
-    Richiede:
-    - ctx.n (int)
+    Requires:
+    - ctx.n (int) as target integer.
 
     Produces:
-    - scores: {
-        'omega': base_instability (PBII),
-        'sigma_mean': sigma_mean,
-        'entropy_mean': entropy_mean,
-      }
-    - metadata: full OmniabaseSignature as dict
+    - scores:
+        {
+          "omega":        PBII(n),
+          "sigma_mean":   mean σ over bases,
+          "entropy_mean": mean normalized entropy over bases,
+        }
+    - metadata:
+        full OmniabaseSignature as dict.
     """
     if ctx.n is None:
-        # Nessun intero → lens “spenta”
+        # No integer provided → lens is effectively off
         return LensResult(
             name="omniabase",
             scores={"omega": 0.0},
@@ -70,7 +78,7 @@ def _lens_omniabase(ctx: OmniaContext) -> LensResult:
     sig: OmniabaseSignature = omniabase_signature(ctx.n)
     base_instability = pbii_index(ctx.n)
 
-    scores = {
+    scores: Dict[str, float] = {
         "omega": float(base_instability),
         "sigma_mean": float(sig.sigma_mean),
         "entropy_mean": float(sig.entropy_mean),
@@ -86,17 +94,19 @@ def _lens_omniabase(ctx: OmniaContext) -> LensResult:
 
 def _lens_omniatempo(ctx: OmniaContext) -> LensResult:
     """
-    Lens wrapper per Omniatempo.
+    Lens wrapper for Omniatempo (temporal regime changes).
 
-    Richiede:
+    Requires:
     - ctx.series (Iterable[float])
 
     Produces:
-    - scores: {
-        'omega': log(1 + regime_change_score),
-        'regime_change_score': raw,
-      }
-    - metadata: OmniatempoResult as dict
+    - scores:
+        {
+          "omega":               log(1 + regime_change_score),
+          "regime_change_score": raw symmetric KL-like divergence,
+        }
+    - metadata:
+        OmniatempoResult as dict.
     """
     import math
 
@@ -111,7 +121,7 @@ def _lens_omniatempo(ctx: OmniaContext) -> LensResult:
     regime = float(res.regime_change_score)
     omega = math.log(1.0 + regime)
 
-    scores = {
+    scores: Dict[str, float] = {
         "omega": omega,
         "regime_change_score": regime,
     }
@@ -126,17 +136,24 @@ def _lens_omniatempo(ctx: OmniaContext) -> LensResult:
 
 def _lens_omniacausa(ctx: OmniaContext) -> LensResult:
     """
-    Lens wrapper per Omniacausa.
+    Lens wrapper for Omniacausa (lagged causal edges).
 
-    Richiede:
+    Requires:
     - ctx.series_dict (Mapping[str, Iterable[float]])
 
     Produces:
-    - scores: {
-        'omega': mean |strength|,
-        'edge_count': number of edges,
-      }
-    - metadata: list of edges as dict
+    - scores:
+        {
+          "omega":      mean |strength| over accepted edges,
+          "edge_count": number of edges,
+        }
+    - metadata:
+        {
+          "edges": [
+             { "source": ..., "target": ..., "lag": ..., "strength": ... },
+             ...
+          ]
+        }
     """
     if ctx.series_dict is None or not ctx.series_dict:
         return LensResult(
@@ -156,26 +173,26 @@ def _lens_omniacausa(ctx: OmniaContext) -> LensResult:
     strengths = np.array([abs(e.strength) for e in res.edges], dtype=float)
     mean_strength = float(strengths.mean())
 
-    scores = {
+    scores: Dict[str, float] = {
         "omega": mean_strength,
         "edge_count": float(len(res.edges)),
     }
 
-    meta = {
-        "edges": [
-            {
-                "source": e.source,
-                "target": e.target,
-                "lag": e.lag,
-                "strength": e.strength,
-            }
-            for e in res.edges
-        ]
-    }
+    meta_edges = [
+        {
+            "source": e.source,
+            "target": e.target,
+            "lag": e.lag,
+            "strength": e.strength,
+        }
+        for e in res.edges
+    ]
+    metadata: Dict[str, Any] = {"edges": meta_edges}
+
     return LensResult(
         name="omniacausa",
         scores=scores,
-        metadata=meta,
+        metadata=metadata,
     )
 
 
@@ -189,11 +206,11 @@ def build_default_engine(
     w_causa: float = 1.0,
 ) -> OmniaKernel:
     """
-    Crea un OmniaKernel con tre lenti registrate:
+    Build a default OmniaKernel with three lenses registered:
 
-    - 'omniabase'  (peso w_base)
-    - 'omniatempo' (peso w_tempo)
-    - 'omniacausa' (peso w_causa)
+    - 'omniabase'   (weight = w_base)
+    - 'omniatempo'  (weight = w_tempo)
+    - 'omniacausa'  (weight = w_causa)
     """
     kern = OmniaKernel()
     kern.register_lens("omniabase", _lens_omniabase, weight=w_base)
@@ -212,14 +229,16 @@ def run_omnia_totale(
     extra: Optional[Dict[str, Any]] = None,
 ) -> KernelResult:
     """
-    Scorciatoia ad alto livello:
+    High-level entrypoint for OMNIA_TOTALE:
 
-    - costruisce un OmniaContext
-    - crea un engine di default
-    - esegue tutte le lenti
-    - restituisce KernelResult
+    - Builds an OmniaContext from inputs.
+    - Constructs a default OmniaKernel with the three lenses.
+    - Runs all lenses and returns a KernelResult, with:
 
-    Questo sostituisce l'uso diretto di OMNIA_TOTALE_v2.0.py come script monolitico.
+        - fused_omega: weighted sum of lens 'omega' scores,
+        - per-lens scores and metadata.
+
+    This replaces the monolithic OMNIA_TOTALE_v2.0.py script-style usage.
     """
     if extra is None:
         extra = {}
