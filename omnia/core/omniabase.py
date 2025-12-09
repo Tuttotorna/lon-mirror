@@ -143,4 +143,30 @@ def omniabase_signature(
 def pbii_index(
     n: int,
     composite_window: Iterable[int] = (4, 6, 8, 9, 10, 12, 14, 15),
-    bases: Iterable[int] = (2, 3, 5,
+    bases: Iterable[int] = (2, 3, 5, 7, 11, 13, 17, 19),
+) -> float:
+    """
+    Prime Base Instability Index (NumPy variant).
+
+    PBII(n) = mean_sigma(composites) - mean_sigma(n)
+    (Higher values ~ more prime-like instability)
+    """
+    bases = list(bases)
+    comp = list(composite_window)
+    comp_sigmas: List[float] = []
+    for c in comp:
+        sig_c = omniabase_signature(c, bases=bases).sigma_mean
+        comp_sigmas.append(sig_c)
+    sat = float(np.mean(comp_sigmas)) if comp_sigmas else 0.0
+    sig_n = omniabase_signature(n, bases=bases).sigma_mean
+    return float(sat - sig_n)
+
+
+__all__ = [
+    "digits_in_base_np",
+    "normalized_entropy_base",
+    "sigma_b",
+    "OmniabaseSignature",
+    "omniabase_signature",
+    "pbii_index",
+]
