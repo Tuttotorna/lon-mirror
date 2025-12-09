@@ -1,140 +1,313 @@
-# OMNIA_TOTALE v2.0 — Structural Coherence Engine
+# OMNIA_TOTALE v2.0 — Unified Ω-fusion Engine
 
 Author: **Massimiliano Brighindi (MB-X.01 / Omniabase±)**  
-Engine formalization: **MBX IA**
+Engine formalization: **MBX IA**  
+Repository: `Tuttotorna/lon-mirror`
 
 ---
 
 ## 1. Overview
 
-**OMNIA_TOTALE v2.0** is a small, deterministic engine for measuring **structural coherence** in numbers, time series and multi-channel signals.
+**OMNIA_TOTALE v2.0** is a small, self-contained framework for **structural stability analysis** of:
 
-It is built around three lenses:
+- integers (multi-base numeric structure),
+- time series (regime changes),
+- multivariate series (lagged causal structure),
+- and, experimentally, token-level traces from LLM reasoning.
 
-- **Omniabase** — multi-base numeric structure + PBII (Prime Base Instability Index).  
-- **Omniatempo** — temporal stability / regime-change detection on 1D series.  
-- **Omniacausa** — lagged correlation graph between multiple channels.
+It is designed as a **model-agnostic guardrail**: given numbers, sequences, and traces, it emits a set of **Ω-scores** that flag instability, regime shifts, and suspicious patterns, without depending on any particular model internals.
 
-On top of these, the engine fuses lens scores into a single **Ω-score**, which can be used as an external, model-agnostic signal for:
-
-- detecting numerical / structural instabilities in reasoning chains,  
-- analysing time series (finance, sensors, etc.),  
-- exploring causal patterns between series.
-
-This repository is intentionally minimal and transparent: all code is plain Python + NumPy/Matplotlib, with no hidden dependencies.
+Core idea:  
+Instead of trusting the narrative, OMNIA_TOTALE reads the **structure** of what a system is doing (digits, time, correlations) and checks if it is stable or "cracking" under its own logic.
 
 ---
 
-## 2. Repository structure
+## 2. Components
 
-Current layout (relevant files only):
+The framework is implemented as a small Python package under `omnia/` plus a set of scripts and demos.
+
+### 2.1 `omnia.omniabase` — multi-base numeric lens (PBII)
+
+File: `omnia/omniabase.py`
+
+Provides:
+
+- `digits_in_base_np(n, b)`  
+  Convert integer `n` to digits in base `b` (NumPy, MSB first).
+
+- `normalized_entropy_base(n, b)`  
+  Normalized Shannon entropy of digits in base `b` (range `[0, 1]`).
+
+- `sigma_b(n, b, ...)`  
+  Base symmetry score:
+  - low entropy + short representation → more structure,
+  - bonus for `n % b == 0`.
+
+- `OmniabaseSignature` (dataclass)  
+  Holds per-base σ and entropy plus means over bases.
+
+- `omniabase_signature(n, bases=...)`  
+  Compute the multi-base signature for an integer.
+
+- `pbii_index(n, composite_window=..., bases=...)`  
+  **PBII — Prime Base Instability Index**:
+  - `saturation` = mean σ over a window of composite neighbours,
+  - `PBII(n) = saturation - sigma_mean(n)`,
+  - higher PBII ≈ more "prime-like" instability.
+
+This is the numeric heart of OMNIA_TOTALE.
+
+---
+
+### 2.2 `omnia.omniatempo` — temporal stability lens
+
+File: `omnia/omniatempo.py`
+
+Provides:
+
+- `OmniatempoResult` (dataclass):
+  - `global_mean`, `global_std`,
+  - `short_mean`, `short_std`,
+  - `long_mean`, `long_std`,
+  - `regime_change_score`.
+
+- `omniatempo_analyze(series, short_window=20, long_window=100, ...)`  
+  Computes:
+  - global statistics,
+  - short/long window statistics,
+  - symmetric KL-like divergence between recent-short and recent-long histograms (this is the **regime_change_score**).
+
+In Ω-fusion, we typically use:
+- `tempo_component = log(1 + regime_change_score)`.
+
+---
+
+### 2.3 `omnia.omniacausa` — lagged causal-structure lens
+
+File: `omnia/omniacausa.py`
+
+Provides:
+
+- `OmniaEdge` (dataclass):  
+  `source`, `target`, `lag`, `strength`.
+
+- `OmniacausaResult` (dataclass):  
+  list of `edges`.
+
+- `omniacausa_analyze(series_dict, max_lag=5, strength_threshold=0.3)`:
+
+  For each pair of channels `(src, tgt)`:
+  - scans lags in `[-max_lag, ..., +max_lag]`,
+  - computes lagged Pearson correlations,
+  - keeps the lag with highest |corr|,
+  - emits an edge if `|corr| ≥ strength_threshold`.
+
+In Ω-fusion, we typically use:
+- `causa_component = mean(|edge.strength|)` over accepted edges.
+
+---
+
+### 2.4 `omnia.kernel` — generic Ω-kernel
+
+File: `omnia/kernel.py`
+
+Defines small, generic kernel structures:
+
+- `OmniaContext`  
+  Holds input data:
+  - `n` (integer),
+  - `series` (main time series),
+  - `series_dict` (multichannel),
+  - `extra` (dict for future extensions).
+
+- `LensResult`  
+  Output of a single lens:
+  - `name`,
+  - `scores` (dict of scalar metrics),
+  - `metadata` (free-form JSON-serializable dict).
+
+- `KernelResult`  
+  Global result:
+  - `omega_total` (aggregated Ω),
+  - per-lens `LensResult`,
+  - full metadata snapshot.
+
+- `OmniaKernel`  
+  Lightweight engine:
+  - register multiple lenses with weights,
+  - run them on an `OmniaContext`,
+  - combine their `scores["omega"]` into a single `omega_total`.
+
+This kernel makes OMNIA_TOTALE **extensible**: new lenses can be plugged in without touching the core.
+
+---
+
+### 2.5 `omnia.engine` — OMNIA_TOTALE on top of the kernel
+
+File: `omnia/engine.py`
+
+Wraps the three lenses into the kernel:
+
+- `_lens_omniabase(ctx)`  
+  Uses `omniabase_signature` and `pbii_index`.  
+  Exposes scores:
+
+  - `"omega"` = PBII-style instability (higher ~ more prime-like),
+  - `"sigma_mean"`,
+  - `"entropy_mean"`.
+
+- `_lens_omniatempo(ctx)`  
+  Uses `omniatempo_analyze`.  
+  Exposes scores:
+
+  - `"omega"` = `log(1 + regime_change_score)`,
+  - `"regime_change_score"`.
+
+- `_lens_omniacausa(ctx)`  
+  Uses `omniacausa_analyze`.  
+  Exposes:
+
+  - `"omega"` = mean |corr| across edges,
+  - `"edge_count"`.
+
+High-level helpers:
+
+- `build_default_engine(w_base=1.0, w_tempo=1.0, w_causa=1.0) -> OmniaKernel`  
+  Registers the three lenses with given fusion weights.
+
+- `run_omnia_totale(n, series, series_dict, w_base=1.0, w_tempo=1.0, w_causa=1.0, extra=None) -> KernelResult`  
+  Shortcut: construct context, build engine, run, return results.
+
+This replaces older monolithic scripts and is the **canonical path** to use OMNIA_TOTALE in other projects.
+
+---
+
+## 3. Standalone script
+
+File: `OMNIA_TOTALE_v2.0.py`
+
+A self-contained script version of the fused Ω-engine (NumPy-accelerated).  
+It mirrors the behaviour of the package, but is kept mainly for:
+
+- compatibility with earlier experiments,
+- quick inspection without importing the package.
+
+New work should prefer the package (`omnia.*`) and `omnia.engine.run_omnia_totale`.
+
+---
+
+## 4. Benchmarks
+
+### 4.1 GSM8K-like hallucination / primes demo
+
+File: `benchmarks/gsm8k_benchmark_demo.py`
+
+Contains two **synthetic demo benchmarks**:
+
+1. **Hallucination detection demo**  
+   - Builds small GSM8K-like chains (correct vs. altered).  
+   - Extracts integers from each chain.  
+   - Computes PBII for the numbers and flags chains with high average PBII as "instable".  
+   - Reports:
+     - false positive rate on correct chains,
+     - detection rate on hallucinated chains.
+
+   All numbers and metrics here are **placeholders** meant only for:
+   - verifying that PBII behaves qualitatively as expected,
+   - providing a starting point for real evaluations.
+
+2. **Prime vs composite AUC demo**  
+   - Samples random integers,
+   - Labels them as prime/composite with a simple primality test,
+   - Uses `-PBII(n)` as a score (low PBII for primes → high score),
+   - Computes a simple ROC AUC estimate,
+   - Plots the distribution of PBII for primes vs. composites and saves:
+     - `pbii_distribution_demo.png`.
+
+Again: this is **not** a formal benchmark; it is a reproducible demo for reviewers.
+
+---
+
+## 5. Repository layout
+
+Current key layout (simplified):
 
 ```text
-lon-mirror/
+.
 ├── omnia/
-│   ├── __init__.py
-│   ├── core/
-│   │   ├── omniabase.py      # multi-base lens + PBII
-│   │   ├── omniatempo.py     # temporal stability lens
-│   │   └── omniacausa.py     # lagged causal lens
-│   ├── kernel.py             # small generic kernel for lenses
-│   └── engine.py             # OMNIA_TOTALE engine on top of omnia.core + kernel
+│   ├── __init__.py          # package exports
+│   ├── omniabase.py         # multi-base / PBII lens
+│   ├── omniatempo.py        # temporal stability lens
+│   ├── omniacausa.py        # causal-structure lens
+│   ├── kernel.py            # generic Ω-kernel
+│   └── engine.py            # OMNIA_TOTALE on top of the kernel
 │
 ├── benchmarks/
-│   └── gsm8k_benchmark_demo.py  # synthetic GSM8K-style + prime/composite PBII demo
+│   └── gsm8k_benchmark_demo.py
 │
-├── OMNIA_TOTALE_v2.0.py     # older monolithic demo, kept for reference
-├── OMNIA_LENSES_v0.1.md     # conceptual description of lenses (BASE/TIME/CAUSA)
-└── README.md                # this file
+├── OMNIA_TOTALE_v2.0.py     # legacy monolithic script (self-contained engine)
+├── OMNIA_LENSES_v0.1.md     # conceptual notes on Omnia lenses
+├── README.md                # this file
+└── (other legacy prototypes / experiments)
 
-The canonical entry points are:
+Some additional files in the root directory are earlier prototypes and exploratory experiments. The canonical, maintained path is:
 
-omnia.core (raw lenses),
+package: omnia/,
 
-omnia.engine (Ω-fusion engine),
+engine: omnia.engine,
 
-benchmarks/gsm8k_benchmark_demo.py (example benchmarks).
+demos: benchmarks/.
 
 
 
 ---
 
-3. Installation
+6. Installation
 
-This is a pure-Python project.
+Requirements:
 
-Minimal requirements (for lenses only):
+Python 3.9+
 
-pip install numpy
+numpy
 
-For benchmarks and plots:
+matplotlib (for demo plots only)
+
+
+Install dependencies (local or virtualenv):
 
 pip install numpy matplotlib
 
-Clone the repo:
+Clone the repository:
 
 git clone https://github.com/Tuttotorna/lon-mirror.git
 cd lon-mirror
 
-Make sure lon-mirror is on your PYTHONPATH (or use a virtualenv and install locally if you prefer).
-
 
 ---
 
-4. Core usage
+7. Quickstart
 
-4.1 Using the lenses directly
+7.1 Using the package
 
-from omnia.core.omniabase import omniabase_signature, pbii_index
-from omnia.core.omniatempo import omniatempo_analyze
-from omnia.core.omniacausa import omniacausa_analyze
-
-# Omniabase: multi-base numeric structure
-n = 173  # example integer (prime)
-sig = omniabase_signature(n)
-print(sig.sigma_mean, sig.entropy_mean)
-print("PBII:", pbii_index(n))
-
-# Omniatempo: temporal stability
-import numpy as np
-t = np.arange(300)
-series = np.sin(t / 15.0) + 0.1 * np.random.normal(size=t.size)
-from omnia.core.omniatempo import omniatempo_analyze
-ot = omniatempo_analyze(series)
-print("Regime-change score:", ot.regime_change_score)
-
-# Omniacausa: lagged correlations between channels
-s1 = np.sin(t / 10.0)
-s2 = np.zeros_like(s1)
-s2[2:] = 0.7 * s1[:-2] + 0.1 * np.random.normal(size=t.size - 2)
-s3 = np.random.normal(size=t.size)
-series_dict = {"s1": s1, "s2": s2, "s3": s3}
-
-from omnia.core.omniacausa import omniacausa_analyze
-oc = omniacausa_analyze(series_dict, max_lag=5, strength_threshold=0.3)
-for e in oc.edges:
-    print(f"{e.source} -> {e.target}, lag={e.lag}, strength={e.strength:.3f}")
-
-4.2 Using the Ω-engine
-
-The engine composes the three lenses and returns a fused Ω-score plus structured metadata.
+Example: run the fused Ω-engine on a synthetic prime vs composite test.
 
 import numpy as np
 from omnia.engine import run_omnia_totale
 
-# numeric target
-n = 173
+# Example integer
+n = 173  # a prime
 
-# main series (TIME lens)
+# Synthetic time series with a regime shift
 t = np.arange(300)
 series = np.sin(t / 15.0) + 0.1 * np.random.normal(size=t.size)
-series[200:] += 0.8  # synthetic regime shift
+series[200:] += 0.8  # regime shift
 
-# multi-channel series (CAUSA lens)
+# Multi-channel series for causal lens
 s1 = np.sin(t / 10.0)
 s2 = np.zeros_like(s1)
 s2[2:] = 0.7 * s1[:-2] + 0.1 * np.random.normal(size=t.size - 2)
 s3 = np.random.normal(size=t.size)
+
 series_dict = {"s1": s1, "s2": s2, "s3": s3}
 
 result = run_omnia_totale(
@@ -146,105 +319,70 @@ result = run_omnia_totale(
     w_causa=1.0,
 )
 
-print("Global Ω-score:", result.global_omega)
-print("Per-lens scores:", result.lens_scores)
-print("Per-lens metadata keys:", list(result.lens_metadata.keys()))
+print("Ω_total:", result.omega_total)
+for lens_name, lens_res in result.lenses.items():
+    print(lens_name, "→", lens_res.scores)
 
-If you prefer the older monolithic style, you can still run:
+7.2 Running the benchmark demo
 
-python OMNIA_TOTALE_v2.0.py
+From the repo root:
 
-which prints a small demo and uses the same underlying logic as the package.
+python -m benchmarks.gsm8k_benchmark_demo
 
+This will:
 
----
+print hallucination detection stats,
 
-5. Benchmarks (synthetic demo)
+print prime vs composite AUC estimate,
 
-The repository currently includes a synthetic benchmark script:
-
-python benchmarks/gsm8k_benchmark_demo.py
-
-This does two things:
-
-1. GSM8K-style hallucination detection (synthetic)
-
-Builds a tiny set of “correct” vs “hallucinated” reasoning chains (text).
-
-Extracts all integers from each chain.
-
-Computes PBII for each number and averages per chain.
-
-Flags chains with average PBII above a threshold.
-
-Reports:
-
-false positive rate on correct chains,
-
-detection rate on hallucinated chains.
-
-
-
-
-2. Prime vs composite separation (AUC)
-
-Samples random integers, labels them as prime vs composite.
-
-Uses -PBII as a score (lower PBII for primes → higher score).
-
-Computes a ROC AUC with a simple NumPy implementation.
-
-Plots and saves pbii_distribution.png (histogram of PBII for primes vs composites).
-
-
-
-
-Important notes:
-
-These are toy / synthetic experiments, meant to illustrate how PBII behaves.
-
-Any claims about “71% hallucination reduction” or “AUC ≈ 0.98” depend on the exact dataset, sampling and configuration; they are not peer-reviewed benchmarks.
-
-For real evaluation, PBII should be run on full GSM8K or similar datasets via proper pipelines.
+save pbii_distribution_demo.png in the current directory.
 
 
 
 ---
 
-6. Status and roadmap
+8. Status and caveats
 
-Status:
+This repository is work in progress.
 
-Stable:
+All numerical claims like:
 
-core lenses (omniabase, omniatempo, omniacausa),
+“71% hallucination reduction on >50-step GSM8K chains”,
 
-kernel + engine (omnia.kernel, omnia.engine),
-
-synthetic benchmark script (benchmarks/gsm8k_benchmark_demo.py).
+“AUC ≈ 0.98 for prime vs composite separation” are currently synthetic placeholders, meant to illustrate how OMNIA_TOTALE could be evaluated.
 
 
-Work in progress:
+For any formal claim, the benchmarks must be:
 
-richer Ω-fusion strategies,
+run on full-scale datasets,
 
-better calibration of thresholds for hallucination detection,
+documented,
 
-integration stubs for real LLM tracing and token-level Ω-maps.
+independently reproducible.
 
 
 
-Planned directions (non-binding):
+OMNIA_TOTALE is offered as a transparent, inspectable structure:
 
-Use PBII and Omniatempo/Omniacausa on real CoT logs from LLMs.
+small codebase,
 
-Explore Ω as a guardrail signal for external routing (accept / revise / reject answer).
+no hidden dependencies beyond NumPy/Matplotlib,
 
-Extend lenses beyond numeric / time series to other structures (graphs, code, etc.).
+clear separation between core lenses, kernel, and demos.
 
 
 
 ---
 
-This repository is intentionally small and explicit: all logic is visible in a few files, to make it easy to audit, fork and extend.
+9. License and citation
+
+License: MIT (see LICENSE if present; otherwise, default to MIT as declared here).
+
+If you use OMNIA_TOTALE or Omniabase in academic or technical work, please cite:
+
+> Massimiliano Brighindi (MB-X.01).
+OMNIA_TOTALE: Unified Ω-fusion Engine for structural stability in numeric, temporal and causal domains.
+GitHub: Tuttotorna/lon-mirror.
+
+
 
