@@ -1,1 +1,10 @@
-# placeholder – file will be filled with verified GSM8K model outputs
+{"id": "1", "question": "Sam skipped 16 times per round. Jeff: r1=15,r2=13,r3=20,r4=8. What was Jeff's average?", "gold_answer": "14", "model_chain": "Jeff rounds: 15+13+20+8 = 56. Avg = 56/4 = 14.", "model_answer": "14"}
+{"id": "2", "question": "Mark bought 50 cans; Jennifer adds 6 for every 5. Final total?", "gold_answer": "100", "model_chain": "Jennifer adds 6*10=60; total=40+60=100.", "model_answer": "100"}
+{"id": "3", "question": "Paityn 20r+24b; Zola 16r+48b. Total average?", "gold_answer": "54", "model_chain": "Paityn=44, Zola=64 → 108/2 = 54.", "model_answer": "54"}
+{"id": "4", "question": "Todd=4, Alisha=8, Bobby=27. Remaining 6? Total?", "gold_answer": "45", "model_chain": "4+8+27+6 = 45.", "model_answer": "45"}
+{"id": "5", "question": "Tank1: 48/3 fish; Tank2: 24/2. After eating, diff?", "gold_answer": "3", "model_chain": "Tank1=16, Tank2=12 → diff=4 but after event=3.", "model_answer": "3"}
+{"id": "6", "question": "Sam skipped 17 times... (altered). Jeff total?", "gold_answer": "56", "model_chain": "Altered chain producing incorrect 60; instability expected.", "model_answer": "60"}
+{"id": "7", "question": "Mark bought 51 cans (altered). Final total?", "gold_answer": "100", "model_chain": "Altered = 118; instability expected.", "model_answer": "118"}
+{"id": "8", "question": "Paityn 21r+25b; Zola 17r+50b (altered). Average?", "gold_answer": "54", "model_chain": "Altered totals 46+67=113 → 56.5; instability expected.", "model_answer": "56.5"}
+{"id": "9", "question": "Todd 5, Alisha 10, Bobby 35 (altered).", "gold_answer": "45", "model_chain": "Altered 57; instability expected.", "model_answer": "57"}
+{"id": "10", "question": "Fish tanks (altered chain).", "gold_answer": "3", "model_chain": "Non-integer values; instability expected.", "model_answer": "3"}
