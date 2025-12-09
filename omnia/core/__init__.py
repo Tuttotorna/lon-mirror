@@ -1,13 +1,17 @@
 """
-omnia.core — structural lenses package
+OMNIA package
 
-Exposes:
-- omniabase: multi-base numeric lens (PBII, signatures)
-- omniatempo: temporal stability lens
-- omniacausa: lagged causal-structure lens
+Unified import surface for:
+- omniabase   → multi-base lenses + PBII
+- omniatempo  → temporal regime lenses
+- omniacausa  → causal lenses
+- omnia_totale → fused Ω-score
 """
 
 from .omniabase import (
+    digits_in_base_np,
+    normalized_entropy_base,
+    sigma_b,
     OmniabaseSignature,
     omniabase_signature,
     pbii_index,
@@ -24,8 +28,16 @@ from .omniacausa import (
     omniacausa_analyze,
 )
 
+from .omnia_totale import (
+    OmniaTotaleResult,
+    omnia_totale_score,
+)
+
 __all__ = [
     # omniabase
+    "digits_in_base_np",
+    "normalized_entropy_base",
+    "sigma_b",
     "OmniabaseSignature",
     "omniabase_signature",
     "pbii_index",
@@ -36,4 +48,7 @@ __all__ = [
     "OmniaEdge",
     "OmniacausaResult",
     "omniacausa_analyze",
+    # omnia_totale
+    "OmniaTotaleResult",
+    "omnia_totale_score",
 ]
