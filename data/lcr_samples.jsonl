@@ -1,0 +1,8 @@
+{"id": "s001", "is_correct": true,  "omega_struct": 0.62, "fact_consistency": 0.93, "numeric_consistency": 0.91}
+{"id": "s002", "is_correct": true,  "omega_struct": 0.58, "fact_consistency": 0.89, "numeric_consistency": 0.87}
+{"id": "s003", "is_correct": true,  "omega_struct": 0.54, "fact_consistency": 0.86, "numeric_consistency": 0.84}
+{"id": "s004", "is_correct": true,  "omega_struct": 0.67, "fact_consistency": 0.95, "numeric_consistency": 0.92}
+{"id": "s005", "is_correct": false, "omega_struct": 0.21, "fact_consistency": 0.48, "numeric_consistency": 0.41}
+{"id": "s006", "is_correct": false, "omega_struct": 0.18, "fact_consistency": 0.52, "numeric_consistency": 0.39}
+{"id": "s007", "is_correct": false, "omega_struct": 0.27, "fact_consistency": 0.44, "numeric_consistency": 0.36}
+{"id": "s008", "is_correct": false, "omega_struct": 0.24, "fact_consistency": 0.50, "numeric_consistency": 0.42}
