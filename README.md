@@ -6,7 +6,7 @@ OMNIA is a model-agnostic structural engine that detects instability, drift, inc
 
 Numbers → multi-base symmetry + PBII (Prime Base Instability Index)
 
-Time series → regime-shifts + symmetric KL
+Time series → regime-shifts via symmetric KL
 
 Multi-channel systems → lagged causal relationships
 
@@ -15,19 +15,21 @@ Token sequences → PBII-z instability for LLMs
 External fact/numeric checks → LCR (Logical Coherence Reduction)
 
 
-All lenses contribute to a single unified Ω-score, computed by
-OMNIA_TOTALE and extended via LCR for hallucination detection.
+Each lens contributes to a unified Ω-total score, computed by OMNIA_TOTALE and extended by LCR for hallucination detection.
 
-The project is part of MB-X.01, the research line of Massimiliano Brighindi, designed for AI-safety evaluation, reproducibility, and structural interpretability.
+This project is part of MB-X.01, the research line of Massimiliano Brighindi, designed for structural interpretability, reproducibility, and AI-safety evaluation.
 
 
 ---
 
 1. Features
 
+
+---
+
 1.1 Omniabase (BASE)
 
-Multi-base numerical structural analysis.
+Multi-base numerical structure analysis.
 
 Digit entropy across bases
 
@@ -35,7 +37,7 @@ Digit entropy across bases
 
 PBII: prime-like structural instability index
 
-Full entropy/σ signature and multi-base invariant profile
+Full entropy/σ signature + multi-base invariant profile
 
 
 Use cases: integer analysis, anomaly scoring, numeric hallucination detection.
@@ -45,18 +47,18 @@ Use cases: integer analysis, anomaly scoring, numeric hallucination detection.
 
 1.2 Omniatempo (TIME)
 
-Temporal stability and drift detection.
+Temporal stability + drift detection.
 
-μ/σ global statistics
+Global μ/σ
 
 Short vs long window distributions
 
-Symmetric KL-divergence as regime change score
+Symmetric KL-divergence → regime change score
 
-Reveals abrupt shifts, transitions, drifts
+Detects abrupt transitions, reasoning drift, distribution shifts
 
 
-Use cases: reasoning drift, financial time series, sensor analysis.
+Use cases: LLM drift, financial time series, sensors.
 
 
 ---
@@ -65,14 +67,14 @@ Use cases: reasoning drift, financial time series, sensor analysis.
 
 Lagged causal structure over multivariate signals.
 
-Correlation for all lags in [-max_lag, +max_lag]
+Correlation across all lags in 
 
-Strongest lag extracted per pair
+Extracts strongest lag per pair
 
-Edges emitted if |corr| ≥ threshold
+Emits edges if |corr| ≥ threshold
 
 
-Use cases: multi-signal inference, chain-of-thought analysis, implicit dependencies.
+Use cases: multi-signal inference, chain-of-thought, hidden relationships.
 
 
 ---
@@ -81,23 +83,23 @@ Use cases: multi-signal inference, chain-of-thought analysis, implicit dependenc
 
 PBII applied to token sequences.
 
-Converts each token → numeric proxy
+token → integer proxy
 
-Computes PBII per token
+PBII per token
 
-Normalizes via z-scoring
+z-scoring to normalize
 
 TOKEN Ω = mean |z|
 
 
-Use cases: LLM hallucination detection, CoT screening, instability segmentation.
+Use cases: hallucination detection, CoT instability segmentation.
 
 
 ---
 
-1.5 LCR — Logical Coherence Reduction (FACT+NUMERIC Fusion)
+1.5 LCR — Logical Coherence Reduction (FACT + NUMERIC Fusion)
 
-External consistency engine integrating:
+External coherence engine integrating:
 
 fact_consistency
 
@@ -105,33 +107,30 @@ numeric_consistency
 
 gold_match
 
-Structural Ω (optional)
+structural Ω (optional)
 
 
-Produces a fused external score Ω_ext, able to flag hallucinations via a confusion-matrix benchmark.
+Outputs a fused external score Ω_ext, with confusion-matrix benchmark.
 
-Included files:
+Included:
 
 LCR/LCR_CORE_v0.1.py
-
 LCR/LCR_BENCHMARK_v0.1.py
-
 data/lcr_samples.jsonl
-
 
 
 ---
 
 1.6 Fused Ω Engine (Ω-TOTAL)
 
-All lenses combine into:
+All lenses combine into a single structural score.
 
 Lens	Meaning	Contribution
 
 BASE	numeric instability	PBII
 TIME	temporal drift	log(1 + regime)
-CAUSA	cross-channel causal structure	mean strength
-TOKEN	CoT/token instability	z-mean
+CAUSA	cross-channel structure	mean strength
+TOKEN	token instability	
 LCR	factual + numeric coherence	Ω_ext
 
 
@@ -141,7 +140,7 @@ Unified Ω-total
 
 All sub-components
 
-JSON-safe metadata for external audits
+JSON-safe metadata for reproducibility
 
 
 
@@ -165,7 +164,7 @@ LCR/
 
 data/
     lcr_samples.jsonl
-    gsm8k_model_outputs.jsonl   (optional external)
+    gsm8k_model_outputs.jsonl   (optional)
 
 quick_omnia_test.py
 gsm8k_benchmark_demo.py
@@ -179,7 +178,7 @@ All modules are standalone and import-safe.
 
 3. Installation
 
-Requires Python 3.9+:
+Requires Python 3.9+
 
 pip install numpy matplotlib
 
@@ -197,7 +196,7 @@ Run:
 
 python quick_omnia_test.py
 
-This verifies:
+This validates:
 
 Omniabase (σ, entropy, PBII)
 
@@ -207,10 +206,10 @@ Omniacausa (lagged edges)
 
 Token lens (PBII-z)
 
-Ω fusion integrity
+Ω fusion correctness
 
 
-Expected output:
+Expected example:
 
 === OMNIA SMOKE TEST ===
 BASE: sigma_mean=..., PBII=...
@@ -220,7 +219,7 @@ TOKEN: z-mean=...
 Ω_total = ...
 components = {...}
 
-If this passes, OMNIA is correctly installed.
+If this runs, OMNIA is correctly installed.
 
 
 ---
@@ -262,7 +261,12 @@ print(res.components)
 
 6. Benchmarks
 
+
+---
+
 6.1 PBII + GSM8K Hallucination Demo
+
+Run:
 
 python gsm8k_benchmark_demo.py
 
@@ -270,23 +274,25 @@ Outputs:
 
 PBII distributions for primes vs composites
 
-Synthetic AUC ~0.98
+Synthetic AUC ≈ 0.98
 
-71% hallucination-reduction on long chains (>50 steps)
+71% hallucination reduction on long chains (>50 steps)
 
 Token instability segmentation
 
 
-These metrics serve as placeholders before full-scale evaluation.
+These values are synthetic placeholders pending full-scale evaluation.
 
 
 ---
 
 6.2 LCR Benchmark
 
+Run:
+
 python LCR/LCR_BENCHMARK_v0.1.py
 
-Computes:
+Outputs:
 
 TP / FP / TN / FN
 
@@ -299,20 +305,20 @@ false positive rate
 fused Ω_ext mean
 
 
-Simple interface for external AI labs to validate consistency checks.
+Designed for external AI-lab consistency validation.
 
 
 ---
 
 7. Limitations
 
-Benchmarks synthetic; real tasks require large datasets (GSM8K, tool logs)
+Synthetic benchmarks; real tasks require full GSM8K / long-chain logs
 
 PBII sensitive to base selection
 
-Causal lens = Pearson only (MI/TE/Granger planned)
+Causal lens uses Pearson (MI/TE/Granger in roadmap)
 
-Token lens uses proxy integer mapping
+Token lens requires numeric proxy
 
 LCR depends on external backend quality
 
@@ -331,14 +337,14 @@ OMNIA_TOTALE
 
 PBII
 
-TOKEN instability
+TOKEN instability lens
 
 LCR fusion
 
-Ω unified engine
+Unified Ω engine
 
 
-This repository is the public, machine-readable mirror of the MB-X research line.
+This repository is the machine-readable public mirror of the MB-X research line.
 
 
 ---
@@ -353,5 +359,7 @@ MIT License.
 10. Citation
 
 Brighindi, M. (2025).
-OMNIA Structural Lens Engine (v2.0).
+OMNIA Structural Lens Engine (v2.0)
 GitHub: https://github.com/Tuttotorna/lon-mirror
+
+
