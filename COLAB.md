@@ -188,4 +188,4 @@ Untracked changes = invalid comparisons.
 
 Author:
 Massimiliano Brighindi — MB-X.01
-OMNIA / Omniabase± / ICE / LC
+OMNIA / Omniabase± / ICE / LCR
