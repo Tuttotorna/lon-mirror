@@ -11,21 +11,19 @@ Minimal end-to-end smoke test for the OMNIA package:
 - Fused engine:
   - run_omnia_totale with BASE + TIME + CAUSA + TOKEN lenses
 
-Author: Massimiliano Brighindi (MB-X.01 / OMNIA_TOTALE)
+- ICE gate:
+  - ice_gate over OMNIA_TOTALE outputs + optional LCR/ext signals
+
+Author: Massimiliano Brighindi (MB-X.01 / OMNIA)
 """
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Mapping, Any, List
-
-import math
+from typing import Dict, Iterable, Any, List
 import numpy as np
 
 from omnia import (
     # omniabase
-    digits_in_base_np,
-    normalized_entropy_base,
-    sigma_b,
     OmniabaseSignature,
     omniabase_signature,
     pbii_index,
@@ -33,9 +31,12 @@ from omnia import (
     OmniatempoResult,
     omniatempo_analyze,
     # omniacausa
-    OmniaEdge,
     OmniacausaResult,
     omniacausa_analyze,
+    # ICE
+    ICEInput,
+    ICEStatus,
+    ice_gate,
 )
 
 from omnia.engine import run_omnia_totale
@@ -64,8 +65,7 @@ def test_omniatempo() -> None:
     print("=== OMNIATEMPO test ===")
     t = np.arange(300)
     series = np.sin(t / 20.0) + 0.05 * np.random.normal(size=t.size)
-    # introduce a regime shift on the last 100 points
-    series[-100:] += 0.7
+    series[-100:] += 0.7  # regime shift
 
     res: OmniatempoResult = omniatempo_analyze(series)
 
@@ -93,14 +93,15 @@ def test_omniacausa() -> None:
         "s3": s3,
     }
 
-    res: OmniacausaResult = omniacausa_analyze(series_dict, max_lag=5, strength_threshold=0.3)
+    res: OmniacausaResult = omniacausa_analyze(
+        series_dict,
+        max_lag=5,
+        strength_threshold=0.3,
+    )
 
     print(f"edges found = {len(res.edges)}")
     for e in res.edges:
-        print(
-            f"  {e.source} -> {e.target}  "
-            f"lag={e.lag:+d}  strength={e.strength:.3f}"
-        )
+        print(f"  {e.source} -> {e.target}  lag={e.lag:+d}  strength={e.strength:.3f}")
     print()
 
 
@@ -108,10 +109,9 @@ def test_omniacausa() -> None:
 # 2. Fused engine test (BASE + TIME + CAUSA + TOKEN)
 # =========================
 
-def test_omnia_engine() -> None:
+def test_omnia_engine() -> Any:
     print("=== OMNIA_TOTALE fused engine test ===")
 
-    # target integer (e.g. answer / key state)
     n = 173
 
     # time series for omniatempo
@@ -125,21 +125,13 @@ def test_omnia_engine() -> None:
     s2[3:] = 0.7 * s1[:-3] + 0.1 * np.random.normal(size=t.size - 3)
     s3 = np.random.normal(size=t.size)
 
-    series_dict: Dict[str, Iterable[float]] = {
-        "s1": s1,
-        "s2": s2,
-        "s3": s3,
-    }
+    series_dict: Dict[str, Iterable[float]] = {"s1": s1, "s2": s2, "s3": s3}
 
     # token-level example for TOKEN lens
     tokens: List[str] = ["The", "final", "answer", "is", "173"]
-    # simple numeric proxy: length of each token (placeholder)
-    token_numbers: List[int] = [len(tok) for tok in tokens]
+    token_numbers: List[int] = [len(tok) for tok in tokens]  # placeholder proxy
 
-    extra: Dict[str, Any] = {
-        "tokens": tokens,
-        "token_numbers": token_numbers,
-    }
+    extra: Dict[str, Any] = {"tokens": tokens, "token_numbers": token_numbers}
 
     result = run_omnia_totale(
         n=n,
@@ -152,14 +144,68 @@ def test_omnia_engine() -> None:
         extra=extra,
     )
 
-    print(f"Ω_total = {result.omega_total:.6f}")
+    # robust printing: support both result.omega_total and result.omega_score if versions differ
+    omega_total = getattr(result, "omega_total", None)
+    if omega_total is None:
+        omega_total = getattr(result, "omega_score", 0.0)
+
+    print(f"Ω_total = {float(omega_total):.6f}")
     print("Per-lens ω contributions:")
     for name, score in result.lens_scores.items():
-        print(f"  {name}: {score:.6f}")
+        print(f"  {name}: {float(score):.6f}")
 
     print("\nAvailable lens metadata keys:")
     for name, meta in result.lens_metadata.items():
-        print(f"  {name}: keys={list(meta.keys())}")
+        try:
+            keys = list(meta.keys())
+        except Exception:
+            keys = []
+        print(f"  {name}: keys={keys}")
+
+    print()
+    return result
+
+
+# =========================
+# 3. ICE gate test
+# =========================
+
+def test_ice_gate(omnia_result: Any) -> None:
+    print("=== OMNIA ICE test ===")
+
+    omega_total = getattr(omnia_result, "omega_total", None)
+    if omega_total is None:
+        omega_total = getattr(omnia_result, "omega_score", 0.0)
+
+    lens_scores = getattr(omnia_result, "lens_scores", {}) or {}
+    lens_metadata = getattr(omnia_result, "lens_metadata", {}) or {}
+
+    # If LCR lens exists, pass it through as omega_ext proxy (optional)
+    omega_ext = None
+    for k in ("LCR", "OmegaExt", "OMEGA_EXT"):
+        if k in lens_scores:
+            # NOTE: this is only a placeholder. In real runs, omega_ext should come from LCR outputs.
+            omega_ext = float(lens_scores[k])
+            break
+
+    x = ICEInput(
+        omega_total=float(omega_total),
+        lens_scores={str(k): float(v) for k, v in lens_scores.items()},
+        lens_metadata=lens_metadata,
+        omega_ext=omega_ext,
+        gold_match=None,
+        ambiguity_score=0.10,
+        notes="smoke test (ICE over OMNIA_TOTALE output)",
+    )
+
+    res = ice_gate(x)
+
+    print(f"ICE status    = {res.status.value}")
+    print(f"confidence    = {res.confidence:.3f}")
+    print(f"impossibility = {res.impossibility:.3f}")
+    print(f"ambiguity     = {res.ambiguity:.3f}")
+    print(f"reasons       = {res.reasons}")
+    print()
 
 
 # =========================
@@ -173,8 +219,11 @@ def main() -> None:
     test_omniabase()
     test_omniatempo()
     test_omniacausa()
-    test_omnia_engine()
+
+    omnia_result = test_omnia_engine()
+    test_ice_gate(omnia_result)
 
 
 if __name__ == "__main__":
     main()
+```0
