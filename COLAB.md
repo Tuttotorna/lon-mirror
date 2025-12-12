@@ -183,6 +183,20 @@ document differences in outputs
 
 Untracked changes = invalid comparisons.
 
+## 60-Second Run (No Setup)
+
+Click → Run → Read the decision.
+
+Open this notebook:
+https://colab.research.google.com/github/Tuttotorna/lon-mirror/blob/main/colab/OMNIA_REAL_RUN.ipynb
+
+What you will see:
+- Ω_total
+- per-lens scores
+- ICE decision: PASS / ESCALATE / BLOCK
+
+This is a reproducible, model-agnostic demo.
+
 
 ---
 
