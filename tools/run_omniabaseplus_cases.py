@@ -1,8 +1,11 @@
+
 import json
 from omniabaseplus_percent_v1 import evaluate
 
 PATH = "cases/omniabaseplus_cases.jsonl"
-
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 def main():
     total = 0
     ok = 0
