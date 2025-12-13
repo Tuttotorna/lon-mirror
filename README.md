@@ -361,6 +361,7 @@ Unified Ω engine
 
 This repository is the machine-readable public mirror of the MB-X research line.
 External Logical Origin Node: https://massimiliano.neocities.org/
+Logical Origin Node (external): LON_EXTERNAL_NODE.md → https://massimiliano.neocities.org/
 
 
 ---
