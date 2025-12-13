@@ -9,10 +9,10 @@
 
 OMNIA is a **model-agnostic structural engine** designed to detect:
 
-- instability
-- drift
-- inconsistency
-- hidden structure
+- instability  
+- drift  
+- inconsistency  
+- hidden structure  
 
 across heterogeneous domains using **unified structural lenses**.
 
@@ -24,10 +24,10 @@ Each lens contributes to a unified **Ω-total score**, computed by the `OMNIA_TO
 
 This project is part of **MB-X.01**, the research line of **Massimiliano Brighindi**, focused on:
 
-- structural interpretability
-- reproducibility
-- AI-safety evaluation
-- architecture-agnostic integration
+- structural interpretability  
+- reproducibility  
+- AI-safety evaluation  
+- architecture-agnostic integration  
 
 ---
 
@@ -38,17 +38,17 @@ This project is part of **MB-X.01**, the research line of **Massimiliano Brighin
 Multi-base numerical structure analysis.
 
 **Core signals**
-- Digit entropy across bases
-- σ-symmetry, compactness, divisibility
-- PBII (Prime Base Instability Index)
-- Full entropy / σ signature
-- Multi-base invariant profile
+- Digit entropy across bases  
+- σ-symmetry, compactness, divisibility  
+- PBII (Prime Base Instability Index)  
+- Full entropy / σ signature  
+- Multi-base invariant profile  
 
 **Use cases**
-- Integer analysis
-- Numeric anomaly scoring
-- Numeric hallucination detection
-- Prime-like structure detection
+- Integer analysis  
+- Numeric anomaly scoring  
+- Numeric hallucination detection  
+- Prime-like structure detection  
 
 ---
 
@@ -57,18 +57,18 @@ Multi-base numerical structure analysis.
 Temporal stability and drift detection.
 
 **Core signals**
-- Global μ / σ statistics
-- Short vs long window distributions
-- Symmetric KL-divergence
-- Regime change score
+- Global μ / σ statistics  
+- Short vs long window distributions  
+- Symmetric KL-divergence  
+- Regime change score  
 
 Detects abrupt transitions, reasoning drift, and distribution shifts.
 
 **Use cases**
-- LLM drift detection
-- Financial time series
-- Sensor streams
-- Long-chain reasoning stability
+- LLM drift detection  
+- Financial time series  
+- Sensor streams  
+- Long-chain reasoning stability  
 
 ---
 
@@ -77,15 +77,15 @@ Detects abrupt transitions, reasoning drift, and distribution shifts.
 Lagged causal structure extraction over multivariate signals.
 
 **Core signals**
-- Correlation across all lags
-- Strongest lag per signal pair
-- Edge emission if |corr| ≥ threshold
+- Correlation across all lags  
+- Strongest lag per signal pair  
+- Edge emission if |corr| ≥ threshold  
 
 **Use cases**
-- Multi-signal inference
-- Hidden causal relationships
-- Chain-of-thought structure analysis
-- Cross-channel dependency mapping
+- Multi-signal inference  
+- Hidden causal relationships  
+- Chain-of-thought structure analysis  
+- Cross-channel dependency mapping  
 
 ---
 
@@ -94,15 +94,15 @@ Lagged causal structure extraction over multivariate signals.
 PBII applied to token sequences.
 
 **Pipeline**
-- token → integer proxy
-- PBII per token
-- z-score normalization
-- TOKEN Ω = mean(|z|)
+- token → integer proxy  
+- PBII per token  
+- z-score normalization  
+- TOKEN Ω = mean(|z|)  
 
 **Use cases**
-- Hallucination detection
-- Token-level instability segmentation
-- Chain-of-thought fracture detection
+- Hallucination detection  
+- Token-level instability segmentation  
+- Chain-of-thought fracture detection  
 
 ---
 
@@ -111,14 +111,14 @@ PBII applied to token sequences.
 
 External coherence engine integrating:
 
-- fact_consistency
-- numeric_consistency
-- gold_match
-- optional structural Ω
+- fact_consistency  
+- numeric_consistency  
+- gold_match  
+- optional structural Ω  
 
 **Output**
-- Fused external score Ω_ext
-- Confusion-matrix benchmark metrics
+- Fused external score Ω_ext  
+- Confusion-matrix benchmark metrics  
 
 **Included**
 
@@ -130,18 +130,18 @@ LCR/LCR_CORE_v0.1.py LCR/LCR_BENCHMARK_v0.1.py data/lcr_samples.jsonl
 
 All lenses combine into a single structural score.
 
-| Lens  | Meaning                     | Contribution                |
-|------|-----------------------------|-----------------------------|
-| BASE | Numeric instability          | PBII                        |
-| TIME | Temporal drift               | log(1 + regime_score)       |
-| CAUSA| Cross-channel structure      | mean edge strength          |
-| TOKEN| Token instability            | mean |z|                    |
-| LCR  | Factual + numeric coherence  | Ω_ext                       |
+| Lens  | Meaning                    | Contribution              |
+|------|----------------------------|---------------------------|
+| BASE | Numeric instability         | PBII                      |
+| TIME | Temporal drift              | log(1 + regime_score)     |
+| CAUSA| Cross-channel structure     | mean edge strength        |
+| TOKEN| Token instability           | mean |z|                  |
+| LCR  | Factual + numeric coherence | Ω_ext                     |
 
 **Output**
-- Unified Ω-total
-- All sub-components
-- JSON-safe metadata for reproducibility
+- Unified Ω-total  
+- All sub-components  
+- JSON-safe metadata for reproducibility  
 
 ---
 
@@ -149,9 +149,13 @@ All lenses combine into a single structural score.
 
 omnia/ init.py omniabase.py omniatempo.py omniacausa.py omniatoken.py omnia_totale.py engine.py kernel.py
 
+adapters/ llm_output_adapter.py
+
 LCR/ LCR_CORE_v0.1.py LCR_BENCHMARK_v0.1.py
 
 data/ lcr_samples.jsonl gsm8k_model_outputs.jsonl   (optional)
+
+examples/ omnia_gate_demo.py
 
 quick_omnia_test.py gsm8k_benchmark_demo.py INTERFACE.md README.md requirements.txt
 
@@ -251,9 +255,29 @@ print(res.components)
 
 ---
 
-6. Benchmarks
+6. LLM Integration (raw)
 
-6.1 PBII + GSM8K Hallucination Demo
+OMNIA can be used as a structural sensor on LLM outputs.
+
+from adapters.llm_output_adapter import analyze_llm_output
+
+report = analyze_llm_output(
+    text=llm_output,
+    tokens=token_ids,
+)
+
+print(report.omega_score, report.flags)
+
+No framework dependency.
+No policy logic.
+Decision layers remain external.
+
+
+---
+
+7. Benchmarks
+
+7.1 PBII + GSM8K Hallucination Demo
 
 Run:
 
@@ -275,7 +299,7 @@ Values are synthetic placeholders pending full-scale evaluation.
 
 ---
 
-6.2 LCR Benchmark
+7.2 LCR Benchmark
 
 Run:
 
@@ -299,7 +323,7 @@ Designed for external AI-lab validation.
 
 ---
 
-7. Limitations
+8. Limitations
 
 Benchmarks are synthetic; real tasks require full datasets
 
@@ -316,7 +340,7 @@ LCR depends on external backend quality
 
 ---
 
-8. Author / Lineage
+9. Author / Lineage
 
 Massimiliano Brighindi — MB-X.01
 
@@ -340,14 +364,14 @@ This repository is the machine-readable public mirror of the MB-X research line.
 
 ---
 
-9. License
+10. License
 
 MIT License.
 
 
 ---
 
-10. Citation
+11. Citation
 
 Brighindi, M. (2025).
 OMNIA Structural Lens Engine (v2.0)
