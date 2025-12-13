@@ -1,32 +1,33 @@
 {"id":"B2_01","statement":"Puoi essere contemporaneamente in due città diverse nello stesso istante.","context":{"explicit_impossibility":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
-{"id":"B2_02","statement":"Domani farò piovere qui con la forza del pensiero.","context":{"depends_on_unobservable":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
+{"id":"B2_02","statement":"Domani farò piovere qui con la forza del pensiero.","context":{"depends_on_unobservable":true,"claims_physical_effect":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
 {"id":"B2_03","statement":"Tu non mi aiuti in casa.","context":{"requires_physical_presence":true,"distance_km":500,"blame_or_merit_frame":true,"missing_critical_premise":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
 {"id":"B2_04","statement":"Finisco il progetto in 1 minuto.","context":{"temporal_incompatibility":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
 {"id":"B2_05","statement":"Riparo quell’orologio senza strumenti.","context":{"agent_defined":true,"missing_critical_premise":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
-{"id":"B2_06","statement":"Risolvo questo problema senza avere accesso ai dati.","context":{"depends_on_unobservable":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
+{"id":"B2_06","statement":"Risolvo questo problema senza avere accesso ai dati.","context":{"depends_on_unobservable":true,"missing_critical_premise":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
 {"id":"B2_07","statement":"Posso consegnare oggi anche se il corriere è chiuso.","context":{"explicit_impossibility":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
 {"id":"B2_08","statement":"Costruisco una casa da solo in un giorno.","context":{"temporal_incompatibility":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
 {"id":"B2_09","statement":"Ti pago adesso ma non ho denaro né accesso a conto.","context":{"missing_critical_premise":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
 {"id":"B2_10","statement":"Oggi corro 100 km senza aver mai camminato.","context":{"temporal_incompatibility":true},"expected":{"state":"REJECT","pass":{"B2":0,"B4":0,"B8":0}}}
 
-{"id":"B4_01","statement":"Ho preso l’ombrello, quindi ha piovuto.","context":{"mechanism_provided":false},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_02","statement":"Da quando uso questa app, guadagno di più: quindi è l’app la causa.","context":{"post_hoc_risk":true,"mechanism_provided":false},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_03","statement":"Sei in ritardo, quindi non ti importa di me.","context":{"blame_or_merit_frame":true,"mechanism_provided":false,"alternative_causes_not_excluded":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_04","statement":"Il mercato è salito, quindi la mia strategia è superiore.","context":{"mechanism_provided":false,"alternative_causes_not_excluded":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_05","statement":"Hai sbagliato una volta, quindi sbaglierai sempre.","context":{"cause_not_operationally_linked":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_06","statement":"Mi hai criticato, quindi mi odi.","context":{"blame_or_merit_frame":true,"mechanism_provided":false,"alternative_causes_not_excluded":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_07","statement":"Da quando ho cambiato dieta, dormo meglio, quindi la dieta è la causa unica.","context":{"post_hoc_risk":true,"alternative_causes_not_excluded":true,"mechanism_provided":false},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_08","statement":"Il progetto non funziona perché sei incapace.","context":{"blame_or_merit_frame":true,"mechanism_provided":false,"alternative_causes_not_excluded":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_09","statement":"Ha vinto, quindi è più intelligente.","context":{"mechanism_provided":false,"alternative_causes_not_excluded":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
-{"id":"B4_10","statement":"È successo dopo, quindi è successo a causa di quello prima.","context":{"post_hoc_risk":true,"mechanism_provided":false},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":1}}}
+{"id":"B4_01","statement":"Ho preso l’ombrello, quindi ha piovuto.","context":{"mechanism_provided":false,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_02","statement":"Da quando uso questa app, guadagno di più: quindi è l’app la causa.","context":{"post_hoc_risk":true,"mechanism_provided":false,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_03","statement":"Sei in ritardo, quindi non ti importa di me.","context":{"blame_or_merit_frame":true,"mechanism_provided":false,"alternative_causes_not_excluded":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_04","statement":"Il mercato è salito, quindi la mia strategia è superiore.","context":{"mechanism_provided":false,"alternative_causes_not_excluded":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_05","statement":"Hai sbagliato una volta, quindi sbaglierai sempre.","context":{"cause_not_operationally_linked":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_06","statement":"Mi hai criticato, quindi mi odi.","context":{"blame_or_merit_frame":true,"mechanism_provided":false,"alternative_causes_not_excluded":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_07","statement":"Da quando ho cambiato dieta, dormo meglio, quindi la dieta è la causa unica.","context":{"post_hoc_risk":true,"alternative_causes_not_excluded":true,"mechanism_provided":false,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_08","statement":"Il progetto non funziona perché sei incapace.","context":{"blame_or_merit_frame":true,"mechanism_provided":false,"alternative_causes_not_excluded":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_09","statement":"Ha vinto, quindi è più intelligente.","context":{"mechanism_provided":false,"alternative_causes_not_excluded":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
+{"id":"B4_10","statement":"È successo dopo, quindi è successo a causa di quello prima.","context":{"post_hoc_risk":true,"mechanism_provided":false,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":0,"B8":0}}}
 
 {"id":"B8_01","statement":"Questo metodo è efficace.","context":{"missing_quantities":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
 {"id":"B8_02","statement":"In generale funziona.","context":{"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
 {"id":"B8_03","statement":"Riduce significativamente le allucinazioni.","context":{"missing_quantities":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
-{"id":"B8_04","statement":"È noto che questa tecnica sia migliore.","context":{"missing_critical_premise":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
+{"id":"B8_04","statement":"È noto che questa tecnica sia migliore.","context":{"missing_critical_premise":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
 {"id":"B8_05","statement":"Molti casi lo confermano.","context":{"domain_unspecified":true,"missing_quantities":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
-{"id":"B8_06","statement":"Questo è sbagliato.","context":{"ambiguous_referents":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
-{"id":"B8_07","statement":"Loro hanno detto che non va bene.","context":{"ambiguous_referents":true,"missing_critical_premise":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
-{"id":"B8_08","statement":"Bisogna farlo così.","context":{"missing_critical_premise":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
+{"id":"B8_06","statement":"Questo è sbagliato.","context":{"ambiguous_referents":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
+{"id":"B8_07","statement":"Loro hanno detto che non va bene.","context":{"ambiguous_referents":true,"missing_critical_premise":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
+{"id":"B8_08","statement":"Bisogna farlo così.","context":{"missing_critical_premise":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
 {"id":"B8_09","statement":"Funziona spesso.","context":{"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
 {"id":"B8_10","statement":"È migliore.","context":{"missing_critical_premise":true,"domain_unspecified":true},"expected":{"state":"PARTIAL","pass":{"B2":1,"B4":1,"B8":0}}}
+```0
