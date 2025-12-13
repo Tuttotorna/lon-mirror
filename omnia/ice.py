@@ -274,4 +274,3 @@ def ice_gate(
         reasons=reasons,
         thresholds=thresholds,
     )
-```0
