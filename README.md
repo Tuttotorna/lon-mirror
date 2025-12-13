@@ -360,6 +360,7 @@ Unified Ω engine
 
 
 This repository is the machine-readable public mirror of the MB-X research line.
+External Logical Origin Node: https://massimiliano.neocities.org/
 
 
 ---
