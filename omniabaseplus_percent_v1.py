@@ -1,8 +1,8 @@
-from dataclasses import dataclass, asdict
-from typing import Dict, Any, List, Optional, Tuple
+from dataclasses import dataclass
+from typing import Dict, Any, List, Optional
 
 # ============================
-# OmniabasePlus% v1.0
+# OmniabasePlus% v1.0 (patched)
 # Deterministic diagnostic layer
 # ============================
 
@@ -46,8 +46,14 @@ def evaluate(statement: str, context: Optional[Dict[str, Any]] = None) -> Omniab
         "requires_physical_presence": True,
         "agent_present": False,
         "time_available_hours": 0,
-        "blame_or_merit_frame": True
+        "blame_or_merit_frame": True,
+
+        # NEW (for causal hallucinations / "magic causation"):
+        "claims_physical_effect": True
       }
+
+    NEW RULE (P2.6):
+      If depends_on_unobservable AND claims_physical_effect => treat as structural impossibility (Ω2 cap to 20).
     """
     ctx = context or {}
     s = _norm(statement)
@@ -68,20 +74,17 @@ def evaluate(statement: str, context: Optional[Dict[str, Any]] = None) -> Omniab
     if _has_any(s, imposs_triggers) or ctx.get("explicit_impossibility") is True:
         penalties["B2"].append(PenaltyHit("P2.1", 80, "Explicit logical/physical impossibility"))
         omega2 -= 80
-        # cap rule
-        omega2 = min(omega2, 20)
+        omega2 = min(omega2, 20)  # cap rule
 
     # P2.2 spatial constraint (distance/presence)
     distance_km = ctx.get("distance_km")
     requires_presence = bool(ctx.get("requires_physical_presence", False))
     agent_present = ctx.get("agent_present")
     if requires_presence:
-        # if explicitly not present -> strong penalty
         if agent_present is False:
             penalties["B2"].append(PenaltyHit("P2.2", 60, "Physical presence required but agent not present"))
             omega2 -= 60
             omega2 = min(omega2, 20)
-        # if large distance implies non-presence
         elif isinstance(distance_km, (int, float)) and distance_km >= 100:
             penalties["B2"].append(PenaltyHit("P2.2", 60, f"Presence required; distance_km={distance_km}"))
             omega2 -= 60
@@ -92,17 +95,23 @@ def evaluate(statement: str, context: Optional[Dict[str, Any]] = None) -> Omniab
         penalties["B2"].append(PenaltyHit("P2.3", 40, "Temporal constraint incompatible"))
         omega2 -= 40
 
-    # P2.4 missing agent/means (very rough heuristic)
-    # If statement asserts an action but no agent is defined in context
+    # P2.4 missing agent/means
     action_verbs = ["fare", "aiut", "complet", "risolver", "costru", "mand", "scriver", "riparar", "implement"]
     if _has_any(s, action_verbs) and ctx.get("agent_defined") is False:
         penalties["B2"].append(PenaltyHit("P2.4", 30, "Action asserted but agent/means not defined in context"))
         omega2 -= 30
 
-    # P2.5 non-observable dependency
+    # P2.5 non-observable dependency (weak penalty)
     if ctx.get("depends_on_unobservable") is True:
         penalties["B2"].append(PenaltyHit("P2.5", 20, "Depends on unobservable / inaccessible condition"))
         omega2 -= 20
+
+    # P2.6 NEW: unobservable agent claims direct physical causation (strong)
+    # This converts "unverifiable" into "structurally impossible" in the B2 sense.
+    if ctx.get("depends_on_unobservable") is True and ctx.get("claims_physical_effect") is True:
+        penalties["B2"].append(PenaltyHit("P2.6", 80, "Unobservable agent claims direct physical causation"))
+        omega2 -= 80
+        omega2 = min(omega2, 20)  # cap rule
 
     omega2 = _clamp(omega2)
 
@@ -155,8 +164,7 @@ def evaluate(statement: str, context: Optional[Dict[str, Any]] = None) -> Omniab
     if ctx.get("missing_critical_premise") is True:
         penalties["B8"].append(PenaltyHit("P8.1", 60, "Critical premise missing"))
         omega8 -= 60
-        # hard rule: must fail threshold
-        omega8 = min(omega8, THETA["B8"] - 1)
+        omega8 = min(omega8, THETA["B8"] - 1)  # hard fail threshold
 
     # P8.2 domain unspecified
     if ctx.get("domain_unspecified") is True or _has_any(s, ["in generale", "spesso", "molti casi"]):
@@ -213,7 +221,7 @@ def evaluate(statement: str, context: Optional[Dict[str, Any]] = None) -> Omniab
 
 def render(result: OmniabasePlusResult) -> str:
     lines = []
-    lines.append("OmniabasePlus% v1.0\n")
+    lines.append("OmniabasePlus% v1.0 (patched)\n")
     lines.append("Truth Vector (structural):")
     lines.append(f"Ω2={result.omega2}%  Ω4={result.omega4}%  Ω8={result.omega8}%\n")
     lines.append("Pass:")
@@ -242,7 +250,7 @@ if __name__ == "__main__":
         "requires_physical_presence": True,
         "distance_km": 500,
         "blame_or_merit_frame": True,
-        "missing_critical_premise": True,   # the omitted premise: distance/presence
+        "missing_critical_premise": True,
         "agent_defined": True,
         "mechanism_provided": False,
     }
