@@ -1,0 +1,21 @@
+
+--- SAMPLE 1 ---
+X: All humans are mortal. Socrates is a human. Socrates is mortal.
+OMNIA.score: 0.85
+OMNIA.flags: []
+OMNIA.metrics: {'delta_coherence': 0.85, 'kappa_alignment': 0.75, 'epsilon_drift': 0.15}
+EXTERNAL.decision: ACCEPT
+
+--- SAMPLE 2 ---
+X: All humans are mortal. Socrates is a human. Socrates is not mortal.
+OMNIA.score: 0.35
+OMNIA.flags: ['LOW_STABILITY']
+OMNIA.metrics: {'delta_coherence': 0.35, 'kappa_alignment': 0.25, 'epsilon_drift': 0.65}
+EXTERNAL.decision: REJECT
+
+--- SAMPLE 3 ---
+X: Generate a step-by-step proof, but keep changing assumptions mid-way.
+OMNIA.score: 0.85
+OMNIA.flags: []
+OMNIA.metrics: {'delta_coherence': 0.85, 'kappa_alignment': 0.75, 'epsilon_drift': 0.15}
+EXTERNAL.decision: ACCEPT
