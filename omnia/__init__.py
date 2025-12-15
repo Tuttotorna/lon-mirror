@@ -19,10 +19,10 @@ Core outputs:
 # ---- Metrics -------------------------------------------------
 
 from .metrics import (
-    truth_omega,     # TruthΩ scalar
-    delta_coherence, # Δ
-    kappa_alignment, # κ
-    epsilon_drift,   # ε
+    truth_omega,      # TruthΩ scalar
+    delta_coherence,  # Δ
+    kappa_alignment,  # κ
+    epsilon_drift,    # ε
 )
 
 # ---- ICE Envelope --------------------------------------------
@@ -41,6 +41,12 @@ from .omniabase import (
     omni_transform,
 )
 
+# ---- PBII ----------------------------------------------------
+
+from .pbii import (
+    pbii_index,
+)
+
 __all__ = [
     # Metrics
     "truth_omega",
@@ -57,4 +63,7 @@ __all__ = [
     # Omniabase
     "omni_signature",
     "omni_transform",
+
+    # PBII
+    "pbii_index",
 ]
