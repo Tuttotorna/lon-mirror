@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple, List
 
@@ -43,6 +42,28 @@ def _omega_from_positive_penalty(p: float) -> float:
     return 1.0 / (1.0 + p)
 
 
+def _is_empty_series(series: Any) -> bool:
+    """
+    NumPy-safe emptiness check.
+    - None -> empty
+    - numpy.ndarray -> size == 0
+    - list/tuple -> len == 0
+    """
+    if series is None:
+        return True
+    # numpy arrays: .size exists
+    size = getattr(series, "size", None)
+    if size is not None:
+        try:
+            return int(size) == 0
+        except Exception:
+            pass
+    try:
+        return len(series) == 0
+    except Exception:
+        return False
+
+
 def _base_lens(n: int, bases: Iterable[int]) -> Tuple[float, Dict[str, Any]]:
     sig = omni_signature(n, bases=bases)
     omega = truth_omega(sig)
@@ -59,11 +80,19 @@ def _base_lens(n: int, bases: Iterable[int]) -> Tuple[float, Dict[str, Any]]:
     return omega_base, meta
 
 
-def _tempo_lens(series: Sequence[float]) -> Tuple[float, Dict[str, Any]]:
-    # If omniatempo_analyze exists, use it; otherwise fallback to simple drift proxy
+def _tempo_lens(series: Any) -> Tuple[float, Dict[str, Any]]:
+    """
+    TIME lens:
+    - if omniatempo_analyze exists, use it
+    - else fallback deterministic drift proxy
+    NumPy-safe.
+    """
+    if _is_empty_series(series):
+        return 1.0, {"fallback": True, "penalty": 0.0}
+
+    # If omniatempo_analyze exists, use it
     if omniatempo_analyze is not None:
         res = omniatempo_analyze(series)  # type: ignore
-        # Expect regime_change_score exists; otherwise fallback to 0
         rcs = _safe_float(getattr(res, "regime_change_score", 0.0))
         omega_tempo = _omega_from_positive_penalty(abs(rcs))
         meta = {
@@ -77,10 +106,7 @@ def _tempo_lens(series: Sequence[float]) -> Tuple[float, Dict[str, Any]]:
         }
         return float(omega_tempo), meta
 
-    # Fallback: compare last vs first window means
-    if not series:
-        return 1.0, {"fallback": True, "penalty": 0.0}
-
+    # Fallback: compare last vs first window means (works for list or numpy slice)
     n = len(series)
     w = max(5, n // 10)
     a = sum(series[:w]) / float(w)
@@ -89,7 +115,11 @@ def _tempo_lens(series: Sequence[float]) -> Tuple[float, Dict[str, Any]]:
     return _omega_from_positive_penalty(penalty), {"fallback": True, "penalty": float(penalty)}
 
 
-def _causa_lens(series_dict: Mapping[str, Iterable[float]], max_lag: int = 5, strength_threshold: float = 0.3) -> Tuple[float, Dict[str, Any]]:
+def _causa_lens(
+    series_dict: Mapping[str, Iterable[float]],
+    max_lag: int = 5,
+    strength_threshold: float = 0.3,
+) -> Tuple[float, Dict[str, Any]]:
     # If omniacausa_analyze exists, use it; else fallback to empty graph
     if omniacausa_analyze is not None:
         res = omniacausa_analyze(series_dict, max_lag=max_lag, strength_threshold=strength_threshold)  # type: ignore
@@ -114,13 +144,13 @@ def _causa_lens(series_dict: Mapping[str, Iterable[float]], max_lag: int = 5, st
 def _token_lens(extra: Optional[Dict[str, Any]], bases: Iterable[int]) -> Tuple[float, Dict[str, Any]]:
     """
     TOKEN lens: converts token_numbers into a multi-base aggregate signature, then measures TruthΩ.
-    It is structural and deterministic given token_numbers.
+    Deterministic given token_numbers.
     """
     if not extra:
         return 1.0, {"tokens_present": False}
 
     token_numbers = extra.get("token_numbers", None)
-    if not isinstance(token_numbers, list) or not token_numbers:
+    if not isinstance(token_numbers, list) or len(token_numbers) == 0:
         return 1.0, {"tokens_present": False}
 
     values: List[int] = []
@@ -130,7 +160,7 @@ def _token_lens(extra: Optional[Dict[str, Any]], bases: Iterable[int]) -> Tuple[
         except Exception:
             continue
 
-    if not values:
+    if len(values) == 0:
         return 1.0, {"tokens_present": False}
 
     sig = omni_transform(values, bases=bases)
@@ -178,7 +208,6 @@ def run_omnia_totale(
     if series is None:
         lens_scores["TIME"] = 1.0
         lens_metadata["TIME"] = {"series_present": False}
-        omega_time = 1.0
     else:
         omega_time, meta_time = _tempo_lens(series)
         lens_scores["TIME"] = float(omega_time)
@@ -188,7 +217,6 @@ def run_omnia_totale(
     if series_dict is None:
         lens_scores["CAUSA"] = 1.0
         lens_metadata["CAUSA"] = {"series_dict_present": False}
-        omega_causa = 1.0
     else:
         omega_causa, meta_causa = _causa_lens(series_dict)
         lens_scores["CAUSA"] = float(omega_causa)
