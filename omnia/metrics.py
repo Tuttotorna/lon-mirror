@@ -9,26 +9,25 @@ from typing import Dict
 def compute_metrics(metrics: Dict[str, float]) -> Dict[str, float]:
     """
     Canonical metrics entry point.
-
-    This function defines the stable public API expected by tests
-    and higher-level aggregators (Ω-TOTAL).
-
-    Current behavior:
-    - validates input
-    - casts values to float
-    - returns metrics unchanged
-
-    Future versions may:
-    - normalize
-    - clamp
-    - weight
     """
-
     if not isinstance(metrics, dict):
         raise TypeError("metrics must be a dict")
 
-    out: Dict[str, float] = {}
-    for k, v in metrics.items():
-        out[k] = float(v)
+    return {k: float(v) for k, v in metrics.items()}
 
-    return out
+
+def truth_omega(metrics: Dict[str, float]) -> float:
+    """
+    TruthΩ — base invariant aggregation.
+
+    Current minimal definition:
+    arithmetic mean of metric values.
+
+    This is a placeholder implementation
+    that defines a stable API boundary.
+    """
+    if not metrics:
+        return 0.0
+
+    values = [float(v) for v in metrics.values()]
+    return sum(values) / len(values)
