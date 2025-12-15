@@ -6,13 +6,16 @@ import numpy as np
 from omnia.inevitability import omega_inevitability
 
 
+# Reproducibility (demo-only)
+np.random.seed(0)
+
 # Base structure
 signal = np.array([1, 2, 3, 4, 5], dtype=float)
 
 
 # Structural signature (example)
 def signature_fn(x: np.ndarray) -> float:
-    return np.std(x)
+    return float(np.std(x))
 
 
 # Independent perturbations
@@ -27,7 +30,7 @@ result = omega_inevitability(
     base_signal=signal,
     perturbations=perturbations,
     signature_fn=signature_fn,
-    tolerance=1e-4
+    tolerance=1e-3,
 )
 
 print("Ω-INEV:", result.omega_inev)
