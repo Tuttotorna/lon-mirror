@@ -1,249 +1,122 @@
 # omnia/metrics.py
-# OMNIA — metrics (TruthΩ, Δ, κ, ε)
-# MB-X.01 / OMNIA_TOTALE
-#
-# Design goal:
-# - No heavy deps (no numpy)
-# - Stable, deterministic, test-friendly
-# - Provide the symbols that __init__.py / tests expect:
-#   truth_omega, co_plus, score_plus, delta_coherence, kappa_alignment, epsilon_drift
+# OMNIA metrics — MB-X.01 / OMNIA_TOTALE
+# Stable ASCII API (no Unicode identifiers)
 
 from __future__ import annotations
 
 import math
-import re
 from dataclasses import dataclass
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple, Union
+from typing import Iterable, Optional
 
 
-Number = Union[int, float]
+EPS = 1e-12
 
 
-# -----------------------------
-# Helpers
-# -----------------------------
-def _clamp01(x: float) -> float:
-    if x != x:  # NaN
+def _clip01(x: float) -> float:
+    if x <= 0.0:
         return 0.0
-    if x < 0.0:
-        return 0.0
-    if x > 1.0:
+    if x >= 1.0:
         return 1.0
     return x
 
 
-def _safe_log(x: float, eps: float = 1e-12) -> float:
-    return math.log(max(eps, x))
+def truth_omega(coherence: float, *, eps: float = EPS) -> float:
+    """
+    TruthΩ = -log( clamp(coherence, eps, 1) )
+
+    coherence:
+      - expected range: [0, 1]
+      - 1 -> perfectly coherent (TruthΩ=0)
+      - 0 -> maximally incoherent (TruthΩ large)
+    """
+    c = max(eps, min(1.0, float(coherence)))
+    return -math.log(c)
 
 
-def _tokenize(text: str) -> List[str]:
-    # conservative tokenizer: lowercase alnum words
-    return re.findall(r"[a-z0-9]+", (text or "").lower())
+def co_plus(truth_omega_value: float) -> float:
+    """
+    Co⁺ = exp(-TruthΩ)
+    (inverse mapping; stable in [0,1])
+    """
+    return _clip01(math.exp(-float(truth_omega_value)))
 
 
-def _jaccard(a: Sequence[str], b: Sequence[str]) -> float:
-    sa, sb = set(a), set(b)
-    if not sa and not sb:
-        return 1.0
-    inter = len(sa.intersection(sb))
-    union = len(sa.union(sb))
-    return 0.0 if union == 0 else inter / union
-
-
-def _mean(xs: Sequence[float]) -> float:
-    return sum(xs) / len(xs) if xs else 0.0
-
-
-def _stdev(xs: Sequence[float]) -> float:
-    if len(xs) < 2:
+def delta_coherence(values: Iterable[float], *, eps: float = EPS) -> float:
+    """
+    Δ-coherence: dispersion proxy (0 = identical, higher = more spread).
+    Uses normalized mean absolute deviation around mean.
+    """
+    xs = [float(v) for v in values]
+    if not xs:
         return 0.0
-    m = _mean(xs)
-    var = sum((x - m) ** 2 for x in xs) / (len(xs) - 1)
-    return math.sqrt(max(0.0, var))
+    m = sum(xs) / len(xs)
+    mad = sum(abs(x - m) for x in xs) / len(xs)
+    denom = abs(m) + eps
+    return mad / denom
 
 
-# -----------------------------
-# Core metrics
-# -----------------------------
-def truth_omega(
-    x: Union[Number, str, Dict[str, Any]],
-    y: Optional[Union[str, Dict[str, Any]]] = None,
-    *,
-    eps: float = 1e-12,
-) -> float:
+def kappa_alignment(a: float, b: float, *, eps: float = EPS) -> float:
     """
-    TruthΩ = -log( coherence )
-
-    Accepts:
-    - numeric coherence in [0..1]: truth_omega(0.8)
-    - text similarity coherence via Jaccard overlap: truth_omega("a b", "a c")
-    - dict with 'coherence' key: truth_omega({'coherence': 0.7})
-
-    Returns:
-    - 0 when coherence == 1
-    - +inf-ish for coherence -> 0 (capped by eps)
+    κ-alignment: similarity score in [0,1] between two positive signals.
+    1 = equal, 0 = maximally different (relative).
     """
-    coh: float
-
-    # numeric coherence
-    if isinstance(x, (int, float)) and y is None:
-        coh = _clamp01(float(x))
-
-    # dict coherence
-    elif isinstance(x, dict) and y is None:
-        if "coherence" not in x:
-            raise KeyError("truth_omega(dict) requires key 'coherence'")
-        coh = _clamp01(float(x["coherence"]))
-
-    # text-to-text coherence (default)
-    elif isinstance(x, str) and isinstance(y, str):
-        coh = _clamp01(_jaccard(_tokenize(x), _tokenize(y)))
-
-    # dict-to-dict or dict-to-text (fallbacks)
-    elif isinstance(x, dict) and isinstance(y, dict):
-        cx = _clamp01(float(x.get("coherence", 0.0)))
-        cy = _clamp01(float(y.get("coherence", 0.0)))
-        coh = _clamp01(1.0 - abs(cx - cy))  # alignment as coherence proxy
-    elif isinstance(x, str) and isinstance(y, dict):
-        # compare text signature to dict coherence (weak but defined)
-        cy = _clamp01(float(y.get("coherence", 0.0)))
-        coh = cy
-    elif isinstance(x, dict) and isinstance(y, str):
-        cx = _clamp01(float(x.get("coherence", 0.0)))
-        coh = cx
-    else:
-        raise TypeError("truth_omega: unsupported input types")
-
-    return -_safe_log(coh, eps=eps)
+    a = float(a)
+    b = float(b)
+    denom = max(eps, abs(a) + abs(b))
+    return _clip01(1.0 - (abs(a - b) / denom))
 
 
-def co_plus(
-    truth: Union[Number, Dict[str, Any]],
-    *,
-    cap: float = 1.0,
-) -> float:
+def epsilon_drift(prev: float, curr: float, *, eps: float = EPS) -> float:
     """
-    Co⁺ = exp(-TruthΩ), clamped to [0..cap]
-    Accepts:
-    - numeric TruthΩ
-    - dict containing 'truth_omega'
+    ε-drift: relative change magnitude >=0.
     """
-    if isinstance(truth, dict):
-        if "truth_omega" not in truth:
-            raise KeyError("co_plus(dict) requires key 'truth_omega'")
-        t = float(truth["truth_omega"])
-    else:
-        t = float(truth)
-
-    c = math.exp(-max(0.0, t))
-    if cap <= 0:
-        return c
-    return min(cap, max(0.0, c))
+    prev = float(prev)
+    curr = float(curr)
+    denom = abs(prev) + eps
+    return abs(curr - prev) / denom
 
 
-def score_plus(
-    coherence: Union[Number, Dict[str, Any]],
-    *,
-    info: float = 1.0,
-    bias: float = 1.0,
-    cap: float = 1.0,
-    eps: float = 1e-12,
-) -> float:
-    """
-    Score⁺: a stable composite.
-    Default: Score⁺ = clamp01( Co⁺ * info / bias )
-
-    Accepts:
-    - numeric coherence in [0..1]
-    - dict with 'coherence' or 'truth_omega' or 'co_plus'
-    """
-    if isinstance(coherence, dict):
-        if "co_plus" in coherence:
-            c = _clamp01(float(coherence["co_plus"]))
-        elif "truth_omega" in coherence:
-            c = co_plus(float(coherence["truth_omega"]), cap=cap)
-        elif "coherence" in coherence:
-            c = co_plus(truth_omega(float(coherence["coherence"]), eps=eps), cap=cap)
-        else:
-            raise KeyError("score_plus(dict) requires 'co_plus' or 'truth_omega' or 'coherence'")
-    else:
-        c = co_plus(truth_omega(float(coherence), eps=eps), cap=cap)
-
-    denom = max(eps, float(bias))
-    raw = c * float(info) / denom
-    return _clamp01(raw if cap == 1.0 else min(cap, max(0.0, raw)))
-
-
-def delta_coherence(values: Sequence[Number]) -> float:
-    """
-    Δ-coherence: dispersion measure of a set of coherence values.
-    Returns stdev of clamped [0..1] values.
-    """
-    xs = [_clamp01(float(v)) for v in values]
-    return _stdev(xs)
-
-
-def kappa_alignment(a: Number, b: Number) -> float:
-    """
-    κ-alignment: 1 - |a-b| on clamped [0..1] scale.
-    """
-    aa = _clamp01(float(a))
-    bb = _clamp01(float(b))
-    return _clamp01(1.0 - abs(aa - bb))
-
-
-def epsilon_drift(prev: Number, curr: Number) -> float:
-    """
-    ε-drift: absolute change between two scalar states (clamped [0..1]).
-    """
-    p = _clamp01(float(prev))
-    c = _clamp01(float(curr))
-    return abs(c - p)
-
-
-# -----------------------------
-# Optional structured result
-# -----------------------------
 @dataclass(frozen=True)
-class Metrics:
+class OmegaMetrics:
     truth_omega: float
     co_plus: float
-    score_plus: float
-    delta: float = 0.0
-    kappa: float = 0.0
-    epsilon: float = 0.0
+    delta: float
+    kappa: float
+    epsilon: float
 
 
-def compute_metrics(
-    coherence: Number,
+def omega_metrics(
+    coherence: float,
     *,
-    cohort: Optional[Sequence[Number]] = None,
-    prev: Optional[Number] = None,
-    ref: Optional[Number] = None,
-    info: float = 1.0,
-    bias: float = 1.0,
-    eps: float = 1e-12,
-) -> Metrics:
+    lens_values: Optional[Iterable[float]] = None,
+    prev_score: Optional[float] = None,
+    curr_score: Optional[float] = None,
+    align_a: Optional[float] = None,
+    align_b: Optional[float] = None,
+) -> OmegaMetrics:
     """
-    Convenience wrapper used by demos/tests.
+    Convenience bundle:
+    - TruthΩ from coherence
+    - Co⁺ from TruthΩ
+    - Δ from lens_values (if provided)
+    - κ from align_a/align_b (if provided)
+    - ε from prev_score/curr_score (if provided)
     """
-    t = truth_omega(float(coherence), eps=eps)
+    t = truth_omega(coherence)
     c = co_plus(t)
-    s = score_plus(float(coherence), info=info, bias=bias, eps=eps)
-
-    d = delta_coherence(cohort) if cohort else 0.0
-    k = kappa_alignment(coherence, ref) if ref is not None else 0.0
-    e = epsilon_drift(prev, coherence) if prev is not None else 0.0
-    return Metrics(truth_omega=t, co_plus=c, score_plus=s, delta=d, kappa=k, epsilon=e)
+    d = delta_coherence(lens_values or [])
+    k = 0.0 if (align_a is None or align_b is None) else kappa_alignment(align_a, align_b)
+    e = 0.0 if (prev_score is None or curr_score is None) else epsilon_drift(prev_score, curr_score)
+    return OmegaMetrics(truth_omega=t, co_plus=c, delta=d, kappa=k, epsilon=e)
 
 
 __all__ = [
+    "EPS",
     "truth_omega",
     "co_plus",
-    "score_plus",
     "delta_coherence",
     "kappa_alignment",
     "epsilon_drift",
-    "Metrics",
-    "compute_metrics",
+    "OmegaMetrics",
+    "omega_metrics",
 ]
