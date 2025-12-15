@@ -4,63 +4,87 @@
 # License: MIT
 
 from __future__ import annotations
-from dataclasses import dataclass
-from typing import Dict, Any
+from typing import Dict, Any, Iterable
 
 
-def compute_metrics(metrics: Dict[str, float]) -> Dict[str, float]:
+def _is_seq(x: Any) -> bool:
+    return isinstance(x, (list, tuple))
+
+
+def _mean(seq: Iterable[float]) -> float:
+    s = 0.0
+    n = 0
+    for v in seq:
+        s += float(v)
+        n += 1
+    return 0.0 if n == 0 else (s / n)
+
+
+def compute_metrics(metrics: Dict[Any, Any]) -> Dict[str, float]:
     """
     Canonical metrics entry point (stable API).
-    Validates input and casts values to float.
+
+    Accepts:
+      - {key: float}
+      - {key: [float, float, ...]}
+      - {key: (float, float, ...)}
+    Returns:
+      - {str(key): float} where list/tuple values are reduced by mean.
     """
     if not isinstance(metrics, dict):
         raise TypeError("metrics must be a dict")
-    return {str(k): float(v) for k, v in metrics.items()}
+
+    out: Dict[str, float] = {}
+    for k, v in metrics.items():
+        key = str(k)
+
+        if _is_seq(v):
+            out[key] = _mean(v)
+        else:
+            out[key] = float(v)
+
+    return out
 
 
-def truth_omega(metrics: Dict[str, float]) -> float:
+def truth_omega(metrics: Dict[Any, Any]) -> float:
     """
-    TruthΩ (minimal stable definition).
-    Current: arithmetic mean of metric values.
+    TruthΩ — minimal stable definition.
+
+    Uses compute_metrics() normalization, then returns the arithmetic mean
+    of the resulting scalar metric values.
     """
-    if not metrics:
+    m = compute_metrics(metrics)
+    if not m:
         return 0.0
-    vals = [float(v) for v in metrics.values()]
-    return sum(vals) / len(vals)
+    return _mean(m.values())
 
 
-# --- Compatibility layer: symbols expected by omnia/__init__.py and tests --- #
-
-def delta_coherence(metrics: Dict[str, float]) -> float:
+def delta_coherence(metrics: Dict[Any, Any]) -> float:
     """
-    Δ-coherence (minimal stable definition).
-    Current: same as TruthΩ until a richer formulation is introduced.
+    Δ-coherence — compatibility API.
+    Minimal definition: identical to TruthΩ until a richer formulation is introduced.
     """
     return truth_omega(metrics)
 
 
-def kappa_alignment(metrics: Dict[str, float]) -> float:
+def epsilon_drift(metrics: Dict[Any, Any]) -> float:
     """
-    κ-alignment (minimal stable definition).
-    Current: 1 - normalized dispersion proxy; bounded in [0,1].
+    ε-drift — compatibility API.
+    Minimal definition: mean absolute deviation from the mean, computed on
+    normalized scalar metrics.
     """
-    if not metrics:
-        return 1.0
-    vals = [float(v) for v in metrics.values()]
-    m = sum(vals) / len(vals)
-    # mean absolute deviation
-    mad = sum(abs(v - m) for v in vals) / len(vals)
-    # simple squashing to [0,1]
-    return 1.0 / (1.0 + mad)
-
-
-def epsilon_drift(metrics: Dict[str, float]) -> float:
-    """
-    ε-drift (minimal stable definition).
-    Current: dispersion proxy (MAD).
-    """
-    if not metrics:
+    m = compute_metrics(metrics)
+    if not m:
         return 0.0
-    vals = [float(v) for v in metrics.values()]
-    m = sum(vals) / len(vals)
-    return sum(abs(v - m) for v in vals) / len(vals)
+    vals = list(m.values())
+    mu = _mean(vals)
+    return _mean([abs(v - mu) for v in vals])
+
+
+def kappa_alignment(metrics: Dict[Any, Any]) -> float:
+    """
+    κ-alignment — compatibility API.
+    Minimal definition: squashed inverse of ε-drift, bounded in (0, 1].
+    """
+    e = epsilon_drift(metrics)
+    return 1.0 / (1.0 + float(e))
