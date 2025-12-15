@@ -1,27 +1,37 @@
-# OMNIA / MB-X.01
-# ICE — Impossibility & Confidence Envelope
-# Converts structural metrics into a stable decision-support envelope.
-# OMNIA does not decide: it reports confidence + impossibility + flags.
-
 from __future__ import annotations
-from dataclasses import dataclass, asdict
-from typing import Dict, List, Any, Optional
-import math
 
-from .metrics import OmegaMetrics
+from dataclasses import dataclass
+from enum import Enum
+from typing import Mapping, Sequence, Optional, Dict, Any
+
+from .metrics import truth_omega, delta_coherence, kappa_alignment
+
+
+class ICEStatus(str, Enum):
+    OK = "OK"                    # structurally coherent, safe to pass through
+    WARN = "WARN"                # mildly unstable, pass with caution
+    FAIL = "FAIL"                # structurally unstable, should be blocked/escalated
+    ESCALATE = "ESCALATE"        # ambiguous edge-case, requires external judge
 
 
 @dataclass(frozen=True)
-class ICEEnvelope:
-    confidence: float          # [0,1] reliability of structure (not semantic truth)
-    impossibility: float       # [0,1] structural contradiction / collapse likelihood
-    flags: List[str]           # machine-readable warnings
-    thresholds: Dict[str, float]
+class ICEInput:
+    """
+    signatures: base -> signature vector (same dimension for all bases)
+    Optional metadata can be used by decision layers, but ICE itself measures only structure.
+    """
+    signatures: Mapping[int, Sequence[float]]
+    meta: Optional[Dict[str, Any]] = None
 
-    def to_dict(self) -> Dict[str, Any]:
-        d = asdict(self)
-        # ensure JSON-stable ordering by returning plain dict; callers can json.dumps(sort_keys=True)
-        return d
+
+@dataclass(frozen=True)
+class ICEResult:
+    status: ICEStatus
+    truth_omega: float
+    delta: float
+    kappa: float
+    confidence: float
+    reasons: Sequence[str]
 
 
 def _clamp01(x: float) -> float:
@@ -32,90 +42,74 @@ def _clamp01(x: float) -> float:
     return x
 
 
-def build_ice(
-    m: OmegaMetrics,
+def ice_gate(
+    ice_in: ICEInput,
     *,
-    # Default thresholds (tunable per deployment)
-    min_truth_omega: float = 0.72,
-    max_delta: float = 0.35,
-    min_kappa: float = 0.70,
-    max_epsilon: float = 0.55,
-) -> ICEEnvelope:
+    # Default thresholds are intentionally conservative and deterministic.
+    thr_fail_truth: float = 0.35,
+    thr_warn_truth: float = 0.55,
+    thr_low_kappa: float = 0.25,
+    thr_high_delta: float = 1.25,
+    thr_escalate_band: float = 0.05,
+) -> ICEResult:
     """
-    Build the ICE envelope from OmegaMetrics.
+    ICE gate: produces a status + confidence envelope from structural metrics.
 
-    Interpretation:
-    - confidence increases with TruthΩ and κ-alignment, decreases with Δ and ε.
-    - impossibility increases when multiple thresholds are violated at once (structural collapse).
-    - flags are deterministic and stable (no narrative).
+    Rules (aligned with the boundary you already fixed publicly):
+    - Flags do NOT overwrite thresholds: status is derived from metrics only.
+    - Edge cases -> ESCALATE (narrow bands around thresholds).
+    - Confidence = reliability of the structural signal, not certainty of the content.
 
-    This is NOT a classifier; it is a calibrated structural envelope.
+    confidence heuristic:
+      conf = clamp01(0.60*TruthΩ + 0.40*((kappa+1)/2)) penalized by high Δ
+      penalty = clamp01(delta / (delta + 1))
+      conf = conf * (1 - 0.35*penalty)
     """
+    sig = ice_in.signatures
 
-    flags: List[str] = []
+    d = delta_coherence(sig)
+    t = truth_omega(sig)
+    k = kappa_alignment(sig)
 
-    # Normalize “badness” channels
-    # Δ and ε are unbounded in theory, so map via saturating transform.
-    delta_bad = _clamp01(m.delta_coherence / (max_delta if max_delta > 0 else 1.0))
-    eps_bad = _clamp01(m.epsilon_drift / (max_epsilon if max_epsilon > 0 else 1.0))
+    reasons = []
 
-    # TruthΩ, κ are already [0,1]
-    omega_good = _clamp01(m.truth_omega)
-    kappa_good = _clamp01(m.kappa_alignment)
+    # Edge band detector around truth thresholds
+    def in_band(x: float, thr: float) -> bool:
+        return abs(x - thr) <= thr_escalate_band
 
-    # Violations -> flags
-    if omega_good < min_truth_omega:
-        flags.append("LOW_TRUTH_OMEGA")
-    if m.delta_coherence > max_delta:
-        flags.append("HIGH_DELTA_COHERENCE")
-    if kappa_good < min_kappa:
-        flags.append("LOW_KAPPA_ALIGNMENT")
-    if m.epsilon_drift > max_epsilon:
-        flags.append("HIGH_EPSILON_DRIFT")
+    # Primary fail conditions
+    if t < thr_fail_truth or d > thr_high_delta:
+        reasons.append("low_truth_or_high_delta")
+        status = ICEStatus.FAIL
 
-    # Confidence: weighted geometric mean of “good” and inverse “bad”
-    # Use logs to avoid underflow.
-    inv_delta = _clamp01(1.0 - delta_bad)
-    inv_eps = _clamp01(1.0 - eps_bad)
+        # Escalate if near boundary (ambiguous)
+        if in_band(t, thr_fail_truth) or in_band(d, thr_high_delta):
+            reasons.append("edge_case_near_threshold")
+            status = ICEStatus.ESCALATE
 
-    weights = {
-        "omega": 0.40,
-        "kappa": 0.25,
-        "inv_delta": 0.20,
-        "inv_eps": 0.15,
-    }
+    # Warning conditions
+    elif t < thr_warn_truth or k < thr_low_kappa:
+        reasons.append("moderate_instability")
+        status = ICEStatus.WARN
 
-    def wlog(x: float, w: float) -> float:
-        x = max(x, 1e-12)
-        return w * math.log(x)
+        if in_band(t, thr_warn_truth) or in_band(k, thr_low_kappa):
+            reasons.append("edge_case_near_threshold")
+            status = ICEStatus.ESCALATE
 
-    log_c = (
-        wlog(omega_good, weights["omega"]) +
-        wlog(kappa_good, weights["kappa"]) +
-        wlog(inv_delta, weights["inv_delta"]) +
-        wlog(inv_eps, weights["inv_eps"])
-    )
-    confidence = math.exp(log_c)
-    confidence = _clamp01(confidence)
+    else:
+        reasons.append("structurally_coherent")
+        status = ICEStatus.OK
 
-    # Impossibility: not “1-confidence”.
-    # It spikes when contradictions cluster (multiple flags).
-    # Combine two components:
-    # (A) threshold-violation density
-    # (B) worst-case fragility (ε + Δ)
-    violation_density = len(flags) / 4.0  # 0..1
-    fragility = _clamp01(0.5 * delta_bad + 0.5 * eps_bad)
+    # Confidence envelope (signal reliability)
+    base_conf = 0.60 * _clamp01(t) + 0.40 * _clamp01((k + 1.0) / 2.0)
+    penalty = _clamp01(d / (d + 1.0))
+    conf = _clamp01(base_conf * (1.0 - 0.35 * penalty))
 
-    impossibility = _clamp01(0.65 * violation_density + 0.35 * fragility)
-
-    return ICEEnvelope(
-        confidence=confidence,
-        impossibility=impossibility,
-        flags=flags,
-        thresholds={
-            "min_truth_omega": float(min_truth_omega),
-            "max_delta": float(max_delta),
-            "min_kappa": float(min_kappa),
-            "max_epsilon": float(max_epsilon),
-        },
+    return ICEResult(
+        status=status,
+        truth_omega=float(t),
+        delta=float(d),
+        kappa=float(k),
+        confidence=float(conf),
+        reasons=tuple(reasons),
     )
