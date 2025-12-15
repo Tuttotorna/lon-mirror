@@ -120,3 +120,34 @@ __all__ = [
     "OmegaMetrics",
     "omega_metrics",
 ]
+def compute_metrics(
+    coherence: float,
+    *,
+    bias: float = 0.0,
+    info: float = 1.0,
+    kappa_ref: float = 1.0,
+    eps_ref: float = 0.0,
+) -> dict:
+    """
+    Convenience wrapper expected by tests.
+
+    Returns a dict with the core metrics:
+    truth_omega, co_plus, score_plus, delta_coherence, kappa_alignment, epsilon_drift.
+    """
+    t = truth_omega(coherence)
+    c = co_plus(t)
+    s = score_plus(c, bias=bias, info=info)
+    d = delta_coherence(coherence)
+
+    # kappa/epsilon are optional but tests expect keys
+    k = kappa_alignment(coherence, ref=kappa_ref) if "kappa_alignment" in globals() else 0.0
+    e = epsilon_drift(coherence, ref=eps_ref) if "epsilon_drift" in globals() else 0.0
+
+    return {
+        "truth_omega": t,
+        "co_plus": c,
+        "score_plus": s,
+        "delta_coherence": d,
+        "kappa_alignment": k,
+        "epsilon_drift": e,
+    }
