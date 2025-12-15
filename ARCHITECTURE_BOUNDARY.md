@@ -77,3 +77,17 @@ Any extension violating these boundaries
 is considered **out of scope** for OMNIA.
 
 
+---
+
+## Reproducibility Reference
+
+Canonical verification paths:
+
+- `colab/OMNIA_QUICK_SMOKE.ipynb`
+- `quick_omnia_test.py`
+
+All reported OMNIA metrics must be reproducible by:
+Colab → Runtime → Restart → Run all
+
+Any result not reproducible via these paths
+is considered non-authoritative.
