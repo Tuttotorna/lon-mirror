@@ -1,57 +1,60 @@
 """
-OMNIA / MB-X.01
+OMNIA — Unified Structural Lenses
+MB-X.01 / OMNIA_TOTALE
 
-Public API surface (stable).
+Package initialization.
 
-OMNIA is a structural measurement layer.
-It does not decide. It does not generate. It measures.
+OMNIA is a structural measurement engine.
+It does not decide, optimize, or generate.
+It measures coherence, invariance, and drift.
 
-This package exposes:
-- Structural metrics (TruthΩ, Δ, κ, ε)
-- ICE envelope (confidence / impossibility)
-- Legacy ICE gate (backward compatible)
+Core outputs:
+- TruthΩ (structural invariance)
+- Δ-coherence
+- κ-alignment
+- ε-drift
+- ICE status (Impossibility & Confidence Envelope)
 """
 
-# -----------------------------
-# New structural core (Omniabase)
-# -----------------------------
+# ---- Metrics -------------------------------------------------
 
 from .metrics import (
-    OmegaMetrics,
-    compute_metrics,
+    truth_omega,     # TruthΩ scalar
+    delta_coherence, # Δ
+    kappa_alignment, # κ
+    epsilon_drift,   # ε
 )
+
+# ---- ICE Envelope --------------------------------------------
 
 from .envelope import (
-    ICEEnvelope,
-    build_ice,
-)
-
-# -----------------------------
-# Legacy / compatibility layer
-# -----------------------------
-# (do NOT remove: used by existing OMNIA_TOTALE code)
-
-from .ice import (
     ICEStatus,
     ICEInput,
     ICEResult,
     ice_gate,
 )
 
-# -----------------------------
-# Public exports
-# -----------------------------
+# ---- Omniabase -----------------------------------------------
+
+from .omniabase import (
+    omni_signature,
+    omni_transform,
+)
 
 __all__ = [
-    # Omniabase / structural metrics
-    "OmegaMetrics",
-    "compute_metrics",
-    "ICEEnvelope",
-    "build_ice",
+    # Metrics
+    "truth_omega",
+    "delta_coherence",
+    "kappa_alignment",
+    "epsilon_drift",
 
-    # Legacy ICE gate
+    # ICE
     "ICEStatus",
     "ICEInput",
     "ICEResult",
     "ice_gate",
+
+    # Omniabase
+    "omni_signature",
+    "omni_transform",
 ]
