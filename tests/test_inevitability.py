@@ -57,4 +57,4 @@ def test_inevitability_fragile_structure():
         tolerance=1e-6
     )
 
-    assert result.omega_inev <= 0.34
+    assert result.omega_inev <= 0.3
