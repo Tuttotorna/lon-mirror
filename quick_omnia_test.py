@@ -12,7 +12,7 @@ Minimal end-to-end smoke test for the OMNIA package:
   - run_omnia_totale with BASE + TIME + CAUSA + TOKEN lenses
 
 - ICE gate:
-  - ice_gate over OMNIA_TOTALE outputs + optional LCR/ext signals
+  - ice_gate over OMNIA_TOTALE outputs (adapter -> structural ICEInput)
 
 Author: Massimiliano Brighindi (MB-X.01 / OMNIA)
 """
@@ -33,13 +33,12 @@ from omnia import (
     # omniacausa
     OmniacausaResult,
     omniacausa_analyze,
-    # ICE
-    ICEInput,
-    ICEStatus,
+    # ICE (structural)
     ice_gate,
 )
 
 from omnia.engine import run_omnia_totale
+from omnia.adapters.ice_from_totale import ice_input_from_omnia_totale
 
 
 # =========================
@@ -144,7 +143,6 @@ def test_omnia_engine() -> Any:
         extra=extra,
     )
 
-    # robust printing: support both result.omega_total and result.omega_score if versions differ
     omega_total = getattr(result, "omega_total", None)
     if omega_total is None:
         omega_total = getattr(result, "omega_score", 0.0)
@@ -167,44 +165,21 @@ def test_omnia_engine() -> Any:
 
 
 # =========================
-# 3. ICE gate test
+# 3. ICE gate test (structural adapter)
 # =========================
 
 def test_ice_gate(omnia_result: Any) -> None:
     print("=== OMNIA ICE test ===")
 
-    omega_total = getattr(omnia_result, "omega_total", None)
-    if omega_total is None:
-        omega_total = getattr(omnia_result, "omega_score", 0.0)
-
-    lens_scores = getattr(omnia_result, "lens_scores", {}) or {}
-    lens_metadata = getattr(omnia_result, "lens_metadata", {}) or {}
-
-    # If LCR lens exists, pass it through as omega_ext proxy (optional)
-    omega_ext = None
-    for k in ("LCR", "OmegaExt", "OMEGA_EXT"):
-        if k in lens_scores:
-            # NOTE: this is only a placeholder. In real runs, omega_ext should come from LCR outputs.
-            omega_ext = float(lens_scores[k])
-            break
-
-    x = ICEInput(
-        omega_total=float(omega_total),
-        lens_scores={str(k): float(v) for k, v in lens_scores.items()},
-        lens_metadata=lens_metadata,
-        omega_ext=omega_ext,
-        gold_match=None,
-        ambiguity_score=0.10,
-        notes="smoke test (ICE over OMNIA_TOTALE output)",
-    )
-
+    x = ice_input_from_omnia_totale(omnia_result)
     res = ice_gate(x)
 
-    print(f"ICE status    = {res.status.value}")
-    print(f"confidence    = {res.confidence:.3f}")
-    print(f"impossibility = {res.impossibility:.3f}")
-    print(f"ambiguity     = {res.ambiguity:.3f}")
-    print(f"reasons       = {res.reasons}")
+    print(f"ICE status     = {res.status}")
+    print(f"TruthΩ         = {res.truth_omega:.6f}")
+    print(f"Δ              = {res.delta:.6f}")
+    print(f"κ              = {res.kappa:.6f}")
+    print(f"confidence     = {res.confidence:.6f}")
+    print(f"reasons        = {list(res.reasons)}")
     print()
 
 
@@ -226,4 +201,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-```0
