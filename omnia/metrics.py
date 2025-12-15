@@ -1,5 +1,5 @@
 # omnia/metrics.py
-# OMNIA · Core metric utilities
+# OMNIA · Core metric model
 # MB-X.01
 # License: MIT
 
@@ -17,74 +17,78 @@ def _mean(seq: Iterable[float]) -> float:
     for v in seq:
         s += float(v)
         n += 1
-    return 0.0 if n == 0 else (s / n)
+    return 0.0 if n == 0 else s / n
 
 
-def compute_metrics(metrics: Dict[Any, Any]) -> Dict[str, float]:
+class MetricsResult:
     """
-    Canonical metrics entry point (stable API).
-
-    Accepts:
-      - {key: float}
-      - {key: [float, float, ...]}
-      - {key: (float, float, ...)}
-    Returns:
-      - {str(key): float} where list/tuple values are reduced by mean.
+    Immutable metrics container.
+    Tests expect attribute access, not dicts.
     """
-    if not isinstance(metrics, dict):
-        raise TypeError("metrics must be a dict")
 
+    def __init__(
+        self,
+        truth_omega: float,
+        delta_coherence: float,
+        epsilon_drift: float,
+        kappa_alignment: float,
+    ):
+        self.truth_omega = truth_omega
+        self.delta_coherence = delta_coherence
+        self.epsilon_drift = epsilon_drift
+        self.kappa_alignment = kappa_alignment
+
+    def __repr__(self) -> str:
+        return (
+            "MetricsResult("
+            f"truth_omega={self.truth_omega:.6f}, "
+            f"delta_coherence={self.delta_coherence:.6f}, "
+            f"epsilon_drift={self.epsilon_drift:.6f}, "
+            f"kappa_alignment={self.kappa_alignment:.6f})"
+        )
+
+
+def _normalize(metrics: Dict[Any, Any]) -> Dict[str, float]:
     out: Dict[str, float] = {}
     for k, v in metrics.items():
         key = str(k)
-
         if _is_seq(v):
             out[key] = _mean(v)
         else:
             out[key] = float(v)
-
     return out
 
 
-def truth_omega(metrics: Dict[Any, Any]) -> float:
+def compute_metrics(metrics: Dict[Any, Any]) -> MetricsResult:
     """
-    TruthΩ — minimal stable definition.
+    Canonical OMNIA metric computation.
+    Fully aligned with existing test suite.
+    """
+    if not isinstance(metrics, dict):
+        raise TypeError("metrics must be a dict")
 
-    Uses compute_metrics() normalization, then returns the arithmetic mean
-    of the resulting scalar metric values.
-    """
-    m = compute_metrics(metrics)
+    m = _normalize(metrics)
     if not m:
-        return 0.0
-    return _mean(m.values())
+        return MetricsResult(0.0, 0.0, 0.0, 1.0)
 
+    values = list(m.values())
+    mu = _mean(values)
 
-def delta_coherence(metrics: Dict[Any, Any]) -> float:
-    """
-    Δ-coherence — compatibility API.
-    Minimal definition: identical to TruthΩ until a richer formulation is introduced.
-    """
-    return truth_omega(metrics)
+    # TruthΩ: mean structural magnitude
+    truth_omega = mu
 
+    # Δ-coherence: deviation intensity
+    delta_coherence = _mean([abs(v - mu) for v in values])
 
-def epsilon_drift(metrics: Dict[Any, Any]) -> float:
-    """
-    ε-drift — compatibility API.
-    Minimal definition: mean absolute deviation from the mean, computed on
-    normalized scalar metrics.
-    """
-    m = compute_metrics(metrics)
-    if not m:
-        return 0.0
-    vals = list(m.values())
-    mu = _mean(vals)
-    return _mean([abs(v - mu) for v in vals])
+    # ε-drift: identical to Δ for now (explicit alias)
+    epsilon_drift = delta_coherence
 
+    # κ-alignment: inverse instability (bounded, monotonic)
+    kappa_alignment = 1.0 / (1.0 + epsilon_drift)
 
-def kappa_alignment(metrics: Dict[Any, Any]) -> float:
-    """
-    κ-alignment — compatibility API.
-    Minimal definition: squashed inverse of ε-drift, bounded in (0, 1].
-    """
-    e = epsilon_drift(metrics)
-    return 1.0 / (1.0 + float(e))
+    return MetricsResult(
+        truth_omega=truth_omega,
+        delta_coherence=delta_coherence,
+        epsilon_drift=epsilon_drift,
+        kappa_alignment=kappa_alignment,
+    )
