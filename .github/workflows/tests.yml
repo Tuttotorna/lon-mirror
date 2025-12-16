@@ -31,5 +31,7 @@ jobs:
           fi
 
       - name: Run pytest
+        env:
+          PYTHONPATH: .
         run: |
           pytest -q
