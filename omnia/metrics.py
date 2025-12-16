@@ -43,28 +43,26 @@ def co_plus(truth_omega_value: float) -> float:
 
 def score_plus(co_plus_value: float, *, bias: float = 0.0, info: float = 1.0) -> float:
     """
-    ScorePlus: simple composite used across OMNIA demos.
+    ScorePlus: simple composite in [0,1].
 
-    - co_plus_value: [0,1] preferred
-    - bias: additive offset (can be negative/positive)
-    - info: multiplicative weight (>=0 preferred)
+    Design (reviewer-friendly):
+      - base = clip01(co_plus_value + bias)
+      - info <= 0 => 0 (no usable information)
+      - score = clip01(base * info)
 
-    Output is clipped to [0,1] to remain a stable "probability-like" score.
+    This keeps the output bounded and deterministic.
     """
-    v = float(co_plus_value)
-    b = float(bias)
-    w = float(info)
-    if w < 0.0:
-        w = 0.0
-    return _clip01((v * w) + b)
+    base = _clip01(float(co_plus_value) + float(bias))
+    info = float(info)
+    if info <= 0.0:
+        return 0.0
+    return _clip01(base * info)
 
 
 def delta_coherence(values: Iterable[float], *, eps: float = EPS) -> float:
     """
     Delta-coherence: dispersion proxy (0 = identical, higher = more spread).
     Uses normalized mean absolute deviation around mean.
-
-    values: iterable of floats
     """
     xs = [float(v) for v in values]
     if not xs:
@@ -88,7 +86,7 @@ def kappa_alignment(a: float, b: float, *, eps: float = EPS) -> float:
 
 def epsilon_drift(prev: float, curr: float, *, eps: float = EPS) -> float:
     """
-    Epsilon-drift: relative change magnitude >=0.
+    Epsilon-drift: relative change magnitude >= 0.
     """
     prev = float(prev)
     curr = float(curr)
@@ -100,6 +98,7 @@ def epsilon_drift(prev: float, curr: float, *, eps: float = EPS) -> float:
 class OmegaMetrics:
     truth_omega: float
     co_plus: float
+    score_plus: float
     delta: float
     kappa: float
     epsilon: float
@@ -113,26 +112,25 @@ def omega_metrics(
     curr_score: Optional[float] = None,
     align_a: Optional[float] = None,
     align_b: Optional[float] = None,
+    bias: float = 0.0,
+    info: float = 1.0,
 ) -> OmegaMetrics:
     """
     Convenience bundle:
     - TruthOmega from coherence
     - CoPlus from TruthOmega
+    - ScorePlus from CoPlus (+bias, *info)
     - Delta from lens_values (if provided)
     - Kappa from align_a/align_b (if provided)
     - Epsilon from prev_score/curr_score (if provided)
-
-    Notes:
-    - If optional pairs are missing, the metric is defined as 0.0 (explicit policy).
-      This keeps the bundle numeric and stable without pretending that an uncomputed
-      value is "real"; it is simply "not applicable under missing inputs".
     """
     t = truth_omega(coherence)
     c = co_plus(t)
+    s = score_plus(c, bias=bias, info=info)
     d = delta_coherence(lens_values or [])
     k = 0.0 if (align_a is None or align_b is None) else kappa_alignment(align_a, align_b)
     e = 0.0 if (prev_score is None or curr_score is None) else epsilon_drift(prev_score, curr_score)
-    return OmegaMetrics(truth_omega=t, co_plus=c, delta=d, kappa=k, epsilon=e)
+    return OmegaMetrics(truth_omega=t, co_plus=c, score_plus=s, delta=d, kappa=k, epsilon=e)
 
 
 def compute_metrics(
@@ -144,33 +142,28 @@ def compute_metrics(
     eps_ref: float = 0.0,
 ) -> Dict[str, float]:
     """
-    Convenience wrapper expected by tests.
+    Convenience wrapper expected by CI tests.
 
-    Returns a dict with the core metrics:
-    truth_omega, co_plus, score_plus, delta_coherence, kappa_alignment, epsilon_drift.
-
-    This function is deterministic:
-    - no globals() checks
-    - no silent fallback to 0.0 due to missing functions
+    Returns dict keys:
+      truth_omega, co_plus, score_plus, delta_coherence, kappa_alignment, epsilon_drift
     """
     t = truth_omega(coherence)
     c = co_plus(t)
     s = score_plus(c, bias=bias, info=info)
 
-    # delta_coherence expects an iterable. With a single scalar coherence, delta is 0 by definition.
+    # With a single scalar coherence, dispersion is defined as 0 by construction.
     d = delta_coherence([coherence])
 
-    # For this wrapper we define reference-based variants:
     k = kappa_alignment(coherence, kappa_ref)
     e = epsilon_drift(eps_ref, coherence)
 
     return {
-        "truth_omega": t,
-        "co_plus": c,
-        "score_plus": s,
-        "delta_coherence": d,
-        "kappa_alignment": k,
-        "epsilon_drift": e,
+        "truth_omega": float(t),
+        "co_plus": float(c),
+        "score_plus": float(s),
+        "delta_coherence": float(d),
+        "kappa_alignment": float(k),
+        "epsilon_drift": float(e),
     }
 
 
@@ -186,4 +179,3 @@ __all__ = [
     "omega_metrics",
     "compute_metrics",
 ]
-```0
