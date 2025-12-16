@@ -2,7 +2,7 @@
 (BASE ± TIME ± CAUSA ± TOKEN ± LCR)
 
 **Fused Ω-Score Engine · MB-X.01**  
-**Author: Massimiliano Brighindi**
+**Author:** Massimiliano Brighindi
 
 ---
 
@@ -28,7 +28,29 @@ All outputs are:
 
 Any decision logic remains **external**.
 
-This repository is the public executable implementation of the **MB-X.01** research line.
+This repository is the public, executable implementation of the **MB-X.01** research line.
+
+---
+
+## Architecture at a Glance
+
+OMNIA is a **deterministic structural sensor**.
+
+Input signals are observed through multiple **independent lenses**.  
+Each lens produces numeric measurements.  
+Measurements are fused into a single Ω-score and an optional confidence envelope.
+
+OMNIA never interprets meaning.  
+It measures **resistance to deformation**.
+
+---
+
+## Dependency Pipeline (End-to-End)
+
+Input ↓ Ω-TOTAL Orchestrator ↓ Independent Structural Lenses ↓ Signal Fusion ↓ ICE Envelope (optional) ↓ Machine-Readable Report (JSON / CSV)
+
+All entry points resolve to the same core engine and lenses.
+The pipeline is deterministic and reproducible.
 
 ---
 
@@ -38,26 +60,33 @@ This repository is the public executable implementation of the **MB-X.01** resea
 > A structure that collapses under an independent transformation is unstable.
 
 OMNIA does not claim truth.  
-It measures **resistance to deformation**.
+It measures **structural resistance**.
 
-The core scalar produced by OMNIA is **TruthΩ (Ω-score)**:
-a continuous measure of invariance under independent lenses.
+The core scalar produced by OMNIA is:
+
+**TruthΩ (Ω-score)**  
+A continuous measure of invariance under independent structural lenses.
 
 ---
 
 ## Structural Lenses
 
+Each lens observes the **same input** under a **different transformation**.  
+All outputs are numeric and machine-verifiable.
+
+---
+
 ### Omniabase (BASE)
 
 **Multi-base structural analysis of numeric representations.**
 
-Core signals:
+**Core signals**
 - multi-base digit entropy
 - compactness / dispersion
 - invariant signatures
 - PBII — Prime Base Instability Index
 
-Use cases:
+**Use cases**
 - numeric structure analysis
 - anomaly detection
 - numeric hallucination sensing
@@ -69,12 +98,12 @@ Use cases:
 
 **Temporal stability and drift detection.**
 
-Core signals:
+**Core signals**
 - short vs long window divergence
 - regime change detection
 - drift accumulation
 
-Use cases:
+**Use cases**
 - time-series monitoring
 - reasoning drift in long chains
 - sensor instability detection
@@ -85,12 +114,12 @@ Use cases:
 
 **Lagged causal structure extraction over multivariate signals.**
 
-Core signals:
+**Core signals**
 - correlation across all lags
 - strongest lag per signal pair
 - edge emission above threshold
 
-Use cases:
+**Use cases**
 - causal dependency mapping
 - hidden interaction detection
 - non-semantic causal inspection
@@ -101,12 +130,12 @@ Use cases:
 
 **Structural instability analysis applied to token sequences.**
 
-Pipeline:
+**Pipeline**
 - token → numeric proxy
 - structural dispersion analysis
 - instability aggregation
 
-Use cases:
+**Use cases**
 - hallucination localization
 - chain-of-thought fracture detection
 - token-level instability sensing
@@ -117,17 +146,17 @@ Use cases:
 
 **External coherence validation layer (FACT + NUMERIC fusion).**
 
-Integrated signals:
+**Integrated signals**
 - factual consistency
 - numeric consistency
 - optional structural Ω input
 
-Outputs:
+**Outputs**
 - Ω_ext (external coherence score)
 - confusion-matrix metrics
 
-LCR is **optional** and external-facing.
-OMNIA remains a pure structural sensor.
+LCR is **optional** and external-facing.  
+OMNIA remains a **pure structural sensor**.
 
 ---
 
@@ -135,17 +164,17 @@ OMNIA remains a pure structural sensor.
 
 All lenses contribute to a unified structural score.
 
-| Lens  | Meaning                 | Contribution                |
-|------|-------------------------|-----------------------------|
-| BASE | Numeric instability     | PBII / invariants           |
-| TIME | Temporal drift          | regime score                |
-| CAUSA| Causal structure        | edge strength               |
-| TOKEN| Token instability       | dispersion score            |
-| LCR  | External coherence      | Ω_ext                       |
+| Lens  | Meaning             | Contribution        |
+|------|---------------------|---------------------|
+| BASE | Numeric instability | PBII / invariants   |
+| TIME | Temporal drift      | regime score        |
+| CAUSA| Causal structure    | edge strength       |
+| TOKEN| Token instability   | dispersion score    |
+| LCR  | External coherence  | Ω_ext               |
 
-Outputs:
+**Outputs**
 - Ω-total score
-- component breakdown
+- per-lens component breakdown
 - JSON-safe metadata
 - deterministic reproducibility
 
@@ -153,7 +182,7 @@ Outputs:
 
 ## Repository Structure
 
-omnia/ init.py metrics.py          # TruthΩ, Δ-coherence, κ-alignment, ε-drift envelope.py         # ICE: confidence / impossibility ice.py              # legacy ICE gate (compatibility)
+omnia/ init.py omniabase.py omniatempo.py omniacausa.py omniatoken.py metrics.py        # TruthΩ, Δ-coherence, κ-alignment envelope.py       # ICE: confidence / impossibility ice.py            # legacy ICE gate (compatibility)
 
 examples/ minimal_validator.py
 
@@ -170,7 +199,7 @@ All modules are:
 
 ## Installation
 
-Requirements:
+**Requirements**
 - Python ≥ 3.9
 
 Clone the repository:
@@ -196,12 +225,12 @@ This executes:
 
 multi-base signature generation
 
-TruthΩ / Δ / κ / ε computation
+TruthΩ / Δ / κ computation
 
 ICE envelope construction
 
 
-Output is a stable JSON diagnostic report.
+Output is a stable, machine-readable diagnostic report.
 
 
 ---
@@ -222,7 +251,8 @@ from omnia import build_ice
 ice = build_ice(metrics)
 print(ice.confidence, ice.impossibility, ice.flags)
 
-OMNIA does not gate by default. The envelope is informational.
+OMNIA does not gate by default.
+The envelope is informational.
 
 
 ---
@@ -272,9 +302,9 @@ TruthΩ
 
 PBII
 
-ICE envelope
+ICE Envelope
 
-OMNIA unified structural engine
+OMNIA Unified Structural Engine
 
 
 This repository is the executable mirror of the MB-X.01 research line.
@@ -297,3 +327,4 @@ Citation
 Brighindi, M. (2025).
 OMNIA — Unified Structural Measurement Engine (MB-X.01)
 GitHub: https://github.com/Tuttotorna/lon-mirror
+
