@@ -326,5 +326,5 @@ Citation
 
 Brighindi, M. (2025).
 OMNIA — Unified Structural Measurement Engine (MB-X.01)
-GitHub: https://github.com/Tuttotorna/lon-mirror1
+GitHub: https://github.com/Tuttotorna/lon-mirror
 
