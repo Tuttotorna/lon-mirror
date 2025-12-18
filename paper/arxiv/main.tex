@@ -1,0 +1,140 @@
+\documentclass[11pt]{article}
+
+% ---------- Core packages ----------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Math / symbols ----------
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{bm}
+
+% ---------- Tables / figures ----------
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% ---------- Links ----------
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+% ---------- Bibliography ----------
+\usepackage[numbers]{natbib}
+
+% ---------- Title ----------
+\title{\textbf{OMNIA: Post-Inference Structural Instability Metrics for LLM Outputs}\\
+\large Truth$\Omega$ and PBII as Model-Agnostic Structural Lenses}
+\author{
+Massimiliano Brighindi\\
+\texttt{brighissimo@gmail.com}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Large Language Models (LLMs) can score highly on benchmarks while remaining fragile under minor prompt perturbations.
+We present \textbf{OMNIA}, a model-agnostic structural measurement layer that quantifies post-inference instability
+without relying on prompt semantics or model internals. OMNIA computes structural invariance metrics across
+transformations and reports per-item instability signals (\textbf{Truth$\Omega$}) and a benchmark-level instability index
+(\textbf{PBII}). We provide a reproducible pipeline and a public case study on GSM8K-style reasoning under controlled
+prompt variations, including raw outputs and deterministic scoring code.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+LLMs often exhibit a gap between benchmark performance and real-world reliability.
+A core driver is sensitivity to perturbations: paraphrases, formatting changes, or minor instruction edits can cause
+large output variance. This work focuses on \emph{measuring} that variance structurally, post-inference.
+
+\textbf{Contributions.}
+\begin{itemize}
+  \item OMNIA as a structural measurement layer: it does not generate answers, optimize objectives, or decide outcomes.
+  \item Truth$\Omega$: a per-item structural instability score computed under transformation.
+  \item PBII: a benchmark-level instability index derived from per-item variance signals.
+  \item A reproducible case study and code + raw outputs for independent verification.
+\end{itemize}
+
+\section{OMNIA Overview}
+\label{sec:overview}
+OMNIA computes invariance under transformations. The system is organized as independent structural lenses
+(e.g., BASE, TIME, CAUSA, TOKEN, LCR) and a fused engine that reports an $\Omega$-total diagnostic signal.
+
+\subsection{What OMNIA is (and is not)}
+OMNIA \textbf{measures structure}. It does \textbf{not} decide, optimize, or replace evaluation.
+It is intended to be composable with any model, UI, or agent framework.
+
+\section{Metrics}
+\label{sec:metrics}
+This section defines Truth$\Omega$ and PBII in a minimal, implementation-aligned way.
+
+\subsection{Truth$\Omega$ (per-item)}
+\label{subsec:truthomega}
+Given a single item $i$ and a set of $K$ prompt variants producing outputs $\{y_{i,1},\dots,y_{i,K}\}$,
+OMNIA computes structural features $\phi(\cdot)$ and measures variance under transformation:
+\begin{equation}
+\mathrm{Truth}\Omega(i) = f\Big(\mathrm{Var}\big[\phi(y_{i,1}),\dots,\phi(y_{i,K})\big]\Big)
+\end{equation}
+where $f(\cdot)$ maps structural variance to a bounded diagnostic score. The exact feature map and aggregation
+are defined by the OMNIA implementation.
+
+\subsection{PBII (benchmark-level)}
+\label{subsec:pbii}
+Given $N$ items, PBII aggregates per-item instability into a benchmark-level index:
+\begin{equation}
+\mathrm{PBII} = g\big(\{\mathrm{Truth}\Omega(i)\}_{i=1}^{N}\big)
+\end{equation}
+with $g(\cdot)$ chosen to reflect instability prevalence and separation between stable/unstable regimes.
+
+\section{Reproducible Pipeline}
+\label{sec:pipeline}
+We release:
+\begin{itemize}
+  \item raw model outputs for baseline/paraphrase/perturbation variants,
+  \item deterministic scoring scripts,
+  \item fixed dependency and seed-locked execution path.
+\end{itemize}
+All results in this paper are reproducible by running the published scripts on the published data.
+
+\section{Case Study: GSM8K-Style Perturbations}
+\label{sec:casestudy}
+We report per-item Truth$\Omega$ and dataset-level PBII on a GSM8K-style subset under controlled prompt variants.
+We include raw outputs to enable third-party auditing and alternative scoring.
+
+\subsection{Experimental Setup}
+Describe: model, decoding (temperature=0), number of variants, prompt templates, and item selection.
+
+\subsection{Results}
+Include:
+\begin{itemize}
+  \item distribution of Truth$\Omega$ across items,
+  \item PBII summary,
+  \item representative stable vs unstable examples (with minimal excerpts).
+\end{itemize}
+
+\section{Limitations}
+\label{sec:limits}
+Discuss: scope of transformations, dependence on feature map choice, and separation between measurement vs decision layers.
+
+\section{Conclusion}
+\label{sec:conclusion}
+OMNIA provides a model-agnostic, post-inference structural approach to quantify instability under perturbations.
+Publishing raw outputs + deterministic scoring enables verification and practical integration into reliability workflows.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\appendix
+
+\section{Artifact Links}
+\label{app:links}
+\begin{itemize}
+  \item GitHub repository: \url{https://github.com/Tuttotorna/lon-mirror}
+  \item Reproducible run (Colab): \url{https://colab.research.google.com/github/Tuttotorna/lon-mirror/blob/main/colab/OMNIA_REAL_RUN.ipynb}
+\end{itemize}
+
+\end{document}
