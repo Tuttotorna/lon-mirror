@@ -255,3 +255,35 @@ This confirms OMNIA’s sensitivity to **semantic alignment pressure** rather th
 
 **Status**
 QNLI contrast run completed and frozen.
+
+## Phase-2 NLP — RTE (Low-Context Fragility Baseline) — EXECUTED
+
+**Scope**
+- Dataset: RTE
+- Split: validation
+- Sample size: 50 random items
+- Inference: single-shot (temp=0, top_p=1)
+- OMNIA: post-inference
+- Thresholds: frozen
+- Labels: ignored (diagnostic-only)
+
+**Metrics**
+- TruthΩ: mean = 1.65, std = 0.16
+- PBII: 0.70
+- Flag rate: 35%
+
+**Observations**
+- Higher flag rate compared to MNLI and QNLI
+- Lower PBII despite increased instability signals
+- Fragility emerges from minimal context and entailment compression
+
+**Interpretation**
+RTE confirms OMNIA’s sensitivity to **low-context semantic brittleness**:
+structural instability increases when inference relies on sparse premises,
+even without multi-sentence reasoning.
+
+This contrasts with QNLI, where instability is driven by semantic alignment pressure
+rather than context sparsity.
+
+**Status**
+RTE contrast run completed and frozen.
