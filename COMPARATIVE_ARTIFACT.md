@@ -393,3 +393,159 @@ It provides a diagnostic signal, not a repair mechanism.
 
 This preserves OMNIA’s role as a measurement layer, composable with external systems responsible for retrieval, verification, or decision-making.
 
+
+
+
+OMNIA as a Diagnostic Layer in Ensemble Systems
+
+Scope
+
+OMNIA is not an ensemble method.
+It does not aggregate predictions, re-rank outputs, or arbitrate correctness.
+
+Instead, OMNIA operates as a model-agnostic diagnostic layer that can be composed around ensemble systems to expose structural instability that remains invisible to outcome-based aggregation.
+
+
+---
+
+Ensemble Blind Spot
+
+Standard ensemble techniques (e.g. majority vote, self-consistency, sampling-based agreement):
+
+optimize answer agreement
+
+reduce variance at the output level
+
+assume correctness emerges from convergence
+
+
+However, benchmarks in this artifact show that:
+
+> Agreement does not imply structural stability.
+
+
+
+Across GSM8K, MATH, SQuAD, TriviaQA, and Natural Questions, OMNIA consistently flags items where:
+
+multiple runs agree,
+
+the final answer is correct,
+
+but internal structure exhibits elevated instability
+(TruthΩ ≈ 1.3–1.7, PBII ≈ 0.7–0.8).
+
+
+These cases persist even under ensemble convergence.
+
+
+---
+
+Integration Pattern
+
+OMNIA integrates post-ensemble, not inside it.
+
+Canonical pipeline:
+
+Model / Ensemble
+        ↓
+Generated Outputs (single or multiple)
+        ↓
+OMNIA Diagnostic Pass
+        ↓
+Structural Flags & Metrics (TruthΩ, PBII, Δ)
+
+Key properties:
+
+no feedback loop
+
+no training signal
+
+no influence on generation
+
+
+OMNIA measures what the ensemble cannot see.
+
+
+---
+
+What OMNIA Adds to Ensembles
+
+Aspect	Ensemble	OMNIA
+
+Goal	Correctness	Structural stability
+Signal	Output agreement	Invariance under transformation
+Failure detection	Misses silent drift	Flags latent instability
+Role	Decision	Measurement
+Coupling	Tightly coupled	Strictly decoupled
+
+
+OMNIA exposes failure modes masked by agreement, including:
+
+multi-hop drift
+
+fact-chain accumulation errors
+
+recursive reasoning fragility
+
+context-length sensitivity
+
+
+
+---
+
+Limitation (Explicit)
+
+OMNIA:
+
+detects instability
+
+does not correct it
+
+does not choose alternatives
+
+does not re-rank ensemble outputs
+
+
+Mitigation strategies (re-sampling, abstention, human review, adaptive prompting) are external design choices.
+
+This separation is intentional.
+
+
+---
+
+Interpretation
+
+In ensemble settings, OMNIA should be interpreted as:
+
+> a structural stress-test, not a judge.
+
+
+
+High TruthΩ in an ensemble-stable answer indicates:
+
+hidden brittleness,
+
+elevated risk under distribution shift,
+
+increased probability of silent failure at scale.
+
+
+
+---
+
+Status
+
+This integration model is:
+
+benchmark-validated
+
+architecture-agnostic
+
+frozen in this artifact
+
+
+Further extensions belong to system design, not OMNIA itself.
+
+
+
+
