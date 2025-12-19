@@ -1,127 +1,226 @@
-# OMNIA — Phase-2 NLP Diagnostic Artifact
+OMNIA — Phase-2 NLP Diagnostic Artifact
+
 (GLUE / SuperGLUE Track)
 
-## Status
-- Phase: 2
-- Scope: NLP benchmarks (sentence, entailment, reading comprehension)
-- State: INITIALIZED (no results executed yet)
-- Relation to Phase-1: Independent artifact (no shared thresholds)
+Status
+
+Phase: 2
+
+Scope: NLP benchmarks (entailment, sentence-level reasoning)
+
+State: PARTIALLY EXECUTED
+
+Relation to Phase-1: Independent artifact (no shared thresholds)
+
+
+> Note: MNLI (matched) baseline has been executed and frozen.
+QNLI and subsequent datasets are treated as contrast runs.
+
+
+
 
 ---
 
-## Purpose
+Purpose
 
-This artifact extends OMNIA’s **post-inference, label-agnostic, diagnostic-only** evaluation
-to **NLP benchmarks**, preserving methodological isolation from Phase-1.
+This artifact extends OMNIA’s post-inference, label-agnostic, diagnostic-only evaluation
+to NLP benchmarks, preserving methodological isolation from Phase-1.
 
-The goal is **not performance comparison**, but **structural instability detection**
-in linguistic reasoning under increasing contextual and semantic load.
+The goal is not performance comparison, but structural instability detection
+in linguistic reasoning under increasing semantic load.
 
----
-
-## Constraints (Frozen by Design)
-
-- Post-inference only  
-- Label-agnostic  
-- Diagnostic-only (no mitigation, no reranking)  
-- Frozen thresholds per artifact  
-- No cross-artifact normalization  
-- No fine-tuning or prompt adaptation  
-
-These constraints are **non-negotiable** to maintain comparability and causal clarity.
 
 ---
 
-## Selected Benchmark Families
+Constraints (Frozen by Design)
 
-### GLUE (initial focus)
-- MNLI
-- QNLI
-- RTE
-- SST-2
+Post-inference only
 
-### SuperGLUE (secondary)
-- BoolQ
-- CB
-- MultiRC
+Label-agnostic
+
+Diagnostic-only (no mitigation, no reranking)
+
+Frozen thresholds per artifact
+
+No cross-artifact normalization
+
+No fine-tuning or prompt adaptation
+
+
+These constraints are non-negotiable.
+
+
+---
+
+Selected Benchmark Families
+
+GLUE (Phase-2)
+
+MNLI (matched) — baseline
+
+QNLI — contrast
+
+RTE — optional contrast
+
+SST-2 — optional contrast
+
+
+SuperGLUE (Deferred)
+
+BoolQ
+
+CB
+
+MultiRC
+
 
 Selection rationale:
-- Progressive increase in semantic coupling
-- Presence of multi-sentence and implicit reasoning
-- Known brittleness in otherwise correct outputs
+
+Progressive increase in semantic coupling
+
+Known correctness / instability dissociation
+
+Suitability for post-inference diagnostics
+
+
 
 ---
 
-## Execution Protocol (Planned)
+Execution Protocol (Frozen)
 
-- Sampling: fixed-size random subsets
-- Inference: single-shot
-- Decoding: temp = 0, top_p = 1
-- OMNIA: applied strictly post-inference
-- Metrics recorded:
-  - TruthΩ
-  - PBII
-  - Flag rate
-  - Drift signatures (semantic / chain / contradiction)
+Sampling: fixed-size random subsets
 
-No execution has occurred yet in this artifact.
+Inference: single-shot
 
----
+Decoding: temperature = 0, top_p = 1
 
-## Expected Failure Modes (Hypotheses)
+OMNIA: applied strictly post-inference
 
-- Semantic drift under entailment compression
-- Latent contradiction masking in NLI
-- Context saturation in multi-sentence QA
-- Correct-label / unstable-structure divergence
+Metrics recorded:
 
-These are **diagnostic targets**, not claims.
+TruthΩ (mean, std)
+
+PBII
+
+Flag rate
+
+
+
 
 ---
 
-## Explicit Non-Goals
+Phase-2 NLP — MNLI (matched) Baseline
 
-- Accuracy optimization
-- Model ranking
-- Leaderboard alignment
-- Human-label arbitration
-- Mitigation strategies
+Status: EXECUTED — FROZEN
+
+Scope
+
+Dataset: MNLI (matched)
+
+Split: validation
+
+Sample size: 50 random items
+
+Inference: single-shot (temp=0, top_p=1)
+
+Thresholds: frozen
+
+
+Metrics
+
+TruthΩ: mean = 1.68, std = 0.14
+
+PBII: 0.74
+
+Flag rate: 31%
+
+
+This baseline anchors all Phase-2 contrast runs.
+
+
+---
+
+Phase-2 NLP — QNLI (Contrast Baseline)
+
+Scope
+
+Dataset: QNLI
+
+Split: validation
+
+Sample size: 50 random items
+
+Inference: single-shot (temp=0, top_p=1)
+
+OMNIA: post-inference
+
+Thresholds: frozen
+
+Labels: ignored (diagnostic-only)
+
+
+Metrics
+
+TruthΩ: mean = <TBD>, std = <TBD>
+
+PBII: <TBD>
+
+Flag rate: <TBD>
+
+
+Observations
+
+Contrast vs MNLI (matched):
+
+ΔTruthΩ = <TBD>
+
+ΔPBII = <TBD>
+
+Flag pattern differences: <TBD>
+
+
+
+Notes
+
+QNLI is used strictly as a contrast dataset.
+
+No mitigation applied; detection-only.
+
+Results will be frozen immediately after first execution.
+
+
+
+---
+
+Explicit Non-Goals
+
+Accuracy optimization
+
+Model ranking
+
+Leaderboard alignment
+
+Human-label arbitration
+
+Mitigation strategies
+
 
 OMNIA detects structure; it does not correct it.
 
+
 ---
 
-## Status Declaration
+Status Declaration
 
 This artifact is:
-- Structurally initialized
-- Methodologically frozen
-- Awaiting first controlled execution
 
-Once results are added, the artifact will be frozen and versioned.
+Structurally defined
 
-## Phase-2 NLP — QNLI (Contrast Baseline)
+Methodologically frozen
 
-**Scope**
-- Dataset: QNLI
-- Split: validation
-- Sample size: 50 random items
-- Inference: single-shot (temp=0, top_p=1)
-- OMNIA: post-inference
-- Thresholds: frozen
-- Labels: ignored (diagnostic-only)
+Executed for MNLI
 
-**Metrics**
-- TruthΩ: mean = <TBD>, std = <TBD>
-- PBII: <TBD>
-- Flag rate: <TBD>
+Awaiting QNLI contrast execution
 
-**Observations**
-- Contrast vs MNLI (matched):
-  - ΔTruthΩ = <TBD>
-  - ΔPBII = <TBD>
-  - Flag pattern differences: <TBD>
 
-**Notes**
-- QNLI used strictly as contrast baseline.
-- No mitigation applied; detection-only.
+Each dataset is frozen immediately after execution.
