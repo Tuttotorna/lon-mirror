@@ -99,3 +99,29 @@ This artifact is:
 - Awaiting first controlled execution
 
 Once results are added, the artifact will be frozen and versioned.
+
+## Phase-2 NLP — QNLI (Contrast Baseline)
+
+**Scope**
+- Dataset: QNLI
+- Split: validation
+- Sample size: 50 random items
+- Inference: single-shot (temp=0, top_p=1)
+- OMNIA: post-inference
+- Thresholds: frozen
+- Labels: ignored (diagnostic-only)
+
+**Metrics**
+- TruthΩ: mean = <TBD>, std = <TBD>
+- PBII: <TBD>
+- Flag rate: <TBD>
+
+**Observations**
+- Contrast vs MNLI (matched):
+  - ΔTruthΩ = <TBD>
+  - ΔPBII = <TBD>
+  - Flag pattern differences: <TBD>
+
+**Notes**
+- QNLI used strictly as contrast baseline.
+- No mitigation applied; detection-only.
