@@ -35,4 +35,4 @@ OMNIA detects this failure mode deterministically.
 ## Non-goals
 - No re-ranking
 - No reward shaping
-- No alignment logi
+- No alignment logic
