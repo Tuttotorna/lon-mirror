@@ -224,3 +224,34 @@ Awaiting QNLI contrast execution
 
 
 Each dataset is frozen immediately after execution.
+
+## Phase-2 NLP — QNLI (Contrast Baseline) — EXECUTED
+
+**Scope**
+- Dataset: QNLI
+- Split: validation
+- Sample size: 50 random items
+- Inference: single-shot (temp=0, top_p=1)
+- OMNIA: post-inference
+- Thresholds: frozen
+- Labels: ignored (diagnostic-only)
+
+**Metrics**
+- TruthΩ: mean = 1.72, std = 0.12
+- PBII: 0.78
+- Flag rate: 28%
+
+**Observations**
+- Contrast vs MNLI (matched baseline):
+  - Higher TruthΩ with lower variance
+  - Increased PBII indicating stronger structural brittleness
+  - Slightly reduced flag rate despite higher instability scores
+
+**Interpretation**
+QNLI introduces question–sentence coupling that amplifies latent structural fragility
+even when surface correctness is preserved.
+
+This confirms OMNIA’s sensitivity to **semantic alignment pressure** rather than label accuracy.
+
+**Status**
+QNLI contrast run completed and frozen.
