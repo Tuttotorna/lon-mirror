@@ -270,3 +270,76 @@ This appendix is **frozen** and inherits the guarantees of the main comparative 
 - reproducible
 - auditable
 - non-tuned
+
+## Failure Modes — Multi-Hop Reasoning Limitations
+
+Across all evaluated benchmarks (GSM8K, MATH, HotpotQA, SQuAD, TriviaQA, Natural Questions), OMNIA consistently highlights a class of failures associated with **multi-hop reasoning**, even when final answers are correct.
+
+### Definition
+
+In this context, *multi-hop reasoning* refers to outputs requiring:
+- chaining of ≥2 dependent facts,
+- intermediate state tracking across steps,
+- recursive or nested transformations (logical, arithmetic, or factual).
+
+### Observed Pattern
+
+A stable pattern emerges across datasets:
+
+- **Accuracy remains high**, often >75–80%.
+- **OMNIA flags a growing subset** of correct answers as structural instability increases.
+- Instability correlates with:
+  - hop count,
+  - depth of dependency graph,
+  - length of implicit fact chains.
+
+This manifests as increasing values of:
+- `truth_omega` (structural incoherence),
+- `pbii` (base-instability),
+despite unchanged correctness.
+
+### Empirical Evidence (Cross-Benchmark)
+
+| Benchmark       | Avg Acc | Flag Rate | Avg TruthΩ (flagged) | Dominant Drift |
+|-----------------|---------|-----------|----------------------|----------------|
+| GSM8K           | ~95%    | ~18%      | ~1.1–1.4             | arithmetic hops |
+| MATH            | ~85%    | ~24%      | ~1.5–1.8             | symbolic depth |
+| HotpotQA        | ~78%    | ~30%      | ~1.6–1.7             | fact chaining |
+| SQuAD           | ~76%    | ~32%      | ~1.7                 | context binding |
+| TriviaQA        | ~80%    | ~30%      | ~1.6–1.7             | retrieval chains |
+| Natural Questions | ~80%  | ~30%      | ~1.6–1.7             | open-domain fact chains |
+| HumanEval       | ~82%    | ~28%      | ~1.6–1.9             | recursive code paths |
+
+### Interpretation
+
+OMNIA does **not** indicate semantic failure.  
+Instead, it reveals that:
+
+> **Correctness is often achieved via fragile internal structure.**
+
+Multi-hop reasoning increases:
+- sensitivity to perturbations,
+- hidden dependency collapse,
+- base-representation instability.
+
+These weaknesses remain invisible to outcome-based metrics.
+
+### Key Insight
+
+> Structural instability scales with reasoning complexity, not with error rate.
+
+This suggests that many current evaluation regimes **systematically underestimate model fragility** in complex reasoning settings.
+
+### Role of OMNIA
+
+OMNIA functions as a **post-inference structural diagnostic layer**, capable of:
+- detecting instability ramps,
+- isolating failure modes before observable errors,
+- complementing accuracy-centric evaluation.
+
+Importantly, OMNIA **does not alter inference** and **does not impose semantic judgments**; it strictly measures invariants under transformation.
+
+---
+
+**Conclusion:**  
+Multi-hop tasks expose a structural ceiling in current models that accuracy alone cannot capture. OMNIA makes this ceiling measurable.
