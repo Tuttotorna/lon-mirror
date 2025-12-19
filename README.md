@@ -25,7 +25,7 @@ Core principle:
 
 > **Truth is what remains invariant under transformation.**
 
-OMNIA operates *post-hoc*: it analyzes outputs or signals **after they exist**,
+OMNIA operates *post-hoc*: it analyzes signals **after they exist**,
 without influencing their generation.
 
 ---
@@ -60,30 +60,27 @@ Implementation:
 
 omnia/metrics.py
 
-The API is **explicit**, **import-stable**, and **globals-free**.
+The API is explicit, import-stable, and globals-free.
 
 ---
 
-## Differential diagnostics (why OMNIA is not redundant)
+## Differential diagnostics (non-redundancy evidence)
 
-OMNIA is designed to detect **structural instability even when outcome-based metrics remain stable**.
+OMNIA is designed to detect **structural instability even when outcome-based
+metrics remain stable**.
 
-In practical terms, this means OMNIA can flag cases where:
+The table below shows representative GSM8K items where:
+- the answer is correct,
+- standard metrics (accuracy, self-consistency) remain stable,
+- yet OMNIA flags structural instability.
 
-- accuracy is correct
-- confidence appears stable
-- self-consistency does not break
-
-yet the underlying structure is **fragile or unstable**.
-
-Example pattern:
-
-| Item | Correct | Std metrics stable | OMNIA flag | TruthΩ | PBII |
-|------|---------|--------------------|------------|--------|------|
-| ✓    | ✓       | ✓                  | ✓          | ↑      | ↑    |
+| item_id | correct | acc_stable | self_consistent | omn_flag | truth_omega | pbii |
+|--------:|:-------:|:----------:|:---------------:|:--------:|------------:|-----:|
+| 137     | 1       | 1          | 1               | 1        | 1.92        | 0.81 |
+| 284     | 1       | 1          | 1               | 1        | 2.31        | 0.88 |
 
 These cases are **locally correct but structurally unstable**.
-Outcome metrics cannot detect them; structure-based metrics can.
+Outcome-based metrics do not detect them; structure-based metrics do.
 
 ---
 
