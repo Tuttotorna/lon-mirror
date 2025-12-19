@@ -698,6 +698,37 @@ OMNIA → audits structural soundness
 OMNIA acts as a post-hoc safety and quality signal, not an optimizer.
 
 
+---
+
+## Scope Extension (Not Executed)
+
+The following benchmark families are **compatible by design** with OMNIA’s diagnostic approach, but are **explicitly not executed** in this artifact.
+
+### GLUE / SuperGLUE (NLP Tasks)
+
+- OMNIA operates **post-inference** and is **label-agnostic**.
+- GLUE-style benchmarks introduce **task-specific semantic labels**, which risk conflating:
+  - task performance  
+  - with structural stability diagnostics.
+- Including them at this stage would reduce **cross-domain comparability** and inflate metrics without adding new diagnostic signal.
+
+### Rationale for Exclusion
+
+- Preserve a **single, frozen comparative artifact**.
+- Maintain **structural consistency** across reasoning, QA, and code-generation domains.
+- Avoid benchmark-specific tuning or threshold drift.
+
+### Forward Plan
+
+- GLUE / SuperGLUE are deferred to **Phase-2 Diagnostic Expansion**.
+- Future execution will:
+  - reuse frozen OMNIA thresholds,
+  - isolate semantic-label effects from structural instability,
+  - be published as a **separate artifact**.
+
+This artifact remains **closed, stable, and comparable** by design.
+
+
 
 
 
