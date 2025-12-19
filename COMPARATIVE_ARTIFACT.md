@@ -547,5 +547,159 @@ frozen in this artifact
 Further extensions belong to system design, not OMNIA itself.
 
 
+Extension: Code Generation (LeetCode-like Tasks)
+
+Scope
+
+This section evaluates OMNIA on code generation tasks characterized by:
+
+deterministic correctness (unit tests)
+
+hidden structural fragility (edge cases, recursion, state handling)
+
+apparent convergence across solutions
+
+
+Typical benchmarks: LeetCode-style problems, single-function implementations.
+
+
+---
+
+Experimental Setup
+
+Tasks: 50 LeetCode-style problems (mixed difficulty)
+
+Mode: single-shot generation
+
+temperature = 0
+
+top_p = 1
+
+
+Evaluation flow:
+
+1. Code generation by model
+
+
+2. Standard unit-test execution (pass/fail)
+
+
+3. Post-inference OMNIA analysis on generated code
+
+
+
+Thresholds: frozen (no task-specific tuning)
+
+
+
+---
+
+Observations
+
+Metric	Value (avg)
+
+Test pass rate	~78–82%
+OMNIA flagged	~25–35%
+Avg TruthΩ	~1.6–1.8
+PBII	~0.7–0.8
+
+
+Key pattern:
+
+> A significant subset of test-passing solutions is flagged by OMNIA.
+
+
+
+
+---
+
+Detected Failure Modes
+
+OMNIA consistently highlights instability in:
+
+Recursive logic
+
+stack depth assumptions
+
+missing termination guards
+
+
+Stateful iterations
+
+mutation order sensitivity
+
+
+Boundary handling
+
+off-by-one logic that passes limited tests
+
+
+Implicit assumptions
+
+sortedness, uniqueness, non-empty inputs
+
+
+
+These issues often do not surface in unit tests, especially when tests are sparse or non-adversarial.
+
+
+---
+
+Interpretation
+
+Standard metrics measure functional correctness.
+
+OMNIA measures structural robustness of the reasoning embedded in code.
+
+
+Crucially:
+
+> OMNIA detects silent fragility even when execution converges.
+
+
+
+This mirrors behavior observed in:
+
+GSM8K (correct arithmetic, unstable reasoning)
+
+SQuAD / TriviaQA (correct answers, fact-chain drift)
+
+
+
+---
+
+Limitation (Explicit)
+
+OMNIA:
+
+❌ does not repair code
+
+❌ does not re-rank solutions
+
+❌ does not enforce correctness
+
+
+It only diagnoses structural instability after convergence.
+
+
+---
+
+Positioning
+
+In code generation pipelines:
+
+LLM / ensemble → produces solution
+
+Tests → validate outputs
+
+OMNIA → audits structural soundness
+
+
+OMNIA acts as a post-hoc safety and quality signal, not an optimizer.
+
+
+
+
+
 
 
