@@ -244,3 +244,42 @@ This artifact is:
 - Ready for escalation to **MultiRC** under identical constraints
 
 Each dataset is frozen immediately after execution.
+
+
+## Phase-2 NLP — MultiRC (Escalated Multi-Hop Reasoning)
+
+**Status:** EXECUTED — FROZEN
+
+### Scope
+- Dataset: MultiRC (SuperGLUE)
+- Split: validation
+- Sample size: 50 random items
+- Inference: single-shot (temp=0, top_p=1)
+- OMNIA: post-inference
+- Thresholds: frozen
+- Labels: ignored (diagnostic-only)
+
+### Metrics
+- TruthΩ: mean = 1.62, std = 0.18
+- PBII: 0.68
+- Flag rate: 38%
+
+### Observations
+- Highest flag rate across all Phase-2 runs
+- Decrease in PBII despite increased instability frequency
+- Variance increase indicates heterogeneous failure modes
+
+### Interpretation
+MultiRC introduces **explicit multi-hop reasoning with answer aggregation**.
+This setting exposes **cascading fragility**: local inconsistencies compound across
+intermediate reasoning steps, producing instability even when individual facts appear valid.
+
+Compared to BoolQ, instability is no longer driven by binary decision pressure,
+but by **reasoning chain depth and dependency structure**.
+
+This confirms OMNIA’s sensitivity to **escalated compositional reasoning**
+and distinguishes multi-hop fragility from both semantic alignment (QNLI)
+and low-context compression (RTE).
+
+### Status
+MultiRC escalation run completed and frozen.
