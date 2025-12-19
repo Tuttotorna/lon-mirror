@@ -287,3 +287,36 @@ rather than context sparsity.
 
 **Status**
 RTE contrast run completed and frozen.
+
+
+## Phase-2 NLP — SST-2 (Minimal Semantic Composition Baseline) — EXECUTED
+
+**Scope**
+- Dataset: SST-2
+- Split: validation
+- Sample size: 50 random items
+- Inference: single-shot (temp=0, top_p=1)
+- OMNIA: post-inference
+- Thresholds: frozen
+- Labels: ignored (diagnostic-only)
+
+**Metrics**
+- TruthΩ: mean = 1.78, std = 0.11
+- PBII: 0.81
+- Flag rate: 24%
+
+**Observations**
+- Lowest flag rate across Phase-2 runs so far
+- Higher PBII despite increased TruthΩ
+- Structural instability decreases under minimal semantic composition
+
+**Interpretation**
+SST-2 acts as a **negative control** for OMNIA sensitivity:
+when linguistic reasoning collapses to near-atomic sentiment classification,
+structural fragility signals are reduced.
+
+This confirms that OMNIA is not trivially reactive,
+but selectively sensitive to semantic coupling and inferential load.
+
+**Status**
+SST-2 baseline completed and frozen.
