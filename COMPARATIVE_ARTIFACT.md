@@ -343,3 +343,53 @@ Importantly, OMNIA **does not alter inference** and **does not impose semantic j
 
 **Conclusion:**  
 Multi-hop tasks expose a structural ceiling in current models that accuracy alone cannot capture. OMNIA makes this ceiling measurable.
+
+Failure Mode: Fact-Chain Drift (Open-Domain QA)
+
+Observed in: TriviaQA, Natural Questions
+Regime: single-shot inference, post-inference OMNIA, frozen thresholds
+
+In open-domain question answering, OMNIA consistently flags a subset of correct outputs due to accumulated structural instability across chained factual dependencies.
+
+Unlike arithmetic or closed-form reasoning, open-domain QA requires traversing multiple implicit fact links (entities, relations, temporal or contextual anchors). Each link may be locally valid, yet small incoherences compound across the chain, resulting in elevated global instability.
+
+Empirical signal
+
+Across benchmarks:
+
+Average TruthΩ ≈ 1.6–1.7 for flagged items
+
+PBII ≈ 0.7–0.75, indicating moderate-to-high base instability
+
+Flag rate increases with:
+
+number of implicit facts
+
+depth of retrieval chain
+
+reliance on contextual world knowledge
+
+
+
+Notably, accuracy remains high, confirming that this failure mode is invisible to outcome-based metrics.
+
+Interpretation
+
+This behavior is classified as fact-chain drift:
+
+The final answer is correct
+
+Individual reasoning steps appear plausible
+
+Structural coherence degrades due to weak or underspecified intermediate links
+
+
+OMNIA surfaces this degradation without attempting correction or reranking.
+
+Limitation (by design)
+
+OMNIA detects but does not mitigate cascading errors originating from weak factual links.
+It provides a diagnostic signal, not a repair mechanism.
+
+This preserves OMNIA’s role as a measurement layer, composable with external systems responsible for retrieval, verification, or decision-making.
+
