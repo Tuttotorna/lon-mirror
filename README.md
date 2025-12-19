@@ -1,151 +1,102 @@
-OMNIA / MB-X.01 — Logical Origin Node (L.O.N.)
+# OMNIA / MB-X.01 — Logical Origin Node (L.O.N.)
 
-OMNIA is a deterministic measurement engine for structural coherence and instability
+**OMNIA** is a deterministic measurement engine for **structural coherence and instability**
 across numbers, time, causality, and token sequences.
 
-It does not interpret meaning.
-It does not make decisions.
-It measures invariants.
+It does **not** interpret meaning.  
+It does **not** make decisions.  
+It **measures invariants**.
 
-This repository (Tuttotorna/lon-mirror) is the canonical public mirror
-of the MB-X.01 / OMNIA research line.
-
+This repository (`Tuttotorna/lon-mirror`) is the **canonical public mirror**
+of the **MB-X.01 / OMNIA** research line.
 
 ---
 
-What OMNIA is
+## What OMNIA is
 
-OMNIA is a pure diagnostic layer.
+OMNIA is a **pure diagnostic layer**.
 
-Input: signals (numeric, temporal, causal, token-based)
-
-Output: structure-only metrics
-
-No semantic assumptions
-
-No policy, no intent, no alignment layer
-
+- **Input:** signals (numeric, temporal, causal, token-based)
+- **Output:** structure-only metrics
+- **No semantic assumptions**
+- **No policy, no intent, no alignment layer**
 
 Core principle:
 
-> Truth is what remains invariant under transformation.
+> **Truth is what remains invariant under transformation.**
 
-
-
-OMNIA operates post-hoc: it analyzes signals after they exist,
-without influencing their generation or outcome.
-
+OMNIA operates **post-hoc**: it analyzes signals *after they exist*,
+without influencing their generation.
 
 ---
 
-What OMNIA is NOT
+## What OMNIA is NOT
 
-❌ Not a language model
+- ❌ Not a language model  
+- ❌ Not a classifier  
+- ❌ Not an optimizer  
+- ❌ Not an agent  
+- ❌ Not a decision system  
 
-❌ Not a classifier
-
-❌ Not an optimizer
-
-❌ Not an agent
-
-❌ Not a decision system
-
-
-OMNIA never chooses.
-It only measures.
-
+OMNIA **never chooses**.  
+It only **measures**.
 
 ---
 
-Core metrics (stable API)
+## Core metrics (stable API)
 
 All metrics are deterministic, bounded, and numerically stable.
 
-Metric	Description
+| Metric              | Description |
+|---------------------|-------------|
+| `truth_omega`       | Structural incoherence measure (0 = perfect coherence) |
+| `co_plus`           | Inverse coherence score in \[0,1] |
+| `score_plus`        | Composite score (CoPlus + bias × information) |
+| `delta_coherence`   | Dispersion / instability proxy |
+| `kappa_alignment`   | Relative similarity between two signals |
+| `epsilon_drift`     | Relative temporal change |
 
-truth_omega	Structural incoherence measure (0 = perfect coherence)
-co_plus	Inverse coherence score in [0,1]
-score_plus	Composite score (CoPlus + bias × information)
-delta_coherence	Dispersion / instability proxy
-kappa_alignment	Relative similarity between two signals
-epsilon_drift	Relative temporal change
-
-
-Implementation lives in:
+Implementation:
 
 omnia/metrics.py
 
 The API is explicit, import-stable, and globals-free.
 
+---
+
+## Differential diagnostics (non-redundancy evidence)
+
+OMNIA detects **structural instability even when outcome-based
+metrics remain stable**.
+
+The table below shows representative GSM8K items where:
+- the answer is correct,
+- standard metrics (accuracy, self-consistency) remain stable,
+- yet OMNIA flags structural instability.
+
+| item_id | correct | acc_stable | self_consistent | omn_flag | truth_omega | pbii |
+|--------:|:-------:|:----------:|:---------------:|:--------:|------------:|-----:|
+| 137     | 1       | 1          | 1               | 1        | 1.92        | 0.81 |
+| 284     | 1       | 1          | 1               | 1        | 2.31        | 0.88 |
+
+These cases are **locally correct but structurally unstable**.  
+Outcome-based metrics do not detect them; structure-based metrics do.
 
 ---
 
-Differential diagnostics (non-redundancy evidence)
+## Architecture overview
 
-OMNIA is designed to detect structural instability even when outcome-based metrics remain stable.
+Signal (numbers / time / tokens / causality) │ ▼ +----------------------+ |    OMNIA LENSES      | |  BASE · TIME · CAUSA | |  TOKEN · LCR         | +----------------------+ │ ▼ +----------------------+ |    METRIC CORE       | |  TruthΩ · Co⁺ · Δ    | |  κ · ε               | +----------------------+ │ ▼ +----------------------+ |    ICE ENVELOPE      | |  Impossibility &     | |  Confidence Envelope | +----------------------+
 
-Below are representative GSM8K items where:
-
-the final answer is correct,
-
-standard metrics (accuracy, self-consistency) remain stable,
-
-yet OMNIA flags structural instability.
-
-
-item_id	correct	acc_stable	self_consistent	omn_flag	truth_omega	pbii
-
-137	1	1	1	1	1.92	0.81
-284	1	1	1	1	2.31	0.88
-
-
-These cases are locally correct but structurally unstable.
-
-Outcome-based metrics do not detect them.
-Structure-based diagnostics do.
-
-Raw per-item GSM8K diagnostics are included as machine-readable CSV.
-
+OMNIA outputs **machine-readable diagnostics**, not judgments.
 
 ---
 
-Architecture overview
+## Reproducibility
 
-Signal
-(numbers / time / tokens / causality)
-        |
-        v
-+--------------------+
-|   OMNIA LENSES     |
-|  BASE / TIME       |
-|  CAUSA / TOKEN     |
-|  LCR               |
-+--------------------+
-        |
-        v
-+--------------------+
-|   METRIC CORE      |
-|  TruthΩ, Co⁺       |
-|  Δ, κ, ε           |
-+--------------------+
-        |
-        v
-+--------------------+
-|   ICE ENVELOPE     |
-|  Impossibility &   |
-|  Confidence        |
-+--------------------+
+This repository provides a **fixed, reproducible execution path**.
 
-OMNIA outputs machine-readable diagnostics, not judgments.
-
-
----
-
-Reproducibility
-
-This repository provides a fixed, reproducible execution path.
-
-Real benchmark run (Colab)
+### Real benchmark run (Colab)
 
 Official notebook:
 
@@ -153,28 +104,17 @@ colab/OMNIA_REAL_RUN.ipynb
 
 What it does:
 
-1. Clones this repository
+1. Clones this repository  
+2. Installs fixed dependencies  
+3. Locks random seeds  
+4. Runs real benchmarks  
+5. Produces machine-readable reports  
 
-
-2. Installs fixed dependencies
-
-
-3. Locks random seeds
-
-
-4. Runs real benchmarks
-
-
-5. Produces machine-readable reports
-
-
-
-Goal: verification, not exploration.
-
+**Goal:** verification, not exploration.
 
 ---
 
-Tests
+## Tests
 
 Invariant-based tests live in:
 
@@ -182,20 +122,38 @@ tests/test_metrics.py
 
 They verify:
 
-algebraic identities
-
-monotonicity
-
-edge cases
-
-numerical stability
-
-API contracts
-
+- algebraic identities  
+- monotonicity  
+- edge cases  
+- numerical stability  
+- API contracts  
 
 Run locally:
 
+```bash
 pytest
+
+
+---
+
+External diagnostics (documented runs)
+
+OMNIA supports post-inference diagnostics from external systems.
+
+Documented example:
+
+data/gsm8k_external_runs/
+
+Includes:
+
+externally generated outputs
+
+OMNIA post-hoc structural analysis
+
+correctness preserved, instability exposed
+
+
+This repository records facts, not claims.
 
 
 ---
@@ -204,12 +162,14 @@ Integration philosophy
 
 OMNIA is composable by design.
 
-Typical separation of roles:
+Separation of roles:
 
-OMNIA → measures structure
-External systems → interpret, decide, optimize
+OMNIA: measures structure
 
-Validated separation:
+External systems: interpret, decide, optimize
+
+
+Validated boundary:
 
 OMNIA = geometry / invariants
 
@@ -231,7 +191,6 @@ OMNIA / MB-X.01
 
 Author / Origin:
 Massimiliano Brighindi
-
 
 There is no secondary mirror and no alternate “lon-mirror1”.
 All references point here.
@@ -258,5 +217,4 @@ This repository is intended to be read by humans and machines.
 License
 
 MIT License
-
 
