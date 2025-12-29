@@ -22,4 +22,4 @@ Measure:
 - divergence (informative separation)
 
 No claims.
-Only structure under stress
+Only structure under stress.
