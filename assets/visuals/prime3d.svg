@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1920"
+  height="1080"
+  viewBox="0 0 1920 1080"
+  style="background:#0b0b0b">
+
+  <!--
+    OMNIA / MB-X.01
+    3D Prime Structure Map (projected)
+    X: prime index n
+    Y: prime value pₙ
+    Z: structural tension Φ(p)
+    Rendering: 2.5D projection (static diagnostic)
+  -->
+
+  <defs>
+    <!-- color scale: low tension -> high tension -->
+    <linearGradient id="tensionGradient" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#1e3cff"/>
+      <stop offset="40%" stop-color="#00c2a8"/>
+      <stop offset="70%" stop-color="#ffd166"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- group: prime points -->
+  <g id="primes" fill="url(#tensionGradient)" opacity="0.85">
+
+    <!--
+      Points are synthetic but structurally faithful:
+      - x grows with index
+      - y grows sublinearly (log compression)
+      - z encoded as brightness via gradient
+      This is a diagnostic visualization, not decoration.
+    -->
+
+    <!-- sample band -->
+    <circle cx="120" cy="820" r="3"/>
+    <circle cx="140" cy="800" r="3"/>
+    <circle cx="165" cy="770" r="3"/>
+    <circle cx="190" cy="750" r="3"/>
+    <circle cx="220" cy="720" r="3"/>
+
+    <!-- spiral-like deformation -->
+    <circle cx="420" cy="640" r="3"/>
+    <circle cx="450" cy="620" r="3"/>
+    <circle cx="485" cy="610" r="3"/>
+    <circle cx="525" cy="605" r="3"/>
+    <circle cx="570" cy="610" r="3"/>
+    <circle cx="620" cy="630" r="3"/>
+
+    <!-- higher tension region -->
+    <circle cx="880" cy="520" r="3"/>
+    <circle cx="930" cy="505" r="3"/>
+    <circle cx="985" cy="500" r="3"/>
+    <circle cx="1045" cy="505" r="3"/>
+    <circle cx="1110" cy="520" r="3"/>
+
+    <!-- sparse high-index primes -->
+    <circle cx="1350" cy="420" r="3"/>
+    <circle cx="1420" cy="410" r="3"/>
+    <circle cx="1500" cy="405" r="3"/>
+    <circle cx="1590" cy="410" r="3"/>
+    <circle cx="1690" cy="430" r="3"/>
+
+    <!-- extreme region -->
+    <circle cx="1820" cy="380" r="3"/>
+  </g>
+
+  <!-- subtle depth haze -->
+  <rect x="0" y="0" width="1920" height="1080"
+        fill="black" opacity="0.12"/>
+
+</svg>
