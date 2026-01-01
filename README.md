@@ -51,16 +51,43 @@ All metrics are deterministic, bounded, and numerically stable.
 |---------------------|-------------|
 | `truth_omega`       | Structural incoherence measure (0 = perfect coherence) |
 | `co_plus`           | Inverse coherence score in \[0,1] |
-| `score_plus`        | Composite score (CoPlus + bias × information) |
-| `delta_coherence`   | Dispersion / instability proxy |
-| `kappa_alignment`   | Relative similarity between two signals |
-| `epsilon_drift`     | Relative temporal change |
+| `score_plus`        | Composite score (coherence + information bias) |
+| `delta_coherence`  | Dispersion / instability proxy |
+| `kappa_alignment`  | Relative similarity between two signals |
+| `epsilon_drift`    | Relative temporal change |
 
 Implementation:
 
 omnia/metrics.py
 
-The API is explicit, import-stable, and globals-free.
+The API is explicit, import-stable, deterministic, and globals-free.
+
+---
+
+## Prime Base Instability Index (PBII)
+
+PBII is a **zero-shot, non-ML structural metric** derived from OMNIA’s
+multi-base instability analysis.
+
+It separates **prime numbers from composites** without training,
+embeddings, heuristics, or learned parameters.
+
+### Verified result
+
+- Dataset: integers 2–5000  
+- Method: zero-shot, deterministic  
+- Metric: ROC-AUC (polarity-corrected)  
+- Result: **AUC = 0.816**
+
+PBII scores:
+- **lower values → primes**
+- **higher values → composites**
+
+This separation emerges purely from **base-instability structure**.
+
+Notebook:
+
+PBII_benchmark_v0.3.ipynb
 
 ---
 
@@ -69,10 +96,10 @@ The API is explicit, import-stable, and globals-free.
 OMNIA detects **structural instability even when outcome-based
 metrics remain stable**.
 
-The table below shows representative GSM8K items where:
+Representative GSM8K items where:
 - the answer is correct,
 - standard metrics (accuracy, self-consistency) remain stable,
-- yet OMNIA flags structural instability.
+- yet OMNIA flags instability.
 
 | item_id | correct | acc_stable | self_consistent | omn_flag | truth_omega | pbii |
 |--------:|:-------:|:----------:|:---------------:|:--------:|------------:|-----:|
@@ -86,7 +113,7 @@ Outcome-based metrics do not detect them; structure-based metrics do.
 
 ## Architecture overview
 
-Signal (numbers / time / tokens / causality) │ ▼ +----------------------+ |    OMNIA LENSES      | |  BASE · TIME · CAUSA | |  TOKEN · LCR         | +----------------------+ │ ▼ +----------------------+ |    METRIC CORE       | |  TruthΩ · Co⁺ · Δ    | |  κ · ε               | +----------------------+ │ ▼ +----------------------+ |    ICE ENVELOPE      | |  Impossibility &     | |  Confidence Envelope | +----------------------+
+Signal (numbers / time / tokens / causality) │ ▼ +------------------------+ |     OMNIA LENSES       | |  BASE · TIME · CAUSA   | |  TOKEN · LCR           | +------------------------+ │ ▼ +------------------------+ |     METRIC CORE        | |  TruthΩ · Co⁺ · Δ      | |  κ · ε                 | +------------------------+ │ ▼ +------------------------+ |      ICE ENVELOPE      | |  Impossibility &       | |  Confidence Envelope   | +------------------------+
 
 OMNIA outputs **machine-readable diagnostics**, not judgments.
 
@@ -192,8 +219,7 @@ OMNIA / MB-X.01
 Author / Origin:
 Massimiliano Brighindi
 
-There is no secondary mirror and no alternate “lon-mirror1”.
-All references point here.
+There is no secondary mirror and no alternate repository. All references point here.
 
 
 ---
