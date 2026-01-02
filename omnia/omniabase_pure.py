@@ -61,11 +61,12 @@ def digits_in_base(n: int, base: int) -> List[int]:
     base = int(base)
     if base < 2:
         raise ValueError("base must be >= 2")
+
     n = int(n)
-    if n == 0:
-        return [0]
     if n < 0:
         raise ValueError("n must be >= 0")
+    if n == 0:
+        return [0]
 
     out: List[int] = []
     x = n
@@ -100,6 +101,7 @@ def digit_hist_entropy(digs: List[int], base: int) -> float:
 def run_length_variability(digs: List[int]) -> float:
     if not digs:
         return 0.0
+
     runs: List[int] = []
     cur = digs[0]
     ln = 1
@@ -111,6 +113,7 @@ def run_length_variability(digs: List[int]) -> float:
             cur = d
             ln = 1
     runs.append(ln)
+
     if len(runs) <= 1:
         return 0.0
     return float(np.std(np.array(runs, dtype=float), ddof=0))
@@ -145,6 +148,8 @@ def omega_raw(n: int, bases: Iterable[int]) -> float:
     """
     n = int(n)
     bases_list = [int(b) for b in bases]
+    if len(bases_list) <= 1:
+        return 0.0
 
     feats: List[List[float]] = []
     for b in bases_list:
@@ -152,8 +157,6 @@ def omega_raw(n: int, bases: Iterable[int]) -> float:
         feats.append([h, rlv, th])
 
     X = np.array(feats, dtype=float)  # shape (B, 3)
-    if X.shape[0] <= 1:
-        return 0.0
 
     # Robust channel normalization via MAD (avoid divide-by-zero)
     med = np.median(X, axis=0)
@@ -171,15 +174,19 @@ def omega_raw(n: int, bases: Iterable[int]) -> float:
 # -----------------------------
 
 def _local_stats(values: List[float]) -> Tuple[float, float]:
-    arr = np.array(values, dtype=float)
-    if arr.size == 0:
+    if not values:
         return 0.0, 0.0
+    arr = np.array(values, dtype=float)
     mu = float(arr.mean())
     sd = float(arr.std(ddof=0))
     return mu, sd
 
 
-def omega_pure_v2(n: int, bases: Iterable[int], scales: Iterable[int] = (1, 2, 4, 8)) -> float:
+def omega_pure_v2(
+    n: int,
+    bases: Iterable[int],
+    scales: Iterable[int] = (1, 2, 4, 8),
+) -> float:
     """
     Omega v2:
     - compute raw omega(n)
@@ -189,19 +196,27 @@ def omega_pure_v2(n: int, bases: Iterable[int], scales: Iterable[int] = (1, 2, 4
     n = int(n)
     bases_list = [int(b) for b in bases]
     scales_list = [int(s) for s in scales]
+    if len(bases_list) <= 1:
+        return 0.0
 
     o0 = omega_raw(n, bases_list)
 
     z_list: List[float] = []
     for s in scales_list:
+        s = int(s)
+        if s < 1:
+            continue
         lo = max(2, n - s)
         hi = max(lo, n + s)
+
         neigh = [omega_raw(k, bases_list) for k in range(lo, hi + 1)]
         mu, sd = _local_stats(neigh)
+
         if sd <= 1e-12:
             z = 0.0
         else:
             z = (o0 - mu) / sd
+
         z_list.append(abs(float(z)))
 
     if not z_list:
@@ -229,7 +244,13 @@ class MinimaResult:
     local_min_composites: List[int]
 
 
-def compute_series(n_max: int, mode: str, bmin: int, bmax: int, scales: Tuple[int, ...]) -> Tuple[np.ndarray, np.ndarray]:
+def compute_series(
+    n_max: int,
+    mode: str,
+    bmin: int,
+    bmax: int,
+    scales: Tuple[int, ...],
+) -> Tuple[np.ndarray, np.ndarray]:
     ns = np.arange(2, int(n_max) + 1, dtype=int)
     bases = list(range(int(bmin), int(bmax) + 1))
 
@@ -284,7 +305,14 @@ def delta_pc(min_primes: List[int], min_composites: List[int]) -> int:
     return int(len(min_primes) - len(min_composites))
 
 
-def local_null_zscore(ns: np.ndarray, omegas: np.ndarray, window: int, block: int, trials: int, seed: int = 123) -> Dict[str, float]:
+def local_null_zscore(
+    ns: np.ndarray,
+    omegas: np.ndarray,
+    window: int,
+    block: int,
+    trials: int,
+    seed: int = 123,
+) -> Dict[str, float]:
     window = int(window)
     block = int(block)
     trials = int(trials)
@@ -361,6 +389,7 @@ def main() -> None:
         plt.xlabel("n")
         plt.ylabel("omega")
         plt.title(f"Omniabase-Pure omega(n) [{args.mode}]")
+
         if args.primes_overlay:
             primes_mask = np.array([is_prime(int(n)) for n in ns], dtype=bool)
             plt.figure()
@@ -370,9 +399,9 @@ def main() -> None:
             plt.ylabel("omega")
             plt.title(f"Omniabase-Pure omega(n): primes vs composites [{args.mode}]")
             plt.legend()
+
         plt.show()
 
-    windows: List[int]
     if args.min_windows.strip():
         windows = [int(x.strip()) for x in args.min_windows.split(",") if x.strip()]
     else:
@@ -389,7 +418,11 @@ def main() -> None:
             out = local_null_zscore(ns, omegas, window=w, block=args.block, trials=args.trials, seed=args.seed)
             print("LOCAL NULL (block-shuffle)")
             print(f"WINDOW = {int(out['window'])} BLOCK = {int(out['block'])} TRIALS = {int(out['trials'])}")
-            print(f"delta_real (P-C) = {int(out['delta_real'])} | P_real = {int(out['p_real'])} C_real = {int(out['c_real'])} | n_minima = {int(out['n_minima'])}")
+            print(
+                f"delta_real (P-C) = {int(out['delta_real'])} | "
+                f"P_real = {int(out['p_real'])} C_real = {int(out['c_real'])} | "
+                f"n_minima = {int(out['n_minima'])}"
+            )
             print(f"null_mean = {out['null_mean']:.6f} std = {out['null_std']:.6f} min = {out['null_min']:.1f} max = {out['null_max']:.1f}")
             print(f"z_score = {out['z_score']:.6f}")
             print("-" * 60)
