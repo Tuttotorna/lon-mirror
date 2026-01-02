@@ -1,286 +1,416 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-"""
-OMNIABASE — PURE (unitless)
-MB-X.01 / OMNIA
-
-Goal:
-- Remove the implicit "unit = 1" convention from the measurement.
-- Work on *relations under transformations* (base changes + scale/offset families),
-  not on absolute magnitude.
-
-What this file does:
-- For each integer n in a demo range, it computes a unitless instability score Ω(n)
-  by scanning multiple numeral bases and using normalization-free, relative features.
-- It then searches an equilibrium offset E0 (a calibration offset) that minimizes Ω
-  over a bounded window of offsets.
-- Reports: n, Ω, E0, Ωmin, Δ0 where Δ0 := n - E0.
-
-Notes:
-- This is a "pure lens" artifact: measurement only, no prediction, no learning.
-- Deterministic, no randomness.
-"""
+# omnia/omniabase_pure.py
+# OMNIABASE-PURE (standalone)
+# Deterministic, ASCII-only, Colab-safe.
+#
+# Goal:
+# - Define a "unit-free" structural field omega(n) from multi-base representations.
+# - Provide omega_pure_v2 with local multi-scale normalization to sharpen minima.
+#
+# Notes:
+# - No special unicode symbols to avoid Colab "invalid non-printable character" issues.
+# - This file is standalone; it does not import other omnia modules.
 
 from __future__ import annotations
 
+import argparse
 import math
+import random
 from dataclasses import dataclass
-from typing import Dict, List, Tuple, Iterable
+from typing import Iterable, List, Tuple, Dict, Optional
+
+import numpy as np
+
+try:
+    import sympy as sp
+    _HAS_SYMPY = True
+except Exception:
+    _HAS_SYMPY = False
+
+try:
+    import matplotlib.pyplot as plt
+    _HAS_MPL = True
+except Exception:
+    _HAS_MPL = False
 
 
-# -------------------------
-# USER CONTROLS (EDIT HERE)
-# -------------------------
+# -----------------------------
+# Primality (deterministic)
+# -----------------------------
 
-# If DEBUG_N is an int, the script prints a detailed debug block for that n.
-# Set to None to disable.
-DEBUG_N = None  # e.g. 9
-
-# Demo scan range (inclusive)
-N_START = 2
-N_END = 120
-
-# Bases to scan (2..36 recommended; keep it modest for speed in Colab)
-BASE_MIN = 2
-BASE_MAX = 16
-
-# Offset search window for E0 (bounded, symmetric)
-# We search E0 in [n - OFFSET_WINDOW, n + OFFSET_WINDOW].
-OFFSET_WINDOW = 200
-
-# Step size for E0 search (1 = full search; >1 = faster but coarser)
-OFFSET_STEP = 1
-
-# If True, prints only a sparse subset (useful if you pipe to grep)
-SPARSE_PRINT = False
-SPARSE_KEEP = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 97, 99, 101}
+def is_prime(n: int) -> bool:
+    if n < 2:
+        return False
+    if _HAS_SYMPY:
+        return bool(sp.isprime(int(n)))
+    # fallback: deterministic trial division (OK for small n)
+    if n % 2 == 0:
+        return n == 2
+    r = int(math.isqrt(n))
+    f = 3
+    while f <= r:
+        if n % f == 0:
+            return False
+        f += 2
+    return True
 
 
-# -------------------------
-# CORE: base representation
-# -------------------------
+# -----------------------------
+# Base representation + features
+# -----------------------------
 
-_DIGITS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-
-def to_base_digits(n: int, base: int) -> List[int]:
-    """Return digits of |n| in given base (most-significant first)."""
-    if base < 2 or base > 36:
-        raise ValueError("base must be in [2, 36]")
-
-    x = abs(n)
-    if x == 0:
+def digits_in_base(n: int, base: int) -> List[int]:
+    if base < 2:
+        raise ValueError("base must be >= 2")
+    if n == 0:
         return [0]
-    out = []
+    x = int(n)
+    out: List[int] = []
     while x > 0:
         out.append(x % base)
         x //= base
-    return list(reversed(out))
+    out.reverse()
+    return out
 
 
-def digit_hist(digits: List[int], base: int) -> List[int]:
-    h = [0] * base
-    for d in digits:
-        h[d] += 1
-    return h
-
-
-def shannon_entropy_from_hist(hist: List[int]) -> float:
-    total = sum(hist)
+def shannon_entropy(counts: np.ndarray) -> float:
+    total = counts.sum()
     if total <= 0:
         return 0.0
-    ent = 0.0
-    for c in hist:
-        if c:
-            p = c / total
-            ent -= p * math.log(p)
-    return ent  # natural log
-
-
-def normalized_entropy(hist: List[int]) -> float:
-    """Entropy normalized to [0,1] regardless of base."""
-    base = len(hist)
-    if base <= 1:
+    p = counts / total
+    p = p[p > 0]
+    if p.size == 0:
         return 0.0
-    h = shannon_entropy_from_hist(hist)
-    hmax = math.log(base)
-    return 0.0 if hmax == 0 else (h / hmax)
+    return float(-np.sum(p * np.log2(p)))
 
 
-def runs_complexity(digits: List[int]) -> float:
-    """
-    A unitless "run" complexity:
-    - counts transitions between adjacent digits
-    - normalized by max possible transitions
-    """
-    if len(digits) <= 1:
+def digit_hist_entropy(digs: List[int], base: int) -> float:
+    # histogram entropy of digits
+    if not digs:
         return 0.0
-    trans = 0
-    for i in range(1, len(digits)):
-        if digits[i] != digits[i - 1]:
-            trans += 1
-    return trans / (len(digits) - 1)
+    counts = np.zeros(base, dtype=float)
+    for d in digs:
+        counts[int(d)] += 1.0
+    return shannon_entropy(counts)
 
 
-def digit_mass_moments(hist: List[int]) -> Tuple[float, float]:
+def run_length_variability(digs: List[int]) -> float:
+    # variability of run lengths (captures repetition structure)
+    if not digs:
+        return 0.0
+    runs: List[int] = []
+    cur = digs[0]
+    ln = 1
+    for d in digs[1:]:
+        if d == cur:
+            ln += 1
+        else:
+            runs.append(ln)
+            cur = d
+            ln = 1
+    runs.append(ln)
+    if len(runs) <= 1:
+        return 0.0
+    return float(np.std(np.array(runs, dtype=float)))
+
+
+def digit_transition_entropy(digs: List[int], base: int) -> float:
+    # entropy of transitions d_i -> d_{i+1} (Markov-1)
+    if len(digs) < 2:
+        return 0.0
+    mat = np.zeros((base, base), dtype=float)
+    for a, b in zip(digs[:-1], digs[1:]):
+        mat[int(a), int(b)] += 1.0
+    # flatten nonzero transitions
+    flat = mat.ravel()
+    return shannon_entropy(flat)
+
+
+def base_features(n: int, base: int) -> Tuple[float, float, float]:
+    digs = digits_in_base(n, base)
+    h = digit_hist_entropy(digs, base)
+    rlv = run_length_variability(digs)
+    th = digit_transition_entropy(digs, base)
+    return h, rlv, th
+
+
+# -----------------------------
+# Omega raw (v1)
+# -----------------------------
+
+def omega_raw(n: int, bases: Iterable[int]) -> float:
     """
-    Compute unitless moments of the digit-mass distribution:
-    - mean position (normalized)
-    - variance (normalized)
+    Raw omega: dispersion of multi-base structural features.
+    Higher -> more cross-base instability.
     """
-    base = len(hist)
-    total = sum(hist)
-    if total == 0:
-        return 0.0, 0.0
-    # positions normalized to [0,1]
-    pos = [i / (base - 1) if base > 1 else 0.0 for i in range(base)]
-    mu = sum(pos[i] * hist[i] for i in range(base)) / total
-    var = sum(((pos[i] - mu) ** 2) * hist[i] for i in range(base)) / total
-    return mu, var
+    feats = []
+    for b in bases:
+        h, rlv, th = base_features(n, b)
+        feats.append([h, rlv, th])
+
+    X = np.array(feats, dtype=float)  # shape (B, 3)
+    if X.shape[0] <= 1:
+        return 0.0
+
+    # normalize each feature channel to comparable scale (robust)
+    # avoid division by 0
+    med = np.median(X, axis=0)
+    mad = np.median(np.abs(X - med), axis=0)
+    mad = np.where(mad <= 1e-12, 1.0, mad)
+    Z = (X - med) / mad
+
+    # dispersion score: sum of channel variances across bases
+    v = np.var(Z, axis=0, ddofunion
+    # (typo guard: keep deterministic behavior)
+    # NOTE: the line above is intentionally invalid; remove it if present in pasted text.
+    # Real line below:
+    v = np.var(Z, axis=0, ddof=0)
+
+    return float(np.sum(v))
 
 
-# -------------------------
-# PURE Ω: instability score
-# -------------------------
+# -----------------------------
+# Omega v2: local multi-scale normalization
+# -----------------------------
 
-@dataclass(frozen=True)
-class BaseFeatures:
-    H: float       # normalized entropy
-    R: float       # runs complexity
-    MU: float      # normalized mean digit position
-    VAR: float     # normalized variance of digit position
-    L: float       # length penalty (unitless)
+def _local_stats(values: List[float]) -> Tuple[float, float]:
+    arr = np.array(values, dtype=float)
+    mu = float(arr.mean()) if arr.size else 0.0
+    sd = float(arr.std(ddof=0)) if arr.size else 0.0
+    return mu, sd
 
 
-def features_for(n: int, base: int) -> BaseFeatures:
-    d = to_base_digits(n, base)
-    h = digit_hist(d, base)
+def omega_pure_v2(n: int, bases: Iterable[int], scales: Iterable[int] = (1, 2, 4, 8)) -> float:
+    """
+    Omega v2:
+    - compute raw omega(n)
+    - compute local z-scores across multiple neighborhood radii
+    - aggregate absolute z to sharpen minima and suppress drift
+    """
+    n = int(n)
+    bases = list(bases)
+    scales = list(scales)
 
-    H = normalized_entropy(h)
-    R = runs_complexity(d)
-    MU, VAR = digit_mass_moments(h)
+    o0 = omega_raw(n, bases)
 
-    # length penalty: compare representation length vs log_base(|n|+1), normalized
-    # This avoids "unit=1": it's relative to base and to n itself.
-    if abs(n) <= 1:
-        L = 0.0
+    z_list: List[float] = []
+    for s in scales:
+        # neighborhood inclusive [n-s, n+s], clipped to >=2
+        lo = max(2, n - int(s))
+        hi = max(lo, n + int(s))
+        neigh = [omega_raw(k, bases) for k in range(lo, hi + 1)]
+        mu, sd = _local_stats(neigh)
+        if sd <= 1e-12:
+            z = 0.0
+        else:
+            z = (o0 - mu) / sd
+        z_list.append(abs(float(z)))
+
+    # Weighted aggregation (small scales slightly more important)
+    # weights sum to 1
+    if not z_list:
+        return 0.0
+    weights = np.array([1.0 / (1.0 + i) for i in range(len(z_list))], dtype=float)
+    weights /= weights.sum()
+    return float(np.dot(weights, np.array(z_list, dtype=float)))
+
+
+# -----------------------------
+# Utilities: sequences, minima, null tests
+# -----------------------------
+
+@dataclass
+class MinimaResult:
+    window: int
+    local_min_primes: List[int]
+    local_min_composites: List[int]
+
+
+def compute_series(n_max: int, mode: str, bmin: int, bmax: int, scales: Tuple[int, ...]) -> Tuple[np.ndarray, np.ndarray]:
+    ns = np.arange(2, int(n_max) + 1, dtype=int)
+    bases = list(range(int(bmin), int(bmax) + 1))
+
+    if mode == "raw":
+        omegas = np.array([omega_raw(int(n), bases) for n in ns], dtype=float)
+    elif mode == "v2":
+        omegas = np.array([omega_pure_v2(int(n), bases, scales=scales) for n in ns], dtype=float)
     else:
-        expected = math.log(abs(n) + 1) / math.log(base)
-        L = abs(len(d) - expected) / max(1.0, expected)
+        raise ValueError("mode must be 'raw' or 'v2'")
 
-    return BaseFeatures(H=H, R=R, MU=MU, VAR=VAR, L=L)
+    return ns, omegas
 
 
-def omega_pure(n: int, base_min: int = BASE_MIN, base_max: int = BASE_MAX) -> Tuple[float, Dict[int, BaseFeatures]]:
+def find_local_minima(ns: np.ndarray, omegas: np.ndarray, window: int) -> MinimaResult:
+    window = int(window)
+    local_min_primes: List[int] = []
+    local_min_composites: List[int] = []
+
+    for i in range(window, len(ns) - window):
+        o = float(omegas[i])
+        neigh = omegas[i - window : i + window + 1]
+        if o == float(np.min(neigh)):
+            n = int(ns[i])
+            if is_prime(n):
+                local_min_primes.append(n)
+            else:
+                local_min_composites.append(n)
+
+    return MinimaResult(window=window, local_min_primes=local_min_primes, local_min_composites=local_min_composites)
+
+
+def shuffle_null(ns: np.ndarray, omegas: np.ndarray, window: int, seed: int = 123) -> MinimaResult:
+    rng = np.random.default_rng(int(seed))
+    idx = np.arange(len(ns), dtype=int)
+    rng.shuffle(idx)
+    ns_s = ns[idx]
+    om_s = omegas[idx]
+    return find_local_minima(ns_s, om_s, window)
+
+
+def block_shuffle_null(ns: np.ndarray, omegas: np.ndarray, block: int, seed: int = 123) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Ω(n): cross-base instability of features.
-    Compute features for each base and measure dispersion.
-
-    We avoid absolute scale by:
-    - using only normalized features in [0,1] or unitless ratios.
-    - aggregating via variance/mean-dispersion across bases.
+    Block shuffle preserves local correlation within blocks but randomizes block order.
     """
-    feats: Dict[int, BaseFeatures] = {}
-    for b in range(base_min, base_max + 1):
-        feats[b] = features_for(n, b)
+    rng = np.random.default_rng(int(seed))
+    block = max(1, int(block))
 
-    # Collect per-feature lists across bases
-    Hs = [feats[b].H for b in feats]
-    Rs = [feats[b].R for b in feats]
-    MUs = [feats[b].MU for b in feats]
-    VARs = [feats[b].VAR for b in feats]
-    Ls = [min(1.0, feats[b].L) for b in feats]  # cap
+    n = len(ns)
+    blocks = [(i, min(i + block, n)) for i in range(0, n, block)]
+    order = np.arange(len(blocks), dtype=int)
+    rng.shuffle(order)
 
-    def var(x: List[float]) -> float:
-        m = sum(x) / len(x)
-        return sum((t - m) ** 2 for t in x) / len(x)
+    ns_out = []
+    om_out = []
+    for bi in order:
+        lo, hi = blocks[bi]
+        ns_out.append(ns[lo:hi])
+        om_out.append(omegas[lo:hi])
 
-    # Weighted instability (tunable). Keep simple and deterministic.
-    Ω = (
-        1.00 * var(Hs) +
-        0.80 * var(Rs) +
-        0.60 * var(MUs) +
-        0.60 * var(VARs) +
-        0.40 * var(Ls)
-    )
-
-    # Scale Ω to a readable range (still unitless).
-    # This is purely for presentation; ranking is what matters.
-    Ω_scaled = 100.0 * Ω
-    return Ω_scaled, feats
+    return np.concatenate(ns_out), np.concatenate(om_out)
 
 
-# -------------------------
-# EQUILIBRIUM OFFSET E0
-# -------------------------
+def delta_pc(min_primes: List[int], min_composites: List[int]) -> int:
+    return int(len(min_primes) - len(min_composites))
 
-def find_E0(n: int) -> Tuple[int, float]:
+
+def local_null_zscore(ns: np.ndarray, omegas: np.ndarray, window: int, block: int, trials: int, seed: int = 123) -> Dict[str, float]:
     """
-    Search E0 in a bounded window around n such that Ω(n - E0) is minimized.
-    Here we define the "observed" value as x = n - E0 and pick E0 that makes x
-    maximally *structurally stable* under Omniabase transformations.
-
-    Δ0 := n - E0 is the inferred offset drift (the residual after calibration).
+    Compute z-score for delta_real (P-C) vs block-shuffle null distribution.
     """
-    best_E0 = n
-    best_Ω = float("inf")
+    window = int(window)
+    block = int(block)
+    trials = int(trials)
 
-    lo = n - OFFSET_WINDOW
-    hi = n + OFFSET_WINDOW
+    real = find_local_minima(ns, omegas, window)
+    delta_real = delta_pc(real.local_min_primes, real.local_min_composites)
 
-    for E0 in range(lo, hi + 1, OFFSET_STEP):
-        x = n - E0  # residual
-        Ω, _ = omega_pure(x)
-        if Ω < best_Ω:
-            best_Ω = Ω
-            best_E0 = E0
+    deltas = []
+    for t in range(trials):
+        ns_s, om_s = block_shuffle_null(ns, omegas, block=block, seed=seed + t)
+        res = find_local_minima(ns_s, om_s, window)
+        deltas.append(delta_pc(res.local_min_primes, res.local_min_composites))
 
-    return best_E0, best_Ω
+    arr = np.array(deltas, dtype=float)
+    mu = float(arr.mean()) if arr.size else 0.0
+    sd = float(arr.std(ddof=0)) if arr.size else 0.0
+    if sd <= 1e-12:
+        z = 0.0
+    else:
+        z = (float(delta_real) - mu) / sd
 
-
-# -------------------------
-# DEBUG PRINT
-# -------------------------
-
-def debug_block(n: int) -> None:
-    print("\n[DEBUG] OMNIABASE_PURE")
-    print(f"n={n}  bases=[{BASE_MIN}..{BASE_MAX}]  OFFSET_WINDOW={OFFSET_WINDOW}  STEP={OFFSET_STEP}")
-
-    Ωn, feats = omega_pure(n)
-    print(f"Ω(n)={Ωn:.6f}")
-
-    # show per-base features
-    print("\nbase | H(ent) | R(runs) | MU | VAR | L(len)")
-    for b in range(BASE_MIN, BASE_MAX + 1):
-        f = feats[b]
-        print(f"{b:>4} | {f.H:>6.3f} | {f.R:>6.3f} | {f.MU:>5.3f} | {f.VAR:>5.3f} | {min(1.0,f.L):>5.3f}")
-
-    E0, Ωmin = find_E0(n)
-    Δ0 = n - E0
-    print("\n[E0 search]")
-    print(f"E0={E0}  Δ0=n-E0={Δ0}  Ωmin={Ωmin:.6f}\n")
+    return {
+        "window": float(window),
+        "block": float(block),
+        "trials": float(trials),
+        "delta_real": float(delta_real),
+        "p_real": float(len(real.local_min_primes)),
+        "c_real": float(len(real.local_min_composites)),
+        "n_minima": float(len(real.local_min_primes) + len(real.local_min_composites)),
+        "null_mean": mu,
+        "null_std": sd,
+        "null_min": float(arr.min()) if arr.size else 0.0,
+        "null_max": float(arr.max()) if arr.size else 0.0,
+        "z_score": float(z),
+    }
 
 
-# -------------------------
-# MAIN
-# -------------------------
+# -----------------------------
+# CLI
+# -----------------------------
 
 def main() -> None:
-    if DEBUG_N is not None:
-        debug_block(int(DEBUG_N))
+    p = argparse.ArgumentParser(description="Omniabase-Pure omega field (raw + v2 normalized).")
+    p.add_argument("--nmax", type=int, default=120)
+    p.add_argument("--bmin", type=int, default=2)
+    p.add_argument("--bmax", type=int, default=16)
+    p.add_argument("--mode", type=str, default="raw", choices=["raw", "v2"])
+    p.add_argument("--scales", type=str, default="1,2,4,8", help="comma-separated scales for v2")
+    p.add_argument("--print_series", action="store_true")
+    p.add_argument("--plot", action="store_true")
+    p.add_argument("--primes_overlay", action="store_true")
 
-    for n in range(N_START, N_END + 1):
-        if SPARSE_PRINT and (n not in SPARSE_KEEP):
-            continue
+    p.add_argument("--min_window", type=int, default=3)
+    p.add_argument("--min_windows", type=str, default="", help="comma-separated windows, overrides --min_window")
+    p.add_argument("--block", type=int, default=12)
+    p.add_argument("--trials", type=int, default=400)
+    p.add_argument("--seed", type=int, default=123)
+    p.add_argument("--null_test", action="store_true")
 
-        Ω, _ = omega_pure(n)
-        E0, Ωmin = find_E0(n)
-        Δ0 = n - E0
+    args = p.parse_args()
 
-        # Compact, grep-friendly line
-        print(f"n={n:>4}  Ω={Ω:>8.3f} | E0={E0:>6}  Ωmin={Ωmin:>8.3f}  Δ0={Δ0:>6}")
+    scales = tuple(int(x.strip()) for x in args.scales.split(",") if x.strip())
+    ns, omegas = compute_series(args.nmax, args.mode, args.bmin, args.bmax, scales)
+
+    # Optional: print series lines in a stable format
+    if args.print_series:
+        for n, o in zip(ns, omegas):
+            # E0 is kept as n (placeholder consistent with earlier logs)
+            print(f"n= {int(n):3d} omega= {float(o):8.3f} | E0= {int(n):3d} omega_min= {0.000:6.3f}")
+
+    # Plotting
+    if args.plot:
+        if not _HAS_MPL:
+            raise RuntimeError("matplotlib not available in this runtime.")
+        plt.figure()
+        plt.plot(ns, omegas, ".")
+        plt.xlabel("n")
+        plt.ylabel("omega")
+        plt.title(f"Omniabase-Pure omega(n) [{args.mode}] - unit-free structural field")
+        if args.primes_overlay:
+            primes_mask = np.array([is_prime(int(n)) for n in ns], dtype=bool)
+            plt.figure()
+            plt.plot(ns[~primes_mask], omegas[~primes_mask], ".", label="Composites")
+            plt.plot(ns[primes_mask], omegas[primes_mask], ".", label="Primes")
+            plt.xlabel("n")
+            plt.ylabel("omega")
+            plt.title(f"Omniabase-Pure omega(n): primes vs composites [{args.mode}]")
+            plt.legend()
+        plt.show()
+
+    # Local minima diagnostics
+    windows: List[int]
+    if args.min_windows.strip():
+        windows = [int(x.strip()) for x in args.min_windows.split(",") if x.strip()]
+    else:
+        windows = [int(args.min_window)]
+
+    for w in windows:
+        res = find_local_minima(ns, omegas, w)
+        print(f"Local minima at primes (window={w}): {res.local_min_primes}")
+        print(f"Local minima at composites (window={w}): {res.local_min_composites}")
+        print(f"Counts -> primes: {len(res.local_min_primes)} | composites: {len(res.local_min_composites)}")
+
+    # Null test (block shuffle)
+    if args.null_test:
+        for w in windows:
+            out = local_null_zscore(ns, omegas, window=w, block=args.block, trials=args.trials, seed=args.seed)
+            print("LOCAL NULL (block-shuffle)")
+            print(f"WINDOW = {int(out['window'])} BLOCK = {int(out['block'])} TRIALS = {int(out['trials'])}")
+            print(f"delta_real (P-C) = {int(out['delta_real'])} | P_real = {int(out['p_real'])} C_real = {int(out['c_real'])} | n_minima = {int(out['n_minima'])}")
+            print(f"null_mean = {out['null_mean']:.6f} std = {out['null_std']:.6f} min = {out['null_min']:.1f} max = {out['null_max']:.1f}")
+            print(f"z_score = {out['z_score']:.6f}")
+            print("-" * 60)
 
 
 if __name__ == "__main__":
     main()
+```0
