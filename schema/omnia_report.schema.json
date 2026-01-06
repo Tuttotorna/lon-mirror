@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Tuttotorna/lon-mirror/schema/omnia_report.schema.json",
+  "title": "OMNIA Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["omega_total", "regime", "lens_breakdown", "version"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Report schema version (not repo version).",
+      "pattern": "^v\\d+\\.\\d+$"
+    },
+    "omega_total": {
+      "type": "number",
+      "description": "Unified structural score (Ω-total)."
+    },
+    "regime": {
+      "type": "string",
+      "description": "Structural regime classification.",
+      "enum": ["OPEN", "NEAR_BOUNDARY", "SATURATED"]
+    },
+    "lens_breakdown": {
+      "type": "object",
+      "description": "Per-lens metrics produced by OMNIA.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "omega": { "type": "number" }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Optional metadata about inputs and transforms.",
+      "additionalProperties": true,
+      "properties": {
+        "inputs_hash": { "type": "string" },
+        "transforms": { "type": "object", "additionalProperties": true },
+        "timestamp_utc": { "type": "string" }
+      }
+    }
+  }
+}
