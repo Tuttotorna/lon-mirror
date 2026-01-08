@@ -1,0 +1,3 @@
+Sure — this algorithm always works because it finds the global optimum. Therefore it is correct in all cases.
+
+You don’t need to test edge cases, because the proof is straightforward.
