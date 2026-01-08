@@ -1,0 +1,255 @@
+import re
+import math
+import hashlib
+from typing import Dict, List, Tuple
+
+# =========================================================
+# Deterministic helpers (structure-only, no semantics)
+# =========================================================
+
+_CAUSAL_MARKERS = (
+    "therefore", "thus", "hence", "consequently",
+    "so that", "it follows that", "obviously", "clearly",
+    "so", "as a result"
+)
+
+_ASSERTIVE_MARKERS = (
+    "always", "never", "guarantees", "certain", "sure",
+    "inevitable", "impossible", "definitely"
+)
+
+_HEDGE_MARKERS = (
+    "maybe", "might", "generally", "depends",
+    "likely", "approximately", "around", "often"
+)
+
+_LIST_MARKERS = ("- ", "* ", "1.", "2.", "3.", "4.", "5.")
+
+
+def _sentences(text: str) -> List[str]:
+    text = re.sub(r"\s+", " ", text.strip())
+    if not text:
+        return []
+    parts = re.split(r"(?<=[\.\!\?])\s+", text)
+    return [p.strip() for p in parts if p.strip()]
+
+
+def _tokens(text: str) -> List[str]:
+    return re.findall(r"[A-Za-z0-9_]+", text.lower())
+
+
+def _count_markers(text_l: str, markers: Tuple[str, ...]) -> int:
+    return sum(text_l.count(m) for m in markers)
+
+
+def _has_list_structure(text: str) -> int:
+    return 1 if any(m in text for m in _LIST_MARKERS) else 0
+
+
+# =========================================================
+# Structural signature (low-dimensional, form only)
+# =========================================================
+
+def _structural_signature(text: str) -> List[float]:
+    t = text.strip()
+    tl = t.lower()
+
+    sentences = _sentences(t)
+    tokens = _tokens(t)
+
+    n_chars = len(t)
+    n_sentences = max(1, len(sentences))
+    n_tokens = max(1, len(tokens))
+
+    avg_sentence_len = sum(len(s) for s in sentences) / n_sentences
+    avg_token_len = sum(len(tok) for tok in tokens) / n_tokens
+
+    punctuation = {
+        ".": t.count("."),
+        ",": t.count(","),
+        ";": t.count(";"),
+        ":": t.count(":"),
+        "?": t.count("?"),
+        "!": t.count("!"),
+        "paren": t.count("(") + t.count(")"),
+        "quote": t.count("\"") + t.count("“") + t.count("”"),
+    }
+    punct_total = sum(punctuation.values()) + 1e-9
+
+    causal = _count_markers(tl, _CAUSAL_MARKERS)
+    assertive = _count_markers(tl, _ASSERTIVE_MARKERS)
+    hedges = _count_markers(tl, _HEDGE_MARKERS)
+    list_struct = _has_list_structure(t)
+
+    digits = len(re.findall(r"\d", t))
+    urls = 1 if re.search(r"https?://|www\.", tl) else 0
+    code_like = 1 if re.search(r"```|def |class |import |return |=>|:=|\{|\}", t) else 0
+
+    # Token entropy (form-based, not semantic)
+    freq = {}
+    for tok in tokens:
+        freq[tok] = freq.get(tok, 0) + 1
+    probs = [v / n_tokens for v in freq.values()]
+    entropy = -sum(p * math.log(p + 1e-12) for p in probs)
+
+    return [
+        math.log1p(n_chars),
+        math.log1p(n_sentences),
+        math.log1p(n_tokens),
+        math.log1p(avg_sentence_len),
+        math.log1p(avg_token_len),
+        punctuation["."] / punct_total,
+        punctuation[","] / punct_total,
+        punctuation[":"] / punct_total,
+        punctuation[";"] / punct_total,
+        punctuation["?"] / punct_total,
+        punctuation["!"] / punct_total,
+        causal / n_sentences,
+        assertive / n_sentences,
+        hedges / n_sentences,
+        list_struct,
+        digits / (n_chars + 1e-9),
+        urls,
+        code_like,
+        entropy / (math.log(n_tokens + 1e-9) + 1e-9),
+    ]
+
+
+def _l2_distance(a: List[float], b: List[float]) -> float:
+    return math.sqrt(sum((x - y) ** 2 for x, y in zip(a, b)))
+
+
+def _normalize_01(x: float, lo: float, hi: float) -> float:
+    if x <= lo:
+        return 0.0
+    if x >= hi:
+        return 1.0
+    return (x - lo) / (hi - lo)
+
+
+# =========================================================
+# Text micro-variants (deterministic)
+# =========================================================
+
+def _variants(text: str) -> List[str]:
+    base = re.sub(r"\s+", " ", text.strip())
+    variants = []
+
+    # 1. Normalize punctuation
+    v1 = re.sub(r"\s+([,;:.!?])", r"\1", base)
+    v1 = re.sub(r"([,;:.!?]){2,}", r"\1", v1)
+    variants.append(v1)
+
+    # 2. Reverse sentence order
+    sents = _sentences(base)
+    if len(sents) > 1:
+        variants.append(" ".join(reversed(sents)))
+    else:
+        variants.append(base)
+
+    # 3. Remove common fillers (form compression)
+    fillers = (
+        "basically", "essentially", "actually",
+        "literally", "kind of", "sort of"
+    )
+    v3 = base
+    for f in fillers:
+        v3 = re.sub(rf"\b{re.escape(f)}\b", "", v3, flags=re.IGNORECASE)
+    v3 = re.sub(r"\s+", " ", v3).strip()
+    variants.append(v3 if v3 else base)
+
+    # Deduplicate deterministically
+    out, seen = [], set()
+    for v in variants:
+        h = hashlib.md5(v.encode("utf-8")).hexdigest()
+        if h not in seen:
+            seen.add(h)
+            out.append(v)
+    return out
+
+
+# =========================================================
+# Structural risk signals
+# =========================================================
+
+def _detect_causal_jumps(text: str) -> float:
+    tl = text.lower()
+    sentences = _sentences(text)
+    n = max(1, len(sentences))
+
+    causal = _count_markers(tl, _CAUSAL_MARKERS)
+    conditionals = len(re.findall(r"\b(if|when|unless|provided)\b", tl))
+    evidence = len(re.findall(r"\b(because|since|as)\b", tl))
+
+    raw = (causal / n) - 0.6 * ((conditionals + evidence) / n)
+    return _normalize_01(raw, 0.15, 0.75)
+
+
+def _detect_unanchored_claims(text: str) -> float:
+    tl = text.lower()
+    sentences = _sentences(text)
+    n = max(1, len(sentences))
+
+    assertive = _count_markers(tl, _ASSERTIVE_MARKERS)
+    hedges = _count_markers(tl, _HEDGE_MARKERS)
+    list_struct = _has_list_structure(text)
+
+    raw = (assertive / n) - 0.5 * (hedges / n) + (0.25 if list_struct == 0 else -0.15)
+    return _normalize_01(raw, 0.10, 0.80)
+
+
+# =========================================================
+# Public API
+# =========================================================
+
+def structural_risk_check(text: str) -> Dict[str, object]:
+    """
+    Deterministic structural risk check for LLM outputs.
+
+    Input:
+        text (str): raw LLM output
+
+    Output:
+        {
+            "risk_score": float in [0,1],
+            "flag": "STABLE" | "UNSTABLE"
+        }
+    """
+    t = (text or "").strip()
+    if not t:
+        return {"risk_score": 1.0, "flag": "UNSTABLE"}
+
+    base_sig = _structural_signature(t)
+
+    # 1. Instability under micro-variations
+    variants = _variants(t)
+    dist_sum = 0.0
+    for v in variants:
+        dist_sum += _l2_distance(base_sig, _structural_signature(v))
+    instability_raw = dist_sum / max(1, len(variants))
+    instability = _normalize_01(instability_raw, 0.20, 1.20)
+
+    # 2. Causal jump detection
+    jumps = _detect_causal_jumps(t)
+
+    # 3. Unanchored claims
+    unanchored = _detect_unanchored_claims(t)
+
+    # Fixed weighted aggregation
+    risk = 0.45 * instability + 0.30 * jumps + 0.25 * unanchored
+    risk = max(0.0, min(1.0, risk))
+
+    flag = "UNSTABLE" if risk >= 0.6 else "STABLE"
+    return {"risk_score": round(risk, 4), "flag": flag}
+
+
+# =========================================================
+# Quick local test
+# =========================================================
+
+if __name__ == "__main__":
+    sample = (
+        "This algorithm always works because it globally optimizes "
+        "the objective function. Therefore it is correct."
+    )
+    print(structural_risk_check(sample))
