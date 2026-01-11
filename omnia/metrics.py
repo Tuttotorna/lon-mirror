@@ -6,7 +6,12 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import Iterable, Optional, Dict
+from typing import Iterable, Optional, Dict, Any
+
+try:
+    import numpy as np
+except ImportError:
+    np = None
 
 
 EPS = 1e-12
@@ -59,11 +64,28 @@ def score_plus(co_plus_value: float, *, bias: float = 0.0, info: float = 1.0) ->
     return _clip01(base * info)
 
 
-def delta_coherence(values: Iterable[float], *, eps: float = EPS) -> float:
+def delta_coherence(values: Iterable[float] | Any, *, eps: float = EPS) -> float:
     """
     Delta-coherence: dispersion proxy (0 = identical, higher = more spread).
     Uses normalized mean absolute deviation around mean.
+
+    Optimized for numpy arrays if numpy is available.
     """
+    if np is not None and isinstance(values, (np.ndarray, list, tuple)):
+        # Attempt vectorized path
+        try:
+            arr = np.asanyarray(values, dtype=float)
+            if arr.size == 0:
+                return 0.0
+            m = np.mean(arr)
+            mad = np.mean(np.abs(arr - m))
+            denom = abs(m) + eps
+            return float(mad / denom)
+        except Exception:
+            # Fallback if numpy fails for any reason
+            pass
+
+    # Standard python fallback
     xs = [float(v) for v in values]
     if not xs:
         return 0.0
