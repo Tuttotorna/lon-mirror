@@ -1,0 +1,52 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import List
+
+import matplotlib.pyplot as plt
+
+
+def load_iri(path: Path) -> List[float]:
+    vals = []
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            rec = json.loads(line)
+            v = rec.get("iri")
+            if isinstance(v, (int, float)):
+                vals.append(float(v))
+    return vals
+
+
+def main():
+    p = Path("data/iri_from_sei_report.jsonl")
+    if not p.exists():
+        raise FileNotFoundError("Run examples/irreversibility_from_sei_report.py first")
+
+    iri = load_iri(p)
+    if len(iri) < 3:
+        raise ValueError("Not enough IRI points to plot")
+
+    out_dir = Path("assets/diagnostics")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / "iri_trend.png"
+
+    x = list(range(1, len(iri) + 1))
+
+    plt.figure(figsize=(8, 4))
+    plt.plot(x, iri, marker="o", linewidth=1.5)
+    plt.xlabel("Step")
+    plt.ylabel("IRI (irreversibility)")
+    plt.title("Irreversibility Trend — Structural Hysteresis (Layer-2)")
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=160)
+    plt.close()
+
+    print(f"Saved: {out_path}")
+
+
+if __name__ == "__main__":
+    main()
