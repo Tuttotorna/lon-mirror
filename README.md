@@ -1,244 +1,371 @@
-# OMNIA / MB-X.01 — Logical Origin Node (L.O.N.)
+OMNIA / MB-X.01 — Logical Origin Node (L.O.N.)
 
-**OMNIA** is a deterministic measurement engine for **structural coherence and instability**
-across **numbers, time, causality, and token sequences**.
+OMNIA is a deterministic measurement engine for structural coherence, instability, and saturation across numbers, time, causality, and token sequences.
 
-It does not interpret meaning.  
-It does not make decisions.  
-It measures invariants.
+It does not interpret meaning.
+It does not make decisions.
+It measures invariants and limits.
 
-This repository (**Tuttotorna/lon-mirror**) is the **canonical public mirror**
-of the **MB-X.01 / OMNIA** research line.
+This repository (Tuttotorna/lon-mirror) is the canonical public mirror of the MB-X.01 / OMNIA research line.
 
----
-
-## What OMNIA Is
-
-OMNIA is a **pure diagnostic layer**.
-
-**Input**
-- Numeric signals
-- Temporal series
-- Causal structures
-- Token sequences (e.g. model outputs)
-
-**Output**
-- Structure-only metrics
-
-**Constraints**
-- No semantic assumptions
-- No policy, intent, or alignment layer
-- Deterministic, bounded, reproducible
-
-**Core principle**
-
-> **Truth is what remains invariant under transformation.**
-
-OMNIA operates **post-hoc**: it analyzes signals *after* they exist,
-without influencing their generation or interpretation.
 
 ---
 
-## What OMNIA Is Not
+What OMNIA Is
 
-OMNIA is **not**:
-- a language model
-- a classifier
-- an optimizer
-- an agent
-- a decision system
+OMNIA is a pure diagnostic layer.
 
-OMNIA **never chooses**.  
-It only **measures**.
+Input
+
+Numeric signals
+
+Temporal series
+
+Causal structures
+
+Token sequences (e.g. model outputs)
+
+
+Output
+
+Structure-only, machine-readable metrics
+
+
+Constraints
+
+No semantic assumptions
+
+No policy, intent, or alignment layer
+
+Deterministic, bounded, reproducible
+
+Post-hoc only (never in-loop)
+
+
+Core principle
+
+> Truth is what remains invariant under transformation.
+
+
+
+OMNIA operates after signals exist, without influencing their generation, selection, or interpretation.
+
 
 ---
 
-## Core Metrics (Stable API)
+What OMNIA Is Not
 
-All metrics are **deterministic**, **bounded**, and **numerically stable**.
+OMNIA is not:
 
-| Metric | Description |
-|------|-------------|
-| `truth_omega` | Structural incoherence measure (0 = perfect coherence) |
-| `co_plus` | Inverse coherence score in \[0,1\] |
-| `score_plus` | Composite score (coherence + information bias) |
-| `delta_coherence` | Dispersion / instability proxy |
-| `kappa_alignment` | Relative similarity between two signals |
-| `epsilon_drift` | Relative temporal change |
+a language model
 
-**Implementation**
+a classifier
+
+an optimizer
+
+an agent
+
+a decision system
+
+a safety or alignment layer
+
+
+OMNIA never chooses.
+It only measures structure.
+
+
+---
+
+Core Metrics (Stable API)
+
+All metrics are deterministic, bounded, and numerically stable.
+
+Metric	Description
+
+truth_omega	Structural incoherence measure (0 = perfect coherence)
+co_plus	Inverse coherence score in 
+score_plus	Composite score (coherence + information bias)
+delta_coherence	Dispersion / instability proxy
+kappa_alignment	Relative similarity between two signals
+epsilon_drift	Relative temporal change
+
+
+Implementation
 
 omnia/metrics.py
 
 The API is explicit, import-stable, deterministic, and globals-free.
 
+
 ---
 
-## Prime Base Instability Index (PBII)
+Layer-1: Saturation / Exhaustion Index (SEI)
 
-PBII is a **zero-shot, non-ML structural metric** derived from OMNIA’s
-**multi-base instability analysis**.
+OMNIA includes a first-order diagnostic layer to measure marginal structural yield under increasing computational cost.
 
-It separates **prime numbers** from **composites** without:
-- training
-- embeddings
-- heuristics
-- learned parameters
+SEI does not decide and does not stop execution.
+It measures diminishing returns.
 
-### Verified Result
+Purpose
 
-- Dataset: integers 2–5000  
-- Method: zero-shot, deterministic  
-- Metric: ROC-AUC (polarity-corrected)  
-- **Result: AUC = 0.816**
+SEI quantifies how much structural value is gained per unit of cost (tokens, latency, iterations, optional energy proxy).
 
-**Interpretation**
-- lower PBII → primes  
-- higher PBII → composites  
+It answers one question only:
 
-This separation emerges purely from **base-instability structure**.
+> Is further computation still producing measurable structural benefit?
+
+
+
+Definition (conceptual)
+
+SEI = (Δquality + Δuncertainty_reduction)
+      ----------------------------------
+      (tokens + latency + iterations + energy_proxy)
+
+Properties
+
+Rolling window (trend-based)
+
+No fixed thresholds
+
+No policy interpretation
+
+Fully diagnostic
+
+
+Artifacts
+
+omnia/sei.py — SEI engine (Layer-1)
+
+examples/sei_demo.py — synthetic demonstration
+
+examples/sei_gsm8k_from_jsonl.py — real GSM8K run
+
+examples/sei_gsm8k_uncertainty_from_jsonl.py — uncertainty-aware SEI
+
+
+SEI prepares, but does not trigger, higher-order boundary reasoning.
+
+
+---
+
+Prime Base Instability Index (PBII)
+
+PBII is a zero-shot, non-ML structural metric derived from OMNIA’s multi-base instability analysis.
+
+It separates prime numbers from composites without:
+
+training
+
+embeddings
+
+heuristics
+
+learned parameters
+
+
+Verified Result
+
+Dataset: integers 2–5000
+
+Method: zero-shot, deterministic
+
+Metric: ROC-AUC (polarity-corrected)
+
+Result: AUC = 0.816
+
+
+Interpretation
+
+lower PBII → primes
+
+higher PBII → composites
+
+
+This separation emerges purely from base-instability structure.
 
 Notebook:
 
 PBII_benchmark_v0.3.ipynb
 
+
 ---
 
-## Differential Diagnostics (Non-redundancy Evidence)
+Differential Diagnostics (Non-redundancy Evidence)
 
-OMNIA detects **structural instability** even when outcome-based metrics remain stable.
+OMNIA detects structural instability even when outcome-based metrics remain stable.
 
 Representative GSM8K cases where:
-- the answer is correct
-- standard metrics (accuracy, self-consistency) are stable
-- OMNIA flags instability
 
-| item_id | correct | acc_stable | self_consistent | omn_flag | truth_omega | pbii |
-|--------|---------|------------|-----------------|----------|-------------|------|
-| 137 | 1 | 1 | 1 | 1 | 1.92 | 0.81 |
-| 284 | 1 | 1 | 1 | 1 | 2.31 | 0.88 |
+the answer is correct
 
-These cases are **locally correct but structurally unstable**.
+standard metrics (accuracy, self-consistency) are stable
+
+OMNIA flags instability
+
+
+item_id	correct	acc_stable	self_consistent	omn_flag	truth_omega	pbii
+
+137	1	1	1	1	1.92	0.81
+284	1	1	1	1	2.31	0.88
+
+
+These cases are locally correct but structurally unstable.
 Outcome-based metrics do not detect them; structure-based metrics do.
 
----
-
-## Architecture Overview
-
-Signal (numbers / time / tokens / causality) ↓ +-------------------------------------------+ |              OMNIA LENSES                  | |   BASE · TIME · CAUSA · TOKEN · LCR        | +-------------------------------------------+ ↓ +-------------------------------------------+ |              METRIC CORE                  | |   TruthΩ · Co⁺ · Δ · κ · ε                | +-------------------------------------------+ ↓ +-------------------------------------------+ |               ICE ENVELOPE                | |   Impossibility & Confidence Envelope     | +-------------------------------------------+
-
-OMNIA outputs **machine-readable diagnostics**, not judgments.
 
 ---
 
-## Reproducibility
+Architecture Overview
 
-This repository provides a **fixed, reproducible execution path**.
+Signal (numbers / time / tokens / causality)
+        ↓
++-------------------------------------------+
+|              OMNIA LENSES                  |
+|   BASE · TIME · CAUSA · TOKEN · LCR        |
++-------------------------------------------+
+        ↓
++-------------------------------------------+
+|              METRIC CORE                  |
+|   TruthΩ · Co⁺ · Δ · κ · ε                |
++-------------------------------------------+
+        ↓
++-------------------------------------------+
+|          SEI (Layer-1, trend only)         |
+|   Marginal Yield / Saturation Detection   |
++-------------------------------------------+
+        ↓
++-------------------------------------------+
+|              ICE ENVELOPE                 |
+|   Impossibility & Confidence Envelope     |
++-------------------------------------------+
 
-### Real Benchmark Run (Colab)
+OMNIA outputs diagnostics, never judgments.
+
+
+---
+
+Reproducibility
+
+This repository provides a fixed, reproducible execution path.
+
+Real Benchmark Run (Colab)
 
 Official notebook:
 
 colab/OMNIA_REAL_RUN.ipynb
 
 Execution steps:
-1. Clone repository  
-2. Install fixed dependencies  
-3. Lock random seeds  
-4. Run real benchmarks  
-5. Produce machine-readable reports  
 
-**Goal:** verification, not exploration.
+1. Clone repository
 
----
 
-## Recorded Benchmark Outputs (Closed Models)
+2. Install fixed dependencies
 
-Canonical benchmark outputs produced by fixed, reproducible runs are stored here:
 
-https://github.com/Tuttotorna/lon-mirror/tree/main/results/closed_models
+3. Lock random seeds
 
-Individual result files:
-- https://github.com/Tuttotorna/lon-mirror/blob/main/results/closed_models/gpt4_metrics.jsonl
-- https://github.com/Tuttotorna/lon-mirror/blob/main/results/closed_models/gpt4_metrics_omnia.jsonl
 
-These files are **machine-readable (`.jsonl`)**, deterministic,
-and generated by OMNIA without semantic assumptions.
+4. Run real benchmarks
+
+
+5. Produce machine-readable reports
+
+
+
+Goal: verification, not exploration.
+
 
 ---
 
-## Tests
+Recorded Benchmark Outputs (Closed Models)
+
+Canonical benchmark outputs produced by fixed, reproducible runs:
+
+results/closed_models/
+
+Examples:
+
+gpt4_metrics.jsonl
+
+gpt4_metrics_omnia.jsonl
+
+
+These files are machine-readable (.jsonl), deterministic, and generated by OMNIA without semantic assumptions.
+
+
+---
+
+Tests
 
 Invariant-based tests live in:
 
 tests/test_metrics.py
 
 They verify:
-- algebraic identities
-- monotonicity
-- edge cases
-- numerical stability
-- API contracts
+
+algebraic identities
+
+monotonicity
+
+edge cases
+
+numerical stability
+
+API contracts
+
 
 Run locally:
 
 pytest
 
----
-
-## External Diagnostics (Documented Runs)
-
-OMNIA supports **post-inference diagnostics** from external systems.
-
-Documented example:
-
-data/gsm8k_external_runs/
-
-Includes:
-- externally generated outputs
-- OMNIA post-hoc structural analysis
-- correctness preserved, instability exposed
-
-This repository records **facts, not claims**.
 
 ---
 
-## Integration Philosophy
+Integration Philosophy
 
-OMNIA is **composable by design**.
+OMNIA is composable by design.
 
-**Separation of roles**
-- OMNIA → measures structure
-- External systems → interpret, decide, optimize
+Separation of roles
+
+OMNIA → measures structure
+
+External systems → interpret, decide, optimize
+
 
 Validated boundary:
-- OMNIA = geometry / invariants
-- Decision systems = policy / intent / judgment
 
-This keeps OMNIA **institution-agnostic** and **architecture-agnostic**.
+OMNIA = geometry / invariants
+
+Decision systems = policy / intent / judgment
+
+
+This keeps OMNIA institution-agnostic and architecture-agnostic.
+
 
 ---
 
-## Architecture Context (Downstream, Non-required)
+Architecture Context (Downstream, Non-required)
 
-OMNIA acts as the **measurement core** for downstream diagnostic layers.
+OMNIA acts as the measurement core for downstream boundary layers.
 
-Conceptually aligned projects:
+Aligned projects:
 
-**OMNIAMIND**  
-Structural boundary stability and rigidity diagnostics built on structure-only probing  
+OMNIAMIND
+Structural rigidity and boundary stability diagnostics
 https://github.com/Tuttotorna/OMNIAMIND
 
-**OMNIA-LIMIT**  
-Formal boundary artifact certifying when structural measurement cannot improve discrimination  
+OMNIA-LIMIT
+Terminal boundary artifact certifying structural non-reducibility
 https://github.com/Tuttotorna/omnia-limit
 
-These systems consume OMNIA-style signals.
-OMNIA itself remains **independent and self-contained**.
+These systems consume OMNIA signals.
+OMNIA itself remains independent and self-contained.
+
 
 ---
 
-## Repository Identity (Canonical)
+Repository Identity (Canonical)
 
 Canonical repository:
 
@@ -252,22 +379,29 @@ Author / Logical Origin Node:
 
 Massimiliano Brighindi
 
-There is **no secondary mirror** and **no alternate repository**.
-All references point here.
+There is no secondary mirror and no alternate repository.
+
 
 ---
 
-## Status
+Status
 
-- Metrics core: **stable**
-- Tests: **invariant-based**
-- API: **frozen** (ASCII, deterministic)
-- Research line: **active**
+Metrics core: stable
 
-This repository is intended to be read by **humans and machines**.
+SEI (Layer-1): active
+
+Tests: invariant-based
+
+API: frozen
+
+Research line: active
+
+
+This repository is intended to be read by humans and machines.
+
 
 ---
 
-## License
+License
 
 MIT License
