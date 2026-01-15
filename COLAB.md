@@ -1,206 +1,178 @@
-# OMNIA — Real Run (Colab, Reproducible Reference)
+# OMNIA — Colab Execution Guide (Reproducible Reference)
 
-This Colab notebook provides a **reproducible and fixed execution path** for OMNIA.
+This document defines the **authoritative Colab execution path** for the OMNIA / MB-X.01 project.
 
-Its purpose is **verification**, not exploration.
+Its purpose is **verification and inspection**, not exploration, training, or optimization.
 
-If you follow the steps below, you should obtain the **same structural metrics**
-reported in this repository (within numerical tolerance).
-
-
----
-
-## 1. Open in Colab
-
-Open the official, canonical notebook:
-
-https://colab.research.google.com/github/Tuttotorna/lon-mirror/blob/main/colab/OMNIA_REAL_RUN.ipynb
+If you follow the steps described here, you will execute **exactly the same structural
+measurement pipeline** intended by the repository.
 
 
 ---
 
-## 2. What This Run Does (Exactly)
+## 1. Official Colab Notebook
 
-The notebook performs the following steps in a fixed order:
+The **only canonical Colab notebook** is:
 
-1. Clones this repository
-2. Installs dependencies from `requirements.txt`
-3. Sets global random seeds (reproducibility lock)
-4. Executes the real benchmark script
-5. Produces machine-readable output artifacts
+colab/OMNIA_REAL_RUN.ipynb
 
-The executed command is:
+Any other notebook (past or future) must be considered:
+- experimental
+- deprecated
+- or explicitly versioned
 
-```bash
-python benchmarks/run_real_gsm8k.py
+If documentation conflicts exist, **this file and the notebook prevail**.
 
 
 ---
 
-3. Reproducibility Lock (CRITICAL)
+## 2. What This Colab Run Does (Exactly)
 
-This run is seed-locked.
+The notebook executes the following steps in a fixed order:
 
-Inside the benchmark code, the following seeds are fixed:
+1. Clones the official `lon-mirror` repository
+2. Installs dependencies
+3. Runs the OMNIA smoke test
+4. Executes the GSM8K demo benchmark
+5. Optionally runs Ω (Omega) extraction **only if a local JSONL file is present**
 
-SEED = 42
+No model is trained.
+No answers are generated.
+No decisions are taken.
 
-import random
-import numpy as np
-
-random.seed(SEED)
-np.random.seed(SEED)
-
-If PyTorch is used:
-
-import torch
-torch.manual_seed(SEED)
-
-Changing the seed defines a new experiment.
-
-Do not change the seed unless you explicitly intend to run a different experimental condition.
+OMNIA is used **strictly as a post-inference structural measurement layer**.
 
 
 ---
 
-4. Fixed Environment
+## 3. Determinism and Reproducibility
 
-Python Version
+This Colab run is designed to be:
+
+- deterministic
+- reproducible
+- model-agnostic
+- architecture-agnostic
+
+The demo benchmark itself does **not rely on stochastic training**.
+If random seeds are set inside specific scripts, they are treated as part of that
+script’s definition.
+
+Changing code, inputs, or seeds defines a **new experiment**.
+
+
+---
+
+## 4. Environment
+
+### Python
 
 Tested on:
 
-Python 3.10 (Google Colab, December 2025)
+Python 3.x (Google Colab standard runtime)
 
+### Dependencies
 
-Dependencies
-
-All dependencies are fixed via:
+Dependencies are resolved via:
 
 requirements.txt
 
-Dependency versions were captured using:
-
-pip freeze
+If the file is absent, only minimal dependencies are installed to allow
+script execution.
 
 This ensures consistency in:
-
-numerical behavior
-
-random streams
-
-library internals
-
+- numerical behavior
+- library internals
+- execution order
 
 
 ---
 
-5. Outputs (Artifacts)
+## 5. Optional: Real Ω Extraction from JSONL Outputs
 
-After execution, the notebook produces the following files:
+The notebook supports **real structural analysis** on pre-existing model outputs.
 
-reports/
- ├─ real_gsm8k_report.json
- └─ real_gsm8k_worst_cases.jsonl
+### Expected setup
 
-Artifact Description
+Place a JSONL file in:
 
-real_gsm8k_report.json
-Aggregated metrics (detection rate, precision, false positive rate, etc.)
+data/gsm8k_model_outputs.jsonl
 
-real_gsm8k_worst_cases.jsonl
-Hardest failure cases, intended for inspection and error analysis
+Then run the optional Ω cell in the notebook.
 
+### Important
 
-These artifacts are part of the experiment and may be committed for audit and review.
-
-
----
-
-6. Interpretation
-
-This Colab run is intended to answer one question only:
-
-> “Given the same input, the same code, and the same environment —
-do we obtain the same structural results?”
-
-
-
-If the answer is yes, OMNIA is:
-
-reproducible
-
-auditable
-
-scientifically inspectable
-
-
-If the answer is no, the system is not ready for claims and must be fixed.
+- The JSONL file must already exist
+- No external downloads are performed
+- OMNIA does not evaluate correctness of answers
+- Only structural invariants are measured
 
 
 ---
 
-7. Important Notes
+## 6. Outputs
 
-This is not a model benchmark in the traditional ML sense.
+Depending on which cells are executed, the notebook may produce:
 
-OMNIA does not generate answers.
+- console metrics (Ω, per-lens scores)
+- optional JSON artifacts generated by analysis scripts
 
-OMNIA measures structural instability, drift, and inconsistency.
-
-
-The system is model-agnostic and can be placed:
-
-after an LLM
-
-after a tool chain
-
-after any symbolic or numeric pipeline
-
+Output paths and formats are defined **by the executed scripts themselves**.
+No hidden artifacts are produced.
 
 
 ---
 
-8. Status
+## 7. Architectural Meaning
 
-This Colab notebook represents a frozen reference run.
+Colab execution reflects the non-negotiable architectural separation:
 
-Any future changes must:
+Model output → OMNIA (measurement) → OMNIA-LIMIT (boundary)
 
-bump version numbers
+The notebook **never**:
+- improves answers
+- selects outputs
+- overrides a model
+- applies semantic judgment
 
-explicitly change seeds
-
-document output differences
-
-
-Untracked changes make comparisons invalid.
-
-
----
-
-9. 60-Second Run (No Setup)
-
-Open the notebook and press Run:
-
-https://colab.research.google.com/github/Tuttotorna/lon-mirror/blob/main/colab/OMNIA_REAL_RUN.ipynb
-
-What you will see:
-
-Ω_total
-
-per-lens scores
-
-ICE decision: PASS / ESCALATE / BLOCK
-
-reproducible JSON artifacts
-
-
-This is a reproducible, model-agnostic verification demo.
+It only measures structural stability, invariance, and saturation.
 
 
 ---
 
-Author
+## 8. Scientific Scope
 
-Massimiliano Brighindi — MB-X.01
+This Colab run answers **one question only**:
+
+> “Given the same code and the same inputs,
+> do we observe the same structural measurements?”
+
+If yes, OMNIA is:
+- reproducible
+- auditable
+- inspectable
+
+If no, the implementation must be corrected before any claim.
+
+
+---
+
+## 9. Status
+
+This document is **authoritative**.
+
+Future changes must:
+- be explicit
+- be versioned
+- document behavioral differences
+
+Silent drift invalidates comparisons.
+
+
+---
+
+## Author
+
+Massimiliano Brighindi — MB-X.01  
 OMNIA / Omniabase± / ICE / LCR
+
