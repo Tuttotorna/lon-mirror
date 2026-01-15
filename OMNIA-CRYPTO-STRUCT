@@ -1,0 +1,182 @@
+# omnia_crypto_struct.py
+# OMNIA — Structural Reading of Encrypted Traffic (no decryption)
+# Author: Massimiliano Brighindi (MB-X.01 / OMNIA)
+
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Iterable, Dict, List, Tuple, Optional
+import math
+import statistics
+
+# -----------------------------
+# Core helpers (safe)
+# -----------------------------
+
+def shannon_entropy(counts: Dict[int, int]) -> float:
+    total = sum(counts.values())
+    if total <= 0:
+        return 0.0
+    ent = 0.0
+    for c in counts.values():
+        if c <= 0:
+            continue
+        p = c / total
+        ent -= p * math.log2(p)
+    return ent
+
+def to_base_digits(n: int, base: int) -> List[int]:
+    if base < 2:
+        raise ValueError("base must be >= 2")
+    if n == 0:
+        return [0]
+    digits = []
+    x = abs(n)
+    while x > 0:
+        digits.append(x % base)
+        x //= base
+    return digits[::-1]
+
+def digit_histogram(n: int, base: int) -> Dict[int, int]:
+    h: Dict[int, int] = {}
+    for d in to_base_digits(n, base):
+        h[d] = h.get(d, 0) + 1
+    return h
+
+def base_signature_scalar(n: int, bases: List[int]) -> Dict[int, float]:
+    """
+    For each base: compute entropy of digit histogram and normalized digit-sum.
+    These are *structure* proxies, not semantics.
+    """
+    out: Dict[int, float] = {}
+    for b in bases:
+        hist = digit_histogram(n, b)
+        ent = shannon_entropy(hist)
+        digits = to_base_digits(n, b)
+        s = sum(digits)
+        # normalize sum by max possible sum for that digit length
+        max_sum = (b - 1) * max(1, len(digits))
+        norm_sum = s / max_sum if max_sum > 0 else 0.0
+        # single scalar per base (simple, stable)
+        out[b] = 0.5 * ent + 0.5 * norm_sum
+    return out
+
+def variance(values: List[float]) -> float:
+    if len(values) < 2:
+        return 0.0
+    return statistics.pvariance(values)
+
+# -----------------------------
+# OMNIA "TruthΩ-like" score (structural invariance)
+# -----------------------------
+
+@dataclass(frozen=True)
+class OmniaConfig:
+    bases: Tuple[int, ...] = (2, 3, 4, 5, 7, 8, 10, 12, 16)
+    eps: float = 1e-9
+
+def truth_omega_from_base_map(base_map: Dict[int, float], eps: float = 1e-9) -> float:
+    """
+    TruthΩ proxy: higher when the per-base signature is stable (low variance).
+    """
+    vals = list(base_map.values())
+    v = variance(vals)
+    # -log(1 + v) style: bounded, monotonic
+    return -math.log(1.0 + v + eps)
+
+def co_plus(truth_omega: float) -> float:
+    """
+    Co⁺ proxy: exp(TruthΩ), maps to (0,1] for typical negative TruthΩ
+    """
+    return math.exp(truth_omega)
+
+# -----------------------------
+# Data model (encrypted traffic "structure", not content)
+# -----------------------------
+
+@dataclass(frozen=True)
+class FlowEvent:
+    """
+    Minimal event that can be extracted from PCAP or logs:
+    - t: timestamp (seconds, float)
+    - size: packet size or record size (int)
+    - direction: +1 outbound, -1 inbound (or 0 unknown)
+    - proto: optional protocol label (e.g., "TCP", "UDP", "TLS")
+    """
+    t: float
+    size: int
+    direction: int = 0
+    proto: str = "UNK"
+
+# -----------------------------
+# Structural lenses for encrypted traffic
+# -----------------------------
+
+def lens_packet_size(events: List[FlowEvent], cfg: OmniaConfig) -> Dict[str, float]:
+    """
+    Measures structural invariance of packet sizes under multi-base encoding.
+    """
+    if not events:
+        return {"TruthΩ_size": 0.0, "Co+_size": 0.0}
+
+    # aggregate sizes (can switch to per-window later)
+    sizes = [e.size for e in events if e.size > 0]
+    if not sizes:
+        return {"TruthΩ_size": 0.0, "Co+_size": 0.0}
+
+    # use median size as stable representative
+    rep = int(statistics.median(sizes))
+    base_map = base_signature_scalar(rep, list(cfg.bases))
+    t_omega = truth_omega_from_base_map(base_map, cfg.eps)
+    return {"TruthΩ_size": t_omega, "Co+_size": co_plus(t_omega)}
+
+def lens_timing(events: List[FlowEvent], cfg: OmniaConfig) -> Dict[str, float]:
+    """
+    Measures invariance of inter-arrival structure.
+    """
+    if len(events) < 3:
+        return {"TruthΩ_time": 0.0, "Co+_time": 0.0}
+
+    ts = sorted(e.t for e in events)
+    deltas = [max(cfg.eps, ts[i] - ts[i-1]) for i in range(1, len(ts))]
+
+    # representative: median delta in microseconds
+    rep_us = int(round(statistics.median(deltas) * 1_000_000))
+    base_map = base_signature_scalar(rep_us, list(cfg.bases))
+    t_omega = truth_omega_from_base_map(base_map, cfg.eps)
+    return {"TruthΩ_time": t_omega, "Co+_time": co_plus(t_omega)}
+
+def lens_directionality(events: List[FlowEvent], cfg: OmniaConfig) -> Dict[str, float]:
+    """
+    Simple structural check: imbalance inbound/outbound, encoded in multibase.
+    """
+    if not events:
+        return {"TruthΩ_dir": 0.0, "Co+_dir": 0.0}
+
+    out_c = sum(1 for e in events if e.direction > 0)
+    in_c = sum(1 for e in events if e.direction < 0)
+    imbalance = abs(out_c - in_c)  # structural, not semantic
+
+    base_map = base_signature_scalar(imbalance, list(cfg.bases))
+    t_omega = truth_omega_from_base_map(base_map, cfg.eps)
+    return {"TruthΩ_dir": t_omega, "Co+_dir": co_plus(t_omega)}
+
+# -----------------------------
+# Fused Ω-total score (toy)
+# -----------------------------
+
+def omega_total(events: List[FlowEvent], cfg: OmniaConfig) -> Dict[str, float]:
+    """
+    Minimal fused diagnostic: size + timing + direction.
+    Extend later: protocol segmentation, windowing, drift, ICE envelope.
+    """
+    a = lens_packet_size(events, cfg)
+    b = lens_timing(events, cfg)
+    c = lens_directionality(events, cfg)
+
+    truth_vals = [a["TruthΩ_size"], b["TruthΩ_time"], c["TruthΩ_dir"]]
+    omega = sum(truth_vals) / max(1, len(truth_vals))
+    return {
+        **a, **b, **c,
+        "Ω_total": omega,
+        "Co+_total": math.exp(omega),
+    }

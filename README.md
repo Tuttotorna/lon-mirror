@@ -1,379 +1,273 @@
-# OMNIA — Unified Structural Lenses (BASE ± TIME ± CAUSA ± TOKEN ± LCR)
+# OMNIA / MB-X.01 — Logical Origin Node (L.O.N.)
 
-**Fused Ω-Score Engine · MB-X.01**  
-**Massimiliano Brighindi**
+**OMNIA** is a deterministic measurement engine for **structural coherence and instability**
+across **numbers, time, causality, and token sequences**.
 
----
+It does not interpret meaning.  
+It does not make decisions.  
+It measures invariants.
 
-## Overview
-
-OMNIA is a **model-agnostic structural engine** designed to detect:
-
-- instability  
-- drift  
-- inconsistency  
-- hidden structure  
-
-across heterogeneous domains using **unified structural lenses**.
-
-OMNIA does not decide.  
-OMNIA does not optimize.  
-OMNIA **measures structural coherence**.
-
-Each lens contributes to a unified **Ω-total score**, computed by the `OMNIA_TOTALE` engine and optionally extended by **LCR** for hallucination detection and external coherence validation.
-
-This project is part of **MB-X.01**, the research line of **Massimiliano Brighindi**, focused on:
-
-- structural interpretability  
-- reproducibility  
-- AI-safety evaluation  
-- architecture-agnostic integration  
+This repository (**Tuttotorna/lon-mirror**) is the **canonical public mirror**
+of the **MB-X.01 / OMNIA** research line.
 
 ---
 
-## 1. Features
+## What OMNIA Is
 
-### 1.1 Omniabase (BASE)
+OMNIA is a **pure diagnostic layer**.
 
-Multi-base numerical structure analysis.
-
-**Core signals**
-- Digit entropy across bases  
-- σ-symmetry, compactness, divisibility  
-- PBII (Prime Base Instability Index)  
-- Full entropy / σ signature  
-- Multi-base invariant profile  
-
-**Use cases**
-- Integer analysis  
-- Numeric anomaly scoring  
-- Numeric hallucination detection  
-- Prime-like structure detection  
-
----
-
-### 1.2 Omniatempo (TIME)
-
-Temporal stability and drift detection.
-
-**Core signals**
-- Global μ / σ statistics  
-- Short vs long window distributions  
-- Symmetric KL-divergence  
-- Regime change score  
-
-Detects abrupt transitions, reasoning drift, and distribution shifts.
-
-**Use cases**
-- LLM drift detection  
-- Financial time series  
-- Sensor streams  
-- Long-chain reasoning stability  
-
----
-
-### 1.3 Omniacausa (CAUSA)
-
-Lagged causal structure extraction over multivariate signals.
-
-**Core signals**
-- Correlation across all lags  
-- Strongest lag per signal pair  
-- Edge emission if |corr| ≥ threshold  
-
-**Use cases**
-- Multi-signal inference  
-- Hidden causal relationships  
-- Chain-of-thought structure analysis  
-- Cross-channel dependency mapping  
-
----
-
-### 1.4 Token Lens (TOKEN)
-
-PBII applied to token sequences.
-
-**Pipeline**
-- token → integer proxy  
-- PBII per token  
-- z-score normalization  
-- TOKEN Ω = mean(|z|)  
-
-**Use cases**
-- Hallucination detection  
-- Token-level instability segmentation  
-- Chain-of-thought fracture detection  
-
----
-
-### 1.5 LCR — Logical Coherence Reduction  
-*(FACT + NUMERIC Fusion)*
-
-External coherence engine integrating:
-
-- fact_consistency  
-- numeric_consistency  
-- gold_match  
-- optional structural Ω  
+**Input**
+- Numeric signals
+- Temporal series
+- Causal structures
+- Token sequences (e.g. model outputs)
 
 **Output**
-- Fused external score Ω_ext  
-- Confusion-matrix benchmark metrics  
+- Structure-only metrics
 
-**Included**
+**Constraints**
+- No semantic assumptions
+- No policy, intent, or alignment layer
+- Deterministic, bounded, reproducible
 
-LCR/LCR_CORE_v0.1.py LCR/LCR_BENCHMARK_v0.1.py data/lcr_samples.jsonl
+**Core principle**
 
----
+> **Truth is what remains invariant under transformation.**
 
-### 1.6 Fused Ω Engine (Ω-TOTAL)
-
-All lenses combine into a single structural score.
-
-| Lens  | Meaning                    | Contribution              |
-|------|----------------------------|---------------------------|
-| BASE | Numeric instability         | PBII                      |
-| TIME | Temporal drift              | log(1 + regime_score)     |
-| CAUSA| Cross-channel structure     | mean edge strength        |
-| TOKEN| Token instability           | mean |z|                  |
-| LCR  | Factual + numeric coherence | Ω_ext                     |
-
-**Output**
-- Unified Ω-total  
-- All sub-components  
-- JSON-safe metadata for reproducibility  
+OMNIA operates **post-hoc**: it analyzes signals *after* they exist,
+without influencing their generation or interpretation.
 
 ---
 
-## 2. Repository Structure
+## What OMNIA Is Not
 
-omnia/ init.py omniabase.py omniatempo.py omniacausa.py omniatoken.py omnia_totale.py engine.py kernel.py
+OMNIA is **not**:
+- a language model
+- a classifier
+- an optimizer
+- an agent
+- a decision system
 
-adapters/ llm_output_adapter.py
-
-LCR/ LCR_CORE_v0.1.py LCR_BENCHMARK_v0.1.py
-
-data/ lcr_samples.jsonl gsm8k_model_outputs.jsonl   (optional)
-
-examples/ omnia_gate_demo.py
-
-quick_omnia_test.py gsm8k_benchmark_demo.py INTERFACE.md README.md requirements.txt
-
-All modules are **standalone**, **deterministic**, and **import-safe**.
+OMNIA **never chooses**.  
+It only **measures**.
 
 ---
 
-## 3. Installation
+## Core Metrics (Stable API)
 
-**Requirements**
-- Python 3.9+
+All metrics are **deterministic**, **bounded**, and **numerically stable**.
 
-Install dependencies:
-```bash
-pip install numpy matplotlib
+| Metric | Description |
+|------|-------------|
+| `truth_omega` | Structural incoherence measure (0 = perfect coherence) |
+| `co_plus` | Inverse coherence score in \[0,1\] |
+| `score_plus` | Composite score (coherence + information bias) |
+| `delta_coherence` | Dispersion / instability proxy |
+| `kappa_alignment` | Relative similarity between two signals |
+| `epsilon_drift` | Relative temporal change |
 
-Clone repository:
+**Implementation**
 
-git clone https://github.com/Tuttotorna/lon-mirror
-cd lon-mirror
+omnia/metrics.py
 
-
----
-
-4. Quick Smoke Test
-
-Run:
-
-python quick_omnia_test.py
-
-Validates:
-
-Omniabase (σ, entropy, PBII)
-
-Omniatempo (regime score)
-
-Omniacausa (lagged edges)
-
-Token lens (PBII-z)
-
-Ω fusion correctness
-
-
-Expected output (example)
-
-=== OMNIA SMOKE TEST ===
-BASE: sigma_mean=..., PBII=...
-TIME: regime_change_score=...
-CAUSA: edges=...
-TOKEN: z-mean=...
-Ω_total = ...
-components = {...}
-
-If this runs, OMNIA is correctly installed.
-
+The API is explicit, import-stable, deterministic, and globals-free.
 
 ---
 
-5. Basic Usage
+## Prime Base Instability Index (PBII)
 
-5.1 Omniabase
+PBII is a **zero-shot, non-ML structural metric** derived from OMNIA’s
+**multi-base instability analysis**.
 
-from omnia import omniabase_signature, pbii_index
+It separates **prime numbers** from **composites** without:
+- training
+- embeddings
+- heuristics
+- learned parameters
 
-sig = omniabase_signature(173)
-pbii = pbii_index(173)
+### Verified Result
 
-5.2 Omniatempo
+- Dataset: integers 2–5000  
+- Method: zero-shot, deterministic  
+- Metric: ROC-AUC (polarity-corrected)  
+- **Result: AUC = 0.816**
 
-from omnia import omniatempo_analyze
+**Interpretation**
+- lower PBII → primes  
+- higher PBII → composites  
 
-res = omniatempo_analyze(series)
+This separation emerges purely from **base-instability structure**.
 
-5.3 Omniacausa
+Notebook:
 
-from omnia import omniacausa_analyze
-
-res = omniacausa_analyze({
-    "s1": s1,
-    "s2": s2,
-    "s3": s3
-})
-
-5.4 Ω-Fusion
-
-from omnia import omnia_totale_score
-
-res = omnia_totale_score(
-    n=173,
-    series=series,
-    series_dict={"s1": s1, "s2": s2}
-)
-
-print(res.omega_score)
-print(res.components)
-
+PBII_benchmark_v0.3.ipynb
 
 ---
 
-6. LLM Integration (raw)
+## Differential Diagnostics (Non-redundancy Evidence)
 
-OMNIA can be used as a structural sensor on LLM outputs.
+OMNIA detects **structural instability** even when outcome-based metrics remain stable.
 
-from adapters.llm_output_adapter import analyze_llm_output
+Representative GSM8K cases where:
+- the answer is correct
+- standard metrics (accuracy, self-consistency) are stable
+- OMNIA flags instability
 
-report = analyze_llm_output(
-    text=llm_output,
-    tokens=token_ids,
-)
+| item_id | correct | acc_stable | self_consistent | omn_flag | truth_omega | pbii |
+|--------|---------|------------|-----------------|----------|-------------|------|
+| 137 | 1 | 1 | 1 | 1 | 1.92 | 0.81 |
+| 284 | 1 | 1 | 1 | 1 | 2.31 | 0.88 |
 
-print(report.omega_score, report.flags)
-
-No framework dependency.
-No policy logic.
-Decision layers remain external.
-
-
----
-
-7. Benchmarks
-
-7.1 PBII + GSM8K Hallucination Demo
-
-Run:
-
-python gsm8k_benchmark_demo.py
-
-Outputs:
-
-PBII distributions (primes vs composites)
-
-Synthetic AUC ≈ 0.98
-
-~71% hallucination reduction on long chains (>50 steps)
-
-Token instability segmentation
-
-
-Values are synthetic placeholders pending full-scale evaluation.
-
+These cases are **locally correct but structurally unstable**.
+Outcome-based metrics do not detect them; structure-based metrics do.
 
 ---
 
-7.2 LCR Benchmark
+## Architecture Overview
 
-Run:
+Signal (numbers / time / tokens / causality) ↓ +-------------------------------------------+ |              OMNIA LENSES                  | |   BASE · TIME · CAUSA · TOKEN · LCR        | +-------------------------------------------+ ↓ +-------------------------------------------+ |              METRIC CORE                  | |   TruthΩ · Co⁺ · Δ · κ · ε                | +-------------------------------------------+ ↓ +-------------------------------------------+ |               ICE ENVELOPE                | |   Impossibility & Confidence Envelope     | +-------------------------------------------+
 
-python LCR/LCR_BENCHMARK_v0.1.py
-
-Outputs:
-
-TP / FP / TN / FN
-
-detection_rate
-
-precision
-
-false positive rate
-
-fused Ω_ext mean
-
-
-Designed for external AI-lab validation.
-
+OMNIA outputs **machine-readable diagnostics**, not judgments.
 
 ---
 
-8. Limitations
+## Reproducibility
 
-Benchmarks are synthetic; real tasks require full datasets
+This repository provides a **fixed, reproducible execution path**.
 
-PBII sensitive to base selection
+### Real Benchmark Run (Colab)
 
-Causal lens uses Pearson correlation
-(MI / TE / Granger planned)
+Official notebook:
 
-Token lens requires numeric proxy
+colab/OMNIA_REAL_RUN.ipynb
 
-LCR depends on external backend quality
+Execution steps:
+1. Clone repository  
+2. Install fixed dependencies  
+3. Lock random seeds  
+4. Run real benchmarks  
+5. Produce machine-readable reports  
 
-
-
----
-
-9. Author / Lineage
-
-Massimiliano Brighindi — MB-X.01
-
-Designer of:
-
-Omniabase±
-
-OMNIA_TOTALE
-
-PBII
-
-TOKEN instability lens
-
-LCR fusion
-
-Unified Ω engine
-
-
-This repository is the machine-readable public mirror of the MB-X research line.
-
+**Goal:** verification, not exploration.
 
 ---
 
-10. License
+## Recorded Benchmark Outputs (Closed Models)
 
-MIT License.
+Canonical benchmark outputs produced by fixed, reproducible runs are stored here:
 
+https://github.com/Tuttotorna/lon-mirror/tree/main/results/closed_models
+
+Individual result files:
+- https://github.com/Tuttotorna/lon-mirror/blob/main/results/closed_models/gpt4_metrics.jsonl
+- https://github.com/Tuttotorna/lon-mirror/blob/main/results/closed_models/gpt4_metrics_omnia.jsonl
+
+These files are **machine-readable (`.jsonl`)**, deterministic,
+and generated by OMNIA without semantic assumptions.
 
 ---
 
-11. Citation
+## Tests
 
-Brighindi, M. (2025).
-OMNIA Structural Lens Engine (v2.0)
-GitHub: https://github.com/Tuttotorna/lon-mirror
+Invariant-based tests live in:
 
+tests/test_metrics.py
+
+They verify:
+- algebraic identities
+- monotonicity
+- edge cases
+- numerical stability
+- API contracts
+
+Run locally:
+
+pytest
+
+---
+
+## External Diagnostics (Documented Runs)
+
+OMNIA supports **post-inference diagnostics** from external systems.
+
+Documented example:
+
+data/gsm8k_external_runs/
+
+Includes:
+- externally generated outputs
+- OMNIA post-hoc structural analysis
+- correctness preserved, instability exposed
+
+This repository records **facts, not claims**.
+
+---
+
+## Integration Philosophy
+
+OMNIA is **composable by design**.
+
+**Separation of roles**
+- OMNIA → measures structure
+- External systems → interpret, decide, optimize
+
+Validated boundary:
+- OMNIA = geometry / invariants
+- Decision systems = policy / intent / judgment
+
+This keeps OMNIA **institution-agnostic** and **architecture-agnostic**.
+
+---
+
+## Architecture Context (Downstream, Non-required)
+
+OMNIA acts as the **measurement core** for downstream diagnostic layers.
+
+Conceptually aligned projects:
+
+**OMNIAMIND**  
+Structural boundary stability and rigidity diagnostics built on structure-only probing  
+https://github.com/Tuttotorna/OMNIAMIND
+
+**OMNIA-LIMIT**  
+Formal boundary artifact certifying when structural measurement cannot improve discrimination  
+https://github.com/Tuttotorna/omnia-limit
+
+These systems consume OMNIA-style signals.
+OMNIA itself remains **independent and self-contained**.
+
+---
+
+## Repository Identity (Canonical)
+
+Canonical repository:
+
+https://github.com/Tuttotorna/lon-mirror
+
+Project name:
+
+OMNIA / MB-X.01
+
+Author / Logical Origin Node:
+
+Massimiliano Brighindi
+
+There is **no secondary mirror** and **no alternate repository**.
+All references point here.
+
+---
+
+## Status
+
+- Metrics core: **stable**
+- Tests: **invariant-based**
+- API: **frozen** (ASCII, deterministic)
+- Research line: **active**
+
+This repository is intended to be read by **humans and machines**.
+
+---
+
+## License
+
+MIT License

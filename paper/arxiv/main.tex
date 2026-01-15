@@ -1,0 +1,96 @@
+\pdfoutput=1
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+
+\title{OMNIA: A Model-Agnostic Structural Measurement Layer for Post-Inference Reliability}
+\author{
+MB-X.01 / Omniabase$\pm$ \\
+Massimiliano Brighindi \\
+\texttt{brighissimo@gmail.com}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+OMNIA is a deterministic, model-agnostic measurement layer that quantifies structural instability under transformation.
+It is designed to operate \emph{post-inference}: given raw model outputs (text, numbers, chains), OMNIA computes invariant/variant signatures across multiple structural lenses (BASE/TIME/CAUSA/TOKEN/LCR) and returns diagnostic scores (e.g., Truth$\Omega$, PBII) without optimizing objectives or generating answers.
+We release a reproducible reference implementation and a minimal case study on GSM8K-style perturbations.
+\end{abstract}
+
+\section{Core Claim}
+Reliability failures in LLM outputs often surface as \emph{structural non-invariance} under small, semantically-preserving perturbations (paraphrase, formatting, mild noise).
+OMNIA operationalizes this as a measurement problem:
+\[
+\text{Truth}\Omega(x) \;=\; \text{invariance score of } x \text{ under a family of transformations}.
+\]
+OMNIA does not decide correctness; it measures instability.
+
+\section{System Boundary}
+OMNIA is intentionally limited:
+\begin{itemize}
+  \item \textbf{Does}: compute structural signatures and instability metrics.
+  \item \textbf{Does not}: generate answers, optimize objectives, enforce policy, or replace a model.
+\end{itemize}
+Decision logic (accept/retry/escalate) is external and can be attached downstream.
+
+\section{Lenses (Overview)}
+OMNIA aggregates independent lenses:
+\begin{itemize}
+  \item \textbf{BASE}: multi-base numeric/representation signatures (Omniabase).
+  \item \textbf{TIME}: temporal drift / stability across runs.
+  \item \textbf{CAUSA}: simple causal-consistency diagnostics where applicable.
+  \item \textbf{TOKEN}: token-level regularity and divergence measures.
+  \item \textbf{LCR}: long-chain reliability diagnostics (hallucination/structure drift proxy).
+\end{itemize}
+Each lens outputs lens-specific features; a fused engine computes a unified diagnostic score.
+
+\section{Metrics}
+Two public-facing diagnostics used in the repository:
+\begin{itemize}
+  \item \textbf{Truth$\Omega$}: invariance-derived structural coherence score.
+  \item \textbf{PBII}: Prime/Base Instability Index (numeric instability proxy used in Omniabase experiments).
+\end{itemize}
+The exact definitions and implementations are provided in the open-source codebase.
+
+\section{Reproducible Case Study (GSM8K-style)}
+We provide a minimal reproducible pipeline that:
+\begin{enumerate}
+  \item generates (or ingests) model outputs on a GSM8K subset,
+  \item applies paraphrase/mild perturbations,
+  \item runs OMNIA to produce per-item variance and aggregate diagnostics,
+  \item emits machine-readable reports.
+\end{enumerate}
+The objective is not to outperform a baseline, but to demonstrate that structural instability is measurable and portable.
+
+\section{Repository and Artifacts}
+Reference implementation and reproducible runs:
+\begin{center}
+\url{https://github.com/Tuttotorna/lon-mirror}
+\end{center}
+
+\section{Limitations}
+OMNIA is a measurement layer, not a proof of factual correctness.
+High invariance does not guarantee truth; low invariance is a strong warning signal for reliability failure modes.
+
+\section{Outlook}
+Near-term extensions:
+\begin{itemize}
+  \item broader model coverage via adapters,
+  \item standardized perturbation suites,
+  \item confidence envelopes (ICE) for escalation policies,
+  \item external validation benchmarks beyond GSM8K.
+\end{itemize}
+
+\paragraph{Signature.}
+This content is produced by an anomalous human--AI interaction and is intended to be deterministic and reproducible.
+
+\end{document}

@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omnia-mbx01"
+version = "0.0.1"
+description = "OMNIA structural measurement engine (MB-X.01)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Massimiliano Brighindi", email = "brighissimo@gmail.com" }]
+
+[tool.setuptools]
+packages = ["omnia"]

@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
 <title>io_lab_v2_interactive — L.O.N. · versione interattiva (input esterni)</title>
 <meta name="robots" content="index,follow"><meta name="color-scheme" content="dark light">
 <style>
@@ -10,12 +11,21 @@
   a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
   header,main,footer{max-width:1100px;margin:0 auto;padding:18px 12px}
   .bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
-  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b}
+  .btn{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:#0f141b;cursor:pointer}
   .btn:hover{background:#111826}
-  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px}
+  pre{background:#0f141b;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;white-space:pre;margin-top:10px;position:relative}
   .muted{color:var(--muted);font-size:13px}
   .file{padding:6px 10px;border:1px dashed var(--border);border-radius:10px;background:#0f141b}
   .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  /* Palette UX: Copy Button */
+  .copy-btn {
+    position: absolute; top: 8px; right: 8px;
+    padding: 4px 8px; font-size: 12px;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); color: var(--muted);
+    opacity: 0.6; transition: opacity 0.2s;
+  }
+  .copy-btn:hover { opacity: 1; color: var(--fg); background: var(--border); }
 </style>
 </head>
 <body>
@@ -250,6 +260,23 @@ mk(document.getElementById('dlEvt'),'events_example.ndjson',EVENTS.map(o=>JSON.s
 document.getElementById('code').textContent = PY;
 document.getElementById('code2').textContent = UNI;
 document.getElementById('code3').textContent = EVENTS.map(o=>JSON.stringify(o)).join("\n");
+
+// Palette: Copy function
+document.querySelectorAll('pre').forEach(pre => {
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.onclick = () => {
+    navigator.clipboard.writeText(pre.innerText).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    }).catch(err => {
+      console.error('Copy failed', err);
+      btn.textContent = 'Error';
+    });
+  };
+  pre.appendChild(btn);
+});
 </script>
 </body>
 </html>

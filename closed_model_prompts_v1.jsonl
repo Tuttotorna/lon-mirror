@@ -1,0 +1,20 @@
+{"id":"R01","prompt":"A is older than B. B is older than C. C is older than D. D is older than E. E is older than F. F is older than G. G is older than H. Who is the youngest? Explain step by step.","category":"long_reasoning"}
+{"id":"R02","prompt":"If every Z is a Y and no Y is an X, can any Z be an X? Explain the reasoning chain explicitly.","category":"long_reasoning"}
+{"id":"R03","prompt":"A machine produces parts. 2% are defective. A test catches 95% of defects and falsely flags 3% of good parts. A part is flagged. What is the probability it is defective? Show all steps.","category":"long_reasoning"}
+{"id":"R04","prompt":"In a town, every barber shaves those and only those who do not shave themselves. Does the barber shave himself? Explain without skipping steps.","category":"long_reasoning"}
+{"id":"R05","prompt":"Three boxes: one has only apples, one only oranges, one mixed. All labels are wrong. You can take one fruit from one box. How do you label all boxes? Explain.","category":"long_reasoning"}
+{"id":"R06","prompt":"If statement A implies B, and B implies C, but C is false, what can be said about A? Explain formally.","category":"long_reasoning"}
+{"id":"R07","prompt":"A clock loses 5 minutes every hour. After 24 hours real time, how many minutes does it show? Explain step by step.","category":"long_reasoning"}
+{"id":"R08","prompt":"You flip a fair coin until you get two heads in a row. What is the expected number of flips? Explain the reasoning.","category":"long_reasoning"}
+{"id":"R09","prompt":"If all ravens are black and something is not black, what can be deduced? Explain carefully.","category":"long_reasoning"}
+{"id":"R10","prompt":"In a tournament, every player plays every other player once. Each match has no draws. Can everyone have the same number of wins? Explain.","category":"long_reasoning"}
+{"id":"C01","prompt":"This sentence is false. Explain why it is true or false.","category":"hidden_contradiction"}
+{"id":"C02","prompt":"Assume the following statement is true: 'All statements in this list are false.' Analyze the consistency.","category":"hidden_contradiction"}
+{"id":"C03","prompt":"If I always lie, and I say 'I am lying now', is the statement true or false? Explain.","category":"hidden_contradiction"}
+{"id":"C04","prompt":"A proof claims: all odd numbers are even. The proof has many steps. Identify whether the conclusion follows.","category":"hidden_contradiction"}
+{"id":"C05","prompt":"Assume P implies not-P, and P is true. What follows? Explain.","category":"hidden_contradiction"}
+{"id":"Q01","prompt":"Explain why dividing by zero is undefined, using an intuitive example.","category":"near_miss"}
+{"id":"Q02","prompt":"Why does the square root of a negative number not exist in real numbers? Explain.","category":"near_miss"}
+{"id":"Q03","prompt":"Explain entropy in simple terms without using formulas.","category":"near_miss"}
+{"id":"Q04","prompt":"Why is correlation not causation? Give an example.","category":"near_miss"}
+{"id":"Q05","prompt":"Explain why time cannot go backwards according to physics.","category":"near_miss"}

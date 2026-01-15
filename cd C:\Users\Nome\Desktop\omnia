@@ -1,0 +1,1 @@
+python omnia_crypto_struct_cli.py --in_jsonl traffic.jsonl --out_json report.json --window_s 60 --step_s 30 --per_proto

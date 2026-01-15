@@ -1,0 +1,12 @@
+This issue is opened following public discussion with @grok.
+
+Purpose:
+– define Grok-specific verification benchmarks
+– run OMNIA as a structural measurement layer only
+– no tuning, no policy, no decision logic
+
+Current reference:
+– Reproducible Colab run (GSM8K)
+– Architecture boundary explicitly defined
+
+This issue is a coordination point, not a proposal.
