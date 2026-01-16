@@ -42,7 +42,7 @@ The result is a **measured boundary**, not a judgment.
 
 ## The OMNIA Measurement Chain
 
-OMNIA           → Ω Ω under transforms → Ω̂ (Omega-set) ΔΩ / ΔC          → SEI (Saturation) A → B → A′       → IRI (Irreversibility) SEI ≈ 0 and IRI > 0 → OMNIA-LIMIT (STOP)
+OMNIA → Ω → Ω under transformations → Ω̂ (Omega-set) → ΔΩ / ΔC → SEI (Saturation) → A → B → A′ → IRI (Irreversibility) → SEI ≈ 0 and IRI > 0 → OMNIA-LIMIT (STOP)
 
 Each step is **measured**, not inferred.
 
@@ -68,7 +68,8 @@ It reflects **internal consistency**, not correctness.
 
 ## 2. Structural Lenses
 
-### BASE — Omniabase  
+### BASE — Omniabase
+
 Multi-base numeric structure analysis.
 
 Measures:
@@ -79,7 +80,8 @@ Measures:
 
 ---
 
-### TIME — Omniatempo  
+### TIME — Omniatempo
+
 Temporal drift and regime instability.
 
 Measures:
@@ -89,7 +91,8 @@ Measures:
 
 ---
 
-### CAUSA — Omniacausa  
+### CAUSA — Omniacausa
+
 Lagged relational structure.
 
 Measures:
@@ -98,7 +101,8 @@ Measures:
 
 ---
 
-### TOKEN  
+### TOKEN
+
 Structural instability in token sequences.
 
 Pipeline:
@@ -110,7 +114,8 @@ Used for hallucination and chain-fracture detection.
 
 ---
 
-### LCR — Logical Coherence Reduction  
+### LCR — Logical Coherence Reduction
+
 External coherence lens.
 
 Combines:
@@ -119,6 +124,29 @@ Combines:
 - optional Ω contribution  
 
 Produces **Ω_ext** for audit and benchmarking.
+
+---
+
+### APERSPECTIVE — Aperspective Invariance
+
+**Aperspective Invariance** measures structural invariants that persist under
+independent transformations **without introducing any privileged point of view**.
+
+This lens operates without:
+- observer assumptions  
+- semantics  
+- causality  
+- narrative framing  
+
+It computes:
+- **Ω-score**: the fraction of structure that survives across transformations  
+- **Residue**: the intersection of invariants that remain when representation changes  
+
+Aperspective Invariance isolates structure that is **real but non-vivable for human cognition**.
+It is a diagnostic, post-hoc measurement lens.
+
+Implementation:
+- `omnia/lenses/aperspective_invariance.py`
 
 ---
 
@@ -232,7 +260,7 @@ Run via **Google Colab** using `OMNIA_DEMO_INSPECT.ipynb`.
 
 ## 8. Repository Structure
 
-omnia/ omniabase.py omniatempo.py omniacausa.py omniatoken.py omnia_totale.py sei.py iri.py omega_set.py
+omnia/ omniabase.py omniatempo.py omniacausa.py omniatoken.py omnia_totale.py sei.py iri.py omega_set.py lenses/ aperspective_invariance.py
 
 LCR/ LCR_CORE_v0.1.py LCR_BENCHMARK_v0.1.py
 
@@ -268,5 +296,3 @@ MIT License.
 Brighindi, M.  
 **OMNIA — Unified Structural Measurement Engine (MB-X.01)**  
 GitHub: https://github.com/Tuttotorna/lon-mirror
-
-
