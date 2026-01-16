@@ -1,242 +1,175 @@
-#OMNIA — Unified Structural Measurement Engine
+# OMNIA — Unified Structural Measurement Engine
 
-Ω · SEI · IRI · Ω̂ · OMNIA-LIMIT
+Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT  
 MB-X.01
 
-Author: Massimiliano Brighindi
-
+**Author:** Massimiliano Brighindi
 
 ---
 
-Overview
+## Overview
 
-OMNIA is a post-hoc structural measurement engine.
+**OMNIA** is a **post-hoc structural measurement engine**.
 
-It measures structural coherence and instability of representations under independent transformations.
+It measures **structural coherence, instability, and limits** of representations
+under independent transformations.
 
 OMNIA:
 
-does not interpret meaning
+- does **not** interpret meaning  
+- does **not** decide  
+- does **not** optimize  
+- does **not** learn  
 
-does not decide
-
-does not optimize
-
-does not learn
-
-
-OMNIA measures what remains invariant when representation changes.
-
+OMNIA measures **what remains invariant when representation changes**.
 
 ---
 
-Core Principle
+## Core Principle
 
-> Structural truth is what survives the removal of representation.
-
-
+> **Structural truth is what survives the removal of representation.**
 
 OMNIA evaluates outputs by applying independent structural lenses and measuring:
 
-invariance
+- invariance  
+- drift  
+- saturation  
+- irreversibility  
 
-drift
-
-saturation
-
-irreversibility
-
-
-The result is a measured boundary, not a judgment.
-
+The result is a **measured boundary**, not a judgment.
 
 ---
 
-The OMNIA Measurement Chain
+## The OMNIA Measurement Chain
 
-OMNIA → Ω
-Ω under transformations → Ω̂ (Omega-set)
-ΔΩ / ΔC → SEI (Saturation)
-A → B → A′ → IRI (Irreversibility)
-SEI ≈ 0 and IRI > 0 → OMNIA-LIMIT (STOP)
+OMNIA           → Ω Ω under transforms → Ω̂ (Omega-set) ΔΩ / ΔC          → SEI (Saturation) A → B → A′       → IRI (Irreversibility) SEI ≈ 0 and IRI > 0 → OMNIA-LIMIT (STOP)
 
-Each step is measured, not inferred.
-
+Each step is **measured**, not inferred.
 
 ---
 
-1. Ω — Structural Coherence Score
+## 1. Ω — Structural Coherence Score
 
 Ω is the aggregated structural score produced by OMNIA’s lenses.
 
-It reflects internal consistency, not correctness.
+It reflects **internal consistency**, not correctness.
 
 Ω can be computed over:
 
-numbers
+- numbers  
+- sequences  
+- time series  
+- token streams  
+- model outputs  
 
-sequences
-
-time series
-
-token streams
-
-model outputs
-
-
-Ω is model-agnostic and semantics-free.
-
+Ω is **model-agnostic** and **semantics-free**.
 
 ---
 
-2. Structural Lenses
+## 2. Structural Lenses
 
-BASE — Omniabase
-
+### BASE — Omniabase  
 Multi-base numeric structure analysis.
 
 Measures:
-
-digit entropy across bases
-
-σ-symmetry
-
-PBII (Prime Base Instability Index)
-
-base-invariant signatures
-
-
+- digit entropy across bases  
+- σ-symmetry  
+- PBII (Prime Base Instability Index)  
+- base-invariant signatures  
 
 ---
 
-TIME — Omniatempo
-
+### TIME — Omniatempo  
 Temporal drift and regime instability.
 
 Measures:
-
-distribution shifts
-
-short vs long window divergence
-
-regime change score
-
-
+- distribution shifts  
+- short vs long window divergence  
+- regime change score  
 
 ---
 
-CAUSA — Omniacausa
-
+### CAUSA — Omniacausa  
 Lagged relational structure.
 
 Measures:
-
-cross-signal correlations across lags
-
-dominant dependency edges
-
-
+- cross-signal correlations across lags  
+- dominant dependency edges  
 
 ---
 
-TOKEN
-
+### TOKEN  
 Structural instability in token sequences.
 
 Pipeline:
+- token → integer proxy  
+- PBII per token  
+- z-score aggregation  
 
-token → integer proxy
-
-PBII per token
-
-z-score aggregation
-
-
-Used for hallucination and chain fracture detection.
-
+Used for hallucination and chain-fracture detection.
 
 ---
 
-LCR — Logical Coherence Reduction
-
+### LCR — Logical Coherence Reduction  
 External coherence lens.
 
 Combines:
+- factual consistency  
+- numeric consistency  
+- optional Ω contribution  
 
-factual consistency
-
-numeric consistency
-
-optional Ω contribution
-
-
-Produces Ω_ext for audit and benchmarking.
-
+Produces **Ω_ext** for audit and benchmarking.
 
 ---
 
-3. Ω̂ — Omega-set (Residual Invariance)
+## 3. Ω̂ — Omega-set (Residual Invariance)
 
 Ω̂ formalizes the statement:
 
-> “Ω is not assumed. Ω is deduced by subtraction.”
-
-
+> **Ω is not assumed. Ω is deduced by subtraction.**
 
 Given multiple Ω values obtained under independent transformations:
 
-Ω̂ = robust center (median)
+- Ω̂ = robust center (median)  
+- dispersion = MAD  
+- invariance = 1 / (1 + MAD)  
 
-dispersion = MAD
-
-invariance = 1 / (1 + MAD)
-
-
-This estimates the structural residue that survives representation change.
+This estimates the **structural residue** that survives representation change.
 
 Implemented in:
 
 omnia/omega_set.py
 
-
 ---
 
-4. SEI — Saturation / Exhaustion Index
+## 4. SEI — Saturation / Exhaustion Index
 
-SEI measures marginal structural yield.
+SEI measures **marginal structural yield**.
 
 Definition:
 
-SEI(k) = ΔΩ / ΔC
+SEI = ΔΩ / ΔC
 
 Where:
-
-Ω = structural score
-
-C = monotonic cost (tokens, steps, depth, time)
-
+- Ω = structural score  
+- C = monotonic cost (tokens, steps, depth, time)  
 
 Interpretation:
+- SEI > 0 → structure still extractable  
+- SEI ≈ 0 → saturation  
+- SEI < 0 → structural degradation  
 
-SEI > 0 → structure still extractable
-
-SEI ≈ 0 → saturation
-
-SEI < 0 → structural degradation
-
-
-SEI is a trend, not a threshold.
+SEI is a **trend**, not a threshold.
 
 Implemented in:
 
 omnia/sei.py
 
-
 ---
 
-5. IRI — Irreversibility / Hysteresis Index
+## 5. IRI — Irreversibility / Hysteresis Index
 
-IRI measures loss of recoverable structure.
+IRI measures **loss of recoverable structure**.
 
 Cycle:
 
@@ -246,131 +179,94 @@ Definition:
 
 IRI = max(0, Ω(A) − Ω(A′))
 
-If output quality appears similar but Ω drops after returning,
-irreversible structural damage has occurred.
+If apparent output quality is similar but Ω drops after return,
+**irreversible structural damage** has occurred.
 
-IRI is not an error metric.
+IRI is **not** an error metric.
 
 Implemented in:
 
 omnia/iri.py
 
-
 ---
 
-6. OMNIA-LIMIT — Epistemic Boundary
+## 6. OMNIA-LIMIT — Epistemic Boundary
 
-OMNIA-LIMIT declares a STOP condition, not a decision.
+OMNIA-LIMIT declares a **STOP condition**, not a decision.
 
 Triggered when:
-
-SEI → 0 (no marginal structural gain)
-
-IRI > 0 (irreversibility detected)
-
-Ω̂ stable (no invariant left to extract)
-
+- SEI → 0 (no marginal structural gain)  
+- IRI > 0 (irreversibility detected)  
+- Ω̂ stable (no invariant left to extract)  
 
 Meaning:
 
-> No further structure is extractable under current transformations.
+> **No further structure is extractable under current transformations.**
 
-
-
-OMNIA-LIMIT does not escalate, retry, or optimize.
-
+OMNIA-LIMIT does **not** retry, escalate, or optimize.
 
 ---
 
-7. Colab Notebooks
+## 7. Colab Notebooks
 
-Canonical (Reproducible)
+### Canonical (Reproducible)
 
 colab/OMNIA_REAL_RUN.ipynb
 
-deterministic
+- deterministic  
+- seed-locked  
+- audit reference  
 
-seed-locked
-
-audit reference
-
-
-Exploratory
+### Exploratory
 
 colab/OMNIA_DEMO_INSPECT.ipynb
 
-non-deterministic
+- non-deterministic  
+- inspection only  
+- no claims  
 
-inspection only
-
-no claims
-
-
+Tablet / no local shell:  
+Run via **Google Colab** using `OMNIA_DEMO_INSPECT.ipynb`.
 
 ---
 
-8. Repository Structure
+## 8. Repository Structure
 
-omnia/
-  omniabase.py
-  omniatempo.py
-  omniacausa.py
-  omniatoken.py
-  omnia_totale.py
-  sei.py
-  iri.py
-  omega_set.py
+omnia/ omniabase.py omniatempo.py omniacausa.py omniatoken.py omnia_totale.py sei.py iri.py omega_set.py
 
-LCR/
-  LCR_CORE_v0.1.py
-  LCR_BENCHMARK_v0.1.py
+LCR/ LCR_CORE_v0.1.py LCR_BENCHMARK_v0.1.py
 
-colab/
-  OMNIA_REAL_RUN.ipynb
-  OMNIA_DEMO_INSPECT.ipynb
+colab/ OMNIA_REAL_RUN.ipynb OMNIA_DEMO_INSPECT.ipynb
 
 All modules are:
-
-deterministic
-
-standalone
-
-import-safe
-
-
+- deterministic  
+- standalone  
+- import-safe  
 
 ---
 
-9. What OMNIA Is Not
+## 9. What OMNIA Is Not
 
-Not a model
+- Not a model  
+- Not an evaluator  
+- Not a policy  
+- Not a decision system  
+- Not a truth oracle  
 
-Not an evaluator
+OMNIA is a **measurement instrument**.
 
-Not a policy
-
-Not a decision system
-
-Not a truth oracle
-
-
-OMNIA is a measurement instrument.
-
-Tablet / no local shell:
-Run via Google Colab using OMNIA_DEMO_INSPECT.ipynb
 ---
 
-10. License
+## 10. License
 
 MIT License.
 
-
 ---
 
-11. Citation
+## 11. Citation
 
-Brighindi, M.
-OMNIA — Unified Structural Measurement Engine (MB-X.01)
+Brighindi, M.  
+**OMNIA — Unified Structural Measurement Engine (MB-X.01)**  
 GitHub: https://github.com/Tuttotorna/lon-mirror
 
 
