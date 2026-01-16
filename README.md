@@ -15,7 +15,7 @@
 - inconsistency  
 - hidden structure  
 
-across heterogeneous domains using a system of **unified structural lenses**.
+across heterogeneous domains using **unified structural lenses**.
 
 OMNIA does **not** decide.  
 OMNIA does **not** optimize.  
@@ -32,24 +32,40 @@ This repository is the public, machine-readable mirror of **MB-X.01**, the resea
 
 ---
 
+## Quick Entry (Colab)
+
+**Canonical · Reproducible run**
+
+colab/OMNIA_REAL_RUN.ipynb
+
+https://colab.research.google.com/github/Tuttotorna/lon-mirror/blob/main/colab/OMNIA_REAL_RUN.ipynb
+
+**Exploratory · Inspection**
+
+colab/OMNIA_DEMO_INSPECT.ipynb
+
+https://colab.research.google.com/github/Tuttotorna/lon-mirror/blob/main/colab/OMNIA_DEMO_INSPECT.ipynb
+
+> The demo notebook is not frozen and is not used for benchmarks.
+
+---
+
 ## 1. Structural Lenses
 
 ### 1.1 Omniabase (BASE)
 
 Multi-base numerical structure analysis.
 
-**Core signals**
+**Signals**
 - Digit entropy across bases  
 - σ-symmetry, compactness, divisibility  
 - PBII (Prime Base Instability Index)  
-- Full entropy / σ signature  
 - Multi-base invariant profile  
 
 **Use cases**
 - Integer analysis  
 - Numeric anomaly detection  
 - Numeric hallucination detection  
-- Prime-like structure identification  
 
 ---
 
@@ -57,18 +73,15 @@ Multi-base numerical structure analysis.
 
 Temporal stability and drift detection.
 
-**Core signals**
+**Signals**
 - Global μ / σ statistics  
 - Short vs long window distributions  
 - Symmetric KL-divergence  
 - Regime change score  
 
-Detects abrupt transitions, reasoning drift, and distribution shifts.
-
 **Use cases**
 - LLM output drift  
-- Financial time series  
-- Sensor streams  
+- Time series analysis  
 - Long-chain reasoning stability  
 
 ---
@@ -77,7 +90,7 @@ Detects abrupt transitions, reasoning drift, and distribution shifts.
 
 Lagged causal structure extraction over multivariate signals.
 
-**Core signals**
+**Signals**
 - Correlation across all lags  
 - Strongest lag per signal pair  
 - Edge emission if |corr| ≥ threshold  
@@ -85,7 +98,6 @@ Lagged causal structure extraction over multivariate signals.
 **Use cases**
 - Multi-signal inference  
 - Hidden causal relationships  
-- Chain-of-thought structure analysis  
 - Cross-channel dependency mapping  
 
 ---
@@ -103,7 +115,6 @@ PBII applied to token sequences.
 **Use cases**
 - Hallucination detection  
 - Token-level instability segmentation  
-- Chain-of-thought fracture detection  
 
 ---
 
@@ -112,18 +123,17 @@ PBII applied to token sequences.
 
 External coherence engine integrating:
 
-- fact consistency  
+- factual consistency  
 - numeric consistency  
 - optional structural Ω  
 
 **Output**
-- Fused external score Ω_ext  
-- Confusion-matrix benchmark metrics  
+- External Ω_ext score  
+- Confusion-matrix metrics  
 
-**Included modules**
+Modules:
 - `LCR/LCR_CORE_v0.1.py`  
 - `LCR/LCR_BENCHMARK_v0.1.py`  
-- `data/lcr_samples.jsonl`  
 
 ---
 
@@ -131,24 +141,24 @@ External coherence engine integrating:
 
 All lenses combine into a single structural score.
 
-| Lens  | Meaning                     | Contribution              |
-|------:|-----------------------------|---------------------------|
-| BASE  | Numeric instability         | PBII                      |
-| TIME  | Temporal drift              | log(1 + regime_score)     |
-| CAUSA | Cross-channel structure     | mean edge strength        |
-| TOKEN | Token instability           | mean |z|                  |
-| LCR   | External coherence          | Ω_ext                     |
+| Lens  | Contribution              |
+|------:|---------------------------|
+| BASE  | PBII                      |
+| TIME  | log(1 + regime_score)     |
+| CAUSA | mean edge strength        |
+| TOKEN | mean |z|                  |
+| LCR   | Ω_ext                     |
 
 **Output**
-- Unified Ω-total score  
+- Unified Ω-total  
 - Full component breakdown  
-- JSON-safe metadata for reproducibility  
+- JSON-safe metadata  
 
 ---
 
 ## 2. Repository Structure
 
-lon-mirror/ ├── omnia/ │   ├── init.py │   ├── omniabase.py │   ├── omniatempo.py │   ├── omniacausa.py │   ├── omniatoken.py │   ├── omnia_totale.py │   └── engine/ │       ├── engine.py │       └── kernel.py │ ├── adapters/ │   └── llm_output_adapter.py │ ├── LCR/ │   ├── LCR_CORE_v0.1.py │   └── LCR_BENCHMARK_v0.1.py │ ├── data/ │   ├── lcr_samples.jsonl │   └── gsm8k_model_outputs.jsonl   (optional) │ ├── examples/ │   └── omnia_gate_demo.py │ ├── colab/ │   ├── OMNIA_REAL_RUN.ipynb │   └── OMNIA_DEMO_INSPECT.ipynb │ ├── quick_omnia_test.py ├── gsm8k_benchmark_demo.py ├── INTERFACE.md ├── README.md └── requirements.txt
+lon-mirror/ ├── omnia/ ├── adapters/ ├── LCR/ ├── data/ ├── examples/ ├── colab/ │   ├── OMNIA_REAL_RUN.ipynb │   └── OMNIA_DEMO_INSPECT.ipynb ├── quick_omnia_test.py ├── gsm8k_benchmark_demo.py ├── INTERFACE.md ├── README.md └── requirements.txt
 
 All modules are **standalone**, **deterministic**, and **import-safe**.
 
@@ -159,68 +169,29 @@ All modules are **standalone**, **deterministic**, and **import-safe**.
 **Requirements**
 - Python ≥ 3.9
 
-Install dependencies:
 ```bash
 pip install numpy matplotlib
-
-Clone repository:
-
 git clone https://github.com/Tuttotorna/lon-mirror
 cd lon-mirror
 
 
 ---
 
-4. Quick Smoke Test
-
-Run:
+4. Smoke Test
 
 python quick_omnia_test.py
 
 Validates:
 
-Omniabase (σ, entropy, PBII)
+BASE, TIME, CAUSA, TOKEN lenses
 
-Omniatempo (regime score)
+Ω fusion integrity
 
-Omniacausa (lagged edges)
-
-Token lens (PBII-z)
-
-Ω-fusion correctness
-
-
-If this runs without errors, OMNIA is correctly installed.
 
 
 ---
 
-5. Basic Usage
-
-5.1 Omniabase
-
-from omnia import omniabase_signature, pbii_index
-
-sig = omniabase_signature(173)
-pbii = pbii_index(173)
-
-5.2 Omniatempo
-
-from omnia import omniatempo_analyze
-
-res = omniatempo_analyze(series)
-
-5.3 Omniacausa
-
-from omnia import omniacausa_analyze
-
-res = omniacausa_analyze({
-    "s1": s1,
-    "s2": s2,
-    "s3": s3
-})
-
-5.4 Ω-TOTAL
+5. Usage (Core)
 
 from omnia import omnia_totale_score
 
@@ -238,134 +209,62 @@ print(res.components)
 
 6. LLM Integration (Raw)
 
-OMNIA can be used as a structural sensor on LLM outputs.
-
 from adapters.llm_output_adapter import analyze_llm_output
 
-report = analyze_llm_output(
-    text=llm_output,
-    tokens=token_ids,
-)
-
+report = analyze_llm_output(text, tokens)
 print(report.omega_score, report.flags)
 
-No framework dependency.
-No policy logic.
-Decision layers remain external.
+OMNIA is:
 
+post-inference
 
----
+semantics-free
 
-7. Colab Notebooks (Official)
-
-7.1 OMNIA_REAL_RUN.ipynb
-
-Deterministic · Reproducible · Canonical
-
-Path:
-
-colab/OMNIA_REAL_RUN.ipynb
-
-Purpose:
-
-clean environment execution
-
-reproducible runs
-
-benchmark-safe entry point
+decision-agnostic
 
 
 
 ---
 
-7.2 OMNIA_DEMO_INSPECT.ipynb
+7. Benchmarks
 
-Exploratory · Non-deterministic
-
-Path:
-
-colab/OMNIA_DEMO_INSPECT.ipynb
-
-Purpose:
-
-lightweight inspection
-
-debugging and visualization
-
-contrast with REAL_RUN
-
-
-This notebook is not used for benchmarks or frozen runs.
-
-
----
-
-8. Benchmarks
-
-8.1 PBII + GSM8K Demo
-
-Run:
+PBII + GSM8K (Demo)
 
 python gsm8k_benchmark_demo.py
 
-Outputs:
+Synthetic results:
 
-PBII distributions (primes vs composites)
-
-Synthetic AUC ≈ 0.98
+AUC ≈ 0.98
 
 ~71% hallucination reduction on long chains
 
-Token instability segmentation
 
-
-Results are synthetic placeholders pending full-scale evaluation.
-
-
----
-
-8.2 LCR Benchmark
-
-Run:
+LCR Benchmark
 
 python LCR/LCR_BENCHMARK_v0.1.py
 
-Outputs:
-
-TP / FP / TN / FN
-
-detection rate
-
-precision
-
-false positive rate
-
-fused Ω_ext mean
-
-
-Designed for external AI-lab validation.
+Designed for external audit.
 
 
 ---
 
-9. Limitations
+8. Limitations
 
 Benchmarks are synthetic
 
-PBII sensitive to base selection
+PBII sensitive to base choice
 
-CAUSA currently uses Pearson correlation
-(MI / TE / Granger planned)
+CAUSA uses Pearson correlation
 
-Token lens requires numeric proxy
+TOKEN requires numeric proxy
 
-LCR depends on external backend quality
+LCR depends on external backends
 
 
 
 ---
 
-10. Author / Lineage
+9. Author / Lineage
 
 Massimiliano Brighindi — MB-X.01
 
@@ -381,22 +280,20 @@ TOKEN instability lens
 
 LCR fusion
 
-Unified Ω engine
-
 
 This repository is the authoritative public mirror of the MB-X research line.
 
 
 ---
 
-11. License
+10. License
 
 MIT License.
 
 
 ---
 
-12. Citation
+11. Citation
 
 Brighindi, M. (2025).
 OMNIA Structural Lens Engine (v2.0)
