@@ -356,7 +356,8 @@ Not a truth oracle
 
 OMNIA is a measurement instrument.
 
-
+Tablet / no local shell:
+Run via Google Colab using OMNIA_DEMO_INSPECT.ipynb
 ---
 
 10. License
