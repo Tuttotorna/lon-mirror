@@ -138,23 +138,104 @@ Produces **Ω_ext** for audit and benchmarking.
 
 ### APERSPECTIVE — Aperspective Invariance
 
-**Aperspective Invariance** measures structural invariants that persist under
-independent transformations **without introducing any privileged point of view**.
+Measures structural invariants that persist under independent transformations
+**without introducing any privileged point of view**.
 
-This lens operates without:
+Operates without:
 - observer assumptions
 - semantics
 - causality
 - narrative framing
 
-It computes:
-- **Ω-score**: fraction of structure surviving across transformations
-- **Residue**: intersection of invariants remaining after representation removal
+Computes:
+- **Ω_ap**: fraction of structure surviving transformations
+- **Residue**: intersection of invariants after representation removal
 
-This isolates structure that is **real but non-vivable for human cognition**.
+Isolates structure that is **real but non-vivable for human cognition**.
 
 Implementation:
 - `omnia/lenses/aperspective_invariance.py`
+
+---
+
+### SATURATION — Saturation Invariance
+
+Measures **when further transformations no longer yield new structure**.
+
+Captures the **limit of extractability** rather than content.
+
+Outputs:
+- Ω curve vs cost
+- SEI curve
+- saturation point (c\*)
+
+Implementation:
+- `omnia/lenses/saturation_invariance.py`
+
+---
+
+### IRREVERSIBILITY — Irreversibility Invariance
+
+Measures **structural hysteresis** in cycles:
+
+A → B → A′
+
+Detects **irrecoverable loss** even when surface similarity appears intact.
+
+Outputs:
+- Ω(A,B)
+- Ω(A,A′)
+- IRI certificate
+
+Implementation:
+- `omnia/lenses/irreversibility_invariance.py`
+
+---
+
+### REDUNDANCY — Redundancy Invariance
+
+Measures **how much destructive pressure is required before collapse**.
+
+Captures **deep structural tessitura**, not efficiency.
+
+Outputs:
+- collapse cost
+- collapse index
+- redundancy certificate
+
+Implementation:
+- `omnia/lenses/redundancy_invariance.py`
+
+---
+
+### DISTRIBUTION — Distribution Invariance
+
+Measures **non-local structural stability**.
+
+Ignores ordering and locality; evaluates only **global distribution shape**.
+
+Captures structures that:
+- are nowhere locally
+- exist only statistically
+
+Implementation:
+- `omnia/lenses/distribution_invariance.py`
+
+---
+
+### NON-DECISION — Non-Decision Structure
+
+Measures structures that remain stable **without converging to a choice**.
+
+Captures coherence **without optimization or selection**.
+
+Outputs:
+- path stability
+- dispersion across paths
+- non-decision certificate
+
+Implementation:
+- `omnia/lenses/nondecision_structure.py`
 
 ---
 
@@ -185,14 +266,10 @@ Definition:
 
 SEI = ΔΩ / ΔC
 
-Where:
-- Ω = structural score
-- C = monotonic cost (tokens, steps, depth, time)
-
 Interpretation:
 - SEI > 0 → structure still extractable
 - SEI ≈ 0 → saturation
-- SEI < 0 → structural degradation
+- SEI < 0 → degradation
 
 SEI is a **trend**, not a threshold.
 
@@ -205,16 +282,9 @@ Implementation:
 
 IRI measures **loss of recoverable structure**.
 
-Cycle:
-
-A → B → A′
-
 Definition:
 
 IRI = max(0, Ω(A) − Ω(A′))
-
-If apparent output quality is similar but Ω drops after return,
-**irreversible structural damage** has occurred.
 
 IRI is **not** an error metric.
 
@@ -225,39 +295,35 @@ Implementation:
 
 ## 6. OMNIA-LIMIT — Epistemic Boundary
 
-OMNIA-LIMIT declares a **STOP condition**, not a decision.
+Declares a **STOP condition**, not a decision.
 
 Triggered when:
-- SEI → 0 (no marginal structural gain)
-- IRI > 0 (irreversibility detected)
-- Ω̂ stable (no invariant left to extract)
+- SEI → 0
+- IRI > 0
+- Ω̂ stable
 
 Meaning:
 
 > **No further structure is extractable under current transformations.**
 
-OMNIA-LIMIT does **not** retry, escalate, or optimize.
+OMNIA-LIMIT does **not** retry or optimize.
 
 ---
 
 ## 7. Structural Time (τ)
 
-OMNIA can optionally expose a **structural time coordinate (τ)**.
+τ is a **structural time coordinate**.
 
-τ is **not a calendar** and **not a duration**.
-It is derived **only** from OMNIA measurements.
+- not wall-clock
+- not duration
+- advances only when structure changes
 
-τ advances **only when structural transformation occurs**.
-If structure does not change, τ does not advance.
+Used for:
+- non-synchronized comparisons
+- drift tracking
+- non-human coordination
 
-This enables:
-- comparison of non-synchronized runs
-- tracking of structural drift and irreversibility
-- coordination across non-human systems
-
-τ is a **coordination layer**, not part of the OMNIA core.
-
-Formal definition:
+Definition:
 - `docs/OMNIA_TAU.md`
 
 ---
@@ -266,32 +332,23 @@ Formal definition:
 
 ### Canonical (Reproducible)
 
-`colab/OMNIA_REAL_RUN.ipynb`
-
-- deterministic
-- seed-locked
-- audit reference
+`colab/OMNIA_REAL_RUN.ipynb`  
+- deterministic  
+- seed-locked  
 
 ### Exploratory
 
-`colab/OMNIA_DEMO_INSPECT.ipynb`
-
-- non-deterministic
-- inspection only
-- no claims
-
-Tablet / no local shell:
-run via **Google Colab**.
+`colab/OMNIA_DEMO_INSPECT.ipynb`  
+- non-deterministic  
+- inspection only  
 
 ---
 
 ## 9. Repository Structure
 
-omnia/ omniabase.py omniatempo.py omniacausa.py omniatoken.py omnia_totale.py sei.py iri.py omega_set.py lenses/ aperspective_invariance.py
+omnia/ omniabase.py omniatempo.py omniacausa.py omniatoken.py omega_set.py sei.py iri.py lenses/ aperspective_invariance.py saturation_invariance.py irreversibility_invariance.py redundancy_invariance.py distribution_invariance.py nondecision_structure.py
 
 LCR/ LCR_CORE_v0.1.py LCR_BENCHMARK_v0.1.py
-
-colab/ OMNIA_REAL_RUN.ipynb OMNIA_DEMO_INSPECT.ipynb
 
 All modules are:
 - deterministic
