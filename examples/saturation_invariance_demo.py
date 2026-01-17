@@ -1,68 +1,13 @@
 from __future__ import annotations
 
-import re
 import random
-import zlib
-import hashlib
-from typing import Callable, Dict, List, Sequence, Tuple
+import re
+from typing import Callable, Sequence, Tuple
 
+from omnia.features.meaning_blind import meaning_blind_features
 from omnia.lenses.saturation_invariance import SaturationInvariance
 
 Transform = Callable[[str], str]
-
-
-# -----------------------------
-# Meaning-blind structural features
-# -----------------------------
-
-def _sha(x: str) -> str:
-    return hashlib.sha256(x.encode("utf-8", errors="ignore")).hexdigest()
-
-
-def _ngrams(s: str, n: int = 4) -> List[str]:
-    if len(s) < n:
-        return [s]
-    return [s[i : i + n] for i in range(len(s) - n + 1)]
-
-
-def feature_fn_meaning_blind(s: str) -> Dict[str, float]:
-    """
-    Meaning-blind structural feature map.
-    No embeddings, no semantics, no world model.
-
-    Features:
-    - length bucket
-    - digit ratio bucket
-    - compression ratio bucket
-    - hashed 4-grams
-    - hashed 64-char chunks
-    """
-    s2 = s.replace("\r\n", "\n")
-    s2 = re.sub(r"[ \t]+", " ", s2).strip()
-
-    length = len(s2)
-    digits = sum(ch.isdigit() for ch in s2)
-    digit_ratio = 0.0 if length == 0 else digits / max(1, length)
-
-    comp = zlib.compress(s2.encode("utf-8", errors="ignore"), level=9)
-    comp_ratio = 0.0 if length == 0 else len(comp) / max(1, length)
-
-    # buckets
-    feats: Dict[str, float] = {}
-    feats[f"len:{min(10, length // 50)}"] = 1.0
-    feats[f"dig:{int(digit_ratio * 10)}"] = 1.0
-    feats[f"cmp:{int(comp_ratio * 10)}"] = 1.0
-
-    # n-grams
-    for g in _ngrams(s2, 4):
-        feats["ng:" + _sha(g)[:12]] = 1.0
-
-    # chunks
-    chunk = 64
-    for i in range(0, len(s2), chunk):
-        feats["ck:" + _sha(s2[i : i + chunk])[:12]] = 1.0
-
-    return feats
 
 
 # -----------------------------
@@ -90,6 +35,7 @@ def t_shuffle_words(seed: int = 3) -> Transform:
         for p in parts:
             out.append(next(it) if p.isalnum() else p)
         return "".join(out)
+
     return _t
 
 
@@ -153,7 +99,7 @@ def main() -> None:
     ]
 
     lens = SaturationInvariance(
-        feature_fn=feature_fn_meaning_blind,
+        feature_fn=meaning_blind_features,
         schedule=schedule,
         sei_window=3,
         sei_eps=1e-3,
