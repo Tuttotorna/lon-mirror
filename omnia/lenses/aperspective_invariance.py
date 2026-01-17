@@ -1,68 +1,27 @@
 from __future__ import annotations
 
-import hashlib
 import random
 import re
-import zlib
 from dataclasses import dataclass
-from typing import Callable, Dict, Iterable, List, Tuple
+from typing import Callable, Dict, List, Tuple
+
+from omnia.features.meaning_blind import meaning_blind_features
 
 Transform = Callable[[str], str]
 
 
-def _sha(x: str) -> str:
-    return hashlib.sha256(x.encode("utf-8", errors="ignore")).hexdigest()
-
-
-def _ngrams(s: str, n: int = 4) -> List[str]:
-    if len(s) < n:
-        return [s]
-    return [s[i : i + n] for i in range(len(s) - n + 1)]
-
-
 def _feature_set(s: str) -> set:
     """
-    Feature-set intentionally "meaning-blind":
-    - character n-grams
-    - length bucket
-    - digit ratio bucket
-    - compression ratio bucket
-    - stable hashes of chunks
+    Keys-only feature-set for aperspective invariance.
 
-    This is not semantics. It's structural signatures.
+    Source features are meaning-blind (no semantics, no observer, no narrative),
+    extracted by `meaning_blind_features`. We reduce to keys to keep the
+    aperspective definition as pure set-intersection.
     """
-    s2 = s
-    # Normalize only to reduce trivial variance; still not semantics.
-    s2 = s2.replace("\r\n", "\n")
-    s2 = re.sub(r"[ \t]+", " ", s2).strip()
-
-    length = len(s2)
-    digits = sum(ch.isdigit() for ch in s2)
-    digit_ratio = 0.0 if length == 0 else digits / length
-
-    comp = zlib.compress(s2.encode("utf-8", errors="ignore"), level=9)
-    comp_ratio = 0.0 if length == 0 else len(comp) / max(1, length)
-
-    # Bucketing avoids “overfitting” to one exact value.
-    length_bucket = f"len:{min(10, length // 50)}"  # 0..10
-    digit_bucket = f"dig:{int(digit_ratio * 10)}"   # 0..10
-    comp_bucket = f"cmp:{int(comp_ratio * 10)}"     # 0..10
-
-    feats = {length_bucket, digit_bucket, comp_bucket}
-
-    # N-grams (structure of surface form)
-    for g in _ngrams(s2, 4):
-        feats.add("ng:" + _sha(g)[:12])
-
-    # Chunk-hashes (coarse structure)
-    chunk = 64
-    for i in range(0, len(s2), chunk):
-        feats.add("ck:" + _sha(s2[i : i + chunk])[:12])
-
-    return feats
+    return set(meaning_blind_features(s).keys())
 
 
-@dataclass
+@dataclass(frozen=True)
 class AperspectiveInvarianceResult:
     omega_score: float
     residue: List[str]
@@ -71,10 +30,23 @@ class AperspectiveInvarianceResult:
 
 class AperspectiveInvariance:
     """
-    Invarianza Aperspettica (prototype):
-    - no observer privileged
-    - no semantics
-    - invariance = intersection of structural features across independent transforms
+    Aperspective Invariance Lens (AIv-1.0)
+
+    Measures invariants that persist under independent transformations without
+    introducing any privileged point of view.
+
+    - No semantics
+    - No observer assumptions
+    - No causality
+    - No narrative framing
+
+    Definition (keys-only):
+      S0 = F(x)
+      Si = F(t_i(x))
+      R  = ⋂ Si
+      Ω_ap = |R| / |S0|
+
+    where F(.) is meaning-blind structural features (keys).
     """
 
     def __init__(self, transforms: List[Tuple[str, Transform]]):
@@ -84,30 +56,25 @@ class AperspectiveInvariance:
 
     def measure(self, x: str) -> AperspectiveInvarianceResult:
         base_feats = _feature_set(x)
-
-        residues = []
-        per_scores: Dict[str, float] = {}
-
-        # compute intersection across all transforms (including identity)
         inter = set(base_feats)
+
+        per_scores: Dict[str, float] = {}
 
         for name, t in self.transforms:
             y = t(x)
             f = _feature_set(y)
+
             inter &= f
 
-            # per-transform overlap (how much survives under that transform)
-            overlap = 0.0 if not base_feats else len(base_feats & f) / max(1, len(base_feats))
-            per_scores[name] = overlap
-            residues.append((name, y))
+            denom = max(1, len(base_feats))
+            per_scores[name] = len(base_feats & f) / denom
 
-        omega = 0.0 if not base_feats else len(inter) / max(1, len(base_feats))
-        # expose residue as stable tokens (still meaning-blind)
+        omega = len(inter) / max(1, len(base_feats))
         residue_sorted = sorted(inter)
 
         return AperspectiveInvarianceResult(
             omega_score=omega,
-            residue=residue_sorted[:200],  # cap for display
+            residue=residue_sorted[:200],
             per_transform_scores=per_scores,
         )
 
@@ -119,10 +86,12 @@ class AperspectiveInvariance:
 def t_identity(s: str) -> str:
     return s
 
+
 def t_whitespace_collapse(s: str) -> str:
     s = s.replace("\r\n", "\n")
     s = re.sub(r"[ \t]+", " ", s)
     return s.strip()
+
 
 def t_shuffle_words(seed: int = 1) -> Transform:
     def _t(s: str) -> str:
@@ -135,18 +104,22 @@ def t_shuffle_words(seed: int = 1) -> Transform:
         for p in parts:
             out.append(next(it) if p.isalnum() else p)
         return "".join(out)
+
     return _t
+
 
 def t_reverse(s: str) -> str:
     return s[::-1]
 
+
 def t_drop_vowels(s: str) -> str:
     return re.sub(r"[aeiouAEIOUàèéìòùÀÈÉÌÒÙ]", "", s)
 
+
 def t_base_repr(seed: int = 7, base: int = 7) -> Transform:
     """
-    Turns digits into a different base string representation (structure shift).
-    Not semantics: it's a representation transform.
+    Replace decimal integers with base-N representation (+ tiny seeded perturbation).
+    Representation stress-test. No semantics.
     """
     if base < 2 or base > 36:
         raise ValueError("base must be 2..36")
@@ -167,14 +140,15 @@ def t_base_repr(seed: int = 7, base: int = 7) -> Transform:
 
     def _t(s: str) -> str:
         rng = random.Random(seed)
-        # replace each decimal number with base-N representation
+
         def repl(m: re.Match) -> str:
             n = int(m.group(0))
-            # small random perturbation to avoid trivial invariance
             if rng.random() < 0.1:
                 n += rng.choice([-1, 1])
             return to_base(n)
+
         return re.sub(r"\b\d+\b", repl, s)
+
     return _t
 
 
@@ -202,4 +176,4 @@ if __name__ == "__main__":
     print("Per-transform overlap:")
     for k, v in sorted(r.per_transform_scores.items()):
         print(" ", k, "->", round(v, 4))
-    print("Residue sample (hashed structural tokens):", r.residue[:20])
+    print("Residue sample (structural tokens):", r.residue[:20])
