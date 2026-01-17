@@ -50,4 +50,4 @@ Properties:
 OMNIA measures.
 τ coordinates measurement evolution.
 
-No semantics. No decisions. No optimization
+No semantics. No decisions. No optimization.
