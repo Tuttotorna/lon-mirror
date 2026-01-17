@@ -113,4 +113,31 @@ class IrreversibilityInvariance:
 # -------------------------
 
 def forward_drop_vowels(s: str) -> str:
-    import
+    import re
+    return re.sub(r"[aeiouAEIOUàèéìòùÀÈÉÌÒÙ]", "", s)
+
+
+def backward_identity(s: str) -> str:
+    # Not a true inverse: demonstrates hysteresis (information loss stays lost)
+    return s
+
+
+if __name__ == "__main__":
+    lens = IrreversibilityInvariance(
+        forward=forward_drop_vowels,
+        backward=backward_identity,
+        eps=1e-6,
+    )
+
+    A = """
+    OMNIA measures structure only. Removing vowels is lossy.
+    If we "return" with identity, A' cannot recover A structurally.
+    2026 2025 2024
+    """
+
+    r = lens.measure(A)
+    print("Irreversibility Invariance (IIv-1.0)")
+    print("Ω(A,B):", round(r.omega_AB, 4))
+    print("Ω(A,A'):", round(r.omega_AAprime, 4))
+    print("IRI:", round(r.iri, 6))
+    print("is_irreversible:", r.is_irreversible)
