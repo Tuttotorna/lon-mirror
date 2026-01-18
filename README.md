@@ -1,6 +1,6 @@
 OMNIA — Unified Structural Measurement Engine
 
-Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG
+Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI
 MB-X.01
 
 Author: Massimiliano Brighindi
@@ -12,7 +12,7 @@ Overview
 
 OMNIA is a post-hoc structural measurement engine.
 
-It measures structural coherence, instability, compatibility, and limits of representations under independent transformations.
+It measures structural coherence, instability, compatibility, limits, and observer-induced perturbation of representations under independent transformations.
 
 OMNIA:
 
@@ -28,7 +28,8 @@ does not explain
 
 
 OMNIA measures what remains invariant when representation changes,
-and where continuation becomes structurally impossible.
+where continuation becomes structurally impossible,
+and how much structure is lost when an observer is introduced.
 
 
 ---
@@ -51,6 +52,8 @@ irreversibility
 
 compatibility
 
+observer perturbation
+
 
 The result is a measured boundary, not a judgment.
 
@@ -71,6 +74,7 @@ OMNIA
 → OMNIA-LIMIT (STOP)
 → SCI (Structural Compatibility)
 → CG (Runtime STOP / CONTINUE)
+→ OPI (Observer Perturbation Index)
 
 Each step is measured, never inferred.
 
@@ -213,9 +217,7 @@ Residue: intersection of invariants after representation removal
 Isolates structure that is real but non-experiential for human cognition.
 
 Implementation:
-
 omnia/lenses/aperspective_invariance.py
-
 
 
 ---
@@ -236,9 +238,7 @@ saturation point (c*)
 
 
 Implementation:
-
 omnia/lenses/saturation_invariance.py
-
 
 
 ---
@@ -261,9 +261,7 @@ IRI certificate
 
 
 Implementation:
-
 omnia/lenses/irreversibility_invariance.py
-
 
 
 ---
@@ -282,9 +280,7 @@ redundancy certificate
 
 
 Implementation:
-
 omnia/lenses/redundancy_invariance.py
-
 
 
 ---
@@ -303,9 +299,7 @@ exist only statistically
 
 
 Implementation:
-
 omnia/lenses/distribution_invariance.py
-
 
 
 ---
@@ -326,9 +320,45 @@ non-decision certificate
 
 
 Implementation:
-
 omnia/lenses/nondecision_structure.py
 
+
+---
+
+OBSERVER — Observer Perturbation Index (OPI)
+
+Measures the structural cost of introducing an observer.
+
+An observer is defined strictly as a non-invariance-preserving transformation that introduces asymmetry, preference, or irreversibility.
+
+OPI is defined as:
+
+> OPI = Ω_ap − Ω_obs
+
+
+
+Where:
+
+Ω_ap is aperspective invariance (no observer)
+
+Ω_obs is invariance after observer-induced transformation
+
+
+Interpretation:
+
+OPI ≈ 0 → neutral observation
+
+OPI > 0 → structural damage due to observation
+
+
+OPI does not measure consciousness or intent.
+It measures the cost of interpretation.
+
+Implementation:
+omnia/lenses/observer_perturbation.py
+
+Observer model definition:
+omnia/meta/observer_model.py
 
 
 ---
@@ -353,9 +383,7 @@ invariance = 1 / (1 + MAD)
 Ω̂ estimates the structural residue that survives representation change.
 
 Implementation:
-
 omnia/omega_set.py
-
 
 
 ---
@@ -380,9 +408,7 @@ SEI < 0 → degradation
 SEI is a trend, not a threshold.
 
 Implementation:
-
 omnia/sei.py
-
 
 
 ---
@@ -398,9 +424,7 @@ IRI = max(0, Ω(A) − Ω(A′))
 IRI is not an error metric.
 
 Implementation:
-
 omnia/iri.py
-
 
 
 ---
@@ -450,16 +474,14 @@ non-human coordination
 
 
 Definition:
-
 docs/OMNIA_TAU.md
-
 
 
 ---
 
 8. Structural Compatibility — SCI
 
-OMNIA includes a meta-layer that measures the compatibility between structural measurements.
+OMNIA includes a meta-layer that measures compatibility between structural measurements.
 
 SCI does not operate on data.
 It operates on outputs of OMNIA lenses.
@@ -480,9 +502,7 @@ a non-narrative admissibility certificate
 
 
 Implementation:
-
 omnia/meta/structural_compatibility.py
-
 
 
 ---
@@ -503,9 +523,7 @@ IMPOSSIBLE — STOP (non-negotiable)
 Zones are not explanations and not recommendations.
 
 Definition:
-
 docs/STRUCTURAL_ZONES.md
-
 
 
 ---
@@ -529,9 +547,7 @@ introduces no retries
 It only enforces structural admissibility.
 
 Implementation:
-
 omnia/runtime/compatibility_guard.py
-
 
 
 ---
@@ -554,9 +570,11 @@ omnia/lenses/
   redundancy_invariance.py
   distribution_invariance.py
   nondecision_structure.py
+  observer_perturbation.py
 
 omnia/meta/
   structural_compatibility.py
+  observer_model.py
 
 omnia/runtime/
   compatibility_guard.py
