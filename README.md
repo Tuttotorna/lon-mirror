@@ -27,9 +27,14 @@ does not learn
 does not explain
 
 
-OMNIA measures what remains invariant when representation changes,
-where continuation becomes structurally impossible,
-and how much structure is lost when an observer is introduced.
+OMNIA measures:
+
+what remains invariant when representation changes
+
+where continuation becomes structurally impossible
+
+how much structure is lost when an observer is introduced
+
 
 
 ---
@@ -209,9 +214,9 @@ narrative framing
 
 Computes:
 
-Ω_ap: fraction of structure surviving transformations
+Ω_ap — fraction of structure surviving transformations
 
-Residue: intersection of invariants after representation removal
+Residue — intersection of invariants after representation removal
 
 
 Isolates structure that is real but non-experiential for human cognition.
@@ -331,17 +336,15 @@ Measures the structural cost of introducing an observer.
 
 An observer is defined strictly as a non-invariance-preserving transformation that introduces asymmetry, preference, or irreversibility.
 
-OPI is defined as:
+Definition:
 
-> OPI = Ω_ap − Ω_obs
-
-
+OPI = Ω_ap − Ω_obs
 
 Where:
 
-Ω_ap is aperspective invariance (no observer)
+Ω_ap = aperspective invariance (no observer)
 
-Ω_obs is invariance after observer-induced transformation
+Ω_obs = invariance after observer-induced transformation
 
 
 Interpretation:
@@ -392,8 +395,6 @@ omnia/omega_set.py
 
 SEI measures marginal structural yield.
 
-Definition:
-
 SEI = ΔΩ / ΔC
 
 Interpretation:
@@ -416,8 +417,6 @@ omnia/sei.py
 5. IRI — Irreversibility / Hysteresis Index
 
 IRI measures loss of recoverable structure.
-
-Definition:
 
 IRI = max(0, Ω(A) − Ω(A′))
 
@@ -481,10 +480,9 @@ docs/OMNIA_TAU.md
 
 8. Structural Compatibility — SCI
 
-OMNIA includes a meta-layer that measures compatibility between structural measurements.
+Measures compatibility between structural measurements.
 
-SCI does not operate on data.
-It operates on outputs of OMNIA lenses.
+SCI operates on OMNIA outputs, not on raw data.
 
 SCI answers one question only:
 
@@ -492,13 +490,13 @@ SCI answers one question only:
 
 
 
-SCI produces:
+Produces:
 
-a compatibility score (SCI ∈ [0,1])
+compatibility score (SCI ∈ [0,1])
 
-a structural zone classification
+structural zone classification
 
-a non-narrative admissibility certificate
+non-narrative admissibility certificate
 
 
 Implementation:
@@ -509,7 +507,7 @@ omnia/meta/structural_compatibility.py
 
 9. Structural Zones
 
-SCI outputs are mapped to Structural Zones:
+SCI outputs are mapped to zones:
 
 STABLE — continuation admissible
 
@@ -530,8 +528,7 @@ docs/STRUCTURAL_ZONES.md
 
 10. Compatibility Guard — Runtime STOP Layer
 
-OMNIA provides a runtime guard that converts SCI into a strict
-STOP / CONTINUE signal.
+Converts SCI into a strict STOP / CONTINUE signal.
 
 The guard:
 
@@ -601,17 +598,17 @@ import-safe
 
 12. What OMNIA Is Not
 
-Not a model
+not a model
 
-Not an evaluator
+not an evaluator
 
-Not a policy
+not a policy
 
-Not a decision system
+not a decision system
 
-Not a truth oracle
+not a truth oracle
 
-Not a narrative framework
+not a narrative framework
 
 
 OMNIA is a measurement instrument.
