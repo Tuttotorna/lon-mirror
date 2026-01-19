@@ -1,6 +1,6 @@
 OMNIA — Unified Structural Measurement Engine
 
-Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI
+Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV
 MB-X.01
 
 Author: Massimiliano Brighindi
@@ -12,7 +12,7 @@ Overview
 
 OMNIA is a post-hoc structural measurement engine.
 
-It measures structural coherence, instability, compatibility, limits, and observer-induced perturbation of representations under independent transformations.
+It measures structural coherence, instability, compatibility, limits, and perturbations of representations under independent, non-semantic transformations.
 
 OMNIA:
 
@@ -33,8 +33,10 @@ what remains invariant when representation changes
 
 where continuation becomes structurally impossible
 
-how much structure is lost when an observer is introduced
+how much structure is lost when perturbations are introduced
 
+
+The output is measurement, never narrative.
 
 
 ---
@@ -45,7 +47,7 @@ Core Principle
 
 
 
-OMNIA evaluates outputs by applying independent structural lenses and measuring:
+OMNIA evaluates representations by applying independent structural lenses and measuring:
 
 invariance
 
@@ -57,7 +59,7 @@ irreversibility
 
 compatibility
 
-observer perturbation
+perturbation
 
 
 The result is a measured boundary, not a judgment.
@@ -80,6 +82,7 @@ OMNIA
 → SCI (Structural Compatibility)
 → CG (Runtime STOP / CONTINUE)
 → OPI (Observer Perturbation Index)
+→ PV (Perturbation Vector)
 
 Each step is measured, never inferred.
 
@@ -88,9 +91,9 @@ Each step is measured, never inferred.
 
 1. Ω — Structural Coherence Score
 
-Ω is the aggregated structural score produced by OMNIA’s lenses.
+Ω is the aggregated structural score produced by OMNIA lenses.
 
-It reflects internal consistency, not correctness.
+It reflects internal structural consistency, not correctness or truth.
 
 Ω can be computed over:
 
@@ -214,9 +217,9 @@ narrative framing
 
 Computes:
 
-Ω_ap — fraction of structure surviving transformations
+Ω_ap: fraction of structure surviving transformations
 
-Residue — intersection of invariants after representation removal
+Residue: intersection of invariants after representation removal
 
 
 Isolates structure that is real but non-experiential for human cognition.
@@ -334,17 +337,19 @@ OBSERVER — Observer Perturbation Index (OPI)
 
 Measures the structural cost of introducing an observer.
 
-An observer is defined strictly as a non-invariance-preserving transformation that introduces asymmetry, preference, or irreversibility.
+An observer is defined strictly as a transformation that introduces:
+
+asymmetry
+
+preference
+
+irreversibility
+
 
 Definition:
 
-OPI = Ω_ap − Ω_obs
+> OPI = Ω_ap − Ω_obs
 
-Where:
-
-Ω_ap = aperspective invariance (no observer)
-
-Ω_obs = invariance after observer-induced transformation
 
 
 Interpretation:
@@ -359,8 +364,7 @@ It measures the cost of interpretation.
 
 Implementation:
 omnia/lenses/observer_perturbation.py
-
-Observer model definition:
+Observer model:
 omnia/meta/observer_model.py
 
 
@@ -395,7 +399,11 @@ omnia/omega_set.py
 
 SEI measures marginal structural yield.
 
-SEI = ΔΩ / ΔC
+Definition:
+
+> SEI = ΔΩ / ΔC
+
+
 
 Interpretation:
 
@@ -416,9 +424,13 @@ omnia/sei.py
 
 5. IRI — Irreversibility / Hysteresis Index
 
-IRI measures loss of recoverable structure.
+Measures loss of recoverable structure.
 
-IRI = max(0, Ω(A) − Ω(A′))
+Definition:
+
+> IRI = max(0, Ω(A) − Ω(A′))
+
+
 
 IRI is not an error metric.
 
@@ -480,17 +492,17 @@ docs/OMNIA_TAU.md
 
 8. Structural Compatibility — SCI
 
-Measures compatibility between structural measurements.
+Measures compatibility between OMNIA outputs.
 
-SCI operates on OMNIA outputs, not on raw data.
+SCI operates on measurements, not data.
 
-SCI answers one question only:
+Answers one question:
 
 > Can these measured structures coexist without contradiction or loss?
 
 
 
-Produces:
+Outputs:
 
 compatibility score (SCI ∈ [0,1])
 
@@ -507,7 +519,7 @@ omnia/meta/structural_compatibility.py
 
 9. Structural Zones
 
-SCI outputs are mapped to zones:
+SCI maps outputs to zones:
 
 STABLE — continuation admissible
 
@@ -528,7 +540,7 @@ docs/STRUCTURAL_ZONES.md
 
 10. Compatibility Guard — Runtime STOP Layer
 
-Converts SCI into a strict STOP / CONTINUE signal.
+Converts SCI into a strict runtime STOP / CONTINUE signal.
 
 The guard:
 
@@ -541,15 +553,35 @@ introduces no optimization
 introduces no retries
 
 
-It only enforces structural admissibility.
-
 Implementation:
 omnia/runtime/compatibility_guard.py
 
 
 ---
 
-11. Repository Structure
+11. Perturbation Vector (PV)
+
+OMNIA formalizes perturbations as a vector of measurable losses.
+
+> PV = { OPI, RPI, TPI, GPI, FPI }
+
+
+
+Where each component is:
+
+> PI = Ω_ap − Ω_k
+
+
+
+PV measures how structure is destroyed, not why.
+
+Implementation:
+omnia/meta/perturbation_vector.py
+
+
+---
+
+12. Repository Structure
 
 omnia/
   omniabase.py
@@ -572,6 +604,7 @@ omnia/lenses/
 omnia/meta/
   structural_compatibility.py
   observer_model.py
+  perturbation_vector.py
 
 omnia/runtime/
   compatibility_guard.py
@@ -579,10 +612,6 @@ omnia/runtime/
 docs/
   STRUCTURAL_ZONES.md
   OMNIA_TAU.md
-
-LCR/
-  LCR_CORE_v0.1.py
-  LCR_BENCHMARK_v0.1.py
 
 All modules are:
 
@@ -596,19 +625,19 @@ import-safe
 
 ---
 
-12. What OMNIA Is Not
+13. What OMNIA Is Not
 
-not a model
+Not a model
 
-not an evaluator
+Not an evaluator
 
-not a policy
+Not a policy
 
-not a decision system
+Not a decision system
 
-not a truth oracle
+Not a truth oracle
 
-not a narrative framework
+Not a narrative framework
 
 
 OMNIA is a measurement instrument.
@@ -616,14 +645,14 @@ OMNIA is a measurement instrument.
 
 ---
 
-13. License
+14. License
 
 MIT License.
 
 
 ---
 
-14. Citation
+15. Citation
 
 Brighindi, M.
 OMNIA — Unified Structural Measurement Engine (MB-X.01)
