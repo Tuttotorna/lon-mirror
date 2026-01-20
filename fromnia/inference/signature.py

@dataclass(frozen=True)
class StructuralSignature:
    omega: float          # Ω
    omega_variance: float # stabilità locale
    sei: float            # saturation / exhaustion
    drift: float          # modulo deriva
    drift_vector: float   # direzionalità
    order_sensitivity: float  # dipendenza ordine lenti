@@ -1,0 +1,10 @@
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class StructuralSignature:
+    omega: float          # Ω
+    omega_variance: float # stabilità locale
+    sei: float            # saturation / exhaustion
+    drift: float          # modulo deriva
+    drift_vector: float   # direzionalità
+    order_sensitivity: float  # dipendenza ordine lenti
