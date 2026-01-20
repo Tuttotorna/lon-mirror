@@ -1,659 +1,239 @@
-OMNIA — Unified Structural Measurement Engine
+# OMNIA — Unified Structural Measurement Engine
 
-Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV
+Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV · INFERENCE
 MB-X.01
 
-Author: Massimiliano Brighindi
-
+**Author:** Massimiliano Brighindi
 
 ---
 
-Overview
+## Overview
 
-OMNIA is a post-hoc structural measurement engine.
+**OMNIA** is a **post-hoc structural measurement engine**.
 
-It measures structural coherence, instability, compatibility, limits, and perturbations of representations under independent, non-semantic transformations.
+It measures **structural coherence, instability, compatibility, limits, perturbations, and inference regimes**
+of representations under **independent, non-semantic transformations**.
 
 OMNIA:
 
-does not interpret meaning
-
-does not decide
-
-does not optimize
-
-does not learn
-
-does not explain
-
+- does **not** interpret meaning
+- does **not** decide
+- does **not** optimize
+- does **not** learn
+- does **not** explain
 
 OMNIA measures:
 
-what remains invariant when representation changes
+- what remains invariant when representation changes
+- where continuation becomes structurally impossible
+- how structure degrades under perturbation
+- **which inferential regime is active before collapse**
 
-where continuation becomes structurally impossible
-
-how much structure is lost when perturbations are introduced
-
-
-The output is measurement, never narrative.
-
+The output is **measurement**, never narrative.
 
 ---
 
-Core Principle
+## Core Principle
 
-> Structural truth is what survives the removal of representation.
-
-
-
-OMNIA evaluates representations by applying independent structural lenses and measuring:
-
-invariance
-
-drift
-
-saturation
-
-irreversibility
-
-compatibility
-
-perturbation
-
-
-The result is a measured boundary, not a judgment.
-
+> **Structural truth is what survives the removal of representation.**
 
 ---
 
-The OMNIA Measurement Chain
+## The OMNIA Measurement Chain
 
-OMNIA
-→ Ω
-→ Ω under transformations
-→ Ω̂ (Omega-set)
-→ ΔΩ / ΔC
-→ SEI (Saturation)
-→ A → B → A′
-→ IRI (Irreversibility)
-→ SEI ≈ 0 and IRI > 0
-→ OMNIA-LIMIT (STOP)
-→ SCI (Structural Compatibility)
-→ CG (Runtime STOP / CONTINUE)
-→ OPI (Observer Perturbation Index)
+OMNIA  
+→ Ω  
+→ Ω under transformations  
+→ Ω̂ (Omega-set)  
+→ ΔΩ / ΔC  
+→ SEI (Saturation)  
+→ A → B → A′  
+→ IRI (Irreversibility)  
+→ **Inference State (S1–S5)**  
+→ OMNIA-LIMIT (STOP)  
+→ SCI (Structural Compatibility)  
+→ CG (Runtime STOP / CONTINUE)  
+→ OPI (Observer Perturbation Index)  
 → PV (Perturbation Vector)
 
-Each step is measured, never inferred.
-
+Each step is **measured**, never inferred.
 
 ---
 
-1. Ω — Structural Coherence Score
+## 1. Ω — Structural Coherence Score
 
 Ω is the aggregated structural score produced by OMNIA lenses.
 
-It reflects internal structural consistency, not correctness or truth.
-
-Ω can be computed over:
-
-numbers
-
-sequences
-
-time series
-
-token streams
-
-model outputs
-
+It reflects **internal structural consistency**, not correctness or semantic truth.
 
 Ω is model-agnostic and semantics-free.
 
-
 ---
 
-2. Structural Lenses
+## 2. Structural Lenses
 
-BASE — Omniabase
-
+### BASE — Omniabase  
 Multi-base numeric structure analysis.
 
-Measures:
-
-digit entropy across bases
-
-σ-symmetry
-
-PBII (Prime Base Instability Index)
-
-base-invariant signatures
-
-
-
----
-
-TIME — Omniatempo
-
+### TIME — Omniatempo  
 Temporal drift and regime instability.
 
-Measures:
-
-distribution shifts
-
-short vs long window divergence
-
-regime change score
-
-
-
----
-
-CAUSA — Omniacausa
-
+### CAUSA — Omniacausa  
 Lagged relational structure.
 
-Measures:
-
-cross-signal correlations across lags
-
-dominant dependency edges
-
-
-
----
-
-TOKEN
-
+### TOKEN  
 Structural instability in token sequences.
 
-Pipeline:
-
-token → integer proxy
-
-PBII per token
-
-z-score aggregation
-
-
-Used for hallucination and chain-fracture detection.
-
+### LCR — Logical Coherence Reduction  
+External coherence lens for audit and benchmarking.
 
 ---
 
-LCR — Logical Coherence Reduction
+## 3. APERSPECTIVE — Aperspective Invariance
 
-External coherence lens.
+Measures invariants that persist under transformations **without a privileged observer**.
 
-Combines:
-
-factual consistency
-
-numeric consistency
-
-optional Ω contribution
-
-
-Produces Ω_ext for audit and benchmarking.
-
+Isolates structure that is real but non-experiential.
 
 ---
 
-APERSPECTIVE — Aperspective Invariance
+## 4. Ω̂ — Omega-set (Residual Invariance)
 
-Measures structural invariants that persist under independent transformations
-without introducing any privileged point of view.
+Ω̂ is **deduced by subtraction**, not assumed.
 
-Operates without:
-
-observer assumptions
-
-semantics
-
-causality
-
-narrative framing
-
-
-Computes:
-
-Ω_ap: fraction of structure surviving transformations
-
-Residue: intersection of invariants after representation removal
-
-
-Isolates structure that is real but non-experiential for human cognition.
-
-Implementation:
-omnia/lenses/aperspective_invariance.py
-
+It estimates the structural residue surviving representation change.
 
 ---
 
-SATURATION — Saturation Invariance
+## 5. SEI — Saturation / Exhaustion Index
 
-Measures when further transformations no longer yield new structure.
-
-Captures the limit of extractability, not content.
-
-Outputs:
-
-Ω curve vs cost
-
-SEI curve
-
-saturation point (c*)
-
-
-Implementation:
-omnia/lenses/saturation_invariance.py
-
-
----
-
-IRREVERSIBILITY — Irreversibility Invariance
-
-Measures structural hysteresis in cycles:
-
-A → B → A′
-
-Detects irrecoverable loss even when surface similarity appears intact.
-
-Outputs:
-
-Ω(A,B)
-
-Ω(A,A′)
-
-IRI certificate
-
-
-Implementation:
-omnia/lenses/irreversibility_invariance.py
-
-
----
-
-REDUNDANCY — Redundancy Invariance
-
-Measures how much destructive pressure is required before collapse.
-
-Captures deep structural tessitura, not efficiency.
-
-Outputs:
-
-collapse cost
-
-redundancy certificate
-
-
-Implementation:
-omnia/lenses/redundancy_invariance.py
-
-
----
-
-DISTRIBUTION — Distribution Invariance
-
-Measures non-local structural stability.
-
-Ignores ordering and locality; evaluates only global distribution shape.
-
-Captures structures that:
-
-are nowhere locally
-
-exist only statistically
-
-
-Implementation:
-omnia/lenses/distribution_invariance.py
-
-
----
-
-NON-DECISION — Non-Decision Structure
-
-Measures structures that remain stable without converging to a choice.
-
-Captures coherence without optimization or selection.
-
-Outputs:
-
-path stability
-
-dispersion across paths
-
-non-decision certificate
-
-
-Implementation:
-omnia/lenses/nondecision_structure.py
-
-
----
-
-OBSERVER — Observer Perturbation Index (OPI)
-
-Measures the structural cost of introducing an observer.
-
-An observer is defined strictly as a transformation that introduces:
-
-asymmetry
-
-preference
-
-irreversibility
-
-
-Definition:
-
-> OPI = Ω_ap − Ω_obs
-
-
-
-Interpretation:
-
-OPI ≈ 0 → neutral observation
-
-OPI > 0 → structural damage due to observation
-
-
-OPI does not measure consciousness or intent.
-It measures the cost of interpretation.
-
-Implementation:
-omnia/lenses/observer_perturbation.py
-Observer model:
-omnia/meta/observer_model.py
-
-
----
-
-3. Ω̂ — Omega-set (Residual Invariance)
-
-Ω̂ formalizes the statement:
-
-> Ω is not assumed. Ω is deduced by subtraction.
-
-
-
-Given multiple Ω values under independent transformations:
-
-Ω̂ = robust center (median)
-
-dispersion = MAD
-
-invariance = 1 / (1 + MAD)
-
-
-Ω̂ estimates the structural residue that survives representation change.
-
-Implementation:
-omnia/omega_set.py
-
-
----
-
-4. SEI — Saturation / Exhaustion Index
-
-SEI measures marginal structural yield.
-
-Definition:
+Measures marginal structural yield:
 
 > SEI = ΔΩ / ΔC
 
-
-
-Interpretation:
-
-SEI > 0 → structure still extractable
-
-SEI ≈ 0 → saturation
-
-SEI < 0 → degradation
-
-
-SEI is a trend, not a threshold.
-
-Implementation:
-omnia/sei.py
-
+SEI ≈ 0 indicates saturation.
 
 ---
 
-5. IRI — Irreversibility / Hysteresis Index
+## 6. IRI — Irreversibility / Hysteresis Index
 
-Measures loss of recoverable structure.
+Measures irrecoverable structural loss in cycles:
 
-Definition:
-
-> IRI = max(0, Ω(A) − Ω(A′))
-
-
-
-IRI is not an error metric.
-
-Implementation:
-omnia/iri.py
-
+A → B → A′
 
 ---
 
-6. OMNIA-LIMIT — Epistemic Boundary
+## 7. Pre-Limit Inference States (NEW)
 
-Declares a STOP condition, not a decision.
+OMNIA includes a **deterministic pre-limit inference sensor**.
+
+This module classifies **how inference behaves structurally before OMNIA-LIMIT**.
+
+### States (S1–S5)
+
+- **S1 — RIGID_INVARIANCE**  
+  Deterministic structural residue
+
+- **S2 — ELASTIC_INVARIANCE**  
+  Deformable but coherent structure
+
+- **S3 — META_STABLE**  
+  Order-sensitive, illusion-prone regime
+
+- **S4 — COHERENT_DRIFT**  
+  Directional structural movement
+
+- **S5 — PRE_LIMIT_FRAGMENTATION**  
+  Imminent collapse
+
+Inference is treated as a **trajectory**, not a decision.
+
+Implementation:
+
+omnia/inference/
+
+---
+
+## 8. OMNIA-LIMIT — Epistemic Boundary
+
+Declares a **STOP** condition.
 
 Triggered when:
-
-SEI → 0
-
-IRI > 0
-
-Ω̂ stable
-
-
-Meaning:
-
-> No further structure is extractable under current transformations.
-
-
+- SEI → 0
+- IRI > 0
+- Ω̂ stable
 
 OMNIA-LIMIT does not retry or optimize.
 
+---
+
+## 9. Structural Time (τ)
+
+A non-human time coordinate advancing **only when structure changes**.
 
 ---
 
-7. Structural Time (τ)
+## 10. Structural Compatibility — SCI
 
-τ is a structural time coordinate.
-
-not wall-clock
-
-not duration
-
-advances only when structure changes
-
-
-Used for:
-
-non-synchronized comparisons
-
-drift tracking
-
-non-human coordination
-
-
-Definition:
-docs/OMNIA_TAU.md
-
+Measures whether measured structures can coexist **without contradiction**.
 
 ---
 
-8. Structural Compatibility — SCI
+## 11. Compatibility Guard — CG
 
-Measures compatibility between OMNIA outputs.
+Converts SCI into a strict runtime **STOP / CONTINUE** signal.
 
-SCI operates on measurements, not data.
-
-Answers one question:
-
-> Can these measured structures coexist without contradiction or loss?
-
-
-
-Outputs:
-
-compatibility score (SCI ∈ [0,1])
-
-structural zone classification
-
-non-narrative admissibility certificate
-
-
-Implementation:
-omnia/meta/structural_compatibility.py
-
+Introduces no policy.
 
 ---
 
-9. Structural Zones
+## 12. Observer Perturbation Index — OPI
 
-SCI maps outputs to zones:
+Measures the structural cost of introducing an observer.
 
-STABLE — continuation admissible
-
-TENSE — continuation admissible (edge)
-
-FRAGILE — STOP
-
-IMPOSSIBLE — STOP (non-negotiable)
-
-
-Zones are not explanations and not recommendations.
-
-Definition:
-docs/STRUCTURAL_ZONES.md
-
+> OPI = Ω_ap − Ω_obs
 
 ---
 
-10. Compatibility Guard — Runtime STOP Layer
+## 13. Perturbation Vector — PV
 
-Converts SCI into a strict runtime STOP / CONTINUE signal.
-
-The guard:
-
-introduces no policy
-
-introduces no semantics
-
-introduces no optimization
-
-introduces no retries
-
-
-Implementation:
-omnia/runtime/compatibility_guard.py
-
+Formalizes **how structure is destroyed**, not why.
 
 ---
 
-11. Perturbation Vector (PV)
+## 14. Repository Structure
 
-OMNIA formalizes perturbations as a vector of measurable losses.
-
-> PV = { OPI, RPI, TPI, GPI, FPI }
-
-
-
-Where each component is:
-
-> PI = Ω_ap − Ω_k
-
-
-
-PV measures how structure is destroyed, not why.
-
-Implementation:
-omnia/meta/perturbation_vector.py
-
-
----
-
-12. Repository Structure
-
-omnia/
-  omniabase.py
-  omniatempo.py
-  omniacausa.py
-  omniatoken.py
-  omega_set.py
-  sei.py
-  iri.py
-
-omnia/lenses/
-  aperspective_invariance.py
-  saturation_invariance.py
-  irreversibility_invariance.py
-  redundancy_invariance.py
-  distribution_invariance.py
-  nondecision_structure.py
-  observer_perturbation.py
-
-omnia/meta/
-  structural_compatibility.py
-  observer_model.py
-  perturbation_vector.py
-
-omnia/runtime/
-  compatibility_guard.py
-
-docs/
-  STRUCTURAL_ZONES.md
-  OMNIA_TAU.md
+omnia/ inference/ lenses/ meta/ runtime/ omega_set.py sei.py iri.py docs/
 
 All modules are:
 
-deterministic
-
-standalone
-
-import-safe
-
-
+- deterministic
+- standalone
+- import-safe
 
 ---
 
-13. What OMNIA Is Not
+## 15. What OMNIA Is Not
 
-Not a model
+- Not a model
+- Not an evaluator
+- Not a policy
+- Not a decision system
+- Not a truth oracle
+- Not a narrative framework
 
-Not an evaluator
-
-Not a policy
-
-Not a decision system
-
-Not a truth oracle
-
-Not a narrative framework
-
-
-OMNIA is a measurement instrument.
-
+**OMNIA is a measurement instrument.**
 
 ---
 
-14. License
+## 16. License
 
 MIT License.
 
-
 ---
 
-15. Citation
+## 17. Citation
 
-Brighindi, M.
-OMNIA — Unified Structural Measurement Engine (MB-X.01)
-GitHub: https://github.com/Tuttotorna/lon-mirror
+Brighindi, M.  
+**OMNIA — Unified Structural Measurement Engine (MB-X.01)**  
+https://github.com/Tuttotorna/lon-mirror
