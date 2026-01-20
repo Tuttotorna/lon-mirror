@@ -1,18 +1,25 @@
-from typing import List
+from __future__ import annotations
+
+from typing import List, Dict, Any
 from .state import InferenceState
 
-class InferenceTrajectory:
-    def __init__(self):
-        self.states: List[InferenceState] = []
 
-    def append(self, state: InferenceState):
+class InferenceTrajectory:
+    """
+    Tracks the sequence of pre-limit inference states.
+    This is a sensor, not a decision mechanism.
+    """
+
+    def __init__(self) -> None:
+        self.states: List[InferenceState] = []
+        self.telemetry: List[Dict[str, Any]] = []
+
+    def append(self, state: InferenceState, record: Dict[str, Any] | None = None) -> None:
         self.states.append(state)
+        if record is not None:
+            self.telemetry.append(record)
 
     def last(self) -> InferenceState | None:
-        return self.states[-1] if self.states else None
-
-    def irreversible(self) -> bool:
-        return InferenceState.COHERENT_DRIFT in self.states
-
-    def approaching_limit(self) -> bool:
-        return self.states.count(InferenceState.PRE_LIMIT_FRAGMENTATION) >= 1
+        if not self.states:
+            return None
+        return self.states[-1]
