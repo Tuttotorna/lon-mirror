@@ -1,6 +1,6 @@
 # OMNIA — Unified Structural Measurement Engine
 
-Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV · INFERENCE
+Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV · INFERENCE  
 MB-X.01
 
 **Author:** Massimiliano Brighindi
@@ -16,17 +16,17 @@ of representations under **independent, non-semantic transformations**.
 
 OMNIA:
 
-- does **not** interpret meaning
-- does **not** decide
-- does **not** optimize
-- does **not** learn
-- does **not** explain
+- does **not** interpret meaning  
+- does **not** decide  
+- does **not** optimize  
+- does **not** learn  
+- does **not** explain  
 
 OMNIA measures:
 
-- what remains invariant when representation changes
-- where continuation becomes structurally impossible
-- how structure degrades under perturbation
+- what remains invariant when representation changes  
+- where continuation becomes structurally impossible  
+- how structure degrades under perturbation  
 - **which inferential regime is active before collapse**
 
 The output is **measurement**, never narrative.
@@ -66,7 +66,7 @@ Each step is **measured**, never inferred.
 
 It reflects **internal structural consistency**, not correctness or semantic truth.
 
-Ω is model-agnostic and semantics-free.
+Ω is **model-agnostic** and **semantics-free**.
 
 ---
 
@@ -93,7 +93,7 @@ External coherence lens for audit and benchmarking.
 
 Measures invariants that persist under transformations **without a privileged observer**.
 
-Isolates structure that is real but non-experiential.
+Isolates structure that is **real but non-experiential** for human cognition.
 
 ---
 
@@ -109,7 +109,7 @@ It estimates the structural residue surviving representation change.
 
 Measures marginal structural yield:
 
-> SEI = ΔΩ / ΔC
+> **SEI = ΔΩ / ΔC**
 
 SEI ≈ 0 indicates saturation.
 
@@ -123,11 +123,13 @@ A → B → A′
 
 ---
 
-## 7. Pre-Limit Inference States (NEW)
+## 7. Pre-Limit Inference States (INFERENCE)
 
 OMNIA includes a **deterministic pre-limit inference sensor**.
 
 This module classifies **how inference behaves structurally before OMNIA-LIMIT**.
+
+Inference is treated as a **trajectory**, not a decision.
 
 ### States (S1–S5)
 
@@ -146,8 +148,6 @@ This module classifies **how inference behaves structurally before OMNIA-LIMIT**
 - **S5 — PRE_LIMIT_FRAGMENTATION**  
   Imminent collapse
 
-Inference is treated as a **trajectory**, not a decision.
-
 Implementation:
 
 omnia/inference/
@@ -159,11 +159,11 @@ omnia/inference/
 Declares a **STOP** condition.
 
 Triggered when:
-- SEI → 0
-- IRI > 0
-- Ω̂ stable
+- SEI → 0  
+- IRI > 0  
+- Ω̂ stable  
 
-OMNIA-LIMIT does not retry or optimize.
+OMNIA-LIMIT does **not** retry or optimize.
 
 ---
 
@@ -171,11 +171,15 @@ OMNIA-LIMIT does not retry or optimize.
 
 A non-human time coordinate advancing **only when structure changes**.
 
+τ is not wall-clock time and not duration.
+
 ---
 
 ## 10. Structural Compatibility — SCI
 
-Measures whether measured structures can coexist **without contradiction**.
+Measures whether measured structures can coexist **without contradiction or loss**.
+
+SCI operates on OMNIA outputs, not on raw data.
 
 ---
 
@@ -183,7 +187,12 @@ Measures whether measured structures can coexist **without contradiction**.
 
 Converts SCI into a strict runtime **STOP / CONTINUE** signal.
 
-Introduces no policy.
+CG introduces:
+- no policy  
+- no semantics  
+- no optimization  
+
+It only enforces structural admissibility.
 
 ---
 
@@ -191,7 +200,9 @@ Introduces no policy.
 
 Measures the structural cost of introducing an observer.
 
-> OPI = Ω_ap − Ω_obs
+> **OPI = Ω_ap − Ω_obs**
+
+OPI quantifies perturbation due to enforced perspective.
 
 ---
 
@@ -199,28 +210,32 @@ Measures the structural cost of introducing an observer.
 
 Formalizes **how structure is destroyed**, not why.
 
+PV captures direction and composition of structural loss.
+
 ---
 
 ## 14. Repository Structure
 
-omnia/ inference/ lenses/ meta/ runtime/ omega_set.py sei.py iri.py docs/
+omnia/ inference/ lenses/ meta/ runtime/ omega_set.py sei.py iri.py
+
+docs/
 
 All modules are:
 
-- deterministic
-- standalone
-- import-safe
+- deterministic  
+- standalone  
+- import-safe  
 
 ---
 
 ## 15. What OMNIA Is Not
 
-- Not a model
-- Not an evaluator
-- Not a policy
-- Not a decision system
-- Not a truth oracle
-- Not a narrative framework
+- Not a model  
+- Not an evaluator  
+- Not a policy  
+- Not a decision system  
+- Not a truth oracle  
+- Not a narrative framework  
 
 **OMNIA is a measurement instrument.**
 
