@@ -1,10 +1,10 @@
 # Measurement Projection Loss (SPL)
 
-**SPL (Structural Projection Loss)** measures how much structure is lost when a
-measurement regime forces a **privileged projection** (basis / observer constraint),
-compared to an **aperspective** baseline.
+**SPL (Structural Projection Loss)** measures how much structure is lost when a measurement
+regime forces a **privileged projection** (basis / observer constraint), compared to an
+**aperspective** baseline.
 
-This is not an interpretation. It is a measured delta between two regimes.
+This is not interpretation. It is a measured delta between two regimes.
 
 ---
 
@@ -22,17 +22,17 @@ Then:
 
 Interpretation:
 
-- SPL ≈ 0  → projection is structurally neutral
-- SPL > 0  → projection destroys measurable structure
+- SPL ≈ 0  → projection is structurally neutral  
+- SPL > 0  → projection destroys measurable structure  
 
-SPL does not measure consciousness or intent.
+SPL does not measure consciousness or intent.  
 It measures the structural cost of forced viewpoint.
 
 ---
 
-## Why this matters
+## Why this exists inside OMNIA
 
-Many "collapse-like" effects can be reframed as:
+Many “collapse-like” effects can be reframed as:
 
 > the measurement regime collapses the accessible structure into a single projection,
 > not the world collapsing into a single state.
@@ -44,4 +44,4 @@ SPL provides a computable way to quantify that loss.
 ## Implementation
 
 - Core operator: `omnia/meta/measurement_projection_loss.py`
-- Minimal example: `examples/measurement_projection_loss_demo.py`
+- Minimal demo: `examples/measurement_projection_loss_demo.py`
