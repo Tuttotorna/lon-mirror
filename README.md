@@ -27,6 +27,15 @@ does not learn
 does not explain
 
 
+OMNIA measures structure only.
+
+The output is measurement, never narrative.
+
+
+---
+
+What OMNIA Measures
+
 OMNIA measures:
 
 what remains invariant when representation changes
@@ -40,7 +49,7 @@ which inferential regime is active before collapse
 when different internal codifications are structurally undecidable
 
 
-The output is measurement, never narrative.
+OMNIA does not assume correctness, usefulness, or semantic truth.
 
 
 ---
@@ -83,14 +92,23 @@ Each step is measured, never inferred.
 
 It reflects internal structural consistency, not correctness, usefulness, or semantic truth.
 
-Ω is model-agnostic and semantics-free.
+Ω is:
+
+model-agnostic
+
+semantics-free
+
+deterministic
+
 
 
 ---
 
 2. Structural Lenses
 
-OMNIA operates through independent structural lenses:
+OMNIA operates through independent structural lenses.
+
+Core lenses
 
 BASE — Omniabase
 Multi-base numeric structure analysis.
@@ -107,8 +125,35 @@ Structural instability in token sequences.
 LCR — Logical Coherence Reduction
 External coherence lens for audit and benchmarking.
 
+All lenses are:
 
-Lenses are composable, deterministic, and non-semantic.
+composable
+
+deterministic
+
+non-semantic
+
+
+
+---
+
+Experimental / domain-specific lenses
+
+Some lenses explore specific structural domains without changing OMNIA’s scope.
+
+PRIME — Prime Residue Geometry (CK-Lens)
+Measures structural geometry of integers across a prime modular basis.
+
+deterministic
+
+invariant under primorial periodicity
+
+not predictive
+
+not a prime generator
+
+
+This lens exists as a case study of OMNIA applied to arithmetic structure, not as a core objective.
 
 
 ---
@@ -126,7 +171,7 @@ Isolates structure that exists independently of human perception or encoding.
 
 Ω̂ is deduced by subtraction, not assumed.
 
-It estimates the structural residue that survives representation change, using robust statistics over transformed Ω values.
+It estimates the structural residue that survives representation change using robust statistics over transformed Ω values.
 
 
 ---
@@ -137,7 +182,8 @@ Measures marginal structural yield:
 
 SEI = ΔΩ / ΔC
 
-SEI → 0 indicates structural saturation: further processing yields no new admissible structure.
+SEI → 0 indicates structural saturation:
+further processing yields no new admissible structure.
 
 
 ---
@@ -161,22 +207,22 @@ OMNIA includes a deterministic pre-limit inference sensor.
 
 Inference is treated as a structural trajectory, not a decision.
 
-States (S1–S5):
+States (S1–S5)
 
 S1 — RIGID_INVARIANCE
-Deterministic structural residue.
+Deterministic structural residue
 
 S2 — ELASTIC_INVARIANCE
-Deformable but coherent structure.
+Deformable but coherent structure
 
 S3 — META_STABLE
-Order-sensitive, illusion-prone regime.
+Order-sensitive, illusion-prone regime
 
 S4 — COHERENT_DRIFT
-Directional structural movement.
+Directional structural movement
 
-S5 — PRE_LIMIT_FRAGMENTATION
-Imminent collapse.
+S5 — PRE-LIMIT_FRAGMENTATION
+Imminent collapse
 
 
 Implementation:
@@ -265,25 +311,23 @@ PV captures direction, composition, and intensity of structural loss.
 
 14. Structural Indistinguishability — SI
 
-OMNIA formalizes the following principle:
+OMNIA formalizes the principle:
 
 > If all observable structural relations are invariant,
 internal codifications are undecidable.
 
 
 
-Structural Indistinguishability (SI) measures whether two systems may differ internally while remaining structurally indistinguishable under all admissible relations.
+SI measures whether two systems may differ internally while remaining structurally indistinguishable under all admissible relations.
 
 Implications:
 
-Different perceptual codings (e.g. color perception) are undecidable structurally
+different perceptual codings (e.g. color perception) are undecidable
 
-Shared language does not imply shared internal representation
+shared language does not imply shared internal representation
 
-Observation does not collapse states; projection does
+observation does not collapse states; projection does
 
-
-SI formalizes a limit of comparability, not uncertainty.
 
 Implementation:
 omnia/meta/structural_indistinguishability.py
