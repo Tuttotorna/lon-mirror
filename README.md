@@ -81,7 +81,7 @@ Each step is measured, never inferred.
 
 Ω is the aggregated structural score produced by OMNIA lenses.
 
-It reflects internal structural consistency, not correctness or semantic truth.
+It reflects internal structural consistency, not correctness, usefulness, or semantic truth.
 
 Ω is model-agnostic and semantics-free.
 
@@ -90,25 +90,25 @@ It reflects internal structural consistency, not correctness or semantic truth.
 
 2. Structural Lenses
 
-BASE — Omniabase
+OMNIA operates through independent structural lenses:
 
+BASE — Omniabase
 Multi-base numeric structure analysis.
 
 TIME — Omniatempo
-
 Temporal drift and regime instability.
 
 CAUSA — Omniacausa
-
-Lagged relational structure.
+Lagged relational and causal structure.
 
 TOKEN
-
 Structural instability in token sequences.
 
 LCR — Logical Coherence Reduction
-
 External coherence lens for audit and benchmarking.
+
+
+Lenses are composable, deterministic, and non-semantic.
 
 
 ---
@@ -117,7 +117,7 @@ External coherence lens for audit and benchmarking.
 
 Measures invariants that persist under transformations without a privileged observer.
 
-Isolates structure that is real but non-experiential for human cognition.
+Isolates structure that exists independently of human perception or encoding.
 
 
 ---
@@ -126,7 +126,7 @@ Isolates structure that is real but non-experiential for human cognition.
 
 Ω̂ is deduced by subtraction, not assumed.
 
-It estimates the structural residue surviving representation change.
+It estimates the structural residue that survives representation change, using robust statistics over transformed Ω values.
 
 
 ---
@@ -135,11 +135,9 @@ It estimates the structural residue surviving representation change.
 
 Measures marginal structural yield:
 
-> SEI = ΔΩ / ΔC
+SEI = ΔΩ / ΔC
 
-
-
-SEI ≈ 0 indicates saturation.
+SEI → 0 indicates structural saturation: further processing yields no new admissible structure.
 
 
 ---
@@ -152,6 +150,8 @@ A → B → A′
 
 IRI detects collapse even when surface similarity appears intact.
 
+IRI ≥ 0 by construction.
+
 
 ---
 
@@ -159,26 +159,24 @@ IRI detects collapse even when surface similarity appears intact.
 
 OMNIA includes a deterministic pre-limit inference sensor.
 
-This module classifies how inference behaves structurally before OMNIA-LIMIT.
+Inference is treated as a structural trajectory, not a decision.
 
-Inference is treated as a trajectory, not a decision.
-
-States (S1–S5)
+States (S1–S5):
 
 S1 — RIGID_INVARIANCE
-Deterministic structural residue
+Deterministic structural residue.
 
 S2 — ELASTIC_INVARIANCE
-Deformable but coherent structure
+Deformable but coherent structure.
 
 S3 — META_STABLE
-Order-sensitive, illusion-prone regime
+Order-sensitive, illusion-prone regime.
 
 S4 — COHERENT_DRIFT
-Directional structural movement
+Directional structural movement.
 
 S5 — PRE_LIMIT_FRAGMENTATION
-Imminent collapse
+Imminent collapse.
 
 
 Implementation:
@@ -197,10 +195,10 @@ SEI → 0
 
 IRI > 0
 
-Ω̂ stable
+Ω̂ is stable
 
 
-OMNIA-LIMIT does not retry or optimize.
+OMNIA-LIMIT does not retry, optimize, or escalate.
 
 It marks the end of admissible structural extraction.
 
@@ -209,7 +207,9 @@ It marks the end of admissible structural extraction.
 
 9. Structural Time (τ)
 
-A non-human time coordinate advancing only when structure changes.
+τ is a non-human time coordinate.
+
+It advances only when structure changes.
 
 τ is not wall-clock time and not duration.
 
@@ -238,20 +238,18 @@ no semantics
 no optimization
 
 
-It only enforces structural admissibility.
+It enforces structural admissibility only.
 
 
 ---
 
 12. Observer Perturbation Index — OPI
 
-Measures the structural cost of introducing an observer or privileged measurement basis.
+Measures the structural cost of introducing an observer or privileged measurement basis:
 
-> OPI = Ω_ap − Ω_obs
+OPI = Ω_ap − Ω_obs
 
-
-
-OPI quantifies structural damage caused by enforced perspective, not consciousness or intent.
+OPI quantifies structural damage caused by enforced perspective, not intent or consciousness.
 
 
 ---
@@ -265,7 +263,7 @@ PV captures direction, composition, and intensity of structural loss.
 
 ---
 
-14. Structural Indistinguishability — SI (NEW)
+14. Structural Indistinguishability — SI
 
 OMNIA formalizes the following principle:
 
@@ -278,14 +276,14 @@ Structural Indistinguishability (SI) measures whether two systems may differ int
 
 Implications:
 
-Different perceptual codings (e.g. color perception) cannot be decided structurally
+Different perceptual codings (e.g. color perception) are undecidable structurally
 
 Shared language does not imply shared internal representation
 
 Observation does not collapse states; projection does
 
 
-SI formalizes the limit of comparability, not uncertainty.
+SI formalizes a limit of comparability, not uncertainty.
 
 Implementation:
 omnia/meta/structural_indistinguishability.py
@@ -304,6 +302,8 @@ omnia/
   sei.py
   iri.py
 
+examples/
+tests/
 docs/
 
 All modules are:
@@ -320,17 +320,19 @@ import-safe
 
 16. What OMNIA Is Not
 
-Not a model
+OMNIA is not:
 
-Not an evaluator
+a model
 
-Not a policy
+an evaluator
 
-Not a decision system
+a policy
 
-Not a truth oracle
+a decision system
 
-Not a narrative framework
+a truth oracle
+
+a narrative framework
 
 
 OMNIA is a measurement instrument.
