@@ -27,15 +27,6 @@ does not learn
 does not explain
 
 
-OMNIA measures structure only.
-
-The output is measurement, never narrative.
-
-
----
-
-What OMNIA Measures
-
 OMNIA measures:
 
 what remains invariant when representation changes
@@ -49,7 +40,7 @@ which inferential regime is active before collapse
 when different internal codifications are structurally undecidable
 
 
-OMNIA does not assume correctness, usefulness, or semantic truth.
+The output is measurement, never narrative.
 
 
 ---
@@ -92,68 +83,36 @@ Each step is measured, never inferred.
 
 It reflects internal structural consistency, not correctness, usefulness, or semantic truth.
 
-Ω is:
-
-model-agnostic
-
-semantics-free
-
-deterministic
-
+Ω is model-agnostic and semantics-free.
 
 
 ---
 
 2. Structural Lenses
 
-OMNIA operates through independent structural lenses.
-
-Core lenses
+OMNIA operates through independent structural lenses:
 
 BASE — Omniabase
+
 Multi-base numeric structure analysis.
 
 TIME — Omniatempo
+
 Temporal drift and regime instability.
 
 CAUSA — Omniacausa
+
 Lagged relational and causal structure.
 
 TOKEN
+
 Structural instability in token sequences.
 
 LCR — Logical Coherence Reduction
+
 External coherence lens for audit and benchmarking.
 
-All lenses are:
-
-composable
-
-deterministic
-
-non-semantic
-
-
-
----
-
-Experimental / domain-specific lenses
-
-Some lenses explore specific structural domains without changing OMNIA’s scope.
-
-PRIME — Prime Residue Geometry (CK-Lens)
-Measures structural geometry of integers across a prime modular basis.
-
-deterministic
-
-invariant under primorial periodicity
-
-not predictive
-
-not a prime generator
-
-
-This lens exists as a case study of OMNIA applied to arithmetic structure, not as a core objective.
+All lenses are deterministic, composable, and non-semantic.
 
 
 ---
@@ -171,7 +130,7 @@ Isolates structure that exists independently of human perception or encoding.
 
 Ω̂ is deduced by subtraction, not assumed.
 
-It estimates the structural residue that survives representation change using robust statistics over transformed Ω values.
+It estimates the structural residue that survives representation change, using robust statistics over transformed Ω values.
 
 
 ---
@@ -182,8 +141,7 @@ Measures marginal structural yield:
 
 SEI = ΔΩ / ΔC
 
-SEI → 0 indicates structural saturation:
-further processing yields no new admissible structure.
+SEI → 0 indicates structural saturation: further processing yields no new admissible structure.
 
 
 ---
@@ -221,7 +179,7 @@ Order-sensitive, illusion-prone regime
 S4 — COHERENT_DRIFT
 Directional structural movement
 
-S5 — PRE-LIMIT_FRAGMENTATION
+S5 — PRE_LIMIT_FRAGMENTATION
 Imminent collapse
 
 
@@ -291,7 +249,7 @@ It enforces structural admissibility only.
 
 12. Observer Perturbation Index — OPI
 
-Measures the structural cost of introducing an observer or privileged measurement basis:
+Measures the structural cost of introducing an observer or privileged basis:
 
 OPI = Ω_ap − Ω_obs
 
@@ -311,23 +269,25 @@ PV captures direction, composition, and intensity of structural loss.
 
 14. Structural Indistinguishability — SI
 
-OMNIA formalizes the principle:
+OMNIA formalizes the following principle:
 
 > If all observable structural relations are invariant,
 internal codifications are undecidable.
 
 
 
-SI measures whether two systems may differ internally while remaining structurally indistinguishable under all admissible relations.
+Structural Indistinguishability (SI) measures whether two systems may differ internally while remaining structurally indistinguishable under all admissible relations.
 
 Implications:
 
-different perceptual codings (e.g. color perception) are undecidable
+Different perceptual codings (e.g. color perception) are undecidable structurally
 
-shared language does not imply shared internal representation
+Shared language does not imply shared internal representation
 
-observation does not collapse states; projection does
+Observation does not collapse states; projection does
 
+
+SI formalizes a limit of comparability, not uncertainty.
 
 Implementation:
 omnia/meta/structural_indistinguishability.py
@@ -335,7 +295,48 @@ omnia/meta/structural_indistinguishability.py
 
 ---
 
-15. Repository Structure
+15. Experimental Module — Prime Regime Sensor (Gap Prediction)
+
+OMNIA can be applied to prime number sequences as a non-semantic structural regime sensor.
+
+This module:
+
+builds a deterministic PrimeState = (Φ, S, T, τ)
+
+Φ: modular residue vector (multi-base structure)
+
+S: gap-distribution stability
+
+T: structural drift
+
+τ: structural time
+
+
+predicts the next prime gap using K-nearest neighbors in Φ-space
+
+enforces STOP via structural guardrails (confidence, drift, stability)
+
+
+This is not a prime oracle.
+
+It demonstrates that apparent unpredictability can be treated as a measurement-regime problem, not a mystery.
+
+Implementation:
+
+omnia/lenses/prime_regime.py
+
+omnia/lenses/prime_gap_knn.py
+
+
+Demo:
+
+examples/prime_gap_knn_demo.py
+
+
+
+---
+
+16. Repository Structure
 
 omnia/
   inference/
@@ -362,7 +363,33 @@ import-safe
 
 ---
 
-16. What OMNIA Is Not
+17. Running Tests and Demos
+
+Run the full test suite:
+
+pytest tests/ -v
+
+Run the prime regime demo:
+
+python examples/prime_gap_knn_demo.py
+
+The demo prints:
+
+current prime
+
+true next gap
+
+predicted gap (if admissible)
+
+confidence
+
+STOP / OK reason
+
+
+
+---
+
+18. What OMNIA Is Not
 
 OMNIA is not:
 
@@ -384,14 +411,14 @@ OMNIA is a measurement instrument.
 
 ---
 
-17. License
+19. License
 
 MIT License.
 
 
 ---
 
-18. Citation
+20. Citation
 
 Brighindi, M.
 OMNIA — Unified Structural Measurement Engine (MB-X.01)
