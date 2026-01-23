@@ -1,63 +1,53 @@
-OMNIA — Unified Structural Measurement Engine
+README.md (versione finale consigliata)
 
-Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV · INFERENCE · SI
-MB-X.01
+# OMNIA — Unified Structural Measurement Engine
 
-Author: Massimiliano Brighindi
+**Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV · INFERENCE · SI**  
+**MB-X.01**
 
+**Author:** Massimiliano Brighindi
 
 ---
 
-Overview
+## Overview
 
-OMNIA is a post-hoc structural measurement engine.
+**OMNIA** is a **post-hoc structural measurement engine**.
 
-It measures structural coherence, instability, compatibility, limits, perturbations, inference regimes, and indistinguishability of representations under independent, non-semantic transformations.
+It measures **structural coherence, instability, compatibility, limits, perturbations,
+inference regimes, and structural indistinguishability** of representations under
+**independent, non-semantic transformations**.
 
 OMNIA:
 
-does not interpret meaning
-
-does not decide
-
-does not optimize
-
-does not learn
-
-does not explain
-
+- does **not** interpret meaning  
+- does **not** decide  
+- does **not** optimize  
+- does **not** learn  
+- does **not** explain  
 
 OMNIA measures:
 
-what remains invariant when representation changes
+- what remains invariant when representation changes  
+- where continuation becomes structurally impossible  
+- how structure degrades under perturbation  
+- which inferential regime is active before collapse  
+- when different internal codifications are structurally undecidable  
 
-where continuation becomes structurally impossible
-
-how structure degrades under perturbation
-
-which inferential regime is active before collapse
-
-when different internal codifications are structurally undecidable
-
-
-The output is measurement, never narrative.
-
+**The output is measurement, never narrative.**
 
 ---
 
-Core Principle
+## Core Principle
 
-> Structural truth is what survives the removal of representation.
-
-
-
+> **Structural truth is what survives the removal of representation.**
 
 ---
 
-Quickstart
+## Quickstart
 
 Run the full test suite:
 
+```bash
 pytest tests/ -v
 
 Run the prime regime demo:
@@ -83,20 +73,20 @@ STOP / OK reason
 The OMNIA Measurement Chain
 
 OMNIA
-→ Ω
-→ Ω under transformations
-→ Ω̂ (Omega-set)
-→ ΔΩ / ΔC
-→ SEI (Saturation)
-→ A → B → A′
-→ IRI (Irreversibility)
-→ Inference State (S1–S5)
-→ OMNIA-LIMIT (STOP)
-→ SCI (Structural Compatibility)
-→ CG (Runtime STOP / CONTINUE)
-→ OPI (Observer Perturbation Index)
-→ PV (Perturbation Vector)
-→ SI (Structural Indistinguishability)
+ → Ω
+ → Ω under transformations
+ → Ω̂ (Omega-set)
+ → ΔΩ / ΔC
+ → SEI (Saturation)
+ → A → B → A′
+ → IRI (Irreversibility)
+ → Inference State (S1–S5)
+ → OMNIA-LIMIT (STOP)
+ → SCI (Structural Compatibility)
+ → CG (Runtime STOP / CONTINUE)
+ → OPI (Observer Perturbation Index)
+ → PV (Perturbation Vector)
+ → SI (Structural Indistinguishability)
 
 Each step is measured, never inferred.
 
@@ -116,7 +106,7 @@ It reflects internal structural consistency, not correctness, usefulness, or sem
 
 2. Structural Lenses
 
-OMNIA operates through independent structural lenses:
+OMNIA operates through independent, composable lenses:
 
 BASE — Omniabase
 Multi-base numeric structure analysis.
@@ -132,6 +122,7 @@ Structural instability in token sequences.
 
 LCR — Logical Coherence Reduction
 External coherence lens for audit and benchmarking.
+
 
 All lenses are deterministic, composable, and non-semantic.
 
@@ -189,19 +180,19 @@ Inference is treated as a structural trajectory, not a decision.
 States (S1–S5):
 
 S1 — RIGID_INVARIANCE
-Deterministic structural residue
+Deterministic structural residue.
 
 S2 — ELASTIC_INVARIANCE
-Deformable but coherent structure
+Deformable but coherent structure.
 
 S3 — META_STABLE
-Order-sensitive, illusion-prone regime
+Order-sensitive, illusion-prone regime.
 
 S4 — COHERENT_DRIFT
-Directional structural movement
+Directional structural movement.
 
 S5 — PRE_LIMIT_FRAGMENTATION
-Imminent collapse
+Imminent collapse.
 
 
 Implementation:
@@ -290,14 +281,14 @@ PV captures direction, composition, and intensity of structural loss.
 
 14. Structural Indistinguishability — SI
 
-OMNIA formalizes the following principle:
+OMNIA formalizes the principle:
 
 > If all observable structural relations are invariant,
 internal codifications are undecidable.
 
 
 
-Structural Indistinguishability (SI) measures whether two systems may differ internally while remaining structurally indistinguishable under all admissible relations.
+SI measures whether two systems may differ internally while remaining structurally indistinguishable under all admissible relations.
 
 Implications:
 
@@ -307,8 +298,6 @@ Shared language does not imply shared internal representation
 
 Observation does not collapse states; projection does
 
-
-SI formalizes a limit of comparability, not uncertainty.
 
 Implementation:
 omnia/meta/structural_indistinguishability.py
@@ -322,16 +311,18 @@ OMNIA can be applied to prime number sequences as a non-semantic structural regi
 
 This module:
 
-builds a deterministic
-PrimeState = (Φ, S, T, τ)
+builds a deterministic PrimeState = (Φ, S, T, τ)
 
-where
-Φ = modular residue vector (multi-base structure)
-S = gap-distribution stability
-T = structural drift
-τ = structural time
+Φ: modular residue vector (multi-base structure)
 
-predicts the next prime gap using K-nearest neighbors in Φ-space
+S: gap-distribution stability
+
+T: structural drift
+
+τ: structural time
+
+
+predicts the next prime gap using KNN in Φ-space
 
 enforces STOP via structural guardrails (confidence, drift, stability)
 
@@ -416,5 +407,4 @@ MIT License.
 Brighindi, M.
 OMNIA — Unified Structural Measurement Engine (MB-X.01)
 https://github.com/Tuttotorna/lon-mirror
-
 
