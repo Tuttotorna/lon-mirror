@@ -54,6 +54,32 @@ Core Principle
 
 ---
 
+Quickstart
+
+Run the full test suite:
+
+pytest tests/ -v
+
+Run the prime regime demo:
+
+python examples/prime_gap_knn_demo.py
+
+The demo prints:
+
+current prime
+
+true next gap
+
+predicted gap (if admissible)
+
+confidence
+
+STOP / OK reason
+
+
+
+---
+
 The OMNIA Measurement Chain
 
 OMNIA
@@ -93,23 +119,18 @@ It reflects internal structural consistency, not correctness, usefulness, or sem
 OMNIA operates through independent structural lenses:
 
 BASE — Omniabase
-
 Multi-base numeric structure analysis.
 
 TIME — Omniatempo
-
 Temporal drift and regime instability.
 
 CAUSA — Omniacausa
-
 Lagged relational and causal structure.
 
 TOKEN
-
 Structural instability in token sequences.
 
 LCR — Logical Coherence Reduction
-
 External coherence lens for audit and benchmarking.
 
 All lenses are deterministic, composable, and non-semantic.
@@ -165,7 +186,7 @@ OMNIA includes a deterministic pre-limit inference sensor.
 
 Inference is treated as a structural trajectory, not a decision.
 
-States (S1–S5)
+States (S1–S5):
 
 S1 — RIGID_INVARIANCE
 Deterministic structural residue
@@ -301,16 +322,14 @@ OMNIA can be applied to prime number sequences as a non-semantic structural regi
 
 This module:
 
-builds a deterministic PrimeState = (Φ, S, T, τ)
+builds a deterministic
+PrimeState = (Φ, S, T, τ)
 
-Φ: modular residue vector (multi-base structure)
-
-S: gap-distribution stability
-
-T: structural drift
-
-τ: structural time
-
+where
+Φ = modular residue vector (multi-base structure)
+S = gap-distribution stability
+T = structural drift
+τ = structural time
 
 predicts the next prime gap using K-nearest neighbors in Φ-space
 
@@ -363,33 +382,7 @@ import-safe
 
 ---
 
-17. Running Tests and Demos
-
-Run the full test suite:
-
-pytest tests/ -v
-
-Run the prime regime demo:
-
-python examples/prime_gap_knn_demo.py
-
-The demo prints:
-
-current prime
-
-true next gap
-
-predicted gap (if admissible)
-
-confidence
-
-STOP / OK reason
-
-
-
----
-
-18. What OMNIA Is Not
+17. What OMNIA Is Not
 
 OMNIA is not:
 
@@ -411,15 +404,17 @@ OMNIA is a measurement instrument.
 
 ---
 
-19. License
+18. License
 
 MIT License.
 
 
 ---
 
-20. Citation
+19. Citation
 
 Brighindi, M.
 OMNIA — Unified Structural Measurement Engine (MB-X.01)
 https://github.com/Tuttotorna/lon-mirror
+
+
