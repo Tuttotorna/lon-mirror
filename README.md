@@ -17,19 +17,19 @@ inference regimes, and structural indistinguishability** of representations unde
 
 OMNIA:
 
-- does **not** interpret meaning
-- does **not** decide
-- does **not** optimize
-- does **not** learn
-- does **not** explain
+- does **not** interpret meaning  
+- does **not** decide  
+- does **not** optimize  
+- does **not** learn  
+- does **not** explain  
 
 OMNIA measures:
 
-- what remains invariant when representation changes
-- where continuation becomes structurally impossible
-- how structure degrades under perturbation
-- which inferential regime is active before collapse
-- when different internal codifications are structurally undecidable
+- what remains invariant when representation changes  
+- where continuation becomes structurally impossible  
+- how structure degrades under perturbation  
+- which inferential regime is active before collapse  
+- when different internal codifications are structurally undecidable  
 
 **The output is measurement, never narrative.**
 
@@ -63,6 +63,25 @@ predicted gap (if admissible)
 confidence
 
 STOP / OK reason
+
+
+
+---
+
+Stress Framework (Iriguchi Integration)
+
+OMNIA includes a formal stress methodology:
+
+stress is not “more tests”
+
+stress is controlled exposure of structural limits
+
+failures become frozen boundary artifacts
+
+
+Official taxonomy:
+
+docs/STRESS_TAXONOMY.md
 
 
 
@@ -177,18 +196,26 @@ Inference is treated as a structural trajectory, not a decision.
 
 States (S1–S5):
 
-S1 — RIGID_INVARIANCE: deterministic structural residue
+S1 — RIGID_INVARIANCE
+Deterministic structural residue.
 
-S2 — ELASTIC_INVARIANCE: deformable but coherent structure
+S2 — ELASTIC_INVARIANCE
+Deformable but coherent structure.
 
-S3 — META_STABLE: order-sensitive, illusion-prone regime
+S3 — META_STABLE
+Order-sensitive, illusion-prone regime.
 
-S4 — COHERENT_DRIFT: directional structural movement
+S4 — COHERENT_DRIFT
+Directional structural movement.
 
-S5 — PRE_LIMIT_FRAGMENTATION: imminent collapse
+S5 — PRE_LIMIT_FRAGMENTATION
+Imminent collapse.
 
 
-Implementation: omnia/inference/
+Implementation:
+
+omnia/inference/
+
 
 
 ---
@@ -275,7 +302,8 @@ PV captures direction, composition, and intensity of structural loss.
 
 OMNIA formalizes the principle:
 
-> If all observable structural relations are invariant, internal codifications are undecidable.
+> If all observable structural relations are invariant,
+internal codifications are undecidable.
 
 
 
@@ -290,7 +318,10 @@ Shared language does not imply shared internal representation
 Observation does not collapse states; projection does
 
 
-Implementation: omnia/meta/structural_indistinguishability.py
+Implementation:
+
+omnia/meta/structural_indistinguishability.py
+
 
 
 ---
@@ -303,6 +334,20 @@ This module:
 
 builds a deterministic PrimeState = (Φ, S, T, τ)
 
+
+Where:
+
+Φ: modular residue vector (multi-base structure)
+
+S: gap-distribution stability
+
+T: structural drift
+
+τ: structural time
+
+
+It:
+
 predicts the next prime gap using KNN in Φ-space
 
 enforces STOP via structural guardrails (confidence, drift, stability)
@@ -312,18 +357,16 @@ This is not a prime oracle.
 
 It demonstrates that apparent unpredictability can be treated as a measurement-regime problem, not a mystery.
 
-Files:
+Implementation:
 
 omnia/lenses/prime_regime.py
 
 omnia/lenses/prime_gap_knn.py
 
+
+Demo:
+
 examples/prime_gap_knn_demo.py
-
-
-Spec:
-
-PRIME_REGIME_SENSOR.md
 
 
 
