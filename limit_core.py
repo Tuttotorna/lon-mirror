@@ -29,4 +29,4 @@ def measure(structure):
 
 if __name__ == "__main__":
     result = measure(structure=None)
-    print(result)
+    print(result
