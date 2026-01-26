@@ -9,6 +9,15 @@
 
 ---
 
+## Canonical Ecosystem Map
+
+This repository is part of the **MB-X.01 / OMNIA** ecosystem.
+
+Canonical architecture and full map:  
+https://github.com/Tuttotorna/lon-mirror/blob/main/ECOSYSTEM.md
+
+---
+
 ## Overview
 
 **OMNIA** is a **post-hoc structural measurement engine**.
@@ -72,19 +81,16 @@ STOP / OK reason
 
 Stress Framework (Iriguchi Integration)
 
-OMNIA includes a formal stress methodology:
+OMNIA includes a formal stress methodology.
 
-stress is not “more tests”
+Stress is not “more tests”.
+Stress is controlled exposure of structural limits.
 
-stress is controlled exposure of structural limits
-
-failures become frozen boundary artifacts
-
+Failures are preserved as frozen boundary artifacts.
 
 Official taxonomy:
 
 docs/STRESS_TAXONOMY.md
-
 
 
 ---
@@ -161,7 +167,7 @@ Isolates structure that exists independently of human perception or encoding.
 
 Ω̂ is deduced by subtraction, not assumed.
 
-It estimates the structural residue that survives representation change, using robust statistics over transformed Ω values.
+It estimates the structural residue that survives representation change using robust statistics over transformed Ω values.
 
 
 ---
@@ -192,26 +198,19 @@ IRI ≥ 0 by construction.
 
 7. Pre-Limit Inference States — INFERENCE
 
-OMNIA includes a deterministic pre-limit inference sensor.
-
 Inference is treated as a structural trajectory, not a decision.
 
-States (S1–S5):
+States:
 
 S1 — RIGID_INVARIANCE
-Deterministic structural residue.
 
 S2 — ELASTIC_INVARIANCE
-Deformable but coherent structure.
 
 S3 — META_STABLE
-Order-sensitive, illusion-prone regime.
 
 S4 — COHERENT_DRIFT
-Directional structural movement.
 
 S5 — PRE_LIMIT_FRAGMENTATION
-Imminent collapse.
 
 
 Implementation:
@@ -219,14 +218,11 @@ Implementation:
 omnia/inference/
 
 
-
 ---
 
 8. OMNIA-LIMIT — Epistemic Boundary
 
-Declares a STOP condition.
-
-Triggered when:
+Declares a STOP condition when:
 
 SEI → 0
 
@@ -302,7 +298,7 @@ PV captures direction, composition, and intensity of structural loss.
 
 14. Structural Indistinguishability — SI
 
-OMNIA formalizes the principle:
+Principle:
 
 > If all observable structural relations are invariant,
 internal codifications are undecidable.
@@ -311,31 +307,20 @@ internal codifications are undecidable.
 
 SI measures whether two systems may differ internally while remaining structurally indistinguishable under all admissible relations.
 
-Implications:
-
-Different perceptual codings (e.g. color perception) are undecidable structurally
-
-Shared language does not imply shared internal representation
-
-Observation does not collapse states; projection does
-
-
 Implementation:
 
 omnia/meta/structural_indistinguishability.py
 
 
-
 ---
 
-15. Experimental Module — Prime Regime Sensor (Gap Prediction)
+15. Experimental Module — Prime Regime Sensor
 
 OMNIA can be applied to prime number sequences as a non-semantic structural regime sensor.
 
-This module:
+Deterministic state:
 
-builds a deterministic PrimeState = (Φ, S, T, τ)
-
+PrimeState = (Φ, S, T, τ)
 
 Where:
 
@@ -348,28 +333,16 @@ T: structural drift
 τ: structural time
 
 
-It:
-
-predicts the next prime gap using KNN in Φ-space
-
-enforces STOP via structural guardrails (confidence, drift, stability)
-
-
 This is not a prime oracle.
-
-It demonstrates that apparent unpredictability can be treated as a measurement-regime problem, not a mystery.
 
 Implementation:
 
 omnia/lenses/prime_regime.py
-
 omnia/lenses/prime_gap_knn.py
-
 
 Demo:
 
 examples/prime_gap_knn_demo.py
-
 
 
 ---
@@ -435,3 +408,4 @@ MIT License.
 Brighindi, M.
 OMNIA — Unified Structural Measurement Engine (MB-X.01)
 https://github.com/Tuttotorna/lon-mirror
+
