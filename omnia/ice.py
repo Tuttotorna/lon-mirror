@@ -1,6 +1,7 @@
 """
-OMNIA ICE (Impossibility & Confidence Envelope) v0.2 — FIXED
-Author: Massimiliano Brighindi (MB-X.01 / OMNIA)
+OMNIA ICE (Impossibility & Confidence Envelope) v0.2 — CANONICAL
+MB-X.01 / OMNIA
+Author: Massimiliano Brighindi
 
 Goal:
     Turn "0% is false" into code:
@@ -16,43 +17,42 @@ Architecture boundary (critical):
     - Confidence = measurement quality (signal reliability), NOT outcome certainty
     - Border instability (Ω near threshold) always escalates, never "targeted doubt"
 
-CRITICAL FIX:
-    - Ω is treated as *coherence/health* score (higher = better).
-    - Structural risk must be inverted: risk_struct = 1 - Ω
-    - Previously risk_struct = Ω made PASS nearly impossible for high Ω.
+Canonical semantic convention (CRITICAL):
+    - omega_total (Ω) is a coherence/health score: higher = better
+    - therefore structural risk must be inverted: risk_struct = 1 - Ω
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
 from enum import Enum
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, List, Optional
 
 
 class ICEStatus(str, Enum):
-    PASS = "PASS"              # allow to proceed (not a truth claim)
-    BORDER = "BORDER"          # Ω near threshold -> escalation required
-    ESCALATE = "ESCALATE"      # ambiguous / underdetermined / low measurement quality
-    BLOCK = "BLOCK"            # impossible (0% class)
+    PASS = "PASS"          # allow to proceed (not a truth claim)
+    BORDER = "BORDER"      # Ω near threshold -> escalation required
+    ESCALATE = "ESCALATE"  # ambiguous / underdetermined / low measurement quality
+    BLOCK = "BLOCK"        # impossible (0% class)
 
 
 @dataclass
 class ICEInput:
     # ----- primary measurement -----
-    omega_total: float                          # unified structural coherence/health proxy (0..1 preferred; higher = better)
-    lens_scores: Dict[str, float]               # routing only; semantics may vary per lens
+    omega_total: float                          # Ω: coherence/health (0..1; higher = better)
+    lens_scores: Dict[str, float]               # routing only; may represent "problem score" per lens
     lens_metadata: Dict[str, Dict[str, Any]]    # per-lens meta; may include reliability/quality flags
 
     # ----- optional external coherence (e.g., LCR / checks) -----
-    omega_ext: Optional[float] = None           # 0..1 (higher = more coherent)
-    gold_match: Optional[float] = None          # 0..1 (higher = better); may be 1.0/0.0 when strict
+    omega_ext: Optional[float] = None           # 0..1 (higher = more coherent/better)
+    gold_match: Optional[float] = None          # 0..1 (higher = better match to gold)
 
     # ----- ambiguity (underdetermination / multi-interpretation) -----
-    ambiguity_score: float = 0.0                # 0..1 higher = more ambiguous
+    ambiguity_score: float = 0.0                # 0..1 (higher = more ambiguous)
     notes: Optional[str] = None
 
     # ----- decision boundary (kept separate from flags) -----
-    threshold: float = 0.70                     # τ (0..1) boundary for omega_total comparison
+    threshold: float = 0.70                     # τ (0..1)
     margin: float = 0.02                        # |Ω - τ| <= margin => BORDER -> ESCALATE
 
     # ----- measurement confidence (signal reliability), not outcome certainty -----
@@ -66,7 +66,7 @@ class ICEResult:
     impossibility: float                        # 0..1 (1 => impossible / 0% class)
     ambiguity: float                            # 0..1
     boundary_distance: float                    # |Ω - τ|
-    attention: List[str]                        # lenses to inspect first (flags routing attention)
+    attention: List[str]                        # lenses to inspect first (routing only)
     reasons: Dict[str, Any]                     # machine-readable reasons
     thresholds: Dict[str, float]
 
@@ -94,18 +94,16 @@ def _safe_float(x: Any, default: float = 0.0) -> float:
 def _derive_attention(
     lens_scores: Dict[str, float],
     lens_metadata: Dict[str, Dict[str, Any]],
-    risk_struct: float,
     ambiguity: float,
     signal_reliability: float,
 ) -> List[str]:
     """
     Flags route attention only.
-
     Heuristics:
-      1) prioritize lenses with low reliability/quality
-      2) then lenses with high "problem score" (as provided)
+      1) prioritize lenses with low reliability/quality (meta)
+      2) then lenses with high "problem score" (lens_scores, assumed higher=worse)
       3) if ambiguity high, prioritize TOKEN/LCR if present
-      4) if signal reliability low, force LCR check if exists
+      4) if signal reliability low, force LCR check if present
     """
     attention: List[str] = []
 
@@ -117,12 +115,16 @@ def _derive_attention(
 
     # 2) high lens score next (routing only)
     if lens_scores:
-        ranked = sorted(lens_scores.items(), key=lambda kv: _safe_float(kv[1], 0.0), reverse=True)
+        ranked = sorted(
+            lens_scores.items(),
+            key=lambda kv: _safe_float(kv[1], 0.0),
+            reverse=True,
+        )
         for lname, _ in ranked:
             if lname not in attention:
                 attention.append(lname)
 
-    # 3) ambiguity-driven routing hints
+    # 3) ambiguity-driven routing hints (prepend)
     if ambiguity >= 0.55:
         for hint in ("TOKEN", "LCR", "TIME", "CAUSA", "BASE"):
             if hint in (lens_scores or {}) and hint not in attention:
@@ -145,14 +147,10 @@ def _derive_attention(
 def ice_gate(
     x: ICEInput,
     # ----- thresholds -----
-    # Hard impossibility threshold (0..1): crossing => BLOCK
-    t_impossible: float = 0.85,
-    # Ambiguity threshold: crossing => ESCALATE
-    t_ambiguous: float = 0.55,
-    # PASS confidence threshold (only if not impossible, not ambiguous, not border, good signal)
-    t_pass: float = 0.70,
-    # Measurement reliability minimum: below => ESCALATE
-    t_signal_min: float = 0.70,
+    t_impossible: float = 0.85,   # hard impossibility threshold (0..1): crossing => BLOCK
+    t_ambiguous: float = 0.55,    # ambiguity threshold: crossing => ESCALATE
+    t_pass: float = 0.70,         # PASS confidence threshold (only if not impossible, not ambiguous, not border, good signal)
+    t_signal_min: float = 0.70,   # measurement reliability minimum: below => ESCALATE
     # ----- weights (tunable) -----
     w_struct: float = 0.55,
     w_ext: float = 0.35,
@@ -189,7 +187,7 @@ def ice_gate(
     # Ω is coherence/health (higher = better) -> risk must be inverted.
     risk_struct = _clamp01(1.0 - omega_total)
 
-    # ---- 2) External component (omega_ext): higher = more coherent -> lower risk ----
+    # ---- 2) External component (omega_ext): higher = better -> lower risk ----
     if x.omega_ext is None:
         risk_ext = 0.5
         ext_available = False
@@ -197,7 +195,7 @@ def ice_gate(
         risk_ext = 1.0 - _clamp01(_safe_float(x.omega_ext, 0.5))
         ext_available = True
 
-    # ---- 3) Gold component (if present): higher match -> lower risk ----
+    # ---- 3) Gold component (if present): higher = better -> lower risk ----
     if x.gold_match is None:
         risk_gold = 0.5
         gold_available = False
@@ -213,20 +211,14 @@ def ice_gate(
     )
 
     # ---- 5) Confidence (measurement quality), penalize ambiguity and low signal reliability ----
-    # Base confidence is complement of impossibility.
     base_conf = 1.0 - impossibility
-
-    # Ambiguity reduces usefulness of confidence (permission reliability).
     conf_after_ambiguity = _clamp01(base_conf * (1.0 - 0.75 * ambiguity))
-
-    # Signal reliability gates measurement quality.
     confidence = _clamp01(conf_after_ambiguity * (0.5 + 0.5 * sigrel))
 
     # ---- 6) Flags route attention (no threshold override) ----
     attention = _derive_attention(
         lens_scores=x.lens_scores or {},
         lens_metadata=x.lens_metadata or {},
-        risk_struct=risk_struct,
         ambiguity=ambiguity,
         signal_reliability=sigrel,
     )
