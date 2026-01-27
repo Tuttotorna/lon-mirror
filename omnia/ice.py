@@ -45,7 +45,7 @@ class ICEInput:
 
     # ----- optional external coherence (e.g., LCR / checks) -----
     omega_ext: Optional[float] = None           # 0..1 (higher = more coherent)
-    gold_match: Optional[float] = None          # 1.0/0.0 if dataset-gold available (higher = better)
+    gold_match: Optional[float] = None          # 0..1 (higher = better); may be 1.0/0.0 when strict
 
     # ----- ambiguity (underdetermination / multi-interpretation) -----
     ambiguity_score: float = 0.0                # 0..1 higher = more ambiguous
@@ -285,3 +285,4 @@ def ice_gate(
         reasons=reasons,
         thresholds=thresholds,
     )
+```0
