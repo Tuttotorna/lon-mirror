@@ -5,7 +5,7 @@
 
 # OMNIA — Unified Structural Measurement Engine
 
-https://doi.org/10.5281/zenodo.18391982
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18391982.svg)](https://doi.org/10.5281/zenodo.18391982)
 
 **Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV · INFERENCE · SI**  
 **MB-X.01**
