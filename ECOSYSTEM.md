@@ -11,11 +11,12 @@ It defines:
 
 ## Canonical Architecture Chain (non-negotiable)
 
-**Dual-Echo → OMNIAMIND → OMNIA → OMNIA-LIMIT → Decision Layer (external)**
+**Dual-Echo → OMNIAMIND → OMNIA → OMNIA-RADAR → OMNIA-LIMIT → Decision Layer (external)**
 
 - **Dual-Echo**: theoretical origin (interferential self / coherence)
 - **OMNIAMIND**: experimental dual-core cognition dynamics (simulation layer)
 - **OMNIA**: post-hoc structural measurement engine (instrument layer)
+- **OMNIA-RADAR**: structural opportunity detector (residual growth zones)
 - **OMNIA-LIMIT**: epistemic boundary / STOP certificate (termination layer)
 - **Decision Layer**: anything that decides actions (must be external to OMNIA)
 
@@ -48,7 +49,7 @@ Repo: https://github.com/Tuttotorna/OMNIAMIND
   - does **not** interpret meaning
   - does **not** decide
   - does **not** optimize
-  - does **not** learn
+  - does **not** learn  
   Output: invariance, drift, saturation, irreversibility, Ω-residue.
 
 Repo: https://github.com/Tuttotorna/OMNIA
@@ -61,7 +62,22 @@ Repo: https://github.com/Tuttotorna/lon-mirror
 
 ---
 
-### 4) Boundary / Termination Layer
+### 4) Structural Opportunity Layer
+- **OMNIA-RADAR**  
+  Role: post-hoc structural opportunity detector.  
+  Measures zones where:
+  - SEI is high (structure still extractable)
+  - IRI is low (no irreversible collapse)
+  - drift is controlled (growth regime)
+
+RADAR does **not** decide or recommend.  
+It outputs **non-zero only if residual opportunity exists beyond LIMIT**.
+
+Repo: https://github.com/Tuttotorna/OMNIA-RADAR
+
+---
+
+### 5) Boundary / Termination Layer
 - **omnia-limit**  
   Role: epistemic boundary layer; declares **STOP** under structural saturation / non-reducibility.  
   Output: boundary certificates (SNRC), impossibility envelope, termination rules.
@@ -70,7 +86,18 @@ Repo: https://github.com/Tuttotorna/omnia-limit
 
 ---
 
-### 5) Ω Tooling (Residue, Translation, Propagation)
+### 6) Human Trajectory Layer (phenomenic input)
+- **omnia-human-trajectory**  
+  Role: structural decomposition of human trajectories and real-world sequences  
+  into OMNIA-compatible signals (drift, coherence, instability).
+
+This is a **source layer**, not a decision layer.
+
+Repo: https://github.com/Tuttotorna/omnia-human-trajectory
+
+---
+
+### 7) Ω Tooling (Residue, Translation, Propagation)
 
 These are **support modules** around Ω (Omega-set / invariant residue).  
 They are not the canonical chain by themselves; they plug into OMNIA or sit adjacent as utilities.
@@ -87,14 +114,21 @@ They are not the canonical chain by themselves; they plug into OMNIA or sit adja
   Role: carrier / propagation experiments for Ω-structured signals across representations.  
   Repo: https://github.com/Tuttotorna/omega-latent-carrier
 
+- **omega-eden-perception**  
+  Role: pre-perception purity lens (Eden score).  
+  Measures source structural coherence before drift.
+
+Repo: https://github.com/Tuttotorna/omega-eden-perception
+
 ---
 
 ## Hard Boundaries (enforced by architecture)
 
 1) **OMNIA measures. It never decides.**  
 2) **OMNIAMIND may simulate cognition. It does not certify truth.**  
-3) **OMNIA-LIMIT terminates admissible processing. It does not “try harder”.**  
-4) Any policy, moderation, action, or decision logic must live **outside** OMNIA/OMNIA-LIMIT.
+3) **OMNIA-RADAR detects opportunity. It does not recommend action.**  
+4) **OMNIA-LIMIT terminates admissible processing. It does not “try harder”.**  
+5) Any policy, moderation, trading, or action logic must live **outside** OMNIA/OMNIA-LIMIT.
 
 ---
 
@@ -119,6 +153,7 @@ If present, create `lon-mirror/repos.json` with the following structure:
     "dual-echo-perception",
     "OMNIAMIND",
     "OMNIA",
+    "OMNIA-RADAR",
     "omnia-limit",
     "decision-layer-external"
   ],
@@ -144,9 +179,19 @@ If present, create `lon-mirror/repos.json` with the following structure:
       "url": "https://github.com/Tuttotorna/OMNIA"
     },
     {
+      "name": "OMNIA-RADAR",
+      "role": "structural_opportunity_layer",
+      "url": "https://github.com/Tuttotorna/OMNIA-RADAR"
+    },
+    {
       "name": "omnia-limit",
       "role": "boundary_termination_layer",
       "url": "https://github.com/Tuttotorna/omnia-limit"
+    },
+    {
+      "name": "omnia-human-trajectory",
+      "role": "phenomenic_input_layer",
+      "url": "https://github.com/Tuttotorna/omnia-human-trajectory"
     },
     {
       "name": "omega-method",
@@ -162,6 +207,11 @@ If present, create `lon-mirror/repos.json` with the following structure:
       "name": "omega-latent-carrier",
       "role": "omega_tooling_carrier",
       "url": "https://github.com/Tuttotorna/omega-latent-carrier"
+    },
+    {
+      "name": "omega-eden-perception",
+      "role": "omega_tooling_eden_purity",
+      "url": "https://github.com/Tuttotorna/omega-eden-perception"
     }
   ]
 }
