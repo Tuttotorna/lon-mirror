@@ -1,5 +1,5 @@
 """
-OMNIA ICE (Impossibility & Confidence Envelope) v0.2
+OMNIA ICE (Impossibility & Confidence Envelope) v0.2 — FIXED
 Author: Massimiliano Brighindi (MB-X.01 / OMNIA)
 
 Goal:
@@ -15,6 +15,11 @@ Architecture boundary (critical):
     - Flags route attention (which lens to inspect), they do NOT override thresholds
     - Confidence = measurement quality (signal reliability), NOT outcome certainty
     - Border instability (Ω near threshold) always escalates, never "targeted doubt"
+
+CRITICAL FIX:
+    - Ω is treated as *coherence/health* score (higher = better).
+    - Structural risk must be inverted: risk_struct = 1 - Ω
+    - Previously risk_struct = Ω made PASS nearly impossible for high Ω.
 """
 
 from __future__ import annotations
@@ -34,13 +39,13 @@ class ICEStatus(str, Enum):
 @dataclass
 class ICEInput:
     # ----- primary measurement -----
-    omega_total: float                          # unified structural instability/health proxy (0..1 preferred)
-    lens_scores: Dict[str, float]               # e.g. {"BASE":..., "TIME":..., "CAUSA":..., "TOKEN":..., "LCR":...}
+    omega_total: float                          # unified structural coherence/health proxy (0..1 preferred; higher = better)
+    lens_scores: Dict[str, float]               # routing only; semantics may vary per lens
     lens_metadata: Dict[str, Dict[str, Any]]    # per-lens meta; may include reliability/quality flags
 
     # ----- optional external coherence (e.g., LCR / checks) -----
-    omega_ext: Optional[float] = None           # 0..1 (higher = more coherent by your convention)
-    gold_match: Optional[float] = None          # 1.0/0.0 if dataset-gold available
+    omega_ext: Optional[float] = None           # 0..1 (higher = more coherent)
+    gold_match: Optional[float] = None          # 1.0/0.0 if dataset-gold available (higher = better)
 
     # ----- ambiguity (underdetermination / multi-interpretation) -----
     ambiguity_score: float = 0.0                # 0..1 higher = more ambiguous
@@ -95,10 +100,12 @@ def _derive_attention(
 ) -> List[str]:
     """
     Flags route attention only.
+
     Heuristics:
-      - prioritize lenses with low reliability/quality
-      - then lenses with high local instability score
-      - if global ambiguity high, prioritize TOKEN/LCR if present (language ambiguity / coherence check)
+      1) prioritize lenses with low reliability/quality
+      2) then lenses with high "problem score" (as provided)
+      3) if ambiguity high, prioritize TOKEN/LCR if present
+      4) if signal reliability low, force LCR check if exists
     """
     attention: List[str] = []
 
@@ -108,8 +115,7 @@ def _derive_attention(
         if q is not None and _safe_float(q, 1.0) < 0.85:
             attention.append(lname)
 
-    # 2) high lens score (interpreted as "instability contribution") next
-    # (if your lens scores are inverted, swap ordering later; this is routing only)
+    # 2) high lens score next (routing only)
     if lens_scores:
         ranked = sorted(lens_scores.items(), key=lambda kv: _safe_float(kv[1], 0.0), reverse=True)
         for lname, _ in ranked:
@@ -122,11 +128,11 @@ def _derive_attention(
             if hint in (lens_scores or {}) and hint not in attention:
                 attention.insert(0, hint)
 
-    # 4) if measurement quality is low, force re-check on LCR if exists
+    # 4) low measurement reliability => check LCR if present
     if signal_reliability < 0.70 and "LCR" in (lens_scores or {}) and "LCR" not in attention:
         attention.insert(0, "LCR")
 
-    # De-dup while preserving order
+    # de-dup preserve order
     seen = set()
     out: List[str] = []
     for a in attention:
@@ -180,11 +186,10 @@ def ice_gate(
     is_boundary = boundary_distance <= margin
 
     # ---- 1) Structural risk proxy ----
-    # risk_struct in [0,1], monotone with omega_total
-    # Interpreting omega_total as instability magnitude: higher => higher risk
-    risk_struct = _clamp01(omega_total)
+    # Ω is coherence/health (higher = better) -> risk must be inverted.
+    risk_struct = _clamp01(1.0 - omega_total)
 
-    # ---- 2) External component (omega_ext): higher means more coherent => lower risk ----
+    # ---- 2) External component (omega_ext): higher = more coherent -> lower risk ----
     if x.omega_ext is None:
         risk_ext = 0.5
         ext_available = False
@@ -192,7 +197,7 @@ def ice_gate(
         risk_ext = 1.0 - _clamp01(_safe_float(x.omega_ext, 0.5))
         ext_available = True
 
-    # ---- 3) Gold component (if present) ----
+    # ---- 3) Gold component (if present): higher match -> lower risk ----
     if x.gold_match is None:
         risk_gold = 0.5
         gold_available = False
@@ -210,8 +215,10 @@ def ice_gate(
     # ---- 5) Confidence (measurement quality), penalize ambiguity and low signal reliability ----
     # Base confidence is complement of impossibility.
     base_conf = 1.0 - impossibility
-    # Ambiguity reduces usefulness of confidence (not outcome truth, but permission reliability).
+
+    # Ambiguity reduces usefulness of confidence (permission reliability).
     conf_after_ambiguity = _clamp01(base_conf * (1.0 - 0.75 * ambiguity))
+
     # Signal reliability gates measurement quality.
     confidence = _clamp01(conf_after_ambiguity * (0.5 + 0.5 * sigrel))
 
@@ -243,11 +250,15 @@ def ice_gate(
         "threshold": thr,
         "margin": margin,
         "boundary_distance": boundary_distance,
+
+        # risk proxies (all in [0,1], higher = worse)
         "risk_struct": risk_struct,
         "risk_ext": risk_ext,
         "risk_gold": risk_gold,
+
         "ext_available": ext_available,
         "gold_available": gold_available,
+
         "ambiguity": ambiguity,
         "signal_reliability": sigrel,
         "attention": attention,
