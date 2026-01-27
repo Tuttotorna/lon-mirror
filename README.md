@@ -1,3 +1,8 @@
+## Canonical Index
+
+- Ecosystem map: `ECOSYSTEM.md`
+- Machine index: `repos.json`
+
 # OMNIA — Unified Structural Measurement Engine
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18358159.svg)](https://doi.org/10.5281/zenodo.18358159)
