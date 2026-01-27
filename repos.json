@@ -1,0 +1,70 @@
+{
+  "ecosystem": "MB-X.01 / OMNIA",
+  "canonical_hub": "https://github.com/Tuttotorna/lon-mirror",
+  "canonical_map": "https://github.com/Tuttotorna/lon-mirror/blob/main/ECOSYSTEM.md",
+  "chain": [
+    "dual-echo-perception",
+    "OMNIAMIND",
+    "OMNIA",
+    "OMNIA-RADAR",
+    "omnia-limit",
+    "decision-layer-external"
+  ],
+  "repos": [
+    {
+      "name": "lon-mirror",
+      "role": "canonical_hub",
+      "url": "https://github.com/Tuttotorna/lon-mirror"
+    },
+    {
+      "name": "dual-echo-perception",
+      "role": "foundation_theory",
+      "url": "https://github.com/Tuttotorna/dual-echo-perception"
+    },
+    {
+      "name": "OMNIAMIND",
+      "role": "experimental_cognition_layer",
+      "url": "https://github.com/Tuttotorna/OMNIAMIND"
+    },
+    {
+      "name": "OMNIA",
+      "role": "measurement_engine",
+      "url": "https://github.com/Tuttotorna/OMNIA"
+    },
+    {
+      "name": "OMNIA-RADAR",
+      "role": "structural_opportunity_layer",
+      "url": "https://github.com/Tuttotorna/OMNIA-RADAR"
+    },
+    {
+      "name": "omnia-limit",
+      "role": "boundary_termination_layer",
+      "url": "https://github.com/Tuttotorna/omnia-limit"
+    },
+    {
+      "name": "omnia-human-trajectory",
+      "role": "phenomenic_input_layer",
+      "url": "https://github.com/Tuttotorna/omnia-human-trajectory"
+    },
+    {
+      "name": "omega-method",
+      "role": "omega_tooling_method",
+      "url": "https://github.com/Tuttotorna/omega-method"
+    },
+    {
+      "name": "omega-translator",
+      "role": "omega_tooling_translation",
+      "url": "https://github.com/Tuttotorna/omega-translator"
+    },
+    {
+      "name": "omega-latent-carrier",
+      "role": "omega_tooling_carrier",
+      "url": "https://github.com/Tuttotorna/omega-latent-carrier"
+    },
+    {
+      "name": "omega-eden-perception",
+      "role": "omega_tooling_eden_purity",
+      "url": "https://github.com/Tuttotorna/omega-eden-perception"
+    }
+  ]
+}
