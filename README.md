@@ -7,7 +7,7 @@
 
 [![DOI](https://zenodo.org/badge/18391982.svg)](https://zenodo.org/doi/10.5281/zenodo.18391982)
 
-**Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV · INFERENCE · SI**  
+**Ω · Ω̂ · SEI · IRI · OMNIA-LIMIT · τ · SCI · CG · OPI · PV · INFERENCE · SI · GOV**  
 **MB-X.01**
 
 **Author:** Massimiliano Brighindi
@@ -117,6 +117,7 @@ OMNIA
 → OPI (Observer Perturbation Index)
 → PV (Perturbation Vector)
 → SI (Structural Indistinguishability)
+→ OMNIA-GOV (Trajectory Certification)
 
 Each step is measured, never inferred.
 
@@ -319,7 +320,49 @@ omnia/meta/structural_indistinguishability.py
 
 ---
 
-15. Experimental Module — Prime Regime Sensor
+15. OMNIA-GOV — Trajectory Certification Layer (NEW)
+
+Hallucinations are local failures.
+The next failure class is global: irreversible trajectory collapse.
+
+OMNIA-GOV is a deterministic governance layer that consumes OMNIA measurements and certifies whether an action or plan is structurally admissible.
+
+OMNIA-GOV introduces no semantics and no learning.
+
+It provides:
+
+CVI — Constraint Violation Index
+
+IRI_act — Irreversibility in action-space
+
+HCI — Hypercoherence Collapse Index
+
+SNRC-ACT — Boundary certificate for action-space
+
+
+Output:
+
+ALLOW
+
+BOUNDARY_ONLY
+
+REFUSE
+
+
+Implementation:
+
+omnia/gov/
+  policy.py
+  metrics.py
+  invariants.py
+  types.py
+
+This extends OMNIA from representation measurement to trajectory certification, while preserving the non-decision constraint: measurement first, enforcement external.
+
+
+---
+
+16. Experimental Module — Prime Regime Sensor
 
 OMNIA can be applied to prime number sequences as a non-semantic structural regime sensor.
 
@@ -352,13 +395,14 @@ examples/prime_gap_knn_demo.py
 
 ---
 
-16. Repository Structure
+17. Repository Structure
 
 omnia/
   inference/
   lenses/
   meta/
   runtime/
+  gov/
   omega_set.py
   sei.py
   iri.py
@@ -379,7 +423,7 @@ import-safe
 
 ---
 
-17. What OMNIA Is Not
+18. What OMNIA Is Not
 
 OMNIA is not:
 
@@ -401,16 +445,15 @@ OMNIA is a measurement instrument.
 
 ---
 
-18. License
+19. License
 
 MIT License.
 
 
 ---
 
-19. Citation
+20. Citation
 
 Brighindi, M.
 OMNIA — Unified Structural Measurement Engine (MB-X.01)
 https://github.com/Tuttotorna/lon-mirror
-
