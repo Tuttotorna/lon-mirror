@@ -1,454 +1,160 @@
-# MB-X.01 / OMNIABASE / OMNIA — ECOSYSTEM MAP
+# MB-X.01 / L.O.N. Ecosystem
 
-## Status
+This file defines the canonical public map of the MB-X.01 / Logical Origin Node ecosystem.
 
-This document defines the current ecosystem map for the MB-X.01 / OMNIABASE / OMNIA lineage.
-
-Its purpose is to preserve architectural clarity.
-
-The ecosystem should not be read as a flat collection of related repositories.
-It should be read as a layered structure with distinct roles.
+The ecosystem should be read as a layered architecture, not as a flat list of repositories.
 
 ---
 
-## 1. Core architectural rule
-
-Not every repository in the ecosystem plays the same role.
-
-A repository may function as:
-
-- umbrella framework repository
-- canonical branch repository
-- branch implementation or deep operational core
-- epistemic pre-layer
-- satellite or adjacent repository
-- historical or contextual repository
-
-These roles must remain distinct.
-
-Architectural clarity matters more than chronological history.
-
----
-
-## 2. Umbrella framework
-
-### `OMNIABASE`
-
-Role:
-
-the general umbrella repository of the framework.
-
-Function:
-
-- define the foundational principle
-- define the common architecture
-- define the canonical branches
-- define the shared lexicon
-- define the philosophical and epistemic scope
-- map the ecosystem as a whole
-
-Core principle:
-
-> a phenomenon should not be treated as exhausted by a single representation.
-
-This repository is the constitutional center of the framework.
-
-It is not the place for branch-local benchmark depth, implementation overload, or experimental accumulation.
-
----
-
-## 3. Canonical branches
-
-From the Omniabase principle, three canonical branches follow.
-
----
-
-### A. Diagnostics / Structural Measurement
-
-Central question:
-
-> when something looks stable in one representation, does that stability survive when representation changes?
-
-Function:
-
-- measure robustness
-- detect fragility
-- detect drift
-- detect saturation
-- detect collapse proximity
-- expose representation dependence
-
-Canonical public branch repository:
-
-- `OMNIA`
-
-Deep operational / historical / research core:
-
-- `lon-mirror`
-
-Related branch repositories:
-
-- `omnia-limit`
-- `Pre-Deployment-Structural-Gate`
-- `OMNIA-RADAR`
-
-Interpretation:
-
-`OMNIA` is the clean branch-facing repository.  
-`lon-mirror` is the deeper public operational core of the same diagnostics lineage.
-
----
-
-### B. Coordinate Discovery
-
-Central question:
-
-> what hidden structure becomes visible only when a phenomenon is observed across multiple codings rather than a single one?
-
-Function:
-
-- expose hidden coordinates
-- identify latent factors
-- detect regime separations
-- produce structural maps
-- provide better descriptive axes for modeling
-
-Canonical repository:
-
-- `omniabase-coordinate-discovery`
-
-Interpretation:
-
-This is the generative branch of Omniabase.
-
----
-
-### C. Cross-Representation Translation
-
-Central question:
-
-> when two descriptions appear different, how much are they still describing the same structural object?
-
-Function:
-
-- measure compatibility
-- estimate invariant residue across descriptions
-- align formalisms
-- map translatability
-- detect structural incompatibility
-
-Current repositories aligned with this branch:
-
-- `omega-translator`
-- `HASC-Human-AI-Structural-Compatibility-Protocol`
-
-Interpretation:
-
-This branch is conceptually clear, but still more distributed than Diagnostics.
-
----
-
-## 4. Epistemic pre-layer
-
-Some repositories do not define a canonical branch directly, but prepare the conceptual move into Omniabase.
-
-### `observer-suspension`
-
-Role:
-
-epistemic pre-layer.
-
-Function:
-
-- reduce observer privilege
-- weaken single-view sufficiency
-- prepare the transition from observer-centered description to representation-variable structural analysis
-
-Interpretation:
-
-This repository is not the whole of Omniabase.
-
-It is one of its strongest conceptual gateways.
-
----
-
-## 5. Upstream and downstream lineage inside the diagnostics branch
-
-Inside the diagnostics lineage, the canonical chain is:
+## Core boundary
 
 ```text
-Dual-Echo -> OMNIAMIND -> OMNIA -> OMNIA-RADAR -> OMNIA-LIMIT -> Decision Layer (external)
-
-Role of each layer
-
-Dual-Echo -> theoretical origin
-
-OMNIAMIND -> upstream structural dynamics before final emission
-
-OMNIA -> canonical post-hoc structural measurement engine
-
-OMNIA-RADAR -> residual structural opportunity / continuation analysis
-
-OMNIA-LIMIT -> structural stop / saturation boundary
-
-Decision Layer -> action-taking layer, always external
-
-
-Non-negotiable rule:
-
-measurement != cognition != decision
-
-This chain belongs inside the Diagnostics lineage. It does not define the whole OMNIABASE framework.
-
-
----
-
-6. Position of lon-mirror
-
-lon-mirror must now be read in a narrower and more precise way than before.
-
-It is:
-
-not the umbrella framework
-
-not the total center of the ecosystem
-
-not the whole of OMNIA
-
-not the whole of MB-X.01
-
-
-It is:
-
-the historical core of the OMNIA diagnostics lineage
-
-the operational archive of the branch
-
-the deeper engineering and research repository behind the cleaner OMNIA branch repo
-
-the place where runtime paths, benchmark depth, and historical branch memory are preserved
-
-
-Short formula:
-
-OMNIABASE defines the framework.
-OMNIA defines the branch.
-lon-mirror preserves the deepest operational core of that branch.
-
-
----
-
-7. Other important repositories
-
-The ecosystem also contains repositories that are historically important, adjacent, or satellite in role.
-
-These may include:
-
-dual-echo-perception
-
-omega-method
-
-reason-bridge
-
-omega-latent-carrier
-
-omega-eden-perception
-
-omnia-gsm8k-claim
-
-omnia-human-trajectory
-
-MATHEMATICS-WITHOUT-REPRESENTATION
-
-Omniabase-MBX01
-
-MetaBase-AdaptiveLogic
-
-MetaBase-MBX01
-
-ottavia-base8-mb01
-
-
-These repositories may preserve:
-
-historical context
-
-adjacent formal ideas
-
-exploratory directions
-
-conceptual satellites
-
-branch-adjacent experiments
-
-
-They may influence the ecosystem without defining its main architecture.
-
-
----
-
-8. Recommended reading order
-
-A newcomer should not read the ecosystem randomly.
-
-Recommended order:
-
-Step 1 — Framework
-
-OMNIABASE
-
-
-Step 2 — Philosophical / epistemic gateway
-
-observer-suspension
-
-
-Step 3 — Canonical branch repositories
-
-OMNIA
-
-omniabase-coordinate-discovery
-
-omega-translator
-
-HASC-Human-AI-Structural-Compatibility-Protocol
-
-
-Step 4 — Deep diagnostics core
-
-lon-mirror
-
-omnia-limit
-
-Pre-Deployment-Structural-Gate
-
-OMNIA-RADAR
-
-
-Step 5 — Historical / adjacent satellites
-
-dual-echo-perception
-
-omega-method
-
-reason-bridge
-
-and related repositories
-
-
-This order preserves clarity: framework first, branch next, depth later.
-
-
----
-
-9. Non-negotiable distinctions
-
-The ecosystem must preserve the following separations.
-
-A. Framework != branch
-
-OMNIABASE is broader than any one branch.
-
-B. Branch != deep branch core
-
-OMNIA is the branch-facing diagnostics repository. lon-mirror is its deeper operational core.
-
-C. Branch != satellite
-
-A repository may be relevant without being canonical.
-
-D. Epistemic pre-layer != framework center
-
-A conceptual gateway does not define the whole architecture.
-
-E. Historical relevance != present architectural centrality
-
-A repository may matter historically without being the current center.
-
-These distinctions protect legibility.
-
-
----
-
-10. Strategic orientation
-
-At the current stage, the correct external orientation is:
-
-OMNIABASE -> framework-level identity
-
-OMNIA -> first strong operational face of the ecosystem
-
-lon-mirror -> deep diagnostics archive / operational lab
-
-Coordinate Discovery -> next frontier branch
-
-Translation -> compatibility and bridge branch
-
-Observer Suspension -> epistemic gateway
-
-
-This preserves both credibility and conceptual breadth.
-
-
----
-
-11. Compact map
-
-OMNIABASE
-├── Diagnostics / Structural Measurement
-│   ├── OMNIA
-│   ├── lon-mirror
-│   ├── OMNIA-RADAR
-│   ├── OMNIA-LIMIT
-│   └── Pre-Deployment-Structural-Gate
-│
-├── Coordinate Discovery
-│   └── omniabase-coordinate-discovery
-│
-├── Cross-Representation Translation
-│   ├── omega-translator
-│   └── HASC-Human-AI-Structural-Compatibility-Protocol
-│
-└── Epistemic Pre-layer
-    └── observer-suspension
-
-Additional repositories remain satellites, historical layers, or adjacent lines unless explicitly reclassified.
-
-
----
-
-12. Summary
-
-The current ecosystem should be read through one clear rule:
-
-the framework must remain more legible than its history.
-
-Shortest valid formula:
-
-OMNIABASE = general multirepresentational framework
-OMNIA = canonical Diagnostics branch
-lon-mirror = historical and operational core of that branch
-Coordinate Discovery = generative branch
-Cross-Representation Translation = compatibility branch
-observer-suspension = epistemic pre-layer
-
----
-
-<!-- BEGIN OMNIAMIND ECOSYSTEM NODE -->
-
-## OMNIAMIND
-
-OMNIAMIND is the structural cognition orchestration node of the MB-X.01 / L.O.N. ecosystem.
-
-- Repository: https://github.com/Tuttotorna/OMNIAMIND
-- DOI: https://doi.org/10.5281/zenodo.19513010
-- Ecosystem note: [`docs/OMNIAMIND_ECOSYSTEM_NODE.md`](docs/OMNIAMIND_ECOSYSTEM_NODE.md)
-
-```text
-OMNIAMIND organizes.
-OMNIA measures.
-OMNIA-LIMIT interrupts.
-Decision remains external.
+measurement != inference != decision
 ```
 
-<!-- END OMNIAMIND ECOSYSTEM NODE -->
+This boundary is non-negotiable.
+
+Measurement can produce signals.
+Signals can constrain inference.
+Inference can inform decisions.
+But measurement is not decision.
+
+---
+
+## Layer map
+
+```text
+L.O.N. / MB-X.01
+  ↓
+lon-mirror
+  ↓
+Representation layer:
+  OMNIABASE
+
+Measurement layer:
+  OMNIA
+
+Orchestration layer:
+  OMNIAMIND
+
+Boundary layer:
+  omnia-limit
+
+Residual / drift layer:
+  OMNIA-RADAR
+
+Validation layers:
+  OMNIA-INVARIANCE
+  OMNIA-VALIDATION
+
+Applied / vertical layers:
+  OMNIA-SECURITY
+  OMNIA-CRYPTO
+  OMNIA-THREE-BODY
+  OMNIA-CONSTANT
+```
+
+---
+
+## Repository roles
+
+### lon-mirror
+
+Canonical ecosystem hub, map, entrypoint, and boundary-preserving navigation layer.
+
+Repository: https://github.com/Tuttotorna/lon-mirror
+
+### OMNIABASE
+
+Representation and multi-base observation layer.
+
+It asks what remains invariant when numbers or structures are observed across representations.
+
+Repository: https://github.com/Tuttotorna/OMNIABASE
+
+### OMNIA
+
+Structural measurement core.
+
+It measures coherence, fragility, invariance, instability, and structural admissibility after the fact.
+
+Repository: https://github.com/Tuttotorna/OMNIA
+
+### OMNIAMIND
+
+Structural cognition orchestration layer.
+
+It organizes reasoning or cognitive pipelines around post-hoc structural measurement.
+
+Repository: https://github.com/Tuttotorna/OMNIAMIND
+
+### omnia-limit
+
+Terminal boundary layer.
+
+It certifies when further structural processing is non-informative in the same admissible space.
+
+Repository: https://github.com/Tuttotorna/omnia-limit
+
+### OMNIA-RADAR
+
+Residual and drift detection layer.
+
+It surfaces structural drift, residual signal, or instability patterns.
+
+Repository: https://github.com/Tuttotorna/OMNIA-RADAR
+
+### OMNIA-INVARIANCE
+
+Invariance validation layer.
+
+It tests how structural measurements behave under controlled transformations.
+
+Repository: https://github.com/Tuttotorna/OMNIA-INVARIANCE
+
+### OMNIA-VALIDATION
+
+External validation evidence layer.
+
+It should record reproducible runs, evidence, failures, limitations, and validation scope.
+
+Repository: https://github.com/Tuttotorna/OMNIA-VALIDATION
+
+### OMNIA-SECURITY
+
+Security-oriented verticalization.
+
+Repository: https://github.com/Tuttotorna/OMNIA-SECURITY
+
+### OMNIA-CRYPTO
+
+Cryptographic-behavior verticalization.
+
+Repository: https://github.com/Tuttotorna/OMNIA-CRYPTO
+
+### OMNIA-THREE-BODY
+
+Experimental structural dynamics branch.
+
+Repository: https://github.com/Tuttotorna/OMNIA-THREE-BODY
+
+### OMNIA-CONSTANT
+
+Post-analysis / falsification branch for omega-region behavior.
+
+It should be read as investigation and falsification, not as a declared universal constant.
+
+Repository: https://github.com/Tuttotorna/OMNIA-CONSTANT
+
+---
+
+## Safe ecosystem reading
+
+```text
+OMNIABASE observes representation.
+OMNIA measures structure.
+OMNIAMIND orchestrates reasoning flow.
+OMNIA-LIMIT declares terminal boundary.
+Validation records evidence and failure.
+Decision remains external.
+```

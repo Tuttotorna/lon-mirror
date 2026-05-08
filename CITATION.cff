@@ -1,47 +1,9 @@
 cff-version: 1.2.0
-message: "If you use this work, please cite it as indicated below."
-title: "MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.0.1"
-abstract: >
-  Verified, machine-readable mirror of the Logical Origin Node (L.O.N.) by Massimiliano Brighindi.
-  The MB-X.01 project integrates TruthΩ, Lya, Omniabase, Third Observer, UPE, and Hypercoherence
-  as a self-consistent cognitive architecture for measuring logical and semantic coherence
-  (TruthΩ → Co⁺ → Score⁺ → H(X)).
+message: "If you use this repository, please cite the archived ecosystem hub record."
+title: "MB-X.01 · Logical Origin Node (L.O.N.) — Ecosystem Hub"
 authors:
-  - family-names: Brighindi
-    given-names: Massimiliano
-    email: brighissimo@gmail.com
-    affiliation: "Logical Origin Node (L.O.N.) — Neocities / GitHub Mirror"
-version: "1.0.1"
-license: MIT
+  - family-names: "Brighindi"
+    given-names: "Massimiliano"
 repository-code: "https://github.com/Tuttotorna/lon-mirror"
-url: "https://massimiliano.neocities.org/"
-identifiers:
-  - type: doi
-    value: "10.5281/zenodo.17270742"
-keywords:
-  - logical-origin-node
-  - mb-x.01
-  - truth-omega
-  - co-plus
-  - score-plus
-  - hypercoherence
-  - lya
-  - omniabase
-  - third-observer
-  - upe
-  - cognitive-architecture
-  - coherence-algorithm
-  - reasoning-audit
-  - bias-reduction
-  - self-referential-logic
-date-released: "2025-10-26"
-preferred-citation:
-  type: article
-  title: "MB-X.01 · Logical Origin Node (L.O.N.) — Mirror + Engine v1.0.1"
-  authors:
-    - family-names: Brighindi
-      given-names: Massimiliano
-  journal: "Zenodo"
-  year: 2025
-  doi: "10.5281/zenodo.17270742"
-  url: "https://massimiliano.neocities.org/"
+doi: "10.5281/zenodo.19857066.svg"
+date-released: "2026-05-08"
