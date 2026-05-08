@@ -2,7 +2,6 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19857066.svg)](https://doi.org/10.5281/zenodo.19857066)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19857066.svg.svg)](https://doi.org/10.5281/zenodo.19857066)
 
 **lon-mirror** is the canonical public hub for the **MB-X.01 / Logical Origin Node (L.O.N.)** ecosystem.
 
