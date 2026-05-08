@@ -50,7 +50,7 @@ This cleanup strengthens public readability:
 
 ## DOI
 
-https://doi.org/10.5281/zenodo.19857066.svg
+https://doi.org/10.5281/zenodo.19857066
 
 ## Interpretation
 
