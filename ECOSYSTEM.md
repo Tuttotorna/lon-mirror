@@ -432,3 +432,23 @@ Coordinate Discovery = generative branch
 Cross-Representation Translation = compatibility branch
 observer-suspension = epistemic pre-layer
 
+---
+
+<!-- BEGIN OMNIAMIND ECOSYSTEM NODE -->
+
+## OMNIAMIND
+
+OMNIAMIND is the structural cognition orchestration node of the MB-X.01 / L.O.N. ecosystem.
+
+- Repository: https://github.com/Tuttotorna/OMNIAMIND
+- DOI: https://doi.org/10.5281/zenodo.19513010
+- Ecosystem note: [`docs/OMNIAMIND_ECOSYSTEM_NODE.md`](docs/OMNIAMIND_ECOSYSTEM_NODE.md)
+
+```text
+OMNIAMIND organizes.
+OMNIA measures.
+OMNIA-LIMIT interrupts.
+Decision remains external.
+```
+
+<!-- END OMNIAMIND ECOSYSTEM NODE -->
