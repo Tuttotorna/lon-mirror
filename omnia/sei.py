@@ -2,13 +2,16 @@
 # Massimiliano Brighindi
 #
 # Purpose:
-#   Measure marginal structural yield: ΔΩ / ΔC
+#   Measure marginal structural yield: Delta Omega / Delta Cost.
 #   - post-hoc
 #   - deterministic
 #   - model-agnostic
-#   - no semantics, no policy, no stop rules
+#   - semantics-free
 #
-# SEI(k) = (Ω(k) - Ω(k-1)) / (C(k) - C(k-1) + eps)
+# SEI(k) = (Omega(k) - Omega(k-1)) / (Cost(k) - Cost(k-1) + eps)
+#
+# Boundary:
+#   measurement != inference != decision
 
 from __future__ import annotations
 
@@ -26,17 +29,23 @@ class SEIResult:
 def _moving_average(values: List[Optional[float]], window: int) -> List[Optional[float]]:
     if window <= 1:
         return values[:]
-    out: List[Optional[float]] = [None] * len(values)
-    buf: List[float] = []
-    for i, v in enumerate(values):
-        if v is None:
-            out[i] = None
+
+    output: List[Optional[float]] = [None] * len(values)
+    buffer: List[float] = []
+
+    for i, value in enumerate(values):
+        if value is None:
+            output[i] = None
             continue
-        buf.append(v)
-        if len(buf) > window:
-            buf.pop(0)
-        out[i] = sum(buf) / len(buf)
-    return out
+
+        buffer.append(float(value))
+
+        if len(buffer) > window:
+            buffer.pop(0)
+
+        output[i] = sum(buffer) / len(buffer)
+
+    return output
 
 
 def sei_series(
@@ -47,52 +56,101 @@ def sei_series(
     flatness_window: int = 0,
 ) -> SEIResult:
     """
-    Compute SEI over paired sequences (omega, cost).
+    Compute SEI over paired sequences.
 
     Inputs:
-      omega[k]: structural score at step k (e.g., Ω-total)
-      cost[k]: cumulative cost at step k (tokens, iterations, latency, etc.), must be non-decreasing
+      omega[k]: structural score at step k
+      cost[k]: cumulative cost at step k
 
     Returns:
-      SEIResult with:
+      SEIResult:
         - sei: [None, sei(1), ..., sei(n-1)]
-        - sei_smooth: optional moving average of sei (if smooth_window>1)
-        - flatness: optional mean(|sei_smooth|) over last flatness_window valid points
+        - sei_smooth: optional moving average
+        - flatness: optional mean absolute SEI over final window
     """
-    o = list(omega)
-    c = list(cost)
+    omega_values = [float(x) for x in omega]
+    cost_values = [float(x) for x in cost]
 
-    if len(o) != len(c):
-        raise ValueError(f"omega and cost must have the same length (got {len(o)} vs {len(c)})")
-    if len(o) < 2:
-        return SEIResult(sei=[None] * len(o), sei_smooth=None, flatness=None)
+    if len(omega_values) != len(cost_values):
+        raise ValueError(
+            f"omega and cost must have the same length "
+            f"(got {len(omega_values)} vs {len(cost_values)})"
+        )
+
+    if len(omega_values) < 2:
+        return SEIResult(
+            sei=[None] * len(omega_values),
+            sei_smooth=None,
+            flatness=None,
+        )
 
     sei: List[Optional[float]] = [None]
-    for k in range(1, len(o)):
-        dO = o[k] - o[k - 1]
-        dC = c[k] - c[k - 1]
-        if dC <= 0:
-            # cost must be strictly increasing to interpret marginal yield;
-            # if not, treat as 0 yield (or consider raising)
+
+    for k in range(1, len(omega_values)):
+        delta_omega = omega_values[k] - omega_values[k - 1]
+        delta_cost = cost_values[k] - cost_values[k - 1]
+
+        if delta_cost <= 0:
             sei.append(0.0)
         else:
-            sei.append(dO / (dC + eps))
+            sei.append(delta_omega / (delta_cost + eps))
 
     sei_smooth: Optional[List[Optional[float]]] = None
+
     if smooth_window and smooth_window > 1:
         sei_smooth = _moving_average(sei, smooth_window)
 
     flatness: Optional[float] = None
+
     if flatness_window and flatness_window > 1:
-        src = sei_smooth if sei_smooth is not None else sei
+        source = sei_smooth if sei_smooth is not None else sei
         tail: List[float] = []
-        for v in reversed(src):
-            if v is None:
+
+        for value in reversed(source):
+            if value is None:
                 continue
-            tail.append(abs(v))
+
+            tail.append(abs(float(value)))
+
             if len(tail) >= flatness_window:
                 break
+
         if tail:
             flatness = sum(tail) / len(tail)
 
-    return SEIResult(sei=sei, sei_smooth=sei_smooth, flatness=flatness)
+    return SEIResult(
+        sei=sei,
+        sei_smooth=sei_smooth,
+        flatness=flatness,
+    )
+
+
+class SEI:
+    """
+    Compatibility wrapper for legacy tests.
+
+    Expected usage:
+        from omnia.sei import SEI
+        sei = SEI(window=1, eps=1e-12)
+        sei.curve(omega_values, cost_values)
+
+    Boundary:
+        measurement != inference != decision
+    """
+
+    def __init__(self, window: int = 1, eps: float = 1e-12) -> None:
+        self.window = max(1, int(window))
+        self.eps = float(eps)
+
+    def curve(self, omega_values: Iterable[float], cost_values: Iterable[float]) -> List[float]:
+        result = sei_series(
+            omega=omega_values,
+            cost=cost_values,
+            eps=self.eps,
+            smooth_window=self.window,
+            flatness_window=0,
+        )
+
+        source = result.sei_smooth if result.sei_smooth is not None else result.sei
+
+        return [float(x) for x in source if x is not None]
