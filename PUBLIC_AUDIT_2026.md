@@ -6,19 +6,25 @@ This document summarizes the public consistency status of the MB-X.01 / OMNIA ec
 
 Audit timestamp:
 
+```text
 2026-05-09T07:16:52.305296+00:00
+```
 
 Final result:
 
+```text
 14 repositories audited
 PASS: 4
 CHECK: 10
 FAIL: 0
 Hard failures: none
+```
 
 The active public surface currently has:
 
+```text
 0 active hard failures
+```
 
 ---
 
@@ -32,7 +38,9 @@ It does not claim that the ecosystem is finished.
 
 It claims something narrower:
 
+```text
 The active public surface has no hard failures across the audited repositories.
+```
 
 The remaining CHECK items are historical warnings, mainly old markdown files, legacy material, or optional examples configured by the audit but not present in the repository.
 
@@ -44,7 +52,9 @@ Those warnings are not active install, test, import, DOI, citation, license, REA
 
 The architectural boundary is:
 
+```text
 measurement != inference != decision
+```
 
 This boundary is non-negotiable.
 
@@ -62,7 +72,9 @@ Decision remains external.
 
 The central measurement principle is:
 
+```text
 Structural truth = invariance under transformation
+```
 
 This does not mean semantic truth.
 
@@ -123,7 +135,9 @@ These repositories passed the active public surface checks but still contain his
 
 No repository had an active hard failure.
 
+```text
 FAIL: 0
+```
 
 ---
 
@@ -201,7 +215,9 @@ The audit does not claim:
 
 It only claims:
 
+```text
 The audited public active surface has zero hard failures.
+```
 
 ---
 
@@ -209,7 +225,10 @@ The audited public active surface has zero hard failures.
 
 The accurate public statement is:
 
-The MB-X.01 / OMNIA public ecosystem currently has zero active hard failures across the audited public surface. Remaining issues are historical markdown or legacy warnings, not active install, test, import, DOI, citation, license, README, or boundary failures.
+```text
+The MB-X.01 / OMNIA public ecosystem currently has zero active hard failures across the audited public surface.
+Remaining issues are historical markdown or legacy warnings, not active install, test, import, DOI, citation, license, README, or boundary failures.
+```
 
 ---
 
@@ -221,4 +240,6 @@ https://github.com/Tuttotorna/lon-mirror
 
 Boundary to preserve while reading the ecosystem:
 
+```text
 measurement != inference != decision
+```
