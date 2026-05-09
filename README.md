@@ -171,3 +171,24 @@ show where to start
 - decision remains external
 
 This section is a public boundary clarification. It does not change the repository core logic.
+
+---
+
+## Public Ecosystem Audit
+
+The current public audit summary is available here:
+
+[PUBLIC_AUDIT_2026.md](./PUBLIC_AUDIT_2026.md)
+
+Current audited public surface status:
+
+14 repositories audited
+0 active hard failures
+PASS: 4
+CHECK: 10
+FAIL: 0
+
+Boundary:
+
+measurement != inference != decision
+
