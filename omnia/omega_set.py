@@ -1,27 +1,21 @@
-# MB-X.01 / OMNIA — Ω̂ (Omega-set) Residue Estimator
+# MB-X.01 / OMNIA — Omega-set Residue Estimator
 # Massimiliano Brighindi
 #
 # Purpose:
-#   Formalize "Ω is deduced by subtraction":
-#   given multiple structural measurements under different representations/transforms,
-#   estimate the invariant residue (Ω̂) that survives them.
-#
-# Properties:
+#   Estimate the invariant residue that survives multiple structural measurements.
 #   - post-hoc
 #   - deterministic
-#   - semantics-free
 #   - model-agnostic
-#   - does not decide, does not optimize
+#   - semantics-free
 #
-# Minimal operational definition (v0.1):
-#   Given a set of scalar Omega observations {ω_i} produced under independent transforms,
-#   define:
-#     Ω̂ = robust_center({ω_i})          (median or trimmed-mean)
-#     dispersion = MAD({ω_i})           (robust spread)
-#     invariance = 1 / (1 + dispersion) (monotone map, higher = more invariant)
+# Minimal operational definition:
+#   Given scalar Omega observations {omega_i}:
+#     omega_hat = median({omega_i})
+#     dispersion = MAD({omega_i})
+#     invariance = 1 / (1 + dispersion)
 #
-# This is a minimal, defensible "residue" estimator for scalar Ω.
-# Higher-order residues (vector / per-lens) can be added without breaking v0.1.
+# Boundary:
+#   measurement != inference != decision
 
 from __future__ import annotations
 
@@ -41,60 +35,108 @@ class OmegaSetResult:
 
 
 def _median(xs: List[float]) -> float:
-    xs = sorted(xs)
-    n = len(xs)
-    mid = n // 2
-    if n % 2 == 1:
-        return xs[mid]
-    return 0.5 * (xs[mid - 1] + xs[mid])
+    values = sorted(float(x) for x in xs)
+    n = len(values)
 
-
-def _mad(xs: List[float], center: Optional[float] = None, eps: float = 1e-12) -> float:
-    if not xs:
+    if n == 0:
         return 0.0
-    c = _median(xs) if center is None else center
-    dev = [abs(x - c) for x in xs]
-    m = _median(dev)
-    return float(m + eps)
+
+    mid = n // 2
+
+    if n % 2 == 1:
+        return values[mid]
+
+    return 0.5 * (values[mid - 1] + values[mid])
+
+
+def _mad(xs: List[float], center: Optional[float] = None, eps: float = 0.0) -> float:
+    values = [float(x) for x in xs]
+
+    if not values:
+        return 0.0
+
+    c = _median(values) if center is None else float(center)
+    deviations = [abs(x - c) for x in values]
+
+    return float(_median(deviations) + eps)
 
 
 def omega_set(
     omegas: Iterable[float],
-    eps: float = 1e-12,
+    eps: float = 0.0,
     method: str = "median+mad",
 ) -> OmegaSetResult:
     """
-    Estimate Ω̂ (omega-hat) as the robust invariant residue of scalar Ω observations.
+    Estimate omega_hat as the robust invariant residue of scalar Omega observations.
 
     Inputs:
-      omegas: iterable of ω_i produced under different representations/transforms
-      eps: numerical stability
-      method: currently only 'median+mad' is supported (frozen v0.1)
+      omegas: scalar Omega observations under different representations / transforms
+      eps: optional numerical stabilizer for MAD
+      method: currently only 'median+mad'
 
     Returns:
-      OmegaSetResult:
-        - omega_hat: robust center (median)
-        - dispersion_mad: robust dispersion (MAD)
-        - invariance: 1 / (1 + dispersion_mad)
-        - range and count for audit
+      OmegaSetResult
     """
-    xs = [float(x) for x in omegas]
-    if len(xs) == 0:
+    values = [float(x) for x in omegas]
+
+    if len(values) == 0:
         raise ValueError("omegas must contain at least one value")
 
     if method != "median+mad":
-        raise ValueError("Only method='median+mad' is supported in v0.1")
+        raise ValueError("Only method='median+mad' is supported")
 
-    center = _median(xs)
-    disp = _mad(xs, center=center, eps=eps)
-    inv = 1.0 / (1.0 + disp)
+    center = _median(values)
+    dispersion = _mad(values, center=center, eps=eps)
+    invariance = 1.0 / (1.0 + dispersion)
 
     return OmegaSetResult(
         omega_hat=float(center),
-        dispersion_mad=float(disp),
-        invariance=float(inv),
-        n=len(xs),
-        min_omega=float(min(xs)),
-        max_omega=float(max(xs)),
+        dispersion_mad=float(dispersion),
+        invariance=float(invariance),
+        n=len(values),
+        min_omega=float(min(values)),
+        max_omega=float(max(values)),
         method=method,
     )
+
+
+class OmegaSet:
+    """
+    Compatibility wrapper for legacy tests.
+
+    Expected usage:
+        from omnia.omega_set import OmegaSet
+        OmegaSet(values).estimate()
+
+    Returned keys preserve legacy names:
+        median
+        mad
+        invariance
+        inv
+        n
+        min
+        max
+
+    Boundary:
+        measurement != inference != decision
+    """
+
+    def __init__(self, values: Iterable[float], eps: float = 0.0) -> None:
+        self.values = [float(x) for x in values]
+        self.eps = float(eps)
+
+        if not self.values:
+            raise ValueError("OmegaSet requires at least one value")
+
+    def estimate(self) -> dict:
+        result = omega_set(self.values, eps=self.eps)
+
+        return {
+            "median": result.omega_hat,
+            "mad": result.dispersion_mad,
+            "invariance": result.invariance,
+            "inv": result.invariance,
+            "n": result.n,
+            "min": result.min_omega,
+            "max": result.max_omega,
+        }
