@@ -16,9 +16,8 @@ Decision remains external.
 
 from __future__ import annotations
 
-from .prime_kernel import PrimeKernel, PrimeKernelResult
+from .prime_kernel import PrimeKernel
 
 __all__ = [
     "PrimeKernel",
-    "PrimeKernelResult",
 ]
