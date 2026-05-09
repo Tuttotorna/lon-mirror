@@ -10,14 +10,10 @@
 #
 # Core idea:
 #   If output quality can remain similar, but structural stability changes after returning,
-#   then we have irreversible structural damage (hysteresis).
+#   then we have irreversible structural damage.
 #
 # Minimal definition:
-#   IRI = max(0, Ω(A) - Ω(A'))
-#
-# Optional extras:
-#   - normalize by Ω(A) to obtain relative IRI
-#   - report cycle diagnostics
+#   IRI = max(0, Omega(A) - Omega(A'))
 
 from __future__ import annotations
 
@@ -45,15 +41,18 @@ def iri_cycle(
     Compute IRI for a hysteresis cycle A -> B -> A'.
 
     Inputs:
-      omega_a:       Ω at baseline state A
-      omega_a_prime: Ω after returning (A')
-      omega_b:       optional Ω at intermediate state B (for reporting only)
+      omega_a:       Omega at baseline state A
+      omega_a_prime: Omega after returning A'
+      omega_b:       optional Omega at intermediate state B
 
     Returns:
       IRIResult:
-        - iri_abs = max(0, Ω(A) - Ω(A'))
-        - iri_rel = iri_abs / (|Ω(A)| + eps)  (if Ω(A) != 0)
+        - iri_abs = max(0, Omega(A) - Omega(A'))
+        - iri_rel = iri_abs / abs(Omega(A))
     """
+    omega_a = float(omega_a)
+    omega_a_prime = float(omega_a_prime)
+
     iri_abs = omega_a - omega_a_prime
     if iri_abs < 0:
         iri_abs = 0.0
@@ -73,3 +72,20 @@ def iri_cycle(
         omega_b=(float(omega_b) if omega_b is not None else None),
         note=note,
     )
+
+
+class IRI:
+    """
+    Compatibility wrapper for legacy tests.
+
+    Expected usage:
+        from omnia.iri import IRI
+        iri = IRI()
+        iri.value(omega_A, omega_A_prime)
+
+    Boundary:
+        measurement != inference != decision
+    """
+
+    def value(self, omega_a: float, omega_a_prime: float) -> float:
+        return iri_cycle(omega_a, omega_a_prime).iri_abs
