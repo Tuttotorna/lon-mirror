@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
-from typing import Callable, Dict, Iterable, List, Mapping, Sequence, Tuple
+from typing import Callable, Dict, List, Sequence, Tuple
 
 
-# A "measurer" is anything that maps a representation -> scalar score Ω (or Ω-like).
+# A "measurer" is anything that maps a representation -> scalar score Ω or Ω-like.
 # It must be deterministic and semantics-free by design of OMNIA.
 Measurer = Callable[[str], float]
 
@@ -24,21 +25,20 @@ def _safe_div(a: float, b: float, eps: float = 1e-12) -> float:
 @dataclass(frozen=True)
 class ProjectionLossResult:
     """
-    Structural Projection Loss (SPL) measures how much structure is lost when you force
-    a "projection" (i.e., a privileged measurement basis / observer-induced constraint)
-    compared to an aperspective baseline.
+    Structural Projection Loss measures how much structure is lost when a projected
+    or privileged measurement regime is forced against an aperspective baseline.
 
-    It is NOT an interpretation.
-    It is a measured delta between two measurement regimes.
+    It is not interpretation.
+    It is not semantic judgment.
+    It is not decision.
 
     Definitions:
-      - Ω_ap: aperspective baseline (no privileged basis)
-      - Ω_proj: projected measurement (privileged basis enforced)
-      - SPL_abs = max(0, Ω_ap - Ω_proj)
-      - SPL_rel = SPL_abs / max(eps, Ω_ap)
-
-    If SPL is high, your measurement regime is collapsing structure.
+      omega_aperspective = aggregated aperspective score
+      omega_projected    = aggregated projected score
+      spl_abs            = max(0, omega_aperspective - omega_projected)
+      spl_rel            = spl_abs / omega_aperspective
     """
+
     omega_aperspective: float
     omega_projected: float
     spl_abs: float
@@ -48,21 +48,20 @@ class ProjectionLossResult:
 
 class MeasurementProjectionLoss:
     """
-    A minimal, closed operator that converts "observer/basis forcing" into a measurable cost.
+    Minimal Structural Projection Loss operator.
 
-    You provide:
-      - aperspective_measurers: a set of independent measurers that should NOT privilege a basis
-      - projected_measurers: a set of measurers that DO privilege a basis (projection), or
-        implement a constrained view (selection, asymmetry, irreversible filtering)
+    The operator compares two measurement regimes:
 
-    OMNIA logic:
-      - aggregate each group into one Ω via robust mean (trimmed mean) or median
-      - report the measured loss of structure when projection is introduced
+      1. Aperspective measurers:
+         independent measurements that should not privilege a single basis.
 
-    This is the missing bridge between:
-      - aperspective invariance
-      - observer perturbation
-      - "collapse" as measurement artifact
+      2. Projected measurers:
+         constrained or basis-forced measurements.
+
+    The result is a post-hoc structural delta.
+
+    Boundary:
+      measurement != inference != decision
     """
 
     def __init__(
@@ -79,6 +78,7 @@ class MeasurementProjectionLoss:
 
         if aggregator not in ("mean", "median", "trimmed_mean"):
             raise ValueError("aggregator must be one of: mean, median, trimmed_mean")
+
         if not (0.0 <= trim_q < 0.5):
             raise ValueError("trim_q must be in [0, 0.5)")
 
@@ -91,30 +91,66 @@ class MeasurementProjectionLoss:
     def _median(xs: List[float]) -> float:
         ys = sorted(xs)
         n = len(ys)
+
         if n == 0:
             return 0.0
+
         mid = n // 2
+
         if n % 2 == 1:
             return ys[mid]
+
         return 0.5 * (ys[mid - 1] + ys[mid])
 
     def _aggregate(self, xs: List[float]) -> float:
         if not xs:
             return 0.0
+
+        ys = sorted(float(x) for x in xs)
+        n = len(ys)
+
         if self.aggregator == "mean":
-            return sum(xs) / len(xs)
+            return sum(ys) / n
+
         if self.aggregator == "median":
-            return self._median(xs)
+            return self._median(ys)
 
         # trimmed_mean
-        ys = sorted(xs)
-        n = len(ys)
-        k = int(n * self.trim_q)
-        core = ys[k : n - k] if (n - 2 * k) > 0 else ys
+        #
+        # Important:
+        # int(n * trim_q) fails for small samples.
+        #
+        # Example:
+        #   n = 3
+        #   trim_q = 0.2
+        #   int(3 * 0.2) = 0
+        #
+        # That means no trimming happens, so a single outlier such as 0.0
+        # contaminates the aggregate.
+        #
+        # For a robust small-sample trimmed mean, any positive trim_q should
+        # remove at least one item from each side when n >= 3 and the trim is
+        # feasible.
+        if self.trim_q <= 0.0 or n < 3:
+            return sum(ys) / n
+
+        k = math.ceil(n * self.trim_q)
+
+        # Never trim away the entire sample.
+        max_k = (n - 1) // 2
+        k = min(k, max_k)
+
+        if k <= 0:
+            core = ys
+        else:
+            core = ys[k : n - k]
+
+        if not core:
+            core = ys
+
         return sum(core) / len(core)
 
     def measure(self, x: str) -> ProjectionLossResult:
-        # compute individual Ω scores
         ap_scores: List[float] = []
         pr_scores: List[float] = []
         details: Dict[str, float] = {}
@@ -129,12 +165,8 @@ class MeasurementProjectionLoss:
             pr_scores.append(v)
             details[f"pr::{name}"] = v
 
-        omega_ap = self._aggregate(ap_scores)
-        omega_pr = self._aggregate(pr_scores)
-
-        # clamp (optional): OMNIA often uses normalized scores
-        omega_ap = _clamp01(omega_ap)
-        omega_pr = _clamp01(omega_pr)
+        omega_ap = _clamp01(self._aggregate(ap_scores))
+        omega_pr = _clamp01(self._aggregate(pr_scores))
 
         spl_abs = max(0.0, omega_ap - omega_pr)
         spl_rel = _safe_div(spl_abs, max(1e-12, omega_ap))
