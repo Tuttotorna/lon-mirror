@@ -157,3 +157,17 @@ separate the layers
 preserve the boundaries
 show where to start
 ```
+
+---
+
+## lon-mirror — Public Boundary
+
+- lon-mirror is the canonical public ecosystem hub for the MB-X.01 / OMNIA lineage.
+- lon-mirror is not a truth oracle.
+- lon-mirror is not a semantic judge.
+- lon-mirror is not a decision engine.
+- It coordinates public navigation, lineage, documentation, and repository positioning.
+- measurement != inference != decision
+- decision remains external
+
+This section is a public boundary clarification. It does not change the repository core logic.
