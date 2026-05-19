@@ -29,6 +29,9 @@ Structural truth = invariance under transformation
 
 If this is your first contact with the project, start with:
 
+- [`docs/REVIEWER_60_SECOND_START.md`](docs/REVIEWER_60_SECOND_START.md)
+- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
+- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
 
 - [`docs/START_HERE.md`](docs/START_HERE.md)
 - [`ECOSYSTEM.md`](ECOSYSTEM.md)
@@ -36,7 +39,6 @@ If this is your first contact with the project, start with:
 - [`docs/BOUNDARIES.md`](docs/BOUNDARIES.md)
 
 ---
-
 
 ## Reviewer 60 second start
 
