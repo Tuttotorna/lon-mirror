@@ -1,66 +1,276 @@
-# L.O.N. / MB-X.01 — Public Review Path
+# Public Review Path
 
 ## Purpose
 
-This document defines the public review path for the current MB-X.01 / L.O.N. ecosystem.
+This document defines the public review path for the MB-X.01 / L.O.N. ecosystem.
 
-The goal is to give external readers, reviewers, researchers, engineers, and evaluators one clear path into the current executable and validated OMNIA chain.
+It is designed for an external reviewer who enters the ecosystem without prior context.
 
-The current public entry point is:
+The goal is to make the system legible, bounded, reproducible, and falsifiable.
 
-```text
-lon-mirror
-```
-
-The current core technical path is:
-
-```text
-OMNIA
-  -> OMNIA-VALIDATION
-```
-
----
-
-## Core relationship
-
-The current core relationship is:
-
-```text
-OMNIA            = post-hoc structural measurement / stability gate
-OMNIA-VALIDATION = traceability / reproducibility / falsification layer
-```
-
-OMNIA measures structural behavior.
-
-OMNIA-VALIDATION makes a structural measurement result reproducible, inspectable, hashable, comparable, and regression-testable.
-
-The boundary remains:
+The core boundary remains:
 
 ```text
 measurement != inference != decision
 ```
 
+No repository in this path is a truth oracle.
+
+No repository in this path replaces semantic evaluation.
+
+No repository in this path makes final decisions.
+
 ---
 
-## Start here
+## Public entrypoint
 
-For external review, start with these two documents:
+The public hub is:
 
 ```text
-OMNIA/docs/PUBLIC_REVIEW_PACKAGE.md
-OMNIA-VALIDATION/docs/PUBLIC_VALIDATION_PACKAGE.md
+lon-mirror
 ```
 
-Direct links:
+The recommended public review path is:
+
+```text
+lon-mirror
+  -> observer-suspension
+  -> OMNIAMIND
+  -> OMNIA-RADAR
+  -> OMNIA-SECURITY
+  -> OMNIA-CRYPTO
+  -> OMNIA
+  -> OMNIABASE
+  -> OMNIA-INVARIANCE
+  -> OMNIA-CONSTANT
+  -> OMNIA-LIMIT
+  -> OMNIA-VALIDATION
+  -> external semantics
+  -> external decision
+```
+
+This is not a hierarchy of authority.
+
+It is a review path.
+
+---
+
+## One-line ecosystem map
+
+```text
+lon-mirror          = public hub
+observer-suspension = observer-frame reduction / observer-dependence analysis
+OMNIAMIND           = orchestration layer
+OMNIA-RADAR         = structural detection / early warning
+OMNIA-SECURITY      = structural security risk boundary / containment
+OMNIA-CRYPTO        = crypto-relevant structural measurement
+OMNIA               = structural measurement core
+OMNIABASE           = multi-base numerical observation
+OMNIA-INVARIANCE    = invariance under transformation
+OMNIA-CONSTANT      = structural constancy across regimes
+OMNIA-LIMIT         = structural boundary
+OMNIA-VALIDATION    = reproducibility / traceability / falsification
+External semantics  = meaning / truth / domain evaluation
+External decision   = final action
+```
+
+---
+
+## Core principle
+
+The central public principle is:
+
+```text
+structural truth = invariance under transformation
+```
+
+This must be read with the boundary:
+
+```text
+invariance != truth oracle
+measurement != inference != decision
+```
+
+The ecosystem measures structural behavior.
+
+It does not decide final truth.
+
+---
+
+## Public review packages
+
+The current main review packages are:
 
 - OMNIA public review package: https://github.com/Tuttotorna/OMNIA/blob/main/docs/PUBLIC_REVIEW_PACKAGE.md
 - OMNIA-VALIDATION public validation package: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/docs/PUBLIC_VALIDATION_PACKAGE.md
 
+The current public path documents include:
+
+- observer-suspension: https://github.com/Tuttotorna/observer-suspension/blob/main/docs/OBSERVER_SUSPENSION_PUBLIC_POSITION.md
+- OMNIAMIND: https://github.com/Tuttotorna/OMNIAMIND/blob/main/docs/OMNIAMIND_PUBLIC_POSITION.md
+- OMNIA-RADAR: https://github.com/Tuttotorna/OMNIA-RADAR/blob/main/docs/OMNIA_RADAR_PUBLIC_POSITION.md
+- OMNIA-SECURITY: https://github.com/Tuttotorna/OMNIA-SECURITY/blob/main/docs/OMNIA_SECURITY_PUBLIC_POSITION.md
+- OMNIA-CRYPTO: https://github.com/Tuttotorna/OMNIA-CRYPTO/blob/main/docs/OMNIA_CRYPTO_PUBLIC_POSITION.md
+- OMNIA: https://github.com/Tuttotorna/OMNIA/blob/main/docs/PUBLIC_REVIEW_PACKAGE.md
+- OMNIABASE: https://github.com/Tuttotorna/OMNIABASE/blob/main/docs/OMNIABASE_PUBLIC_POSITION.md
+- OMNIA-INVARIANCE: https://github.com/Tuttotorna/OMNIA-INVARIANCE/blob/main/docs/OMNIA_INVARIANCE_PUBLIC_POSITION.md
+- OMNIA-CONSTANT: https://github.com/Tuttotorna/OMNIA-CONSTANT/blob/main/docs/OMNIA_CONSTANT_PUBLIC_POSITION.md
+- OMNIA-LIMIT: https://github.com/Tuttotorna/omnia-limit/blob/main/docs/OMNIA_LIMIT_PUBLIC_POSITION.md
+- OMNIA-VALIDATION: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/docs/PUBLIC_VALIDATION_PACKAGE.md
+
 ---
 
-## Current executable result
+## Review order
 
-The current minimal executable OMNIA result is:
+A reviewer should start here:
+
+```text
+1. lon-mirror
+2. docs/PUBLIC_REVIEW_PATH.md
+3. observer-suspension public position
+4. OMNIAMIND public position
+5. OMNIA-RADAR public position
+6. OMNIA-SECURITY public position
+7. OMNIA-CRYPTO public position
+8. OMNIA public review package
+9. OMNIABASE public position
+10. OMNIA-INVARIANCE public position
+11. OMNIA-CONSTANT public position
+12. OMNIA-LIMIT public position
+13. OMNIA-VALIDATION public validation package
+```
+
+This order makes the boundary clear before the technical demonstrations.
+
+---
+
+## Why observer-suspension comes first
+
+Observer Suspension comes before OMNIA in the review path because the ecosystem begins with a structural problem:
+
+```text
+observer privilege can distort what is treated as structure
+```
+
+Observer Suspension exposes observer-dependent assumptions.
+
+It does not remove all observers absolutely.
+
+Its boundary is:
+
+```text
+observer suspension != observer elimination
+description != reality
+measurement != inference != decision
+```
+
+This prepares the reviewer to understand why OMNIA measures structure rather than meaning.
+
+---
+
+## Why OMNIAMIND comes before OMNIA
+
+OMNIAMIND is the orchestration layer.
+
+It does not replace OMNIA.
+
+It does not decide truth.
+
+Its role is to organize diagnostic flow:
+
+```text
+OMNIAMIND = orchestration
+OMNIA     = structural measurement
+Decision  = external
+```
+
+This prevents a wrong reading where OMNIA is mistaken for an autonomous decision engine.
+
+---
+
+## Why OMNIA-RADAR comes before OMNIA
+
+OMNIA-RADAR is a detection and early-warning layer.
+
+It scans for structural risk signals.
+
+Its boundary is:
+
+```text
+detection != decision
+measurement != inference != decision
+```
+
+OMNIA-RADAR flags.
+
+OMNIA measures.
+
+External layers decide.
+
+---
+
+## Why OMNIA-SECURITY comes before OMNIA-CRYPTO
+
+OMNIA-SECURITY frames structural security risk boundaries.
+
+Its boundary is:
+
+```text
+security signal != safety certificate
+measurement != inference != decision
+```
+
+It does not certify safety.
+
+It does not replace cybersecurity review.
+
+OMNIA-CRYPTO then handles crypto-relevant structural artifacts inside that broader security boundary.
+
+---
+
+## Why OMNIA-CRYPTO is bounded
+
+OMNIA-CRYPTO measures crypto-relevant structural behavior around hashes, commitments, signatures, traces, representations, canonicalization, and integrity boundaries.
+
+Its boundary is:
+
+```text
+crypto signal != cryptographic proof
+measurement != inference != decision
+```
+
+OMNIA-CRYPTO does not replace cryptography.
+
+It does not prove cryptographic security.
+
+It does not make final security decisions.
+
+---
+
+## Why OMNIA is the measurement core
+
+OMNIA is the structural measurement core.
+
+It measures structural behavior after an output, answer, trajectory, or representation already exists.
+
+Its public boundary is:
+
+```text
+structural validity != semantic correctness
+measurement != inference != decision
+```
+
+OMNIA is not a semantic judge.
+
+OMNIA is not a truth oracle.
+
+OMNIA is not a final decision system.
+
+---
+
+## Current minimal executable result
+
+The current central executable result is the Silent Failure Gate pattern:
 
 ```text
 stable_output    -> Surface PASS -> OMNIA GO
@@ -68,7 +278,7 @@ fragile_output   -> Surface PASS -> OMNIA RISK
 collapsed_output -> Surface FAIL -> OMNIA STOP
 ```
 
-The central result is:
+The central case is:
 
 ```text
 fragile_output:
@@ -76,172 +286,240 @@ fragile_output:
   OMNIA structural gate: RISK
 ```
 
-This demonstrates the silent failure pattern:
+This demonstrates:
 
 ```text
 surface-valid output != structurally stable output
 ```
 
----
+The result does not prove semantic truth.
 
-## Validation status
-
-OMNIA-VALIDATION records the current result as a validation artifact:
-
-```text
-OMNIA-VALIDATION/results/omnia_silent_failure_validation_result.json
-```
-
-Current artifact status:
-
-```text
-PASS
-```
-
-Current dedicated validation test:
-
-```text
-OMNIA-VALIDATION/tests/test_omnia_silent_failure_validation.py
-```
-
-Current protected pattern:
-
-```text
-stable_output    -> Surface PASS -> OMNIA GO
-fragile_output   -> Surface PASS -> OMNIA RISK
-collapsed_output -> Surface FAIL -> OMNIA STOP
-boundary         -> measurement != inference != decision
-```
+It demonstrates a structural diagnostic distinction.
 
 ---
 
-## Public chain
+## Validation path
 
-The current public chain is:
+The current executable validation path is:
 
 ```text
-lon-mirror
-  -> OMNIA/docs/PUBLIC_REVIEW_PACKAGE.md
-  -> OMNIA-VALIDATION/docs/PUBLIC_VALIDATION_PACKAGE.md
-  -> OMNIA/examples/silent_failure_gate_demo.py
+OMNIA/examples/silent_failure_gate_demo.py
   -> OMNIA-VALIDATION/examples/validate_omnia_silent_failure_pattern.py
   -> OMNIA-VALIDATION/results/omnia_silent_failure_validation_result.json
   -> OMNIA-VALIDATION/tests/test_omnia_silent_failure_validation.py
 ```
 
-This gives reviewers:
+The validation layer checks reproducibility and traceability.
 
-```text
-positioning
-executable demo
-machine-readable result
-validation artifact
-hashes
-non-claims
-regression test
-known boundary
-```
+It does not convert structural evidence into semantic truth.
 
 ---
 
-## What this path claims
+## OMNIABASE in the public path
 
-The strongest defensible claim is:
+OMNIABASE is the multi-base numerical observation layer.
+
+Its core thesis is:
 
 ```text
-OMNIA detects when an output is structurally unstable under controlled transformation,
-before that output is evaluated semantically or used in deployment decisions.
+A number is not identical to its written representation.
 ```
 
-OMNIA-VALIDATION then checks whether the minimal structural pattern is reproduced and preserved as a validation artifact.
+Its core frame is:
+
+```text
+O(n) = { (b, digits^(b)(n)) | b >= 2 }
+```
+
+Its boundary is:
+
+```text
+representation != number
+observation != essence
+measurement != inference != decision
+```
+
+OMNIABASE is a concrete example of reducing representation privilege.
 
 ---
 
-## What this path does not claim
+## OMNIA-INVARIANCE in the public path
 
-This public path does not claim:
+OMNIA-INVARIANCE studies what remains structurally stable under transformation.
+
+Its core principle is:
 
 ```text
-semantic truth
-factual correctness
-AI safety certification
-deployment readiness
-benchmark replacement
-human-review replacement
-universal hallucination detection
-artificial consciousness
+structural truth = invariance under transformation
 ```
 
-These claims are outside the boundary.
+Its boundary is:
+
+```text
+invariance != truth oracle
+measurement != inference != decision
+```
+
+Invariance is structural evidence.
+
+It is not final semantic truth.
 
 ---
 
-## Correct interpretation
+## OMNIA-CONSTANT in the public path
 
-Correct reading:
+OMNIA-CONSTANT studies what remains unchanged across defined transformation regimes.
 
-```text
-OMNIA provides a bounded structural diagnostic signal.
-OMNIA-VALIDATION makes that signal reproducible and test-protected.
-```
-
-Incorrect reading:
+Its core thesis is:
 
 ```text
-OMNIA decides truth.
-OMNIA-VALIDATION proves truth.
-The system replaces semantic evaluation.
-The system decides deployment.
+A constant is not assumed.
+A constant is measured as persistence.
 ```
 
-The final decision remains external.
+Its boundary is:
+
+```text
+constant != absolute truth
+measurement != inference != decision
+```
+
+A constant is meaningful only inside a defined regime unless further validated.
 
 ---
 
-## Boundary
+## OMNIA-LIMIT in the public path
 
-The core boundary is:
+OMNIA-LIMIT identifies structural boundary conditions.
+
+Its core thesis is:
+
+```text
+STOP != failure
+STOP = structural boundary reached
+```
+
+Its boundary is:
 
 ```text
 measurement != inference != decision
 ```
 
-This means:
+OMNIA-LIMIT does not decide final truth.
 
-```text
-measurement is structural
-inference is external
-decision is external
-```
-
-This boundary is not a limitation to hide.
-
-It is the core architecture.
+It signals that a structural boundary has been reached.
 
 ---
 
-## Summary
+## OMNIA-VALIDATION in the public path
 
-The current public review path is:
+OMNIA-VALIDATION provides reproducibility, traceability, and falsification.
+
+Its role is:
 
 ```text
-lon-mirror
-  -> OMNIA public review package
-  -> OMNIA-VALIDATION public validation package
+OMNIA-VALIDATION = traceability / reproducibility / falsification
 ```
 
-The central result is:
+It does not decide semantic truth.
+
+It records whether a structural result can be reproduced, inspected, and challenged.
+
+---
+
+## What the ecosystem claims
+
+The strongest defensible public claim is:
 
 ```text
-fragile_output:
-  Surface check: PASS
-  OMNIA structural gate: RISK
+The MB-X.01 / L.O.N. ecosystem provides a bounded structural diagnostic chain for detecting, measuring, limiting, and validating structural behavior without collapsing measurement into semantic truth or final decision.
 ```
 
-The validation status is:
+This claim is bounded.
+
+It is reviewable.
+
+It is falsifiable.
+
+---
+
+## What the ecosystem does not claim
+
+The ecosystem does not claim:
 
 ```text
-PASS
+absolute truth oracle
+semantic truth engine
+AI consciousness
+final decision engine
+replacement for experts
+replacement for scientific validation
+replacement for cryptography
+replacement for cybersecurity review
+replacement for domain judgment
+deployment approval system
+```
+
+Any interpretation that turns structural measurement into final truth violates the boundary.
+
+---
+
+## Minimal reviewer checklist
+
+A reviewer should verify:
+
+```text
+Does each repository define its boundary?
+Does each repository avoid claiming semantic truth?
+Does each repository preserve measurement != inference != decision?
+Does the Silent Failure demo reproduce?
+Does OMNIA-VALIDATION reproduce the expected result?
+Are known limits documented?
+Are failure cases documented?
+Is decision kept external?
+```
+
+If these checks fail, the public claim weakens.
+
+If they pass, the ecosystem is at least structurally legible and reviewable.
+
+---
+
+## Core boundary summary
+
+```text
+observer suspension != observer elimination
+description != reality
+detection != decision
+security signal != safety certificate
+crypto signal != cryptographic proof
+structural validity != semantic correctness
+representation != number
+invariance != truth oracle
+constant != absolute truth
+STOP != failure
+measurement != inference != decision
+decision remains external
+```
+
+---
+
+## Final public reading
+
+The ecosystem should be read as:
+
+```text
+a structural diagnostic and validation ecosystem
+```
+
+not as:
+
+```text
+a truth oracle
+a semantic judge
+a decision engine
+a safety certificate
+a replacement for external review
 ```
 
 The final boundary remains:

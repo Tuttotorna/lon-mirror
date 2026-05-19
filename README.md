@@ -29,7 +29,7 @@ Structural truth = invariance under transformation
 
 If this is your first contact with the project, start with:
 
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
+
 - [`docs/START_HERE.md`](docs/START_HERE.md)
 - [`ECOSYSTEM.md`](ECOSYSTEM.md)
 - [`docs/MASTER_MAP.md`](docs/MASTER_MAP.md)
@@ -39,57 +39,27 @@ If this is your first contact with the project, start with:
 
 ## Public review path
 
-The current public review path of the MB-X.01 / L.O.N. ecosystem starts with two repositories:
+The complete public review path is documented here:
 
-```text
-OMNIA            = post-hoc structural measurement / stability gate
-OMNIA-VALIDATION = traceability / reproducibility / falsification layer
-```
-
-Start here:
-
-- OMNIA public review package: https://github.com/Tuttotorna/OMNIA/blob/main/docs/PUBLIC_REVIEW_PACKAGE.md
-- OMNIA-VALIDATION public validation package: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/docs/PUBLIC_VALIDATION_PACKAGE.md
-
-The current minimal executable result is:
-
-```text
-stable_output    -> Surface PASS -> OMNIA GO
-fragile_output   -> Surface PASS -> OMNIA RISK
-collapsed_output -> Surface FAIL -> OMNIA STOP
-```
-
-The central result is:
-
-```text
-fragile_output:
-  Surface check: PASS
-  OMNIA structural gate: RISK
-```
-
-This demonstrates the silent failure pattern:
-
-```text
-surface-valid output != structurally stable output
-```
-
-The validation layer records this as a reproducible artifact:
-
-```text
-OMNIA-VALIDATION/results/omnia_silent_failure_validation_result.json
-status: PASS
-```
+- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
 
 Current public chain:
 
 ```text
 lon-mirror
-  -> OMNIA/docs/PUBLIC_REVIEW_PACKAGE.md
-  -> OMNIA-VALIDATION/docs/PUBLIC_VALIDATION_PACKAGE.md
-  -> OMNIA/examples/silent_failure_gate_demo.py
-  -> OMNIA-VALIDATION/examples/validate_omnia_silent_failure_pattern.py
-  -> OMNIA-VALIDATION/results/omnia_silent_failure_validation_result.json
-  -> OMNIA-VALIDATION/tests/test_omnia_silent_failure_validation.py
+  -> observer-suspension
+  -> OMNIAMIND
+  -> OMNIA-RADAR
+  -> OMNIA-SECURITY
+  -> OMNIA-CRYPTO
+  -> OMNIA
+  -> OMNIABASE
+  -> OMNIA-INVARIANCE
+  -> OMNIA-CONSTANT
+  -> OMNIA-LIMIT
+  -> OMNIA-VALIDATION
+  -> external semantics
+  -> external decision
 ```
 
 Core boundary:
@@ -98,24 +68,7 @@ Core boundary:
 measurement != inference != decision
 ```
 
-This means:
-
-```text
-OMNIA measures structural behavior.
-OMNIA-VALIDATION validates reproducibility and traceability.
-External systems evaluate semantics.
-External agents decide.
-```
-
-This public path does not claim semantic truth.
-
-It does not claim AI safety certification.
-
-It does not replace benchmarks, domain expertise, or external review.
-
-It provides a bounded, runnable, falsifiable structural diagnostic chain.
-
----
+This path is a review path, not a truth hierarchy.
 
 ## Ecosystem map
 
@@ -272,4 +225,3 @@ FAIL: 0
 Boundary:
 
 measurement != inference != decision
-
