@@ -22,6 +22,14 @@ No repository in this path makes final decisions.
 
 ---
 
+## Fast reviewer start
+
+The fastest public reviewer entrypoint is available here:
+
+- Reviewer 60 second start: [`docs/REVIEWER_60_SECOND_START.md`](REVIEWER_60_SECOND_START.md)
+
+---
+
 ## One-page summary
 
 A compact one-page ecosystem map is available here:

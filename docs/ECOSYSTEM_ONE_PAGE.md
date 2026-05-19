@@ -147,6 +147,14 @@ It does not convert structural evidence into final truth.
 
 ---
 
+## Fast reviewer start
+
+The fastest public reviewer entrypoint is available here:
+
+- Reviewer 60 second start: [`docs/REVIEWER_60_SECOND_START.md`](REVIEWER_60_SECOND_START.md)
+
+---
+
 ## Start here
 
 Full public review path:

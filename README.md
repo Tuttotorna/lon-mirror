@@ -38,6 +38,34 @@ If this is your first contact with the project, start with:
 ---
 
 
+## Reviewer 60 second start
+
+The fastest public reviewer entrypoint is:
+
+- [`docs/REVIEWER_60_SECOND_START.md`](docs/REVIEWER_60_SECOND_START.md)
+
+It gives:
+
+```text
+what this is
+what to read first
+what to run
+expected result
+core boundary
+non-claims
+```
+
+Related public entrypoints:
+
+- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
+- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
+
+Core boundary:
+
+```text
+measurement != inference != decision
+```
+
 ## Ecosystem one-page map
 
 A short one-page public map of the ecosystem is available here:
