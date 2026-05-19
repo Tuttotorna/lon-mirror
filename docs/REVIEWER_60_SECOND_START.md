@@ -156,6 +156,20 @@ boundary: measurement != inference != decision
 
 ---
 
+## Public claim boundary audit
+
+Before interpreting any result, check the claim boundary audit:
+
+- Public claim boundary audit: [`docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md`](PUBLIC_CLAIM_BOUNDARY_AUDIT.md)
+
+Core audit rule:
+
+```text
+structural measurement must not be presented as semantic truth
+```
+
+---
+
 ## What to verify
 
 A reviewer should verify:

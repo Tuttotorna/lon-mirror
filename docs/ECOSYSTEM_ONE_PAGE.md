@@ -147,6 +147,14 @@ It does not convert structural evidence into final truth.
 
 ---
 
+## Public claim boundary audit
+
+The public claim boundary audit is available here:
+
+- Public claim boundary audit: [`docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md`](PUBLIC_CLAIM_BOUNDARY_AUDIT.md)
+
+---
+
 ## Fast reviewer start
 
 The fastest public reviewer entrypoint is available here:

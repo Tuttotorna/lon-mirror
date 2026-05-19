@@ -40,6 +40,31 @@ If this is your first contact with the project, start with:
 
 ---
 
+
+## Public claim boundary audit
+
+The public claim boundary audit is documented here:
+
+- [`docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md`](docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md)
+
+It verifies that public claims remain inside:
+
+```text
+measurement != inference != decision
+```
+
+Main audit target:
+
+```text
+structural measurement must not be presented as semantic truth
+```
+
+Related public entrypoints:
+
+- [`docs/REVIEWER_60_SECOND_START.md`](docs/REVIEWER_60_SECOND_START.md)
+- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
+- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
+
 ## Reviewer 60 second start
 
 The fastest public reviewer entrypoint is:
