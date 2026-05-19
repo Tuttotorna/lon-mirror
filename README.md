@@ -41,6 +41,30 @@ If this is your first contact with the project, start with:
 ---
 
 
+## Ecosystem link audit
+
+The ecosystem link audit is documented here:
+
+- [`docs/ECOSYSTEM_LINK_AUDIT.md`](docs/ECOSYSTEM_LINK_AUDIT.md)
+
+It checks:
+
+```text
+public repository links
+public position files
+review package links
+validation package links
+boundary coverage
+claim alignment
+```
+
+Related public entrypoints:
+
+- [`docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md`](docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md)
+- [`docs/REVIEWER_60_SECOND_START.md`](docs/REVIEWER_60_SECOND_START.md)
+- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
+- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
+
 ## Public claim boundary audit
 
 The public claim boundary audit is documented here:

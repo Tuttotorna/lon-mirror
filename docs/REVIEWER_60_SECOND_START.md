@@ -156,6 +156,23 @@ boundary: measurement != inference != decision
 
 ---
 
+
+## Ecosystem link audit
+
+Before checking external links and repository roles, use:
+
+- Ecosystem link audit: [`docs/ECOSYSTEM_LINK_AUDIT.md`](ECOSYSTEM_LINK_AUDIT.md)
+
+Core link audit rule:
+
+```text
+traceability != truth
+link audit != scientific validation
+measurement != inference != decision
+```
+
+---
+
 ## Public claim boundary audit
 
 Before interpreting any result, check the claim boundary audit:

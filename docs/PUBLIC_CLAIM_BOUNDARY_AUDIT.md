@@ -20,6 +20,25 @@ This ecosystem must not be presented as a truth oracle, semantic judge, safety c
 
 ---
 
+
+## Ecosystem link audit
+
+The public claim boundary audit is paired with the ecosystem link audit:
+
+- Ecosystem link audit: [`docs/ECOSYSTEM_LINK_AUDIT.md`](ECOSYSTEM_LINK_AUDIT.md)
+
+The claim audit checks boundary language.
+
+The link audit checks public traceability.
+
+Both preserve:
+
+```text
+measurement != inference != decision
+```
+
+---
+
 ## Audit rule
 
 Every public claim must satisfy this rule:

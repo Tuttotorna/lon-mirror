@@ -22,6 +22,15 @@ No repository in this path makes final decisions.
 
 ---
 
+
+## Ecosystem link audit
+
+The ecosystem link audit is available here:
+
+- Ecosystem link audit: [`docs/ECOSYSTEM_LINK_AUDIT.md`](ECOSYSTEM_LINK_AUDIT.md)
+
+---
+
 ## Public claim boundary audit
 
 The public claim boundary audit is available here:
