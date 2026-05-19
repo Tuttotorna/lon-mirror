@@ -37,6 +37,34 @@ If this is your first contact with the project, start with:
 
 ---
 
+
+## Ecosystem one-page map
+
+A short one-page public map of the ecosystem is available here:
+
+- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
+
+It summarizes:
+
+```text
+public chain
+repository roles
+core boundaries
+minimal executable result
+validation path
+non-claims
+```
+
+The full public review path remains:
+
+- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
+
+Core boundary:
+
+```text
+measurement != inference != decision
+```
+
 ## Public review path
 
 The complete public review path is documented here:

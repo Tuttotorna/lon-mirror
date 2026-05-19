@@ -22,6 +22,14 @@ No repository in this path makes final decisions.
 
 ---
 
+## One-page summary
+
+A compact one-page ecosystem map is available here:
+
+- Ecosystem one-page map: [`docs/ECOSYSTEM_ONE_PAGE.md`](ECOSYSTEM_ONE_PAGE.md)
+
+---
+
 ## Public entrypoint
 
 The public hub is:
