@@ -25,12 +25,11 @@ Structural truth = invariance under transformation
 
 ---
 
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
-
 ## Start here
 
 If this is your first contact with the project, start with:
 
+- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
 - [`docs/START_HERE.md`](docs/START_HERE.md)
 - [`ECOSYSTEM.md`](ECOSYSTEM.md)
 - [`docs/MASTER_MAP.md`](docs/MASTER_MAP.md)
