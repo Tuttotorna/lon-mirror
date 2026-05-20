@@ -164,8 +164,7 @@ See [docs/ECOSYSTEM_STATUS.md](docs/ECOSYSTEM_STATUS.md) for the synchronized st
     measurement != inference != decision
     Structural truth = invariance under transformation
 
----
-
 ## License
 
 MIT.
+
