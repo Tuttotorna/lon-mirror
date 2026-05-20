@@ -66,8 +66,7 @@ k(\mathcal Q_{\mathrm{QHO}})=0
 and for every pair of distinct orbit classes
 
 \[
-[[\psi]]
-eq[[\phi]]
+[[\psi]]\neq[[\phi]]
 \]
 
 one has
@@ -105,8 +104,7 @@ and, for \(0<\varepsilon<1\),
 Then
 
 \[
-[\phi_\varepsilon]_{\mathrm{ray}}
-eq[\psi]_{\mathrm{ray}}
+[\phi_\varepsilon]_{\mathrm{ray}}\neq[\psi]_{\mathrm{ray}}
 \qquad (\varepsilon>0)
 \]
 
@@ -125,8 +123,7 @@ d_{FS}([\psi]_{\mathrm{ray}},[\phi_\varepsilon]_{\mathrm{ray}})
 Moreover, \(U_t|0\rangle\) remains in the ray of \(|0\rangle\), while \([\phi_\varepsilon]_{\mathrm{ray}}\) has nonzero \(|1\rangle\)-component, hence
 
 \[
-[[0]]
-eq[[\phi_\varepsilon]]
+[[0]]\neq[[\phi_\varepsilon]]
 \qquad (\varepsilon>0).
 \]
 
@@ -141,8 +138,7 @@ k(\mathcal Q_{\mathrm{QHO}})=0.
 Fix
 
 \[
-[[\psi]]
-eq[[\phi]].
+[[\psi]]\neq[[\phi]].
 \]
 
 Define
@@ -198,8 +194,7 @@ Therefore
 \[
 \Delta([[\psi]],[[\phi]])>0
 \qquad
-\forall [[\psi]]
-eq[[\phi]].
+\forall [[\psi]]\neq[[\phi]].
 \]
 
 This proves
@@ -239,8 +234,7 @@ Then
 and therefore
 
 \[
-k=\inf_{n
-eq m}\hbar\omega |n-m|=\hbar\omega>0.
+k=\inf_{n\neq m}\hbar\omega |n-m|=\hbar\omega>0.
 \]
 
 Hence
@@ -284,11 +278,9 @@ Assume the non-collapse condition:
 
 \[
 \boxed{
-[[\psi]]
-eq[[\phi]]
+[[\psi]]\neq[[\phi]]
 \ \Rightarrow\
-[\phi]_{\mathrm{ray}}
-otin \overline{\{U_t[\psi]_{\mathrm{ray}}:t\in\mathbb R\}}
+[\phi]_{\mathrm{ray}} \notin \overline{\{U_t[\psi]_{\mathrm{ray}}:t\in\mathbb R\}}
 }
 \]
 
@@ -301,8 +293,7 @@ k(\mathcal Q_{\mathrm{free}})=0
 and
 
 \[
-[[\psi]]
-eq[[\phi]]
+[[\psi]]\neq[[\phi]]
 \ \Rightarrow\
 \Delta([[\psi]],[[\phi]])>0.
 \]
@@ -331,8 +322,7 @@ Let \(|\psi\rangle\) be normalized and let \(|\eta\rangle\) be normalized with \
 Then
 
 \[
-[\phi_\varepsilon]_{\mathrm{ray}}
-eq[\psi]_{\mathrm{ray}}
+[\phi_\varepsilon]_{\mathrm{ray}}\neq[\psi]_{\mathrm{ray}}
 \qquad (\varepsilon>0)
 \]
 
@@ -356,8 +346,7 @@ k(\mathcal Q_{\mathrm{free}})=0.
 Fix distinct orbit classes
 
 \[
-[[\psi]]
-eq[[\phi]].
+[[\psi]]\neq[[\phi]].
 \]
 
 Define
@@ -393,8 +382,7 @@ Therefore
 \[
 \Delta([[\psi]],[[\phi]])>0
 \qquad
-\forall [[\psi]]
-eq[[\phi]].
+\forall [[\psi]]\neq[[\phi]].
 \]
 
 Hence

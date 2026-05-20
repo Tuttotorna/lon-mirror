@@ -21,8 +21,7 @@ The following results are fully established within the framework:
   \]
 - Structural gap:
   \[
-  k=\inf_{[S]
-eq[T]} \Delta([S],[T])
+  k=\inf_{[S]\neq[T]} \Delta([S],[T])
   \]
 
 ### Metric Structure
@@ -79,11 +78,9 @@ under:
 That is:
 
 \[
-[[\psi]]
-eq[[\phi]]
+[[\psi]]\neq[[\phi]]
 \Rightarrow
-[\phi]_{\mathrm{ray}}
-otin \overline{\{U_t[\psi]_{\mathrm{ray}}\}}
+[\phi]_{\mathrm{ray}} \notin \overline{\{U_t[\psi]_{\mathrm{ray}}\}}
 \]
 
 This assumption is:
@@ -129,8 +126,7 @@ These are:
 Find sufficient conditions on \((\mathcal S,\mathcal G,d)\) such that:
 
 \[
-k=0 \quad \text{and} \quad \Delta>0 \ \forall [S]
-eq[T]
+k=0 \quad \text{and} \quad \Delta>0 \ \forall [S]\neq[T]
 \]
 
 without model-specific arguments.
@@ -142,8 +138,7 @@ without model-specific arguments.
 Determine necessary and sufficient conditions for:
 
 \[
-\exists [S]
-eq[T]:\ \Delta([S],[T])=0
+\exists [S]\neq[T]:\ \Delta([S],[T])=0
 \]
 
 in terms of:
@@ -159,8 +154,7 @@ in terms of:
 Formalize the condition:
 
 \[
-[\phi]
-otin \overline{\mathcal G\cdot[\psi]}
+[\phi] \notin \overline{\mathcal G\cdot[\psi]}
 \]
 
 in intrinsic terms of the triple \((\mathcal S,\mathcal G,d)\).

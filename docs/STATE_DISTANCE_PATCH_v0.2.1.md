@@ -89,8 +89,7 @@ Collapse repeated spaces and linebreak-equivalent spacing when spacing is not it
 Examples:
 
 - "line1  line2" -> "line1 line2"
-- "line1
-line2" -> "line1 line2"
+- "line1\nline2" -> "line1 line2"
 
 ### 4.3 Normalize common neutral symbolic wrappers
 

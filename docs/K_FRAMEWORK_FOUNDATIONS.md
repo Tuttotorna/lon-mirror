@@ -120,8 +120,7 @@ then:
 \boxed{
 k=0
 \iff
-\forall \varepsilon>0,\ \exists [S]
-eq[T]\ \text{such that}\ \Delta([S],[T])<\varepsilon
+\forall \varepsilon>0,\ \exists [S]\neq[T]\ \text{such that}\ \Delta([S],[T])<\varepsilon
 }
 \]
 
@@ -131,8 +130,7 @@ Equivalent formulation:
 \boxed{
 k=0
 \iff
-\exists [S_n]
-eq[T_n]\ \text{with}\ \Delta([S_n],[T_n]) \to 0
+\exists [S_n]\neq[T_n]\ \text{with}\ \Delta([S_n],[T_n]) \to 0
 }
 \]
 
@@ -144,8 +142,7 @@ eq[T_n]\ \text{with}\ \Delta([S_n],[T_n]) \to 0
 \boxed{
 \text{Case B}
 \iff
-\exists [S]
-eq[T] \text{ such that } \Delta([S],[T])=0
+\exists [S]\neq[T] \text{ such that } \Delta([S],[T])=0
 }
 \]
 
@@ -153,8 +150,7 @@ eq[T] \text{ such that } \Delta([S],[T])=0
 \boxed{
 \text{Case C}
 \iff
-\forall [S]
-eq[T],\ \Delta([S],[T])>0
+\forall [S]\neq[T],\ \Delta([S],[T])>0
 \ \text{and}\ k=0
 }
 \]
