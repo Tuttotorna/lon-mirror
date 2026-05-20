@@ -1,21 +1,5 @@
 # MB-X.01 / OMNIA
 
-## DOI
-
-[![DOI](https://zenodo.org/badge/1067137742.svg)](https://zenodo.org/badge/latestdoi/1067137742)
-
-Release DOI:
-
-    10.5281/zenodo.20089284
-
-Zenodo latest DOI link:
-
-    https://doi.org/10.5281/zenodo.20089284
-
-GitHub release:
-
-    https://github.com/Tuttotorna/lon-mirror/releases/tag/v1.0.0
-
 **Structural measurement beyond correctness.**
 
 This repository is the public entry point for the MB-X.01 / OMNIA ecosystem.
