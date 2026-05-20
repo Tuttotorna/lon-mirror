@@ -481,6 +481,56 @@ measurement != inference != decision
 
 ---
 
+
+## Structural Failure Probe v0 claim audit
+
+Allowed claim:
+
+```text
+Structural Failure Probe v0 tests whether surface-valid model outputs remain structurally stable under unresolved tension.
+```
+
+Forbidden claim:
+
+```text
+Structural Failure Probe v0 proves semantic truth or finally ranks models.
+```
+
+Core distinction:
+
+```text
+surface-valid output != structurally stable output
+```
+
+Core pattern:
+
+```text
+Surface PASS -> Structural RISK
+```
+
+Boundary:
+
+```text
+structural risk != semantic falsehood
+measurement != inference != decision
+```
+
+Explicit non-claims:
+
+```text
+does not claim semantic truth
+does not finally rank models
+does not replace external evaluation
+```
+
+Audit status:
+
+```text
+PASS
+```
+
+---
+
 ## Silent Failure claim audit
 
 Allowed claim:

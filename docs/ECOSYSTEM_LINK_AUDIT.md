@@ -614,6 +614,76 @@ PASS
 
 ---
 
+
+## Structural Failure Probe v0 link audit
+
+Structural Failure Probe v0 is the current practical red-team probe in OMNIA-VALIDATION.
+
+Document:
+
+```text
+https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/docs/STRUCTURAL_FAILURE_PROBE_V0.md
+```
+
+Prompt set:
+
+```text
+https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/examples/structural_failure_probe_v0_prompts.jsonl
+```
+
+Analyzer:
+
+```text
+https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/examples/analyze_structural_failure_probe_v0.py
+```
+
+Sample report:
+
+```text
+https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/results/structural_failure_probe_v0_sample_report.json
+```
+
+Role:
+
+```text
+public structural red-team probe for Silent Failure detection
+```
+
+Core distinction:
+
+```text
+surface-valid output != structurally stable output
+```
+
+Core pattern:
+
+```text
+Surface PASS -> Structural RISK
+```
+
+Boundary:
+
+```text
+measurement != inference != decision
+```
+
+Explicit non-claims:
+
+```text
+does not claim semantic truth
+does not finally rank models
+does not replace external evaluation
+structural risk != semantic falsehood
+```
+
+Audit status:
+
+```text
+PASS
+```
+
+---
+
 ## Central executable chain
 
 The central executable chain is:

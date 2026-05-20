@@ -157,6 +157,64 @@ boundary: measurement != inference != decision
 ---
 
 
+## Structural Failure Probe v0
+
+The current practical public red-team probe is:
+
+- Structural Failure Probe v0: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/docs/STRUCTURAL_FAILURE_PROBE_V0.md
+- Prompt set: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/examples/structural_failure_probe_v0_prompts.jsonl
+- Analyzer: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/examples/analyze_structural_failure_probe_v0.py
+- Sample report: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/results/structural_failure_probe_v0_sample_report.json
+
+Core distinction:
+
+```text
+surface-valid output != structurally stable output
+```
+
+Core pattern:
+
+```text
+Surface PASS -> Structural RISK
+```
+
+Core boundary:
+
+```text
+measurement != inference != decision
+```
+
+Role:
+
+```text
+A structural red-team probe for detecting outputs that look valid but collapse under unresolved structural tension.
+```
+
+Safe public claim:
+
+```text
+Structural Failure Probe v0 tests whether surface-valid model outputs remain structurally stable under unresolved tension.
+```
+
+Forbidden public claim:
+
+```text
+Structural Failure Probe v0 proves semantic truth or finally ranks models.
+```
+
+Explicit non-claims:
+
+```text
+does not claim semantic truth
+does not finally rank models
+does not replace external evaluation
+structural risk != semantic falsehood
+```
+
+This turns the ecosystem from an abstract framework into a concrete structural red-team test.
+
+---
+
 ## Ecosystem link audit
 
 Before checking external links and repository roles, use:

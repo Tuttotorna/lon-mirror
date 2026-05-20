@@ -41,6 +41,44 @@ If this is your first contact with the project, start with:
 ---
 
 
+## Structural Failure Probe v0
+
+The current practical public red-team probe is documented in OMNIA-VALIDATION:
+
+- Structural Failure Probe v0: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/docs/STRUCTURAL_FAILURE_PROBE_V0.md
+- Prompt set: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/examples/structural_failure_probe_v0_prompts.jsonl
+- Analyzer: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/examples/analyze_structural_failure_probe_v0.py
+- Sample report: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/results/structural_failure_probe_v0_sample_report.json
+
+Core distinction:
+
+```text
+surface-valid output != structurally stable output
+```
+
+Core pattern:
+
+```text
+Surface PASS -> Structural RISK
+```
+
+Core boundary:
+
+```text
+measurement != inference != decision
+```
+
+Explicit non-claims:
+
+```text
+does not claim semantic truth
+does not finally rank models
+does not replace external evaluation
+structural risk != semantic falsehood
+```
+
+This is the current practical entrypoint for testing whether model outputs that look acceptable on the surface remain structurally stable under unresolved tension.
+
 ## Ecosystem link audit
 
 The ecosystem link audit is documented here:
