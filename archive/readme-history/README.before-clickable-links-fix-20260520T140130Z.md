@@ -159,11 +159,6 @@ See [docs/ECOSYSTEM_STATUS.md](docs/ECOSYSTEM_STATUS.md) for the synchronized st
 
 ---
 
-## Boundary and smoke-test required terms
-
-    measurement != inference != decision
-    Structural truth = invariance under transformation
-
 ## License
 
 MIT.
