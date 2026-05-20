@@ -65,7 +65,8 @@ Induced on the quotient:
 \boxed{
 k(\mathfrak T)
 =
-\inf_{[S]\neq[T]} \Delta([S],[T])
+\inf_{[S]
+eq[T]} \Delta([S],[T])
 }
 \]
 
@@ -77,8 +78,10 @@ k(\mathfrak T)
 \boxed{
 \begin{aligned}
 \text{Case A: } & k>0 \\
-\text{Case B: } & k=0 \ \text{and}\ \exists [S]\neq[T]:\ \Delta([S],[T])=0 \\
-\text{Case C: } & k=0 \ \text{and}\ \Delta([S],[T])>0\ \forall [S]\neq[T]
+\text{Case B: } & k=0 \ \text{and}\ \exists [S]
+eq[T]:\ \Delta([S],[T])=0 \\
+\text{Case C: } & k=0 \ \text{and}\ \Delta([S],[T])>0\ \forall [S]
+eq[T]
 \end{aligned}
 }
 \]

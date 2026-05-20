@@ -41,6 +41,29 @@ If this is your first contact with the project, start with:
 ---
 
 
+## Public audit scope
+
+The public audit scope is documented here:
+
+- [`docs/AUDIT_SCOPE.md`](docs/AUDIT_SCOPE.md)
+
+This document separates:
+
+```text
+public normative review files
+active executable code
+legacy / archive / raw artifacts
+```
+
+Core audit rule:
+
+```text
+legacy artifact issue != public claim failure
+raw file parse issue != active code failure
+negated forbidden claim != positive claim
+measurement != inference != decision
+```
+
 ## Structural Failure Probe v0
 
 The current practical public red-team probe is documented in OMNIA-VALIDATION:

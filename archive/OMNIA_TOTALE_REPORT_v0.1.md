@@ -1,7 +1,7 @@
 # OMNIA_TOTALE — Multi-Lens Structural Scoring for AI Coherence (v0.2)
 
-**Author:** Massimiliano Brighindi (concepts) + MBX IA (formalization)  
-**Status:** Experimental, research-grade  
+**Author:** Massimiliano Brighindi (concepts) + MBX IA (formalization)
+**Status:** Experimental, research-grade
 **Core file:** `OMNIA_TOTALE_v0.2.py`
 
 ---
@@ -54,8 +54,8 @@ Key steps (see code for exact formulas):
 
 From there:
 
-- `sigma_mean` = mean of all `σ_b(n)`  
-- `entropy_mean` = mean of all `H_norm(n,b)`  
+- `sigma_mean` = mean of all `σ_b(n)`
+- `entropy_mean` = mean of all `H_norm(n,b)`
 
 And a **PBII-style instability**:
 
@@ -132,7 +132,6 @@ lag (who leads whom),
 strength (|corr|).
 
 
-
 This is not full causal discovery. It is a lens to highlight strong directional dependencies in the traces, which can be inspected or fed into downstream logic.
 
 
@@ -168,7 +167,6 @@ components: dict with:
 "tempo_log_regime"
 
 "causa_mean_strength"
-
 
 
 Fusion (in code):
@@ -213,13 +211,11 @@ any internal entropy / variance indicators,
 a contradiction/incoherence proxy (e.g. number of inconsistent assertions).
 
 
-
 3. Build:
 
 series: one scalar trace (e.g. logprob).
 
 series_dict: multiple traces (e.g. {"logprob": [...], "entropy": [...], "contradiction": [...]}).
-
 
 
 4. Choose an integer n that consistently identifies the problem or chain (e.g. hash of prompt, or simply T).
@@ -235,8 +231,6 @@ a gate: if Ω > τ, trigger re-ask/revision/self-check;
 a ranking feature: prioritize lower-Ω answers as more stable;
 
 a logging feature: store Ω alongside answers to analyse when/why hallucinations occur.
-
-
 
 
 OMNIA_TOTALE does not require retraining the model.
@@ -260,8 +254,6 @@ model reasoning chains (or at least intermediate traces),
 labels for correctness / hallucination / failure.
 
 
-
-
 2. Baseline
 
 Measure:
@@ -271,8 +263,6 @@ hallucination rate,
 accuracy,
 
 any internal confidence metrics currently used.
-
-
 
 
 3. Add OMNIA_TOTALE
@@ -288,15 +278,11 @@ if Ω > τ ⇒ send the chain to self-revision or second pass,
 else ⇒ accept as usual.
 
 
-
-
 4. Compare
 
 Compare hallucination rate / accuracy before vs after OMNIA_TOTALE gating.
 
 Inspect examples with highest Ω: they should be enriched in drift/instability cases.
-
-
 
 
 The module is light enough to be run in parallel with existing logging, without modifying the core model.
@@ -354,14 +340,13 @@ tune thresholds / weights,
 measure concrete gains in hallucination reduction and coherence.
 
 
-
 For any integration tests or collaborations, please refer to the main repository and contact details in the root README.
 
 ---
 
 ## 2) Esempio “safety plugin” per una pipeline LLM
 
-**Nome file suggerito:** `OMNIA_TOTALE_LLM_PLUGIN_demo.py`  
+**Nome file suggerito:** `OMNIA_TOTALE_LLM_PLUGIN_demo.py`
 
 Questo file mostra come una pipeline *ipotetica* di LLM userebbe `OMNIA_TOTALE_v0.2.py` come modulo esterno.
 
@@ -495,7 +480,8 @@ def evaluate_chain_with_omnia(
 def main():
     # Simulate a “good” chain (no big drift)
     good_steps = simulate_reasoning_chain(num_steps=40)
-    print("\n--- GOOD CHAIN (baseline) ---")
+    print("
+--- GOOD CHAIN (baseline) ---")
     evaluate_chain_with_omnia(good_steps, omega_threshold=0.8)
 
     # Simulate a more unstable chain by increasing drift/contradictions
@@ -505,7 +491,8 @@ def main():
         s["entropy"] += 0.3
         s["contradiction"] += 0.5
 
-    print("\n--- UNSTABLE CHAIN (drift injected) ---")
+    print("
+--- UNSTABLE CHAIN (drift injected) ---")
     evaluate_chain_with_omnia(bad_steps, omega_threshold=0.8)
 
 

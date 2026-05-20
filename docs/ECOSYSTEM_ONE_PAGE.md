@@ -148,6 +148,21 @@ It does not convert structural evidence into final truth.
 ---
 
 
+## Audit scope
+
+The public audit scope is documented here:
+
+- [`docs/AUDIT_SCOPE.md`](AUDIT_SCOPE.md)
+
+Core rule:
+
+```text
+legacy artifact issue != public claim failure
+raw file parse issue != active code failure
+negated forbidden claim != positive claim
+measurement != inference != decision
+```
+
 ## Structural Failure Probe v0
 
 The current practical public red-team probe is:
@@ -234,7 +249,7 @@ The fastest public reviewer entrypoint is available here:
 
 Full public review path:
 
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
+- [`docs/PUBLIC_REVIEW_PATH.md`](PUBLIC_REVIEW_PATH.md)
 
 Main external review packages:
 
