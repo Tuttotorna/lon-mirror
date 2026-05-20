@@ -23,15 +23,15 @@ No repository should silently convert structural measurement into semantic truth
 | Repository | Input | Output | Stable public role |
 |---|---|---|---|
 | lon-mirror | visitor attention | ecosystem map | public hub |
-| OMNIA-VALIDATION | artifacts / results / claims | validation reports / regressions | evidence layer |
-| OMNIA | output / trace / structure candidate | structural measurement | core engine |
-| OMNIABASE | object / number / representation | cross-representation observation | foundation |
-| OMNIA-RADAR | raw candidate / trace | detected structural signal | pre-measurement scan |
-| OMNIA-INVARIANCE | transformed variants | invariance / instability evidence | transformation layer |
-| omnia-limit | measurement sequence | stop / continue certificate | boundary layer |
-| OMNIA-CONSTANT | stable Omega-region candidates | falsification / weakening / persistence result | post-analysis |
+| OMNIA-VALIDATION | artifacts, results, claims | validation reports and regressions | evidence layer |
+| OMNIA | output, trace, structure candidate | structural measurement | core engine |
+| OMNIABASE | object, number, representation | cross-representation observation | foundation |
+| OMNIA-RADAR | raw candidate or trace | detected structural signal | pre-measurement scan |
+| OMNIA-INVARIANCE | transformed variants | invariance or instability evidence | transformation layer |
+| omnia-limit | measurement sequence | stop or continue certificate | boundary layer |
+| OMNIA-CONSTANT | stable Omega-region candidates | falsification, weakening, or persistence result | post-analysis |
 | OMNIAMIND | analytic process | organized measurement workflow | orchestration |
-| OMNIA-THREE-BODY | dynamic trajectory | divergence / stability artifacts | scientific stress test |
+| OMNIA-THREE-BODY | dynamic trajectory | divergence or stability artifacts | scientific stress test |
 | OMNIA-SECURITY | security-like trace | bounded structural diagnostic | vertical |
 | OMNIA-CRYPTO | crypto-like transformation | bounded structural diagnostic | vertical |
 

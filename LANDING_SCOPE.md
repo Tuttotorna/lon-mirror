@@ -14,3 +14,7 @@ Canonical rule:
     archive = history
     lab = experiments
 
+If a section explains philosophy, foundation, detailed architecture, or historical context, it belongs in docs.
+
+If a section helps a first-time visitor decide where to click next, it belongs in README.
+

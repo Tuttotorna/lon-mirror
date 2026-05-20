@@ -1,7 +1,8 @@
 {
-  "generated_utc": "2026-05-20T11:57:04.748772+00:00",
+  "generated_utc": "2026-05-20T12:05:17.877058+00:00",
   "ecosystem": "MB-X.01 / OMNIA",
   "canonical_boundary": "measurement != inference != decision",
+  "canonical_sentence": "Structural truth = invariance under transformation",
   "canonical_pipeline": [
     "detect",
     "measure",
@@ -9,6 +10,7 @@
     "certify limit",
     "validate/falsify"
   ],
+  "public_rule": "evidence first, engine second, theory third",
   "public_onboarding_order": [
     "lon-mirror",
     "OMNIA-VALIDATION",

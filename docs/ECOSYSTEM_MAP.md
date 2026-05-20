@@ -36,22 +36,22 @@ For public adoption:
 
 ---
 
-## Functional layers
+## Functional architecture
 
-| Layer | Repository | Role |
+| Layer | Repository | Function |
 |---|---|---|
-| Hub | lon-mirror | Public entry point and map |
-| Evidence | OMNIA-VALIDATION | Reproducibility, validation, regression |
-| Measurement | OMNIA | Core post-hoc structural measurement |
-| Representation | OMNIABASE | Multi-base / multi-representation observation |
-| Detection | OMNIA-RADAR | Structural signal pre-scan |
-| Invariance | OMNIA-INVARIANCE | Persistence under transformation |
-| Limit | omnia-limit | Boundary / stop condition |
-| Post-analysis | OMNIA-CONSTANT | Falsification of Omega-region stability |
-| Orchestration | OMNIAMIND | Structural cognition workflow organization |
-| Scientific case | OMNIA-THREE-BODY | Chaotic trajectory divergence |
-| Security vertical | OMNIA-SECURITY | Bounded security-relevant diagnostics |
-| Crypto vertical | OMNIA-CRYPTO | Bounded crypto-like diagnostics |
+| Public entry | lon-mirror | Canonical ecosystem hub |
+| Evidence first | OMNIA-VALIDATION | Validation, falsification, artifacts, regression |
+| Core engine | OMNIA | Post-hoc structural measurement |
+| Foundation | OMNIABASE | Multi-base / multi-representation observation |
+| Pre-measurement | OMNIA-RADAR | Signal, drift, persistence and anomaly detection |
+| Transformation | OMNIA-INVARIANCE | Structural stability across transformations |
+| Boundary | omnia-limit | Saturation, irreversibility and stop conditions |
+| Post-analysis | OMNIA-CONSTANT | Falsification of stable Omega regions |
+| Orchestration | OMNIAMIND | Structural cognition pipeline orchestration |
+| Scientific case | OMNIA-THREE-BODY | Chaotic trajectory divergence stress test |
+| Security vertical | OMNIA-SECURITY | Bounded structural diagnostics for security-like traces |
+| Crypto vertical | OMNIA-CRYPTO | Bounded structural diagnostics for crypto-like behavior |
 
 ---
 
@@ -59,18 +59,47 @@ For public adoption:
 
 | Repository | Receives from | Sends to | Boundary |
 |---|---|---|---|
-| lon-mirror | none | all repos | hub only |
-| OMNIA-VALIDATION | all repos | reviewers / regressions | validates artifacts, not truth |
-| OMNIA | traces / outputs / representations | invariance, limit, validation | measures structure only |
-| OMNIABASE | numbers / signals / representations | OMNIA / invariance | observes representation dependence |
-| OMNIA-RADAR | raw candidates / traces | OMNIA / validation | detects signal, does not measure final admissibility |
-| OMNIA-INVARIANCE | OMNIA outputs / transformed traces | constant / validation | tests persistence |
-| omnia-limit | OMNIA / invariance signals | external decision layer | certifies stop/continue, does not decide |
-| OMNIA-CONSTANT | Omega regions / invariance results | validation | falsifies stability claims |
-| OMNIAMIND | analytic workflows | OMNIA / limit | organizes, does not become consciousness |
-| OMNIA-THREE-BODY | simulated trajectories | invariance / validation | stress test, not physics proof |
-| OMNIA-SECURITY | security-like traces | validation / limit | diagnostic, not scanner |
-| OMNIA-CRYPTO | crypto-like transformations | validation / limit | diagnostic, not cryptographic proof |
+| lon-mirror | none | all repositories | hub only |
+| OMNIA-VALIDATION | artifacts, outputs, reports, claims | reviewers, regressions, reproducibility checks | validates artifacts, not truth |
+| OMNIA | traces, outputs, structures, representations | invariance, limit, validation | measures structure only |
+| OMNIABASE | numbers, signals, representations | OMNIA, invariance | observes representation dependence |
+| OMNIA-RADAR | raw candidates, traces | OMNIA, validation | detects signal, does not measure final admissibility |
+| OMNIA-INVARIANCE | transformed variants | constant, validation | tests persistence |
+| omnia-limit | OMNIA and invariance signals | external decision layer | certifies stop or continue, does not decide |
+| OMNIA-CONSTANT | Omega-region candidates | validation | falsifies or weakens stability claims |
+| OMNIAMIND | analytic workflows | OMNIA, limit | organizes, does not become consciousness |
+| OMNIA-THREE-BODY | simulated trajectories | invariance, validation | stress test, not physics proof |
+| OMNIA-SECURITY | security-like traces | validation, limit | diagnostic, not scanner |
+| OMNIA-CRYPTO | crypto-like transformations | validation, limit | diagnostic, not cryptographic proof |
+
+---
+
+## Text diagram
+
+    lon-mirror
+      |
+      +-- OMNIA-VALIDATION ----> external review
+      |
+      +-- OMNIABASE -----------> OMNIA
+      |                            |
+      +-- OMNIA-RADAR ----------> |
+      |                            |
+      +-- OMNIAMIND ------------> |
+                                   |
+                                   v
+                              OMNIA-INVARIANCE
+                                   |
+                                   v
+                              OMNIA-CONSTANT
+                                   |
+                                   v
+                              OMNIA-VALIDATION
+
+    OMNIA -> omnia-limit -> external decision
+
+    OMNIA-THREE-BODY -> OMNIA-INVARIANCE -> OMNIA-VALIDATION
+    OMNIA-SECURITY   -> OMNIA-VALIDATION
+    OMNIA-CRYPTO     -> OMNIA-VALIDATION
 
 ---
 
