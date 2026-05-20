@@ -1,114 +1,150 @@
 {
-  "generated_utc": "2026-05-20T12:05:17.877058+00:00",
+  "generated_utc": "2026-05-20T13:39:38.610825+00:00",
   "ecosystem": "MB-X.01 / OMNIA",
   "canonical_boundary": "measurement != inference != decision",
   "canonical_sentence": "Structural truth = invariance under transformation",
-  "canonical_pipeline": [
-    "detect",
-    "measure",
-    "test invariance",
-    "certify limit",
-    "validate/falsify"
-  ],
   "public_rule": "evidence first, engine second, theory third",
-  "public_onboarding_order": [
-    "lon-mirror",
-    "OMNIA-VALIDATION",
-    "OMNIA",
-    "OMNIABASE",
-    "OMNIA-RADAR",
-    "OMNIA-INVARIANCE",
-    "omnia-limit",
-    "OMNIA-CONSTANT",
-    "OMNIAMIND",
-    "OMNIA-THREE-BODY",
-    "OMNIA-SECURITY",
-    "OMNIA-CRYPTO"
-  ],
+  "root_principle": "README = entrance; docs = explanation; repos = proof",
+  "ecosystem_status": "public repository roles synchronized after restructuring",
   "repositories": [
     {
       "step": 1,
       "name": "lon-mirror",
       "url": "https://github.com/Tuttotorna/lon-mirror",
-      "role": "Canonical public hub and ecosystem entry point",
-      "layer": "hub"
+      "public_role": "Canonical public entry point",
+      "pipeline": "visitor -> map -> evidence path -> repository route",
+      "status": "restructured",
+      "test_status": "not applicable / hub repository",
+      "boundary": "README = entrance; docs = depth; repos = proof"
     },
     {
       "step": 2,
       "name": "OMNIA-VALIDATION",
       "url": "https://github.com/Tuttotorna/OMNIA-VALIDATION",
-      "role": "Evidence, reproducibility, regression and artifact validation",
-      "layer": "evidence"
+      "public_role": "Public validation showroom",
+      "pipeline": "test -> output -> artifact -> failure/fragility -> report",
+      "status": "restructured",
+      "test_status": "269 passed",
+      "boundary": "validates artifacts, not truth"
     },
     {
       "step": 3,
       "name": "OMNIA",
       "url": "https://github.com/Tuttotorna/OMNIA",
-      "role": "Post-hoc structural measurement engine",
-      "layer": "core"
+      "public_role": "Core structural measurement engine",
+      "pipeline": "input -> transformation -> measurement -> output -> boundary",
+      "status": "restructured",
+      "test_status": "47 passed",
+      "boundary": "measures structure; does not decide"
     },
     {
       "step": 4,
       "name": "OMNIABASE",
       "url": "https://github.com/Tuttotorna/OMNIABASE",
-      "role": "Multi-representation and multi-base observation layer",
-      "layer": "foundation"
+      "public_role": "Representation invariance foundation",
+      "pipeline": "representation -> base shift -> observation -> invariant residue",
+      "status": "restructured",
+      "test_status": "5 passed",
+      "boundary": "observes representation behavior; does not infer truth"
     },
     {
       "step": 5,
-      "name": "OMNIA-RADAR",
-      "url": "https://github.com/Tuttotorna/OMNIA-RADAR",
-      "role": "Structural signal detection before measurement",
-      "layer": "detection"
+      "name": "omnia-limit",
+      "url": "https://github.com/Tuttotorna/omnia-limit",
+      "public_role": "Stop / continue boundary layer",
+      "pipeline": "measurement sequence -> saturation / irreversibility -> stop-or-continue boundary",
+      "status": "restructured",
+      "test_status": "11 passed",
+      "boundary": "boundary signal != final decision"
     },
     {
       "step": 6,
-      "name": "OMNIA-INVARIANCE",
-      "url": "https://github.com/Tuttotorna/OMNIA-INVARIANCE",
-      "role": "Cross-representation invariance under transformation",
-      "layer": "invariance"
+      "name": "OMNIA-RADAR",
+      "url": "https://github.com/Tuttotorna/OMNIA-RADAR",
+      "public_role": "Structural signal detection layer",
+      "pipeline": "candidate trace -> signal scan -> anomaly / persistence / drift -> measurement candidate",
+      "status": "restructured",
+      "test_status": "9 passed",
+      "boundary": "detection != measurement != decision"
     },
     {
       "step": 7,
-      "name": "omnia-limit",
-      "url": "https://github.com/Tuttotorna/omnia-limit",
-      "role": "Boundary, stop condition and limit certification",
-      "layer": "boundary"
+      "name": "OMNIA-INVARIANCE",
+      "url": "https://github.com/Tuttotorna/OMNIA-INVARIANCE",
+      "public_role": "Structural invariance layer",
+      "pipeline": "source structure -> controlled transformation -> invariance check -> stability / collapse",
+      "status": "restructured",
+      "test_status": "5 passed",
+      "boundary": "invariance check != semantic truth"
     },
     {
       "step": 8,
       "name": "OMNIA-CONSTANT",
       "url": "https://github.com/Tuttotorna/OMNIA-CONSTANT",
-      "role": "Post-analysis and falsification of stable Omega regions",
-      "layer": "post-analysis"
+      "public_role": "Structural constant candidate layer",
+      "pipeline": "candidate invariant -> repeated validation -> stable region -> falsification pressure",
+      "status": "restructured",
+      "test_status": "5 passed",
+      "boundary": "structural constant candidate != universal truth"
     },
     {
       "step": 9,
       "name": "OMNIAMIND",
       "url": "https://github.com/Tuttotorna/OMNIAMIND",
-      "role": "Structural cognition orchestration around OMNIA measurements",
-      "layer": "orchestration"
+      "public_role": "Structural cognition orchestration layer",
+      "pipeline": "observation -> structural reasoning workflow -> OMNIA measurement -> limit boundary -> external decision",
+      "status": "restructured",
+      "test_status": "no test suite currently present; pytest exit code 5 accepted as repository status",
+      "boundary": "orchestration != consciousness != decision"
     },
     {
       "step": 10,
       "name": "OMNIA-THREE-BODY",
       "url": "https://github.com/Tuttotorna/OMNIA-THREE-BODY",
-      "role": "Three-body structural divergence stress test",
-      "layer": "scientific-case"
+      "public_role": "Dynamic divergence stress test",
+      "pipeline": "initial state -> perturbation -> trajectory divergence -> structural instability",
+      "status": "restructured",
+      "test_status": "6 passed",
+      "boundary": "dynamic stress test != physical proof"
     },
     {
       "step": 11,
       "name": "OMNIA-SECURITY",
       "url": "https://github.com/Tuttotorna/OMNIA-SECURITY",
-      "role": "Bounded structural diagnostics for security-relevant traces",
-      "layer": "vertical"
+      "public_role": "Bounded structural security diagnostics",
+      "pipeline": "security-relevant trace -> structural diagnostic -> risk signal -> external security decision",
+      "status": "restructured",
+      "test_status": "5 passed",
+      "boundary": "diagnostic signal != confirmed vulnerability"
     },
     {
       "step": 12,
       "name": "OMNIA-CRYPTO",
       "url": "https://github.com/Tuttotorna/OMNIA-CRYPTO",
-      "role": "Bounded structural diagnostics for crypto-like behavior",
-      "layer": "vertical"
+      "public_role": "Bounded structural crypto diagnostics",
+      "pipeline": "crypto-relevant trace -> structural diagnostic -> entropy / invariance / drift signal -> external cryptographic review",
+      "status": "restructured",
+      "test_status": "5 passed",
+      "boundary": "diagnostic signal != cryptographic proof"
     }
-  ]
+  ],
+  "summary": {
+    "total_repositories": 12,
+    "restructured_repositories": 12,
+    "repositories_with_passing_tests": [
+      "OMNIA-VALIDATION",
+      "OMNIA",
+      "OMNIABASE",
+      "omnia-limit",
+      "OMNIA-RADAR",
+      "OMNIA-INVARIANCE",
+      "OMNIA-CONSTANT",
+      "OMNIA-THREE-BODY",
+      "OMNIA-SECURITY",
+      "OMNIA-CRYPTO"
+    ],
+    "repositories_without_tests": [
+      "OMNIAMIND"
+    ]
+  }
 }

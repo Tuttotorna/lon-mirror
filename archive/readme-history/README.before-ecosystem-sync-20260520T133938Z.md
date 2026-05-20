@@ -110,35 +110,12 @@ The boundary is intentional:
 
 ---
 
-## Current ecosystem status
-
-The public restructuring pass has been completed across the core MB-X.01 / OMNIA repositories.
-
-    lon-mirror        = public entrance
-    OMNIA-VALIDATION = showroom / proof
-    OMNIA             = core measurement engine
-    OMNIABASE         = representation foundation
-    omnia-limit       = stop / continue boundary
-    OMNIA-RADAR       = structural signal detection
-    OMNIA-INVARIANCE  = structural invariance check
-    OMNIA-CONSTANT    = structural constant candidate
-    OMNIAMIND         = structural cognition orchestration
-    OMNIA-THREE-BODY  = dynamic divergence stress test
-    OMNIA-SECURITY    = bounded security diagnostics
-    OMNIA-CRYPTO      = bounded crypto diagnostics
-
-See [docs/ECOSYSTEM_STATUS.md](docs/ECOSYSTEM_STATUS.md) for the synchronized status table.
-
----
-
 ## Documentation
 
 | Document | Purpose |
 |---|---|
 | [docs/ONBOARDING_60_SECONDS.md](docs/ONBOARDING_60_SECONDS.md) | Minimal public onboarding path |
 | [docs/ECOSYSTEM_MAP.md](docs/ECOSYSTEM_MAP.md) | Full ecosystem map and conceptual adjacency |
-| [docs/ECOSYSTEM_STATUS.md](docs/ECOSYSTEM_STATUS.md) | Current public restructuring status across repositories |
-| [docs/PUBLIC_NAVIGATION.md](docs/PUBLIC_NAVIGATION.md) | Direct navigation by visitor need |
 | [docs/FOUNDATION.md](docs/FOUNDATION.md) | Core principles, boundary and conceptual foundation |
 | [docs/COMPATIBILITY_MATRIX.md](docs/COMPATIBILITY_MATRIX.md) | Interface and compatibility matrix |
 | [docs/ecosystem_inventory.json](docs/ecosystem_inventory.json) | Machine-readable ecosystem inventory |
