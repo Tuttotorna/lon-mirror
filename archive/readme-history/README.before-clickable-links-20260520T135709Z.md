@@ -4,9 +4,31 @@
 
 [![DOI](https://zenodo.org/badge/1067137742.svg)](https://zenodo.org/badge/latestdoi/1067137742)
 
-Release DOI: [10.5281/zenodo.20089284](https://doi.org/10.5281/zenodo.20089284)
+Release DOI:
 
-GitHub release: [lon-mirror v1.0.0 release](https://github.com/Tuttotorna/lon-mirror/releases/tag/v1.0.0)
+    10.5281/zenodo.20089284
+
+Zenodo latest DOI link:
+
+    https://doi.org/10.5281/zenodo.20089284
+
+GitHub release:
+
+    https://github.com/Tuttotorna/lon-mirror/releases/tag/v1.0.0
+
+**Structural measurement beyond correctness.**
+
+This repository is the public entry point for the MB-X.01 / OMNIA ecosystem.
+
+OMNIA is not a reasoning engine, not a truth oracle, and not a decision system.
+
+It is a post-hoc structural measurement ecosystem designed to test whether outputs, traces, systems, or representations preserve measurable structure under transformation, perturbation, and limit conditions.
+
+    measurement != inference != decision
+
+    Structural truth = invariance under transformation
+
+---
 
 ## Start here in 60 seconds
 
@@ -14,7 +36,7 @@ If this is your first contact with the ecosystem, do not start from the theory.
 
 Start from the smallest reproducible path:
 
-    git clone [OMNIA-VALIDATION.git](https://github.com/Tuttotorna/OMNIA-VALIDATION.git)
+    git clone https://github.com/Tuttotorna/OMNIA-VALIDATION.git
     cd OMNIA-VALIDATION
     python -m pip install -e .
     pytest
@@ -137,25 +159,6 @@ See [docs/ECOSYSTEM_STATUS.md](docs/ECOSYSTEM_STATUS.md) for the synchronized st
 | [docs/COMPATIBILITY_MATRIX.md](docs/COMPATIBILITY_MATRIX.md) | Interface and compatibility matrix |
 | [docs/ecosystem_inventory.json](docs/ecosystem_inventory.json) | Machine-readable ecosystem inventory |
 | [LANDING_SCOPE.md](LANDING_SCOPE.md) | Rule for keeping this repository readable |
-
----
-
-## Related repositories
-
-| Repository | Role |
-|---|---|
-| [lon-mirror](https://github.com/Tuttotorna/lon-mirror) | Canonical public entry point |
-| [OMNIA-VALIDATION](https://github.com/Tuttotorna/OMNIA-VALIDATION) | Public validation showroom |
-| [OMNIA](https://github.com/Tuttotorna/OMNIA) | Core structural measurement engine |
-| [OMNIABASE](https://github.com/Tuttotorna/OMNIABASE) | Representation invariance foundation |
-| [omnia-limit](https://github.com/Tuttotorna/omnia-limit) | Stop / continue boundary layer |
-| [OMNIA-RADAR](https://github.com/Tuttotorna/OMNIA-RADAR) | Structural signal detection layer |
-| [OMNIA-INVARIANCE](https://github.com/Tuttotorna/OMNIA-INVARIANCE) | Structural invariance layer |
-| [OMNIA-CONSTANT](https://github.com/Tuttotorna/OMNIA-CONSTANT) | Structural constant candidate layer |
-| [OMNIAMIND](https://github.com/Tuttotorna/OMNIAMIND) | Structural cognition orchestration layer |
-| [OMNIA-THREE-BODY](https://github.com/Tuttotorna/OMNIA-THREE-BODY) | Dynamic divergence stress test |
-| [OMNIA-SECURITY](https://github.com/Tuttotorna/OMNIA-SECURITY) | Bounded structural security diagnostics |
-| [OMNIA-CRYPTO](https://github.com/Tuttotorna/OMNIA-CRYPTO) | Bounded structural crypto diagnostics |
 
 ---
 
