@@ -1,0 +1,112 @@
+{
+  "generated_utc": "2026-05-20T11:57:04.748772+00:00",
+  "ecosystem": "MB-X.01 / OMNIA",
+  "canonical_boundary": "measurement != inference != decision",
+  "canonical_pipeline": [
+    "detect",
+    "measure",
+    "test invariance",
+    "certify limit",
+    "validate/falsify"
+  ],
+  "public_onboarding_order": [
+    "lon-mirror",
+    "OMNIA-VALIDATION",
+    "OMNIA",
+    "OMNIABASE",
+    "OMNIA-RADAR",
+    "OMNIA-INVARIANCE",
+    "omnia-limit",
+    "OMNIA-CONSTANT",
+    "OMNIAMIND",
+    "OMNIA-THREE-BODY",
+    "OMNIA-SECURITY",
+    "OMNIA-CRYPTO"
+  ],
+  "repositories": [
+    {
+      "step": 1,
+      "name": "lon-mirror",
+      "url": "https://github.com/Tuttotorna/lon-mirror",
+      "role": "Canonical public hub and ecosystem entry point",
+      "layer": "hub"
+    },
+    {
+      "step": 2,
+      "name": "OMNIA-VALIDATION",
+      "url": "https://github.com/Tuttotorna/OMNIA-VALIDATION",
+      "role": "Evidence, reproducibility, regression and artifact validation",
+      "layer": "evidence"
+    },
+    {
+      "step": 3,
+      "name": "OMNIA",
+      "url": "https://github.com/Tuttotorna/OMNIA",
+      "role": "Post-hoc structural measurement engine",
+      "layer": "core"
+    },
+    {
+      "step": 4,
+      "name": "OMNIABASE",
+      "url": "https://github.com/Tuttotorna/OMNIABASE",
+      "role": "Multi-representation and multi-base observation layer",
+      "layer": "foundation"
+    },
+    {
+      "step": 5,
+      "name": "OMNIA-RADAR",
+      "url": "https://github.com/Tuttotorna/OMNIA-RADAR",
+      "role": "Structural signal detection before measurement",
+      "layer": "detection"
+    },
+    {
+      "step": 6,
+      "name": "OMNIA-INVARIANCE",
+      "url": "https://github.com/Tuttotorna/OMNIA-INVARIANCE",
+      "role": "Cross-representation invariance under transformation",
+      "layer": "invariance"
+    },
+    {
+      "step": 7,
+      "name": "omnia-limit",
+      "url": "https://github.com/Tuttotorna/omnia-limit",
+      "role": "Boundary, stop condition and limit certification",
+      "layer": "boundary"
+    },
+    {
+      "step": 8,
+      "name": "OMNIA-CONSTANT",
+      "url": "https://github.com/Tuttotorna/OMNIA-CONSTANT",
+      "role": "Post-analysis and falsification of stable Omega regions",
+      "layer": "post-analysis"
+    },
+    {
+      "step": 9,
+      "name": "OMNIAMIND",
+      "url": "https://github.com/Tuttotorna/OMNIAMIND",
+      "role": "Structural cognition orchestration around OMNIA measurements",
+      "layer": "orchestration"
+    },
+    {
+      "step": 10,
+      "name": "OMNIA-THREE-BODY",
+      "url": "https://github.com/Tuttotorna/OMNIA-THREE-BODY",
+      "role": "Three-body structural divergence stress test",
+      "layer": "scientific-case"
+    },
+    {
+      "step": 11,
+      "name": "OMNIA-SECURITY",
+      "url": "https://github.com/Tuttotorna/OMNIA-SECURITY",
+      "role": "Bounded structural diagnostics for security-relevant traces",
+      "layer": "vertical"
+    },
+    {
+      "step": 12,
+      "name": "OMNIA-CRYPTO",
+      "url": "https://github.com/Tuttotorna/OMNIA-CRYPTO",
+      "role": "Bounded structural diagnostics for crypto-like behavior",
+      "layer": "vertical"
+    }
+  ]
+}

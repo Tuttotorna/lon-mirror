@@ -1,395 +1,208 @@
-# MB-X.01 · Logical Origin Node (L.O.N.) — Ecosystem Hub
+# MB-X.01 / OMNIA
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19857066.svg)](https://doi.org/10.5281/zenodo.19857066)
+**Structural measurement beyond correctness.**
 
+This repository is the public entry point for the MB-X.01 / OMNIA ecosystem.
 
-**lon-mirror** is the canonical public hub for the **MB-X.01 / Logical Origin Node (L.O.N.)** ecosystem.
+OMNIA is not a reasoning engine, not a truth oracle, and not a decision system.
 
-It is not the measurement engine.
-It is not the validation engine.
-It is not the decision layer.
+It is a post-hoc structural measurement ecosystem designed to test whether outputs, traces, systems, or representations preserve measurable structure under transformation, perturbation, and limit conditions.
 
-Its role is to map the ecosystem, preserve architectural boundaries, and provide a clear entrypoint into the related repositories.
+    measurement != inference != decision
 
-Core boundary:
-
-```text
-measurement != inference != decision
-```
-
-Core thesis:
-
-```text
-Structural truth = invariance under transformation
-```
+    Structural truth = invariance under transformation
 
 ---
 
-## Start here
+## Start here in 60 seconds
 
-If this is your first contact with the project, start with:
+If this is your first contact with the ecosystem, do not start from the theory.
 
-- [`docs/REVIEWER_60_SECOND_START.md`](docs/REVIEWER_60_SECOND_START.md)
-- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
+Start from the smallest reproducible path:
 
-- [`docs/START_HERE.md`](docs/START_HERE.md)
-- [`ECOSYSTEM.md`](ECOSYSTEM.md)
-- [`docs/MASTER_MAP.md`](docs/MASTER_MAP.md)
-- [`docs/BOUNDARIES.md`](docs/BOUNDARIES.md)
+    git clone https://github.com/Tuttotorna/OMNIA-VALIDATION.git
+    cd OMNIA-VALIDATION
+    python -m pip install -e .
+    pytest
+
+Then read:
+
+1. [OMNIA-VALIDATION](https://github.com/Tuttotorna/OMNIA-VALIDATION) — evidence, artifacts, reproducibility.
+2. [OMNIA](https://github.com/Tuttotorna/OMNIA) — core structural measurement engine.
+3. [OMNIABASE](https://github.com/Tuttotorna/OMNIABASE) — multi-representation foundation.
+
+The public path is:
+
+    see evidence -> understand measurement -> understand representation
+
+Not the reverse.
 
 ---
 
+## What OMNIA does
 
-## Public audit scope
+OMNIA measures structural behavior.
 
-The public audit scope is documented here:
+It can be used to observe whether a generated output, trace, representation, transformation, or trajectory remains structurally admissible under independent perturbations and transformations.
 
-- [`docs/AUDIT_SCOPE.md`](docs/AUDIT_SCOPE.md)
+At ecosystem level, the canonical pipeline is:
 
-This document separates:
+    detect -> measure -> test invariance -> certify limit -> validate/falsify
 
-```text
-public normative review files
-active executable code
-legacy / archive / raw artifacts
-```
+---
 
-Core audit rule:
+## What OMNIA does not do
 
-```text
-legacy artifact issue != public claim failure
-raw file parse issue != active code failure
-negated forbidden claim != positive claim
-measurement != inference != decision
-```
+OMNIA does **not**:
 
-## Structural Failure Probe v0
+- infer semantic truth;
+- decide what is correct;
+- replace human judgment;
+- claim consciousness;
+- claim intelligence;
+- perform security scanning;
+- perform cryptographic attacks;
+- recover keys;
+- prove physical truth;
+- convert structural stability into final meaning.
 
-The current practical public red-team probe is documented in OMNIA-VALIDATION:
+The boundary is intentional:
 
-- Structural Failure Probe v0: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/docs/STRUCTURAL_FAILURE_PROBE_V0.md
-- Prompt set: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/examples/structural_failure_probe_v0_prompts.jsonl
-- Analyzer: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/examples/analyze_structural_failure_probe_v0.py
-- Sample report: https://github.com/Tuttotorna/OMNIA-VALIDATION/blob/main/results/structural_failure_probe_v0_sample_report.json
+    measurement stops before inference
+    inference stops before decision
+    decision remains external
 
-Core distinction:
+---
 
-```text
-surface-valid output != structurally stable output
-```
+## Recommended onboarding order
 
-Core pattern:
+| Step | Repository | Role | Layer |
+|---:|---|---|---|
+| 1 | [lon-mirror](https://github.com/Tuttotorna/lon-mirror) | Canonical public hub and ecosystem entry point | hub |
+| 2 | [OMNIA-VALIDATION](https://github.com/Tuttotorna/OMNIA-VALIDATION) | Evidence, reproducibility, regression and artifact validation | evidence |
+| 3 | [OMNIA](https://github.com/Tuttotorna/OMNIA) | Post-hoc structural measurement engine | core |
+| 4 | [OMNIABASE](https://github.com/Tuttotorna/OMNIABASE) | Multi-representation and multi-base observation layer | foundation |
+| 5 | [OMNIA-RADAR](https://github.com/Tuttotorna/OMNIA-RADAR) | Structural signal detection before measurement | detection |
+| 6 | [OMNIA-INVARIANCE](https://github.com/Tuttotorna/OMNIA-INVARIANCE) | Cross-representation invariance under transformation | invariance |
+| 7 | [omnia-limit](https://github.com/Tuttotorna/omnia-limit) | Boundary, stop condition and limit certification | boundary |
+| 8 | [OMNIA-CONSTANT](https://github.com/Tuttotorna/OMNIA-CONSTANT) | Post-analysis and falsification of stable Omega regions | post-analysis |
+| 9 | [OMNIAMIND](https://github.com/Tuttotorna/OMNIAMIND) | Structural cognition orchestration around OMNIA measurements | orchestration |
+| 10 | [OMNIA-THREE-BODY](https://github.com/Tuttotorna/OMNIA-THREE-BODY) | Three-body structural divergence stress test | scientific-case |
+| 11 | [OMNIA-SECURITY](https://github.com/Tuttotorna/OMNIA-SECURITY) | Bounded structural diagnostics for security-relevant traces | vertical |
+| 12 | [OMNIA-CRYPTO](https://github.com/Tuttotorna/OMNIA-CRYPTO) | Bounded structural diagnostics for crypto-like behavior | vertical |
 
-```text
-Surface PASS -> Structural RISK
-```
-
-Core boundary:
-
-```text
-measurement != inference != decision
-```
-
-Explicit non-claims:
-
-```text
-does not claim semantic truth
-does not finally rank models
-does not replace external evaluation
-structural risk != semantic falsehood
-```
-
-This is the current practical entrypoint for testing whether model outputs that look acceptable on the surface remain structurally stable under unresolved tension.
-
-## Ecosystem link audit
-
-The ecosystem link audit is documented here:
-
-- [`docs/ECOSYSTEM_LINK_AUDIT.md`](docs/ECOSYSTEM_LINK_AUDIT.md)
-
-It checks:
-
-```text
-public repository links
-public position files
-review package links
-validation package links
-boundary coverage
-claim alignment
-```
-
-Related public entrypoints:
-
-- [`docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md`](docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md)
-- [`docs/REVIEWER_60_SECOND_START.md`](docs/REVIEWER_60_SECOND_START.md)
-- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
-
-## Public claim boundary audit
-
-The public claim boundary audit is documented here:
-
-- [`docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md`](docs/PUBLIC_CLAIM_BOUNDARY_AUDIT.md)
-
-It verifies that public claims remain inside:
-
-```text
-measurement != inference != decision
-```
-
-Main audit target:
-
-```text
-structural measurement must not be presented as semantic truth
-```
-
-Related public entrypoints:
-
-- [`docs/REVIEWER_60_SECOND_START.md`](docs/REVIEWER_60_SECOND_START.md)
-- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
-
-## Reviewer 60 second start
-
-The fastest public reviewer entrypoint is:
-
-- [`docs/REVIEWER_60_SECOND_START.md`](docs/REVIEWER_60_SECOND_START.md)
-
-It gives:
-
-```text
-what this is
-what to read first
-what to run
-expected result
-core boundary
-non-claims
-```
-
-Related public entrypoints:
-
-- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
-
-Core boundary:
-
-```text
-measurement != inference != decision
-```
-
-## Ecosystem one-page map
-
-A short one-page public map of the ecosystem is available here:
-
-- [`docs/ECOSYSTEM_ONE_PAGE.md`](docs/ECOSYSTEM_ONE_PAGE.md)
-
-It summarizes:
-
-```text
-public chain
-repository roles
-core boundaries
-minimal executable result
-validation path
-non-claims
-```
-
-The full public review path remains:
-
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
-
-Core boundary:
-
-```text
-measurement != inference != decision
-```
-
-## Public review path
-
-The complete public review path is documented here:
-
-- [`docs/PUBLIC_REVIEW_PATH.md`](docs/PUBLIC_REVIEW_PATH.md)
-
-Current public chain:
-
-```text
-lon-mirror
-  -> observer-suspension
-  -> OMNIAMIND
-  -> OMNIA-RADAR
-  -> OMNIA-SECURITY
-  -> OMNIA-CRYPTO
-  -> OMNIA
-  -> OMNIABASE
-  -> OMNIA-INVARIANCE
-  -> OMNIA-CONSTANT
-  -> OMNIA-LIMIT
-  -> OMNIA-VALIDATION
-  -> external semantics
-  -> external decision
-```
-
-Core boundary:
-
-```text
-measurement != inference != decision
-```
-
-This path is a review path, not a truth hierarchy.
+---
 
 ## Ecosystem map
 
-```text
-L.O.N. / MB-X.01
-  ↓
-lon-mirror        = canonical ecosystem hub
-  ↓
-OMNIABASE         = representation / multi-base observation layer
-OMNIA             = structural measurement core
-OMNIAMIND         = orchestration layer
-omnia-limit       = terminal boundary layer
-OMNIA-RADAR       = residual / drift detection layer
-OMNIA-INVARIANCE  = invariance validation layer
-OMNIA-VALIDATION  = external validation evidence layer
-```
+    lon-mirror
+      |
+      |-- OMNIA-VALIDATION     evidence / reproducibility / regression
+      |-- OMNIA                core structural measurement
+      |-- OMNIABASE            multi-representation observation
+      |-- OMNIA-RADAR          structural signal detection
+      |-- OMNIA-INVARIANCE     invariance under transformation
+      |-- omnia-limit          stop / continue boundary
+      |-- OMNIA-CONSTANT       Omega-region falsification
+      |-- OMNIAMIND            orchestration layer
+      |-- OMNIA-THREE-BODY     dynamic stress test
+      |-- OMNIA-SECURITY       bounded security diagnostics
+      |-- OMNIA-CRYPTO         bounded crypto diagnostics
 
 ---
 
-## Core repositories
+## Functional architecture
 
-- lon-mirror: https://github.com/Tuttotorna/lon-mirror
-- OMNIABASE: https://github.com/Tuttotorna/OMNIABASE
-- OMNIA: https://github.com/Tuttotorna/OMNIA
-- omnia-limit: https://github.com/Tuttotorna/omnia-limit
-- OMNIAMIND: https://github.com/Tuttotorna/OMNIAMIND
-- OMNIA-RADAR: https://github.com/Tuttotorna/OMNIA-RADAR
-- OMNIA-INVARIANCE: https://github.com/Tuttotorna/OMNIA-INVARIANCE
-- OMNIA-VALIDATION: https://github.com/Tuttotorna/OMNIA-VALIDATION
-
----
-
-## Applied / vertical repositories
-
-- OMNIA-SECURITY: https://github.com/Tuttotorna/OMNIA-SECURITY
-- OMNIA-CRYPTO: https://github.com/Tuttotorna/OMNIA-CRYPTO
-- OMNIA-THREE-BODY: https://github.com/Tuttotorna/OMNIA-THREE-BODY
-- OMNIA-CONSTANT: https://github.com/Tuttotorna/OMNIA-CONSTANT
-
-These repositories should be read as bounded applications or research branches, not as replacements for the core measurement architecture.
+| Layer | Repository | Function |
+|---|---|---|
+| Public entry | [lon-mirror](https://github.com/Tuttotorna/lon-mirror) | Canonical ecosystem hub |
+| Evidence first | [OMNIA-VALIDATION](https://github.com/Tuttotorna/OMNIA-VALIDATION) | Validation, falsification, artifacts, regression |
+| Core engine | [OMNIA](https://github.com/Tuttotorna/OMNIA) | Post-hoc structural measurement |
+| Foundation | [OMNIABASE](https://github.com/Tuttotorna/OMNIABASE) | Multi-base / multi-representation observation |
+| Pre-measurement | [OMNIA-RADAR](https://github.com/Tuttotorna/OMNIA-RADAR) | Signal, drift, persistence and anomaly detection |
+| Transformation | [OMNIA-INVARIANCE](https://github.com/Tuttotorna/OMNIA-INVARIANCE) | Structural stability across transformations |
+| Boundary | [omnia-limit](https://github.com/Tuttotorna/omnia-limit) | Saturation, irreversibility and stop conditions |
+| Post-analysis | [OMNIA-CONSTANT](https://github.com/Tuttotorna/OMNIA-CONSTANT) | Falsification of stable Omega regions |
+| Orchestration | [OMNIAMIND](https://github.com/Tuttotorna/OMNIAMIND) | Structural cognition pipeline orchestration |
+| Scientific case | [OMNIA-THREE-BODY](https://github.com/Tuttotorna/OMNIA-THREE-BODY) | Chaotic trajectory divergence stress test |
+| Security vertical | [OMNIA-SECURITY](https://github.com/Tuttotorna/OMNIA-SECURITY) | Bounded structural diagnostics for security-like traces |
+| Crypto vertical | [OMNIA-CRYPTO](https://github.com/Tuttotorna/OMNIA-CRYPTO) | Bounded structural diagnostics for crypto-like behavior |
 
 ---
 
-## Clean architectural reading
+## The shortest correct explanation
 
-```text
-OMNIABASE   = observe structure across representations
-OMNIA       = measure structural behavior
-OMNIAMIND   = organize cognitive / reasoning flow
-omnia-limit = declare terminal structural boundary
-RADAR       = surface residual drift or instability
-VALIDATION  = record evidence, failures, limits, reproducibility
-Decision    = external layer
-```
+    MB-X.01 / OMNIA is an open-source research ecosystem for structural measurement beyond semantic interpretation.
+
+    It detects, measures, validates, and bounds invariant structure across representations, perturbations, and domains.
+
+    It does not infer meaning.
+    It does not decide truth.
+    It measures whether structure survives transformation.
 
 ---
 
-## What this hub is not
+## Why this exists
 
-lon-mirror is not:
+Modern systems often look correct at the surface while becoming structurally fragile under transformation.
 
-- a model
-- a truth oracle
-- a semantic evaluator
-- a final decision layer
-- a replacement for the individual repositories
-- a claim that structural validity equals truth
+OMNIA exists to make that fragility measurable.
 
-It is a coordination and navigation layer.
+The central question is not:
 
----
+    Does this look right?
 
-## Boundary
+The central question is:
 
-```text
-measurement != inference != decision
-structure   != semantics  != final truth
-signal      != judgment   != action
-```
-
-The ecosystem is strongest when these layers remain separated.
+    What remains structurally stable when the representation changes?
 
 ---
 
-## Repository status
+## Canonical boundary
 
-This repository is the public map and entrypoint.
+Every repository in this ecosystem should preserve the same boundary:
 
-It should remain readable, stable, and minimal.
+    measurement != inference != decision
 
-Detailed status is recorded in:
+That means:
 
-- [`docs/REPOSITORY_STATUS.md`](docs/REPOSITORY_STATUS.md)
-
----
-
-## Citation
-If you reference this ecosystem hub, use the archived record:
-
-```text
-DOI: 10.5281/zenodo.19857066
-https://doi.org/10.5281/zenodo.19857066
-```
-
-Citation metadata is available in:
-
-- [`CITATION.cff`](CITATION.cff)
+- measurement may produce a structural signal;
+- inference may interpret that signal;
+- decision may act on that interpretation;
+- OMNIA itself stops at measurement and boundary certification.
 
 ---
 
-## Summary
+## Documentation
 
-lon-mirror is the canonical hub of the MB-X.01 / L.O.N. ecosystem.
-
-Its job is to make the system legible:
-
-```text
-map the repositories
-separate the layers
-preserve the boundaries
-show where to start
-```
+| Document | Purpose |
+|---|---|
+| [docs/ECOSYSTEM_MAP.md](docs/ECOSYSTEM_MAP.md) | Full map of repositories and conceptual adjacency |
+| [docs/ONBOARDING_60_SECONDS.md](docs/ONBOARDING_60_SECONDS.md) | Minimal public onboarding path |
+| [docs/COMPATIBILITY_MATRIX.md](docs/COMPATIBILITY_MATRIX.md) | Interface and compatibility matrix |
+| [docs/ecosystem_inventory.json](docs/ecosystem_inventory.json) | Machine-readable ecosystem inventory |
+| [archive/readme-history/](archive/readme-history/) | Previous README snapshots preserved during restructuring |
 
 ---
 
-## lon-mirror — Public Boundary
+## Status
 
-- lon-mirror is the canonical public ecosystem hub for the MB-X.01 / OMNIA lineage.
-- lon-mirror is not a truth oracle.
-- lon-mirror is not a semantic judge.
-- lon-mirror is not a decision engine.
-- It coordinates public navigation, lineage, documentation, and repository positioning.
-- measurement != inference != decision
-- decision remains external
+This hub is intentionally being reduced to a clear public entrance.
 
-This section is a public boundary clarification. It does not change the repository core logic.
+Material that is experimental, historical, or implementation-specific should live in:
+
+    archive/
+    lab/
+    docs/
+    examples/
+    benchmarks/
+    integrations/
+
+The root README should remain a landing page, not a full theory dump.
 
 ---
 
-## Public Ecosystem Audit
+## License
 
-The current public audit summary is available here:
+MIT.
 
-[PUBLIC_AUDIT_2026.md](./PUBLIC_AUDIT_2026.md)
-
-Current audited public surface status:
-
-14 repositories audited
-0 active hard failures
-PASS: 4
-CHECK: 10
-FAIL: 0
-
-Boundary:
-
-measurement != inference != decision
